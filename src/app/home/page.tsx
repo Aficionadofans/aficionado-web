@@ -68,18 +68,20 @@ export default async function HomePage() {
         <h3 className="text-lg font-medium text-off-white">Recent Updates</h3>
         
         {posts && posts.length > 0 ? (
-          posts.map((post) => (
+          posts.map((post) => {
+            const profile = (Array.isArray(post.profiles) ? post.profiles[0] : post.profiles) as any;
+            return (
             <div key={post.id} className="p-5 bg-charcoal/30 border border-white/5 rounded-2xl">
               <div className="flex items-center gap-3 mb-4">
-                {post.profiles?.avatar_url ? (
-                  <img src={post.profiles.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full" />
+                {profile?.avatar_url ? (
+                  <img src={profile.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full" />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                     <UserCircle2 className="w-6 h-6 text-muted-foreground" />
                   </div>
                 )}
                 <div>
-                  <div className="text-sm font-medium text-off-white">{post.profiles?.ai_tone || 'User'}</div>
+                  <div className="text-sm font-medium text-off-white">{profile?.ai_tone || 'User'}</div>
                   <div className="text-xs text-muted-foreground">
                     {new Date(post.created_at).toLocaleDateString()}
                   </div>
@@ -89,7 +91,7 @@ export default async function HomePage() {
                 <p className="text-off-white text-sm whitespace-pre-wrap">{post.content}</p>
               </div>
             </div>
-          ))
+          )})
         ) : (
           <div className="p-5 bg-charcoal/30 border border-white/5 rounded-2xl text-center">
             <p className="text-muted-foreground">No updates in your feed right now.</p>
