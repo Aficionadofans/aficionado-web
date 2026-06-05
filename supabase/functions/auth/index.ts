@@ -19,8 +19,14 @@ serve(async (req) => {
 
     const { action, email, password } = await req.json()
 
-    if (!email || !password) {
-      return new Response(JSON.stringify({ error: 'Email and password are required' }), {
+    if (!email) {
+      return new Response(JSON.stringify({ error: 'Email is required' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
+    if ((action === 'login' || action === 'signup') && !password) {
+      return new Response(JSON.stringify({ error: 'Password is required' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       })
@@ -40,6 +46,27 @@ serve(async (req) => {
       result = await supabase.auth.signInWithPassword({
         email,
         password,
+      })
+    } else if (action === 'magic_link') {
+      result = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: 'https://aficionado.fans/auth/callback',
+        },
+      })
+      if (result.error) throw result.error
+      return new Response(JSON.stringify({ success: true, message: 'Magic link sent' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
+      })
+    } else if (action === 'reset_password') {
+      result = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://aficionado.fans/update-password',
+      })
+      if (result.error) throw result.error
+      return new Response(JSON.stringify({ success: true, message: 'Password reset link sent' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
       })
     } else {
       return new Response(JSON.stringify({ error: 'Invalid action' }), {
