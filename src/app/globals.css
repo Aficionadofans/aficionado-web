@@ -114,9 +114,10 @@
 }
 
 @utility liquid-glass {
-  background-color: rgba(28, 28, 30, 0.5); /* Charcoal with opacity */
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(28, 28, 30, 0.4) 0%, rgba(18, 18, 18, 0.6) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
 }
