@@ -23,20 +23,20 @@ export default async function CirclesPage() {
     <div className="max-w-3xl px-4 py-8 mx-auto lg:py-12">
       <header className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-off-white">Circles</h1>
-          <p className="mt-2 text-muted-foreground">Your private accountability groups.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-off-white animate-fade-in-up">Circles</h1>
+          <p className="mt-2 text-muted-foreground animate-fade-in-up" style={{ animationDelay: '100ms' }}>Your private accountability groups.</p>
         </div>
-        <button className="px-4 py-2 text-sm font-medium transition-colors bg-white/10 text-off-white rounded-full hover:bg-white/20">
+        <button className="px-5 py-2.5 text-sm font-semibold transition-all duration-300 bg-white/10 text-off-white rounded-full hover:bg-white/20 hover:shadow-[0_4px_15px_rgba(255,255,255,0.1)] hover:-translate-y-0.5 active:scale-95 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
           Create Circle
         </button>
       </header>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         {myCircles.length > 0 ? (
-          myCircles.map((circle: any) => (
-            <div key={circle.id} className="liquid-glass p-5 flex items-center justify-between group cursor-pointer hover:border-primary/50 transition-colors">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-deep-plum flex items-center justify-center border border-white/10">
+          myCircles.map((circle: any, index: number) => (
+            <div key={circle.id} className="liquid-glass-hover p-6 flex items-center justify-between group cursor-pointer animate-fade-in-up opacity-0" style={{ animationDelay: `${(index + 3) * 100}ms`, animationFillMode: 'forwards' }}>
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-deep-plum to-[#1A0F1D] flex items-center justify-center border border-white/10 shadow-inner">
                   <Users className="w-6 h-6 text-primary" />
                 </div>
                 <div>

@@ -54,6 +54,34 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-slow: pulse 12s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-delayed: float 10s ease-in-out infinite 2s;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.02);
+    }
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+  }
 }
 
 :root, .dark {
@@ -91,13 +119,13 @@
   
   --radius: 0.75rem;
   
-  --sidebar: #121212;
+  --sidebar: rgba(18, 18, 18, 0.8);
   --sidebar-foreground: #F5F5F7;
   --sidebar-primary: #D4AF37;
   --sidebar-primary-foreground: #121212;
-  --sidebar-accent: #2C1A30;
+  --sidebar-accent: rgba(255, 255, 255, 0.05);
   --sidebar-accent-foreground: #F5F5F7;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #D4AF37;
 }
 
@@ -114,10 +142,21 @@
 }
 
 @utility liquid-glass {
-  background: linear-gradient(135deg, rgba(28, 28, 30, 0.4) 0%, rgba(18, 18, 18, 0.6) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(44, 26, 48, 0.15) 0%, rgba(28, 28, 30, 0.4) 50%, rgba(18, 18, 18, 0.6) 100%);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-2xl);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@utility liquid-glass-hover {
+  @apply liquid-glass;
+  &:hover {
+    background: linear-gradient(135deg, rgba(64, 40, 70, 0.2) 0%, rgba(38, 38, 40, 0.5) 50%, rgba(28, 28, 30, 0.7) 100%);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.6), inset 0 1px 3px rgba(255, 255, 255, 0.3), 0 0 20px rgba(212, 175, 55, 0.1);
+    transform: translateY(-4px);
+  }
 }

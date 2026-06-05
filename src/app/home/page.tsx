@@ -38,7 +38,7 @@ export default async function HomePage() {
       </header>
 
       {/* Daily Check-in Card */}
-      <section className={`p-6 mb-8 liquid-glass transition-opacity ${hasCheckedInToday ? 'opacity-50' : ''}`}>
+      <section className={`p-8 mb-10 liquid-glass-hover transition-all duration-500 animate-fade-in-up ${hasCheckedInToday ? 'opacity-60 grayscale-[0.3]' : ''}`}>
         <div className="flex items-start justify-between">
           <div>
             <h2 className="text-xl font-semibold text-off-white mb-2">
@@ -51,7 +51,7 @@ export default async function HomePage() {
             </p>
             {!hasCheckedInToday && (
               <form action={submitCheckIn}>
-                <button type="submit" className="px-6 py-2.5 text-sm font-medium transition-colors bg-primary text-primary-foreground rounded-full hover:bg-primary/90">
+                <button type="submit" className="px-6 py-2.5 text-sm font-semibold transition-all duration-300 bg-gradient-to-r from-primary to-amber-600 text-primary-foreground rounded-full shadow-[0_4px_14px_0_rgba(212,175,55,0.39)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.5)] hover:-translate-y-0.5 active:scale-95">
                   Complete Check-in
                 </button>
               </form>
@@ -68,10 +68,10 @@ export default async function HomePage() {
         <h3 className="text-lg font-medium text-off-white">Recent Updates</h3>
         
         {posts && posts.length > 0 ? (
-          posts.map((post) => {
+          posts.map((post, index) => {
             const profile = (Array.isArray(post.profiles) ? post.profiles[0] : post.profiles) as any;
             return (
-            <div key={post.id} className="p-5 bg-charcoal/30 border border-white/5 rounded-2xl">
+            <div key={post.id} className="p-6 liquid-glass-hover rounded-2xl animate-fade-in-up opacity-0" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
               <div className="flex items-center gap-3 mb-4">
                 {profile?.avatar_url ? (
                   <img src={profile.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full" />
@@ -93,8 +93,8 @@ export default async function HomePage() {
             </div>
           )})
         ) : (
-          <div className="p-5 bg-charcoal/30 border border-white/5 rounded-2xl text-center">
-            <p className="text-muted-foreground">No updates in your feed right now.</p>
+          <div className="p-8 liquid-glass text-center animate-fade-in-up">
+            <p className="text-muted-foreground font-medium">No updates in your feed right now.</p>
           </div>
         )}
         

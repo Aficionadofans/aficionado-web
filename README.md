@@ -10,9 +10,10 @@ Aficionado Web is the Next.js 16 client for the Aficionado Wellness App ecosyste
 - **Deployment**: Vercel
 
 ## Key Design Principles
-1. **Liquid Glass Aesthetic**: Utilizing ambient background glowing orbs mixed with `backdrop-filter: blur(24px)` to create a premium, translucent glass effect over vibrant background colors.
-2. **Finite Navigation**: Core sections (`/home`, `/explore`, `/create`, `/circles`, `/progress`) have fixed endpoints. There is no infinite scrolling, reducing mindless engagement.
-3. **Responsive**: A dedicated bottom bar for mobile and a side rail for desktop screens.
+1. **Liquid Glass Aesthetic**: Utilizing dynamic, pulsating background glowing orbs mixed with `backdrop-filter: blur(32px)` to create a premium, translucent glass effect over vibrant background colors. We use `@utility liquid-glass` and `@utility liquid-glass-hover` to achieve deep shadow and lifted hover states.
+2. **Micro-Animations**: All lists and cards use staggered fade-in animations (`animate-fade-in-up`), and hover states provide subtle scaling or translating effects for a highly interactive, tactile feel.
+3. **Finite Navigation**: Core sections (`/home`, `/explore`, `/create`, `/circles`, `/progress`) have fixed endpoints. There is no infinite scrolling, reducing mindless engagement.
+4. **Responsive**: A dedicated bottom bar for mobile and a side rail for desktop screens with animated active states.
 
 ## Local Development
 

@@ -28,7 +28,7 @@ export default async function ExplorePage() {
         <input 
           type="text" 
           placeholder="Search categories..." 
-          className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-off-white placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+          className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-off-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/30 focus:shadow-[0_0_25px_rgba(212,175,55,0.2)] transition-all duration-300"
         />
       </div>
 
@@ -42,8 +42,8 @@ export default async function ExplorePage() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {featuredCreators && featuredCreators.length > 0 ? (
-              featuredCreators.map((creator) => (
-                <div key={creator.id} className="liquid-glass p-5 flex items-center gap-4 cursor-pointer hover:bg-white/5 transition-colors">
+              featuredCreators.map((creator, index) => (
+                <div key={creator.id} className="liquid-glass-hover p-5 flex items-center gap-4 cursor-pointer animate-fade-in-up opacity-0" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
                   {creator.avatar_url ? (
                     <img src={creator.avatar_url} alt="Avatar" className="w-12 h-12 rounded-full" />
                   ) : (
@@ -72,8 +72,8 @@ export default async function ExplorePage() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {activeCircles && activeCircles.length > 0 ? (
-              activeCircles.map((circle) => (
-                <div key={circle.id} className="liquid-glass p-5 cursor-pointer hover:bg-white/5 transition-colors">
+              activeCircles.map((circle, index) => (
+                <div key={circle.id} className="liquid-glass-hover p-5 cursor-pointer animate-fade-in-up opacity-0" style={{ animationDelay: `${(index + 5) * 100}ms`, animationFillMode: 'forwards' }}>
                   <h3 className="text-base font-medium text-off-white truncate mb-1">{circle.name}</h3>
                   <p className="text-xs text-muted-foreground line-clamp-2">{circle.description || 'A community circle.'}</p>
                 </div>

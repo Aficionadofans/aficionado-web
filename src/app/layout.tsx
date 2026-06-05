@@ -29,10 +29,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
       >
         {/* Ambient Glowing Background Orbs */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-deep-plum/30 blur-[120px] mix-blend-screen animate-pulse duration-[10000ms]"></div>
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-muted-gold/20 blur-[150px] mix-blend-screen"></div>
-          <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-primary/10 blur-[100px] mix-blend-screen"></div>
+        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-deep-plum/30 blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-muted-gold/15 blur-[150px] mix-blend-screen animate-float"></div>
+          <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-primary/10 blur-[100px] mix-blend-screen animate-float-delayed"></div>
         </div>
 
         <Navigation />
