@@ -1,5 +1,8 @@
 import { Search, Hash, Star, UserCircle2 } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function ExplorePage() {
   const supabase = await createClient();
@@ -24,11 +27,11 @@ export default async function ExplorePage() {
       </header>
 
       <div className="relative mb-10">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-        <input 
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
+        <Input 
           type="text" 
           placeholder="Search categories..." 
-          className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-off-white placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/30 focus:shadow-[0_0_25px_rgba(212,175,55,0.2)] transition-all duration-300"
+          className="w-full pl-10 pr-4 py-6 bg-white/5 border-white/10 rounded-xl text-off-white placeholder:text-muted-foreground focus-visible:ring-primary/50 focus-visible:border-primary/50 focus-visible:shadow-[0_0_25px_rgba(212,175,55,0.2)] transition-all duration-300"
         />
       </div>
 
@@ -43,19 +46,20 @@ export default async function ExplorePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {featuredCreators && featuredCreators.length > 0 ? (
               featuredCreators.map((creator, index) => (
-                <div key={creator.id} className="liquid-glass-hover p-5 flex items-center gap-4 cursor-pointer animate-fade-in-up opacity-0" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
-                  {creator.avatar_url ? (
-                    <img src={creator.avatar_url} alt="Avatar" className="w-12 h-12 rounded-full" />
-                  ) : (
-                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                      <UserCircle2 className="w-6 h-6 text-muted-foreground" />
+                <Card key={creator.id} className="liquid-glass-hover border-white/10 cursor-pointer animate-fade-in-up opacity-0 overflow-hidden" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
+                  <CardContent className="p-5 flex items-center gap-4">
+                    <Avatar className="w-12 h-12 border border-white/10">
+                      <AvatarImage src={creator.avatar_url || ''} alt="Avatar" />
+                      <AvatarFallback className="bg-white/10">
+                        <UserCircle2 className="w-6 h-6 text-muted-foreground" />
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-medium text-off-white truncate">{creator.ai_tone || 'User'}</h3>
+                      <p className="text-xs text-muted-foreground truncate">{creator.bio || 'Wellness Enthusiast'}</p>
                     </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base font-medium text-off-white truncate">{creator.ai_tone || 'User'}</h3>
-                    <p className="text-xs text-muted-foreground truncate">{creator.bio || 'Wellness Enthusiast'}</p>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               ))
             ) : (
               <p className="text-muted-foreground text-sm">No creators found.</p>
@@ -73,10 +77,12 @@ export default async function ExplorePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {activeCircles && activeCircles.length > 0 ? (
               activeCircles.map((circle, index) => (
-                <div key={circle.id} className="liquid-glass-hover p-5 cursor-pointer animate-fade-in-up opacity-0" style={{ animationDelay: `${(index + 5) * 100}ms`, animationFillMode: 'forwards' }}>
-                  <h3 className="text-base font-medium text-off-white truncate mb-1">{circle.name}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2">{circle.description || 'A community circle.'}</p>
-                </div>
+                <Card key={circle.id} className="liquid-glass-hover border-white/10 cursor-pointer animate-fade-in-up opacity-0 overflow-hidden" style={{ animationDelay: `${(index + 5) * 100}ms`, animationFillMode: 'forwards' }}>
+                  <CardContent className="p-5">
+                    <h3 className="text-base font-medium text-off-white truncate mb-1">{circle.name}</h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{circle.description || 'A community circle.'}</p>
+                  </CardContent>
+                </Card>
               ))
             ) : (
               <p className="text-muted-foreground text-sm">No active circles found.</p>
