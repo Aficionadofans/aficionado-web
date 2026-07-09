@@ -28,6 +28,7 @@ export function AuthForm() {
   const defaultMessage = searchParams.get('message')
 
   const [mode, setMode] = useState<AuthMode>('login')
+  const [userType, setUserType] = useState<'aficionado' | 'fan'>('fan')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -46,7 +47,12 @@ export function AuthForm() {
       const res = await fetch(`${supabaseUrl}/functions/v1/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: mode, email, password })
+        body: JSON.stringify({ 
+          action: mode, 
+          email, 
+          password,
+          ...(mode === 'signup' && { userType })
+        })
       })
 
       if (!res.ok) {
@@ -139,6 +145,33 @@ export function AuthForm() {
                 placeholder="Email address"
               />
             </div>
+            
+            {mode === 'signup' && (
+              <div className="animate-fade-in-up flex space-x-4">
+                <button
+                  type="button"
+                  onClick={() => setUserType('fan')}
+                  className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
+                    userType === 'fan'
+                      ? 'bg-primary/20 border-primary text-off-white'
+                      : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
+                  }`}
+                >
+                  I'm a Fan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setUserType('aficionado')}
+                  className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
+                    userType === 'aficionado'
+                      ? 'bg-primary/20 border-primary text-off-white'
+                      : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
+                  }`}
+                >
+                  I'm an Aficionado
+                </button>
+              </div>
+            )}
             
             {(mode === 'login' || mode === 'signup') && (
               <div className="animate-fade-in-up">

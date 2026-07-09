@@ -40,6 +40,7 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
+  const userType = formData.get('userType') as string
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 
@@ -47,7 +48,7 @@ export async function signup(formData: FormData) {
     const res = await fetch(`${supabaseUrl}/functions/v1/auth`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'signup', email, password })
+      body: JSON.stringify({ action: 'signup', email, password, userType })
     })
 
     if (!res.ok) {
