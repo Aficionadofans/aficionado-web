@@ -12,14 +12,30 @@ export async function verifyMfa(prevState: any, formData: FormData) {
     return { error: 'Missing required fields' }
   }
 
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
   const supabase = await createClient()
-  const { error } = await supabase.auth.mfa.challengeAndVerify({
-    factorId,
-    code
-  })
+  const { data: { session } } = await supabase.auth.getSession()
 
-  if (error) {
-    return { error: 'Invalid code. Please try again.' }
+  if (!session) {
+    return { error: 'Not authenticated' }
+  }
+
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/mfa`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`
+      },
+      body: JSON.stringify({ action: 'challengeAndVerify', factorId, code })
+    })
+
+    if (!res.ok) {
+      const errorData = await res.json()
+      return { error: errorData.error || 'Invalid code. Please try again.' }
+    }
+  } catch (err: any) {
+    return { error: err.message || 'An error occurred during verification' }
   }
 
   revalidatePath('/', 'layout')

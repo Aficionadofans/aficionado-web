@@ -3,7 +3,7 @@
 import { useActionState, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Shield, ShieldAlert, CheckCircle2 } from 'lucide-react'
-import { enrollMfa, verifyEnrollment, unenrollMfa } from '@/app/settings/security/actions'
+import { enrollMfa, verifyAndEnableMfa, unenrollMfa } from '@/app/settings/security/actions'
 import { useFormStatus } from 'react-dom'
 
 function SubmitButton({ text, pendingText, disabled, variant = 'primary' }: { text: string, pendingText: string, disabled?: boolean, variant?: 'primary' | 'destructive' | 'outline' }) {
@@ -32,14 +32,14 @@ function SubmitButton({ text, pendingText, disabled, variant = 'primary' }: { te
 
 export function SecuritySettings({ initialIsEnrolled, initialFactorId }: { initialIsEnrolled: boolean, initialFactorId: string }) {
   const [enrollState, enrollAction] = useActionState(enrollMfa, null)
-  const [verifyState, verifyAction] = useActionState(verifyEnrollment, null)
+  const [verifyState, verifyAction] = useActionState(verifyAndEnableMfa, null)
   const [unenrollState, unenrollAction] = useActionState(unenrollMfa, null)
   const [code, setCode] = useState('')
   const [isCancelled, setIsCancelled] = useState(false)
 
   // Determine actual state based on initial props and current action states
   const isEnrolled = (!unenrollState?.success && (initialIsEnrolled || verifyState?.success))
-  const isEnrolling = enrollState?.enrolling && !verifyState?.success && !isCancelled
+  const isEnrolling = !!enrollState?.qrCode && !verifyState?.success && !isCancelled
   const factorId = enrollState?.factorId || initialFactorId
   const error = enrollState?.error || verifyState?.error || unenrollState?.error
 
