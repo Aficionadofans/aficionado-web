@@ -32,9 +32,21 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-3xl px-4 py-8 mx-auto lg:py-12">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-off-white">Today</h1>
-        <p className="mt-2 text-muted-foreground">Your daily check-in and curated feed.</p>
+      <header className="mb-10 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-off-white">Today</h1>
+          <p className="mt-2 text-muted-foreground">Your daily check-in and curated feed.</p>
+        </div>
+        <a 
+          href="/breathe" 
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full liquid-glass-hover text-primary hover:text-white"
+        >
+          <span className="relative flex w-3 h-3">
+            <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-primary"></span>
+            <span className="relative inline-flex w-3 h-3 rounded-full bg-primary"></span>
+          </span>
+          Urge Surfing
+        </a>
       </header>
 
       <CheckInCard hasCheckedInToday={hasCheckedInToday} />

@@ -37,7 +37,7 @@ export function Navigation({ isAdmin = false }: { isAdmin?: boolean }) {
                 className="inline-flex flex-col items-center justify-center px-5 hover:bg-white/5 group transition-all duration-300 relative"
               >
                 {isActive && (
-                  <div className="absolute top-0 w-8 h-1 bg-primary rounded-b-full shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+                  <div className="absolute top-0 w-8 h-1 bg-primary rounded-b-full shadow-[0_0_10px_rgba(71,168,189,0.5)]"></div>
                 )}
                 <Icon
                   className={`w-6 h-6 mb-1 transition-transform duration-300 group-hover:-translate-y-1 ${
@@ -76,7 +76,7 @@ export function Navigation({ isAdmin = false }: { isAdmin?: boolean }) {
                     }`}
                   >
                     {isActive && (
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full shadow-[0_0_10px_rgba(71,168,189,0.5)]"></div>
                     )}
                     <Icon className="w-5 h-5 transition duration-300 group-hover:scale-110" />
                     <span className="ms-3">{item.name}</span>
