@@ -1,5 +1,4 @@
-import { ImagePlus, Send } from "lucide-react";
-import { createPost } from "./actions";
+import { ComposeForm } from "@/components/studio/ComposeForm";
 
 export default function CreatePage() {
   return (
@@ -9,33 +8,10 @@ export default function CreatePage() {
         <p className="mt-2 text-muted-foreground">Share an update with your circles or followers.</p>
       </header>
 
-      <div className="liquid-glass p-6">
-        <form action={createPost}>
-          <textarea 
-            name="content"
-            className="w-full h-32 bg-transparent border-none resize-none text-off-white placeholder:text-muted-foreground focus:outline-none text-lg"
-            placeholder="What's on your mind today?"
-            required
-          ></textarea>
-          
-          <div className="h-px w-full bg-white/10 my-4"></div>
-          
-          <div className="flex items-center justify-between">
-            <button type="button" className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-white/5 text-muted-foreground hover:text-off-white transition-colors cursor-not-allowed opacity-50" title="Media upload coming soon">
-              <ImagePlus className="w-5 h-5" />
-              <span className="text-sm font-medium">Add Media</span>
-            </button>
-            
-            <button type="submit" className="flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors font-medium">
-              <span>Publish</span>
-              <Send className="w-4 h-4" />
-            </button>
-          </div>
-        </form>
-      </div>
+      <ComposeForm />
       
-      <p className="text-xs text-center text-muted-foreground mt-6 px-8">
-        All content passes through our automated moderation gate to ensure a safe, trigger-free environment.
+      <p className="text-xs text-center text-muted-foreground mt-8 px-8">
+        All content passes through our automated AI moderation gate to ensure a safe, trigger-free environment.
       </p>
     </div>
   );

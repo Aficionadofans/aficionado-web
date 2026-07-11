@@ -1,8 +1,6 @@
-import { Users, Lock } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { CircleCard } from "@/components/circles/CircleCard";
+import { EmptyState } from "@/components/circles/EmptyState";
 
 export default async function CirclesPage() {
   const supabase = await createClient();
@@ -37,43 +35,13 @@ export default async function CirclesPage() {
       <div className="space-y-5">
         {myCircles.length > 0 ? (
           myCircles.map((circle: any, index: number) => (
-            <Card key={circle.id} className="liquid-glass-hover border-white/10 group cursor-pointer animate-fade-in-up opacity-0 overflow-hidden" style={{ animationDelay: `${(index + 3) * 100}ms`, animationFillMode: 'forwards' }}>
-              <CardContent className="p-6 flex items-center justify-between">
-                <div className="flex items-center gap-5">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-deep-plum to-[#1A0F1D] flex items-center justify-center border border-white/10 shadow-inner">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium text-off-white flex items-center gap-2 mb-1">
-                      {circle.name} <Lock className="w-3 h-3 text-muted-foreground" />
-                    </h3>
-                    <Badge variant="secondary" className="bg-white/5 text-muted-foreground hover:bg-white/10 border-white/10 font-normal">Active circle</Badge>
-                  </div>
-                </div>
-                <div className="flex -space-x-2">
-                  <Avatar className="w-8 h-8 border-2 border-[#121212]">
-                    <AvatarFallback className="bg-charcoal"></AvatarFallback>
-                  </Avatar>
-                  <Avatar className="w-8 h-8 border-2 border-[#121212]">
-                    <AvatarFallback className="bg-charcoal"></AvatarFallback>
-                  </Avatar>
-                  <Avatar className="w-8 h-8 border-2 border-[#121212]">
-                    <AvatarFallback className="bg-charcoal text-[10px] text-muted-foreground">+2</AvatarFallback>
-                  </Avatar>
-                </div>
-              </CardContent>
-            </Card>
+            <CircleCard key={circle.id} circle={circle} index={index} />
           ))
         ) : (
           <p className="text-muted-foreground">You haven't joined any circles yet.</p>
         )}
 
-        <div className="p-6 border border-dashed border-white/20 rounded-2xl text-center mt-8">
-          <p className="text-muted-foreground mb-4">Looking for more support?</p>
-          <button className="text-primary font-medium hover:underline">
-            Browse public circles
-          </button>
-        </div>
+        <EmptyState />
       </div>
     </div>
   );
