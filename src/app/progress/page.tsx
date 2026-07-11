@@ -1,6 +1,6 @@
-import { createClient } from "@/utils/supabase/server";
-import { StatCards } from "@/components/progress/StatCards";
-import { KintsugiTimeline } from "@/components/progress/KintsugiTimeline";
+import { createClient } from "@/shared/lib/supabase/server";
+import { StatCards } from "@/features/progress/ui/StatCards";
+import { KintsugiTimeline } from "@/features/progress/ui/KintsugiTimeline";
 
 export default async function ProgressPage() {
   const supabase = await createClient();

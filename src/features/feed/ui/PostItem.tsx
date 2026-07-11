@@ -1,6 +1,7 @@
 import { UserCircle2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/shared/ui/core/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/core/avatar";
+import { HoldToAppreciate } from "@/shared/ui/core/HoldToAppreciate";
 
 interface PostItemProps {
   post: any;
@@ -33,6 +34,7 @@ export function PostItem({ post, index }: PostItemProps) {
         <div className="space-y-2">
           <p className="text-off-white text-sm whitespace-pre-wrap">{post.content}</p>
         </div>
+        <HoldToAppreciate />
       </CardContent>
     </Card>
   );

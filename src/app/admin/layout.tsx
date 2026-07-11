@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/shared/lib/supabase/server'
 import type { Metadata } from 'next'
 import { AdminSidebar } from './AdminSidebar'
 

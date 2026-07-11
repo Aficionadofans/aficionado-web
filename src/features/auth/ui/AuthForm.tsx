@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '@/shared/lib/supabase/client'
 import { authAction } from '@/app/login/actions'
 import { useFormStatus } from 'react-dom'
 

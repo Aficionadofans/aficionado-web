@@ -2,11 +2,11 @@
 
 import { useActionState, useRef, useEffect, useState, useTransition } from 'react'
 import { useFormStatus } from 'react-dom'
-import { Card } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
+import { Card } from '@/shared/ui/core/card'
+import { Input } from '@/shared/ui/core/input'
+import { Label } from '@/shared/ui/core/label'
+import { Button } from '@/shared/ui/core/button'
+import { Textarea } from '@/shared/ui/core/textarea'
 import { sendEmailAction, previewEmailAction, type EmailActionState } from './actions'
 import {
   Loader2, Send, CheckCircle2, AlertCircle,

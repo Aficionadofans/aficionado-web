@@ -1,5 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/ui/core/card";
 import { PostItem } from "./PostItem";
 
 interface FiniteFeedProps {

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/core/card'
 import { AlertTriangle } from 'lucide-react'
 
 export function DangerZoneCard() {

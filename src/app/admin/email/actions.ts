@@ -1,7 +1,7 @@
 'use server'
 
 import { Resend } from 'resend'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/shared/lib/supabase/server'
 import { render } from '@react-email/render'
 import MarkdownEmail from './MarkdownEmail'
 

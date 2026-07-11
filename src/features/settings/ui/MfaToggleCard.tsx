@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/core/card'
 import { Shield, ShieldAlert, CheckCircle2 } from 'lucide-react'
 import { enrollMfa, verifyAndEnableMfa, unenrollMfa } from '@/app/settings/security/actions'
 import { useFormStatus } from 'react-dom'

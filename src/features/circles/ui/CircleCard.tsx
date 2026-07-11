@@ -1,6 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/shared/ui/core/card"
+import { Avatar, AvatarFallback } from "@/shared/ui/core/avatar"
+import { Badge } from "@/shared/ui/core/badge"
 import { Users, Lock } from "lucide-react"
 
 export function CircleCard({ circle, index }: { circle: any, index: number }) {

@@ -1,6 +1,6 @@
-import { createClient } from "@/utils/supabase/server";
-import { CircleCard } from "@/components/circles/CircleCard";
-import { EmptyState } from "@/components/circles/EmptyState";
+import { createClient } from "@/shared/lib/supabase/server";
+import { CircleCard } from "@/features/circles/ui/CircleCard";
+import { EmptyState } from "@/features/circles/ui/EmptyState";
 
 export default async function CirclesPage() {
   const supabase = await createClient();

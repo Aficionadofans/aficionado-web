@@ -1,6 +1,6 @@
-import { createClient } from "@/utils/supabase/server";
-import { CheckInCard } from "@/components/home/CheckInCard";
-import { FiniteFeed } from "@/components/home/FiniteFeed";
+import { createClient } from "@/shared/lib/supabase/server";
+import { CheckInCard } from "@/features/feed/ui/CheckInCard";
+import { FiniteFeed } from "@/features/feed/ui/FiniteFeed";
 
 export default async function HomePage() {
   const supabase = await createClient();

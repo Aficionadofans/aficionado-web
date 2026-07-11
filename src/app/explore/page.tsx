@@ -1,8 +1,8 @@
 import { Hash, Star } from "lucide-react";
-import { createClient } from "@/utils/supabase/server";
-import { DiscoverySearch } from "@/components/explore/DiscoverySearch";
-import { CuratorCard } from "@/components/explore/CuratorCard";
-import { CircleHighlight } from "@/components/explore/CircleHighlight";
+import { createClient } from "@/shared/lib/supabase/server";
+import { DiscoverySearch } from "@/features/explore/ui/DiscoverySearch";
+import { CuratorCard } from "@/features/explore/ui/CuratorCard";
+import { CircleHighlight } from "@/features/explore/ui/CircleHighlight";
 
 export default async function ExplorePage() {
   const supabase = await createClient();

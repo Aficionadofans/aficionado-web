@@ -1,4 +1,4 @@
-import { ComposeForm } from "@/components/studio/ComposeForm";
+import { ComposeForm } from "@/features/studio/ui/ComposeForm";
 
 export default function CreatePage() {
   return (
