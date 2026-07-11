@@ -12,7 +12,7 @@ function SubmitButton({ text, pendingText, disabled, variant = 'primary' }: { te
   let className = "px-6 py-2.5 text-sm font-semibold transition-all duration-300 rounded-full active:scale-95 disabled:opacity-50 "
   
   if (variant === 'primary') {
-    className += "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_4px_14px_0_rgba(212,175,55,0.39)] hover:shadow-[0_6px_20px_rgba(212,175,55,0.5)]"
+    className += "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_4px_14px_0_rgba(71,168,189,0.39)] hover:shadow-[0_6px_20px_rgba(71,168,189,0.5)]"
   } else if (variant === 'destructive') {
     className += "bg-destructive/10 text-destructive border border-destructive/20 hover:bg-destructive hover:text-destructive-foreground"
   } else {
@@ -30,7 +30,7 @@ function SubmitButton({ text, pendingText, disabled, variant = 'primary' }: { te
   )
 }
 
-export function SecuritySettings({ initialIsEnrolled, initialFactorId }: { initialIsEnrolled: boolean, initialFactorId: string }) {
+export function MfaToggleCard({ initialIsEnrolled, initialFactorId }: { initialIsEnrolled: boolean, initialFactorId: string }) {
   const [enrollState, enrollAction] = useActionState(enrollMfa, null)
   const [verifyState, verifyAction] = useActionState(verifyAndEnableMfa, null)
   const [unenrollState, unenrollAction] = useActionState(unenrollMfa, null)

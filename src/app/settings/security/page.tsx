@@ -1,5 +1,7 @@
 import { Suspense } from 'react'
-import { SecuritySettings } from '@/components/settings/SecuritySettings'
+import { MfaToggleCard } from '@/components/settings/MfaToggleCard'
+import { DeviceSessionList } from '@/components/settings/DeviceSessionList'
+import { DangerZoneCard } from '@/components/settings/DangerZoneCard'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function SecurityPage() {
@@ -17,9 +19,15 @@ export default async function SecurityPage() {
         <p className="mt-2 text-muted-foreground">Manage your account security and two-factor authentication.</p>
       </header>
 
-      <Suspense fallback={<div className="animate-pulse w-full h-64 bg-white/5 rounded-3xl" />}>
-        <SecuritySettings initialIsEnrolled={initialIsEnrolled} initialFactorId={initialFactorId} />
-      </Suspense>
+      <div className="space-y-6">
+        <Suspense fallback={<div className="animate-pulse w-full h-64 bg-white/5 rounded-3xl" />}>
+          <MfaToggleCard initialIsEnrolled={initialIsEnrolled} initialFactorId={initialFactorId} />
+        </Suspense>
+
+        <DeviceSessionList />
+        
+        <DangerZoneCard />
+      </div>
     </div>
   )
 }
