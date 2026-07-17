@@ -1,0 +1,10 @@
+app/
+├── (auth)/                  # Public routes
+│   ├── login/page.tsx
+│   └── register/page.tsx
+├── (app)/                   # Protected routes (Requires Login)
+│   ├── layout.tsx           # The Layout we built earlier (Sidebar, Header)
+│   ├── feed/page.tsx        # The main timeline
+│   ├── creator/[id]/page.tsx# Creator profile
+│   └── settings/page.tsx
+└── api/                     # Our backend endpoints (Stripe, Mux, Webhooks)
