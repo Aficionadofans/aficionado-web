@@ -24,7 +24,7 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
             </button>
           </Link>
           <div>
-            <h1 className="text-lg font-bold text-white">The Block</h1>
+            <h1 className="text-lg font-bold text-white">Local Square</h1>
             <p className="text-xs text-bio-teal font-medium flex items-center gap-1">
               <MapPin className="w-3 h-3" /> Zip: {targetZip}
             </p>

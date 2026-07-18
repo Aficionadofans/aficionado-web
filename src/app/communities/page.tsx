@@ -44,13 +44,13 @@ export default function CommunitiesHub() {
           <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/50 font-bold tracking-wider uppercase">Coming Soon</span>
         </div>
 
-        {/* The Block (Neighborhoods) */}
+        {/* Local Square (Neighborhoods) */}
         <Link href="/communities/neighborhood" className="group liquid-glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-bio-teal/80 transition-all hover:-translate-y-2 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-bio-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="w-20 h-20 rounded-full bg-bio-teal/20 border border-bio-teal/50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(45,212,191,0.4)]">
             <MapPin className="w-10 h-10 text-bio-teal" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">The Block</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Local Square</h2>
           <p className="text-muted-foreground text-sm mb-6 flex-1">
             Hyper-local living communities for neighbors. Strictly segregated and verified by your Zip Code.
           </p>
