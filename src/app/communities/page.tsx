@@ -20,12 +20,12 @@ export default function CommunitiesHub() {
 
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8 z-10">
         
-        {/* The Studio */}
+        {/* Creative Space */}
         <div className="group liquid-glass p-8 rounded-3xl flex flex-col items-center text-center hover:border-primary/50 transition-all hover:-translate-y-2 cursor-not-allowed opacity-80">
           <div className="w-20 h-20 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(168,85,247,0.3)]">
             <Palette className="w-10 h-10 text-purple-400" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">The Studio</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">Creative Space</h2>
           <p className="text-muted-foreground text-sm mb-6 flex-1">
             A collaborative sanctuary for artists, writers, musicians, and designers to create alongside their top fans.
           </p>
