@@ -4,41 +4,19 @@ import React, { useState } from 'react'
 import MuxPlayer from '@mux/mux-player-react'
 import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical } from 'lucide-react'
 import Link from 'next/link'
+import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
 
-// Mock Data
-const MOCK_VIDEOS = [
-  {
-    id: '1',
-    creator: 'alexa_streams',
-    description: 'Welcome to my new premium setup! ✨',
-    playbackId: 'DS00Spx1CV902MCtPj5WknGlR102V5HFkDe',
-    likes: '12.4K',
-    comments: '342',
-    isSubscribed: false,
-  },
-  {
-    id: '2',
-    creator: 'fitness_guru',
-    description: 'Quick morning routine for subscribers 💪',
-    playbackId: 'qxb01i6T202008AyaVKtKKGQq5OQ00U88s1c',
-    likes: '8.1K',
-    comments: '128',
-    isSubscribed: true,
-  },
-  {
-    id: '3',
-    creator: 'gamer_pro',
-    description: 'Insane clutch moment! 🎮🔥',
-    playbackId: 'Fu6G0099Qn3u7CebH5e00300QjO2D99zGvN',
-    likes: '45K',
-    comments: '1.2K',
-    isSubscribed: false,
-  }
-]
+export interface Video {
+  id: string
+  creator: string
+  description: string
+  playbackId: string
+  likes: string
+  comments: string
+  isSubscribed: boolean
+}
 
-import { DropZoneCarousel } from './DropZoneCarousel'
-
-export function FanFeed() {
+export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
   const [activeVideo, setActiveVideo] = useState(0)
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -53,7 +31,7 @@ export function FanFeed() {
     <div className="h-full w-full max-w-md mx-auto relative bg-black">
       {/* Absolute top Drop Zone Carousel */}
       <div className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/80 to-transparent pt-2">
-        <DropZoneCarousel />
+        <DropZoneCarousel drops={drops} />
       </div>
 
       {/* Main scrolling video feed */}
@@ -62,7 +40,7 @@ export function FanFeed() {
         onScroll={handleScroll}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-      {MOCK_VIDEOS.map((video, idx) => (
+      {videos.map((video, idx) => (
         <div key={video.id} className="h-full w-full snap-start relative bg-black flex justify-center items-center">
           {/* Video Player */}
           <MuxPlayer
@@ -72,7 +50,7 @@ export function FanFeed() {
             muted={false}
             autoPlay={idx === activeVideo ? "any" : false}
             streamType="on-demand"
-            style={{ '--controls': 'none' } as React.CSSProperties}
+            style={{ '--controls': 'none' } as any}
           />
 
           {/* Overlay UI (Liquid Glass) */}

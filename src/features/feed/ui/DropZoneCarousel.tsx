@@ -3,23 +3,22 @@
 import React, { useState } from 'react'
 import { X, Play } from 'lucide-react'
 
-// Mock data for drops
-const MOCK_DROPS = [
-  { id: '1', creator: 'alexa_streams', avatar: 'https://i.pravatar.cc/150?u=alexa', hasUnread: true, content: 'Getting ready for the stream! 💄' },
-  { id: '2', creator: 'fitness_guru', avatar: 'https://i.pravatar.cc/150?u=fitness', hasUnread: true, content: 'Morning pump is real 💪' },
-  { id: '3', creator: 'gamer_pro', avatar: 'https://i.pravatar.cc/150?u=gamer', hasUnread: false, content: 'New high score, check the VOD' },
-  { id: '4', creator: 'chef_boyardee', avatar: 'https://i.pravatar.cc/150?u=chef', hasUnread: true, content: 'Secret recipe drop incoming...' },
-  { id: '5', creator: 'music_maker', avatar: 'https://i.pravatar.cc/150?u=music', hasUnread: false, content: 'Studio time 🎧' },
-]
+export interface Drop {
+  id: string
+  creator: string
+  avatar: string
+  hasUnread: boolean
+  content: string
+}
 
-export function DropZoneCarousel() {
-  const [activeDrop, setActiveDrop] = useState<typeof MOCK_DROPS[0] | null>(null)
+export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
+  const [activeDrop, setActiveDrop] = useState<Drop | null>(null)
 
   return (
     <>
       {/* Horizontal Carousel */}
       <div className="w-full pt-4 pb-2 px-4 overflow-x-auto hide-scrollbar flex gap-4 items-center">
-        {MOCK_DROPS.map((drop) => (
+        {drops.map((drop) => (
           <button 
             key={drop.id}
             onClick={() => setActiveDrop(drop)}

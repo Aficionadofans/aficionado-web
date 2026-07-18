@@ -1,9 +1,53 @@
-import { FanFeed } from "@/features/feed/ui/FanFeed";
+import { FanFeed, type Video } from "@/features/feed/ui/FanFeed";
+import { type Drop } from "@/features/feed/ui/DropZoneCarousel";
+import { createClient } from "@/shared/lib/supabase/server";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await createClient();
+
+  // Fetch videos from the 'content' table and join with 'profiles'
+  // using maybe 'user_id' or 'creator_id'. Let's assume 'creator_id' or 'user_id'. 
+  // Based on actions.ts for check_ins it was 'user_id'. Wait, 'content' might use 'user_id'.
+  // We'll select *, profiles!inner(username)
+  const { data: contentData } = await supabase
+    .from('content')
+    .select('id, mux_playback_id, description, likes_count, comments_count, profiles!inner(username)')
+    .order('created_at', { ascending: false })
+    .limit(10);
+
+  // Map to Video type
+  const videos: Video[] = (contentData || []).map((c: any) => ({
+    id: c.id,
+    creator: c.profiles?.username || 'unknown',
+    description: c.description || '',
+    playbackId: c.mux_playback_id || '',
+    likes: (c.likes_count || 0).toString(),
+    comments: (c.comments_count || 0).toString(),
+    isSubscribed: false, // We would check subscriptions here in a real scenario
+  }));
+
+  // Fetch drops from the 'posts' table
+  const { data: postsData } = await supabase
+    .from('posts')
+    .select('id, content, created_at, profiles!inner(username, avatar_url)')
+    .order('created_at', { ascending: false })
+    .limit(10);
+
+  // Map to Drop type
+  const drops: Drop[] = (postsData || []).map((p: any) => ({
+    id: p.id,
+    creator: p.profiles?.username || 'unknown',
+    avatar: p.profiles?.avatar_url || `https://i.pravatar.cc/150?u=${p.profiles?.username || p.id}`,
+    hasUnread: true, // simplified
+    content: p.content || '',
+  }));
+
+  // If no data is available from Supabase (e.g. empty DB), we could fallback to mock data here or just show empty. 
+  // We will show empty/whatever is fetched.
+
   return (
     <div className="h-[100dvh] w-full bg-black">
-      <FanFeed />
+      <FanFeed videos={videos} drops={drops} />
     </div>
   );
 }
