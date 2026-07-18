@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import MuxPlayer from '@mux/mux-player-react'
 import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical } from 'lucide-react'
 
 // Mock Data
@@ -9,7 +10,7 @@ const MOCK_VIDEOS = [
     id: '1',
     creator: 'alexa_streams',
     description: 'Welcome to my new premium setup! ✨',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    playbackId: 'DS00Spx1CV902MCtPj5WknGlR102V5HFkDe',
     likes: '12.4K',
     comments: '342',
     isSubscribed: false,
@@ -18,7 +19,7 @@ const MOCK_VIDEOS = [
     id: '2',
     creator: 'fitness_guru',
     description: 'Quick morning routine for subscribers 💪',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    playbackId: 'qxb01i6T202008AyaVKtKKGQq5OQ00U88s1c',
     likes: '8.1K',
     comments: '128',
     isSubscribed: true,
@@ -27,7 +28,7 @@ const MOCK_VIDEOS = [
     id: '3',
     creator: 'gamer_pro',
     description: 'Insane clutch moment! 🎮🔥',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    playbackId: 'Fu6G0099Qn3u7CebH5e00300QjO2D99zGvN',
     likes: '45K',
     comments: '1.2K',
     isSubscribed: false,
@@ -54,13 +55,14 @@ export function FanFeed() {
       {MOCK_VIDEOS.map((video, idx) => (
         <div key={video.id} className="h-full w-full snap-start relative bg-black flex justify-center items-center">
           {/* Video Player */}
-          <video
-            src={video.videoUrl}
+          <MuxPlayer
+            playbackId={video.playbackId}
             className="h-full w-full object-cover"
             loop
             muted={false}
-            autoPlay={idx === activeVideo}
-            playsInline
+            autoPlay={idx === activeVideo ? "any" : false}
+            streamType="on-demand"
+            style={{ '--controls': 'none' } as React.CSSProperties}
           />
 
           {/* Overlay UI (Liquid Glass) */}
