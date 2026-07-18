@@ -1,11 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Lock, Star, MessageCircle, Send } from 'lucide-react'
+import { Lock, Star, MessageCircle, Send, DollarSign } from 'lucide-react'
+import { TipModal } from '@/features/monetization/ui/TipModal'
 
 export function InnerCircleView({ username }: { username: string }) {
   // Mocking the subscription state for the prototype
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [isTipModalOpen, setIsTipModalOpen] = useState(false)
 
   if (!isSubscribed) {
     return (
@@ -77,17 +79,33 @@ export function InnerCircleView({ username }: { username: string }) {
 
       {/* Chat Input */}
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent">
-        <div className="relative">
-          <input 
-            type="text" 
-            placeholder="Chat with the Inner Circle..." 
-            className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-4 pr-12 text-sm text-white focus:outline-none focus:border-amber-500/50 transition-colors placeholder:text-white/30"
-          />
-          <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-amber-500 text-black flex items-center justify-center hover:scale-105 transition-transform">
-            <Send className="w-4 h-4 ml-0.5" />
+        <div className="relative flex items-center gap-2">
+          <button 
+            onClick={() => setIsTipModalOpen(true)}
+            className="w-12 h-12 flex-shrink-0 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-500 flex items-center justify-center hover:bg-amber-500/20 transition-colors"
+          >
+            <DollarSign className="w-5 h-5" />
           </button>
+          
+          <div className="relative flex-1">
+            <input 
+              type="text" 
+              placeholder="Chat with the Inner Circle..." 
+              className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-4 pr-12 text-sm text-white focus:outline-none focus:border-amber-500/50 transition-colors placeholder:text-white/30"
+            />
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-amber-500 text-black flex items-center justify-center hover:scale-105 transition-transform">
+              <Send className="w-4 h-4 ml-0.5" />
+            </button>
+          </div>
         </div>
       </div>
+
+      {isTipModalOpen && (
+        <TipModal 
+          creatorId={username} 
+          onClose={() => setIsTipModalOpen(false)} 
+        />
+      )}
     </div>
   )
 }

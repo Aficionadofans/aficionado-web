@@ -5,6 +5,7 @@ import MuxPlayer from '@mux/mux-player-react'
 import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical } from 'lucide-react'
 import Link from 'next/link'
 import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
+import { TipModal } from '@/features/monetization/ui/TipModal'
 
 export interface Video {
   id: string
@@ -18,6 +19,7 @@ export interface Video {
 
 export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
   const [activeVideo, setActiveVideo] = useState(0)
+  const [tipModalCreator, setTipModalCreator] = useState<string | null>(null)
 
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget
@@ -72,7 +74,10 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
               <span className="text-xs font-medium text-white drop-shadow-md">{video.comments}</span>
             </button>
 
-            <button className="flex flex-col items-center gap-1 group">
+            <button 
+              onClick={() => setTipModalCreator(video.creator)}
+              className="flex flex-col items-center gap-1 group"
+            >
               <div className="w-12 h-12 rounded-full bg-amber-500/20 backdrop-blur-xl border border-amber-500/50 flex items-center justify-center transition-transform group-hover:scale-110">
                 <DollarSign className="w-6 h-6 text-amber-500" />
               </div>
@@ -110,6 +115,13 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
         </div>
       ))}
       </div>
+
+      {tipModalCreator && (
+        <TipModal 
+          creatorId={tipModalCreator} 
+          onClose={() => setTipModalCreator(null)} 
+        />
+      )}
     </div>
   )
 }
