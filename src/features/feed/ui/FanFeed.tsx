@@ -22,8 +22,6 @@ export interface Video {
 export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
   const [activeVideo, setActiveVideo] = useState(0)
   const [tipModalCreator, setTipModalCreator] = useState<string | null>(null)
-  const [revealedNsfw, setRevealedNsfw] = useState<Record<string, boolean>>({})
-
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget
     const index = Math.round(container.scrollTop / container.clientHeight)
@@ -48,63 +46,60 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
       {videos.map((video, idx) => {
         const isLocked = video.unlocksAt && new Date(video.unlocksAt) > new Date();
         const unlockDateString = video.unlocksAt ? new Date(video.unlocksAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-        const isNsfw = video.moderationStatus === 'rejected' && !revealedNsfw[video.id];
+        const isNsfw = video.moderationStatus === 'rejected';
         
-        const shouldBlur = isLocked || isNsfw;
-        const autoPlayVideo = !shouldBlur && idx === activeVideo;
+        const autoPlayVideo = !isLocked && !isNsfw && idx === activeVideo;
 
         return (
         <div key={video.id} className="h-full w-full snap-start relative bg-black flex justify-center items-center">
-          {/* Video Player */}
-          <div className={`absolute inset-0 transition-all duration-1000 ${shouldBlur ? 'blur-2xl scale-110 opacity-50' : ''}`}>
-            <MuxPlayer
-              playbackId={video.playbackId}
-              className="h-full w-full object-cover pointer-events-none"
-              loop
-              muted={false}
-              autoPlay={autoPlayVideo ? "any" : false}
-              streamType="on-demand"
-              style={{ '--controls': 'none' } as any}
-            />
-          </div>
-
-          {isNsfw && !isLocked && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
-              <div className="w-20 h-20 rounded-full bg-red-500/20 backdrop-blur-md border border-red-500/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(239,68,68,0.3)]">
-                <EyeOff className="w-10 h-10 text-red-400 drop-shadow-md" />
+          
+          {isNsfw ? (
+            <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-zinc-950">
+              <div className="w-20 h-20 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center mb-6">
+                <EyeOff className="w-10 h-10 text-red-500" />
               </div>
-              <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Sensitive Content</h3>
-              <p className="text-red-200 font-medium mb-8 max-w-[80%]">This video contains adult themes.</p>
-              
-              <button 
-                onClick={() => setRevealedNsfw(prev => ({ ...prev, [video.id]: true }))}
-                className="px-8 py-4 rounded-full bg-red-600 text-white font-bold tracking-wider hover:bg-red-500 transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 uppercase text-sm"
-              >
-                I am over 18 - Reveal
-              </button>
+              <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Content Removed</h3>
+              <p className="text-red-400 font-medium max-w-[80%] text-sm">
+                This content was removed for violating our strict Community Guidelines against adult material.
+              </p>
             </div>
-          )}
-
-          {isLocked && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
-              <div className="w-20 h-20 rounded-full bg-indigo-500/20 backdrop-blur-md border border-indigo-500/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
-                <Lock className="w-10 h-10 text-indigo-400 drop-shadow-md" />
+          ) : (
+            <>
+              {/* Video Player */}
+              <div className={`absolute inset-0 transition-all duration-1000 ${isLocked ? 'blur-2xl scale-110 opacity-50' : ''}`}>
+                <MuxPlayer
+                  playbackId={video.playbackId}
+                  className="h-full w-full object-cover pointer-events-none"
+                  loop
+                  muted={false}
+                  autoPlay={autoPlayVideo ? "any" : false}
+                  streamType="on-demand"
+                  style={{ '--controls': 'none' } as any}
+                />
               </div>
-              <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Time Capsule</h3>
-              <p className="text-indigo-200 font-medium mb-6 max-w-[80%]">This exclusive drop is sealed.</p>
-              
-              <div className="glass-panel px-6 py-4 rounded-2xl flex items-center gap-3 mb-8">
-                <Clock className="w-5 h-5 text-indigo-400 animate-pulse" />
-                <div className="text-left">
-                  <div className="text-xs text-indigo-200/70 font-medium uppercase tracking-wider">Unlocks On</div>
-                  <div className="text-lg font-bold text-white">{unlockDateString}</div>
+
+              {isLocked && (
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
+                  <div className="w-20 h-20 rounded-full bg-indigo-500/20 backdrop-blur-md border border-indigo-500/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+                    <Lock className="w-10 h-10 text-indigo-400 drop-shadow-md" />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Time Capsule</h3>
+                  <p className="text-indigo-200 font-medium mb-6 max-w-[80%]">This exclusive drop is sealed.</p>
+                  
+                  <div className="glass-panel px-6 py-4 rounded-2xl flex items-center gap-3 mb-8">
+                    <Clock className="w-5 h-5 text-indigo-400 animate-pulse" />
+                    <div className="text-left">
+                      <div className="text-xs text-indigo-200/70 font-medium uppercase tracking-wider">Unlocks On</div>
+                      <div className="text-lg font-bold text-white">{unlockDateString}</div>
+                    </div>
+                  </div>
+
+                  <button className="px-8 py-4 rounded-full bg-indigo-500 text-white font-bold tracking-wider hover:bg-indigo-400 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] active:scale-95 uppercase text-sm">
+                    Set Reminder
+                  </button>
                 </div>
-              </div>
-
-              <button className="px-8 py-4 rounded-full bg-indigo-500 text-white font-bold tracking-wider hover:bg-indigo-400 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] active:scale-95 uppercase text-sm">
-                Set Reminder
-              </button>
-            </div>
+              )}
+            </>
           )}
 
           {/* Overlay UI (Liquid Glass) */}

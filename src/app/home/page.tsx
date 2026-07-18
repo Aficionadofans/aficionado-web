@@ -31,7 +31,7 @@ export default async function HomePage() {
   const demoNsfwVideo: Video = {
     id: 'demo-nsfw-video',
     creator: 'spicy_creator',
-    description: 'This video is flagged as adult content. Click to reveal.',
+    description: 'This video was flagged for adult content and removed.',
     playbackId: 'qxb01i6T202018GGS2nwgDS7Bzl3Kx1q9e02Tj02mC62h4', // random mux ID for background blur
     likes: '45k',
     comments: '12k',
