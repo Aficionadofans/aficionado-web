@@ -175,6 +175,47 @@ export function AuthForm() {
             )}
           </div>
 
+          {mode === 'signup' && (
+            <div className="space-y-4 animate-fade-in-up">
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    required
+                    className="focus:ring-primary h-4 w-4 text-primary border-white/20 bg-white/5 rounded"
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor="terms" className="font-medium text-white/80">
+                    I agree to the <a href="/terms" target="_blank" className="text-primary hover:underline">Terms of Service</a> and <a href="/privacy" target="_blank" className="text-primary hover:underline">Privacy Policy</a>
+                  </label>
+                  <p className="text-muted-foreground text-xs mt-1">Includes strict prohibition of adult content.</p>
+                </div>
+              </div>
+
+              {userType === 'aficionado' && (
+                <div className="flex items-start animate-fade-in-up">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="creator-agreement"
+                      name="creator-agreement"
+                      type="checkbox"
+                      required
+                      className="focus:ring-primary h-4 w-4 text-primary border-white/20 bg-white/5 rounded"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="creator-agreement" className="font-medium text-white/80">
+                      I agree to the <a href="/creator-agreement" target="_blank" className="text-primary hover:underline">Creator Monetization Agreement</a>
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {errorMsg && (
             <div className="text-destructive text-sm text-center p-3 bg-destructive/10 border border-destructive/20 rounded-lg animate-fade-in-up">
               {errorMsg}
