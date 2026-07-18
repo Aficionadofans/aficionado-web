@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import MuxPlayer from '@mux/mux-player-react'
-import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical } from 'lucide-react'
+import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical, Lock, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
 import { TipModal } from '@/features/monetization/ui/TipModal'
@@ -15,6 +15,7 @@ export interface Video {
   likes: string
   comments: string
   isSubscribed: boolean
+  unlocksAt?: string
 }
 
 export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
@@ -42,18 +43,46 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
         onScroll={handleScroll}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-      {videos.map((video, idx) => (
+      {videos.map((video, idx) => {
+        const isLocked = video.unlocksAt && new Date(video.unlocksAt) > new Date();
+        const unlockDateString = video.unlocksAt ? new Date(video.unlocksAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+
+        return (
         <div key={video.id} className="h-full w-full snap-start relative bg-black flex justify-center items-center">
           {/* Video Player */}
-          <MuxPlayer
-            playbackId={video.playbackId}
-            className="h-full w-full object-cover"
-            loop
-            muted={false}
-            autoPlay={idx === activeVideo ? "any" : false}
-            streamType="on-demand"
-            style={{ '--controls': 'none' } as any}
-          />
+          <div className={`absolute inset-0 transition-all duration-1000 ${isLocked ? 'blur-xl scale-110 opacity-50' : ''}`}>
+            <MuxPlayer
+              playbackId={video.playbackId}
+              className="h-full w-full object-cover pointer-events-none"
+              loop
+              muted={false}
+              autoPlay={!isLocked && idx === activeVideo ? "any" : false}
+              streamType="on-demand"
+              style={{ '--controls': 'none' } as any}
+            />
+          </div>
+
+          {isLocked && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
+              <div className="w-20 h-20 rounded-full bg-indigo-500/20 backdrop-blur-md border border-indigo-500/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+                <Lock className="w-10 h-10 text-indigo-400 drop-shadow-md" />
+              </div>
+              <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Time Capsule</h3>
+              <p className="text-indigo-200 font-medium mb-6 max-w-[80%]">This exclusive drop is sealed.</p>
+              
+              <div className="glass-panel px-6 py-4 rounded-2xl flex items-center gap-3 mb-8">
+                <Clock className="w-5 h-5 text-indigo-400 animate-pulse" />
+                <div className="text-left">
+                  <div className="text-xs text-indigo-200/70 font-medium uppercase tracking-wider">Unlocks On</div>
+                  <div className="text-lg font-bold text-white">{unlockDateString}</div>
+                </div>
+              </div>
+
+              <button className="px-8 py-4 rounded-full bg-indigo-500 text-white font-bold tracking-wider hover:bg-indigo-400 transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] active:scale-95 uppercase text-sm">
+                Set Reminder
+              </button>
+            </div>
+          )}
 
           {/* Overlay UI (Liquid Glass) */}
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/10 via-transparent to-black/60" />
@@ -113,7 +142,8 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
             </p>
           </div>
         </div>
-      ))}
+        );
+      })}
       </div>
 
       {tipModalCreator && (

@@ -16,7 +16,7 @@ export default async function HomePage() {
     .limit(10);
 
   // Map to Video type
-  const videos: Video[] = (contentData || []).map((c: any) => ({
+  const dbVideos: Video[] = (contentData || []).map((c: any) => ({
     id: c.id,
     creator: c.profiles?.username || 'unknown',
     description: c.description || '',
@@ -25,6 +25,23 @@ export default async function HomePage() {
     comments: (c.comments_count || 0).toString(),
     isSubscribed: false, // We would check subscriptions here in a real scenario
   }));
+
+  // DEMO: Inject a mocked Time Capsule video at the top of the feed
+  const futureDate = new Date();
+  futureDate.setDate(futureDate.getDate() + 7);
+  
+  const demoLockedVideo: Video = {
+    id: 'demo-locked-video',
+    creator: 'aficionado_exclusive',
+    description: 'This is a top-secret drop. Set a reminder!',
+    playbackId: 'qxb01i6T202018GGS2nwgDS7Bzl3Kx1q9e02Tj02mC62h4', // random mux ID for background blur
+    likes: '12k',
+    comments: '4.5k',
+    isSubscribed: true,
+    unlocksAt: futureDate.toISOString()
+  }
+
+  const videos = [demoLockedVideo, ...dbVideos];
 
   // Fetch drops from the 'posts' table
   const { data: postsData } = await supabase

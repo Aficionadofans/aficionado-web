@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Upload, Video, TrendingUp, Users, DollarSign, AlertTriangle, ShieldCheck } from 'lucide-react'
+import { Upload, Video, TrendingUp, Users, DollarSign, AlertTriangle, ShieldCheck, Lock } from 'lucide-react'
 import { CreateDropModal } from './CreateDropModal'
+import { TimeCapsuleModal } from './TimeCapsuleModal'
 
 export function CreatorStudio({ 
   activeSubscribers = 0,
@@ -14,6 +15,7 @@ export function CreatorStudio({
   totalEarnings?: number
 }) {
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
+  const [isTimeCapsuleModalOpen, setIsTimeCapsuleModalOpen] = useState(false)
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12">
       <header className="mb-10">
@@ -40,9 +42,17 @@ export function CreatorStudio({
           </svg>
           <span className="text-lg font-bold text-amber-500 drop-shadow-md">Create Drop</span>
         </button>
+        <button 
+          onClick={() => setIsTimeCapsuleModalOpen(true)}
+          className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl liquid-glass-hover bg-indigo-500/10 border-indigo-500/30 group sm:col-span-3 md:col-span-1"
+        >
+          <Lock className="w-8 h-8 text-indigo-400 group-hover:scale-110 transition-transform" />
+          <span className="text-lg font-bold text-indigo-400">Time Capsule</span>
+        </button>
       </section>
 
       {isDropModalOpen && <CreateDropModal onClose={() => setIsDropModalOpen(false)} />}
+      {isTimeCapsuleModalOpen && <TimeCapsuleModal onClose={() => setIsTimeCapsuleModalOpen(false)} />}
 
       {/* Analytics Dashboard */}
       <section className="mb-10">
