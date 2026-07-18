@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import MuxPlayer from '@mux/mux-player-react'
 import { Heart, MessageCircle, Share2, DollarSign, Star, MoreVertical } from 'lucide-react'
+import Link from 'next/link'
 
 // Mock Data
 const MOCK_VIDEOS = [
@@ -110,7 +111,9 @@ export function FanFeed() {
           {/* Bottom Left Info */}
           <div className="absolute left-4 bottom-20 max-w-[70%] z-10 pointer-events-auto">
             <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-lg font-bold text-white drop-shadow-lg">@{video.creator}</h2>
+              <Link href={`/${video.creator}`}>
+                <h2 className="text-lg font-bold text-white drop-shadow-lg hover:underline decoration-amber-500">@{video.creator}</h2>
+              </Link>
               {!video.isSubscribed ? (
                 <button className="px-3 py-1 text-xs font-bold rounded-full bg-amber-500 text-black uppercase tracking-wider hover:bg-amber-400 transition-colors">
                   Subscribe
