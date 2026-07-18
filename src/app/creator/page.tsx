@@ -28,10 +28,25 @@ export default async function CreatorPage() {
     .eq("status", "active");
 
   const activeSubscribers = count || 0;
+  
+  // Approximate total earnings
+  const totalEarnings = activeSubscribers * 9.99;
+
+  // Approximate total views by summing likes_count from content table
+  const { data: contentData } = await supabase
+    .from("content")
+    .select("likes_count")
+    .eq("creator_id", user.id); // Assuming content table has creator_id based on user_id.
+
+  const totalViews = (contentData || []).reduce((acc: number, curr: any) => acc + (curr.likes_count || 0), 0);
 
   return (
     <div className="min-h-screen bg-background">
-      <CreatorStudio activeSubscribers={activeSubscribers} />
+      <CreatorStudio 
+        activeSubscribers={activeSubscribers} 
+        totalEarnings={totalEarnings}
+        totalViews={totalViews}
+      />
     </div>
   );
 }

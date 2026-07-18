@@ -4,7 +4,15 @@ import React, { useState } from 'react'
 import { Upload, Video, TrendingUp, Users, DollarSign, AlertTriangle, ShieldCheck } from 'lucide-react'
 import { CreateDropModal } from './CreateDropModal'
 
-export function CreatorStudio({ activeSubscribers = 0 }: { activeSubscribers?: number }) {
+export function CreatorStudio({ 
+  activeSubscribers = 0,
+  totalViews = 0,
+  totalEarnings = 0 
+}: { 
+  activeSubscribers?: number
+  totalViews?: number
+  totalEarnings?: number
+}) {
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12">
@@ -44,9 +52,9 @@ export function CreatorStudio({ activeSubscribers = 0 }: { activeSubscribers?: n
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="glass-panel p-6 rounded-2xl flex flex-col">
             <span className="text-sm font-medium text-muted-foreground mb-1">Total Views</span>
-            <span className="text-3xl font-bold text-white">1.2M</span>
+            <span className="text-3xl font-bold text-white">{totalViews.toLocaleString()}</span>
             <span className="text-xs text-primary mt-2 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" /> +12% from last month
+              <TrendingUp className="w-3 h-3" /> Live
             </span>
           </div>
           <div className="glass-panel p-6 rounded-2xl flex flex-col">
@@ -58,9 +66,9 @@ export function CreatorStudio({ activeSubscribers = 0 }: { activeSubscribers?: n
           </div>
           <div className="glass-panel p-6 rounded-2xl flex flex-col">
             <span className="text-sm font-medium text-muted-foreground mb-1">Total Earnings</span>
-            <span className="text-3xl font-bold text-white">$12,450</span>
+            <span className="text-3xl font-bold text-white">${totalEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             <span className="text-xs text-primary mt-2 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3" /> +18% from last month
+              <TrendingUp className="w-3 h-3" /> Live
             </span>
           </div>
         </div>
