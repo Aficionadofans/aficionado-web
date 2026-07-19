@@ -24,8 +24,9 @@ const navItems: NavigationItems = [
 export function Navigation({ isAdmin = false, userType }: { isAdmin?: boolean; userType?: 'aficionado' | 'fan' | null }) {
   const pathname = usePathname()
 
-  // Don't show nav on auth pages
-  if (pathname === '/login' || pathname.startsWith('/login/')) return null
+  // Don't show nav on auth or legal pages
+  const hideNavRoutes = ['/login', '/update-password', '/auth', '/terms', '/privacy', '/creator-agreement']
+  if (hideNavRoutes.some(route => pathname === route || pathname.startsWith(route + '/'))) return null
 
   let finalNavItems = navItems
 

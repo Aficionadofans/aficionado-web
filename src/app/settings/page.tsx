@@ -7,20 +7,25 @@ export default async function SettingsPage() {
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/login?next=/settings')
   }
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('user_type')
+    .select('user_type, username, bio, avatar_url, zip_code')
     .eq('id', user.id)
     .single()
 
-  const userType = profile?.user_type as 'aficionado' | 'fan' | null
-
   return (
     <div className="min-h-screen bg-background">
-      <SettingsView userType={userType} email={user.email} />
+      <SettingsView
+        userType={profile?.user_type as 'aficionado' | 'fan' | null}
+        email={user.email}
+        username={profile?.username ?? ''}
+        bio={profile?.bio ?? ''}
+        avatarUrl={profile?.avatar_url ?? ''}
+        zipCode={profile?.zip_code ?? ''}
+      />
     </div>
   )
 }
