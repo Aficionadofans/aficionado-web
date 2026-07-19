@@ -4,7 +4,14 @@ import { NextResponse, type NextRequest } from 'next/server'
 const PROTECTED_ROUTES = [
   '/home', '/explore', '/create', '/circles', '/communities',
   '/progress', '/settings', '/studio', '/creator', '/live',
-  '/content', '/monetization',
+  '/content', '/monetization', '/admin',
+]
+
+const ADMIN_EMAILS = [
+  'support@aficionado.fans',
+  'tamerlanium@gmail.com',
+  'devastatingdebater@gmail.com',
+  'contact@aficionado.fans',
 ]
 
 export async function proxy(request: NextRequest) {
@@ -51,6 +58,16 @@ export async function proxy(request: NextRequest) {
     const url = request.nextUrl.clone()
     url.pathname = '/login/mfa'
     return NextResponse.redirect(url)
+  }
+
+  // Admin route — only allow admin emails
+  if (pathname.startsWith('/admin') && user) {
+    const email = user.email?.toLowerCase() ?? ''
+    if (!ADMIN_EMAILS.includes(email)) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/home'
+      return NextResponse.redirect(url)
+    }
   }
 
   // Authenticated on login → home or ?next=

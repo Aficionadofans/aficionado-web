@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 }
 
 const ADMIN_EMAILS = [
-  'devastatingdebater@gmail.com',
-  'tamerlanium@gmail.com',
   'support@aficionado.fans',
-  'contact@aficionado.fans'
+  'tamerlanium@gmail.com',
+  'devastatingdebater@gmail.com',
+  'contact@aficionado.fans',
 ]
 
 export default async function AdminLayout({
