@@ -1,5 +1,10 @@
 import { WatchPartyTheater } from '@/features/live/ui/WatchPartyTheater'
 
-export default function LiveWatchPartyPage({ params }: { params: { username: string } }) {
-  return <WatchPartyTheater username={params.username} />
+export default async function LiveWatchPartyPage({
+  params,
+}: {
+  params: Promise<{ username: string }>
+}) {
+  const { username } = await params
+  return <WatchPartyTheater username={username} />
 }

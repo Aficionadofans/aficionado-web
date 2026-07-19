@@ -1,29 +1,47 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export async function submitTip(formData: FormData) {
-  const amount = formData.get('amount')
-  const message = formData.get('message')
-  const creatorId = formData.get('creatorId')
+  const amount = formData.get('amount') as string
+  const message = (formData.get('message') as string) ?? ''
+  const creatorId = formData.get('creatorId') as string
 
   if (!amount || !creatorId) {
     throw new Error('Amount and creator are required')
   }
 
-  // MOCK: Simulate Stripe PaymentIntent processing delay
-  await new Promise((resolve) => setTimeout(resolve, 1500))
+  const amountNum = parseFloat(amount)
+  if (isNaN(amountNum) || amountNum <= 0) {
+    throw new Error('Invalid tip amount')
+  }
 
-  // In a real implementation, we would:
-  // 1. Create a PaymentIntent via Stripe SDK
-  // 2. Insert a record into the 'tips' table in Supabase once successful
-  // 3. (Optional) Trigger a real-time notification to the creator
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-  console.log(`Mock Tip Processed: $${amount} to ${creatorId} with message: "${message}"`)
+  if (!user) throw new Error('Not authenticated')
 
-  // Revalidate the routes so any UI relying on updated earnings or tip history refreshes
+  // Create Stripe checkout session via API route
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/checkout`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'tip',
+      amount: Math.round(amountNum * 100), // cents
+      creatorId,
+      fanId: user.id,
+      message,
+    }),
+  })
+
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.error ?? 'Failed to process tip')
+  }
+
   revalidatePath('/home')
   revalidatePath('/[username]', 'page')
-  
+
   return { success: true }
 }
