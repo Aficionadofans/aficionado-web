@@ -1,10 +1,14 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+const PROTECTED_ROUTES = [
+  '/home', '/explore', '/create', '/circles', '/communities',
+  '/progress', '/settings', '/studio', '/creator', '/live',
+  '/content', '/monetization',
+]
+
 export async function proxy(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  })
+  let supabaseResponse = NextResponse.next({ request })
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,10 +19,8 @@ export async function proxy(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          supabaseResponse = NextResponse.next({ request })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
@@ -27,60 +29,50 @@ export async function proxy(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  const {
-    data: aalData,
-  } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
-
+  // Refresh session — must run before any auth checks
+  const { data: { user } } = await supabase.auth.getUser()
+  const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
   const currentLevel = aalData?.currentLevel
   const nextLevel = aalData?.nextLevel
 
-  // Define protected routes that require authentication
-  const isProtectedRoute = 
-    request.nextUrl.pathname.startsWith('/home') ||
-    request.nextUrl.pathname.startsWith('/explore') ||
-    request.nextUrl.pathname.startsWith('/create') ||
-    request.nextUrl.pathname.startsWith('/circles') ||
-    request.nextUrl.pathname.startsWith('/progress') ||
-    request.nextUrl.pathname.startsWith('/settings')
+  const { pathname } = request.nextUrl
+  const isProtected = PROTECTED_ROUTES.some(r => pathname.startsWith(r))
 
-  if (isProtectedRoute) {
-    if (!user) {
-      const url = request.nextUrl.clone()
-      url.pathname = '/login'
-      return NextResponse.redirect(url)
-    }
+  // Unauthenticated on protected route → login
+  if (isProtected && !user) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    url.searchParams.set('next', pathname)
+    return NextResponse.redirect(url)
+  }
 
+  // Authenticated but MFA required → MFA page
+  if (isProtected && user && nextLevel === 'aal2' && currentLevel !== 'aal2') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login/mfa'
+    return NextResponse.redirect(url)
+  }
+
+  // Authenticated on login → home or ?next=
+  if (user && pathname === '/login') {
     if (nextLevel === 'aal2' && currentLevel !== 'aal2') {
       const url = request.nextUrl.clone()
       url.pathname = '/login/mfa'
       return NextResponse.redirect(url)
     }
+    const next = request.nextUrl.searchParams.get('next') ?? '/home'
+    const url = request.nextUrl.clone()
+    url.pathname = next
+    url.search = ''
+    return NextResponse.redirect(url)
   }
 
-  // Redirect logged-in users away from auth pages
-  if (user) {
-    if (request.nextUrl.pathname === '/login') {
-      // If they need MFA, send to MFA page, else to home
+  // MFA page — redirect away if MFA already satisfied or not needed
+  if (user && pathname === '/login/mfa') {
+    if (nextLevel !== 'aal2' || currentLevel === 'aal2') {
       const url = request.nextUrl.clone()
-      if (nextLevel === 'aal2' && currentLevel !== 'aal2') {
-        url.pathname = '/login/mfa'
-      } else {
-        url.pathname = '/home'
-      }
+      url.pathname = '/home'
       return NextResponse.redirect(url)
-    }
-
-    if (request.nextUrl.pathname === '/login/mfa') {
-      // If they don't need MFA (or already did it), redirect to home
-      if (nextLevel !== 'aal2' || currentLevel === 'aal2') {
-        const url = request.nextUrl.clone()
-        url.pathname = '/home'
-        return NextResponse.redirect(url)
-      }
     }
   }
 
@@ -89,13 +81,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
