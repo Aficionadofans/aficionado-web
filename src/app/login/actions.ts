@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
+import { headers } from 'next/headers'
 
 export async function authAction(prevState: any, formData: FormData) {
   const email = formData.get('email') as string
@@ -11,48 +12,74 @@ export async function authAction(prevState: any, formData: FormData) {
   const userType = formData.get('userType') as string
   const zipCode = formData.get('zipCode') as string
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+  const supabase = await createClient()
+  const headersList = await headers()
+  const origin = headersList.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aficionado.fans'
 
   try {
-    const res = await fetch(`${supabaseUrl}/functions/v1/auth`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        action: mode, 
-        email, 
-        ...(password && { password }),
-        ...(userType && { userType }),
-        ...(zipCode && { zipCode })
+    if (mode === 'signup') {
+      if (!email || !password) return { error: 'Email and password are required', success: null }
+      
+      const { error, data } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${origin}/auth/callback`,
+          data: {
+            user_type: userType,
+            zip_code: zipCode,
+          }
+        }
       })
-    })
-
-    if (!res.ok) {
-      const errorData = await res.json()
-      return { error: errorData.error || 'Authentication failed', success: null }
+      
+      if (error) return { error: error.message, success: null }
+      
+      if (!data.session && data.user) {
+        return { success: 'Check your email for the confirmation link.', error: null }
+      }
+      
+    } else if (mode === 'login') {
+      if (!email || !password) return { error: 'Email and password are required', success: null }
+      
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      if (error) return { error: error.message, success: null }
+      
+    } else if (mode === 'magic_link') {
+      if (!email) return { error: 'Email is required', success: null }
+      
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${origin}/auth/callback`,
+        }
+      })
+      if (error) return { error: error.message, success: null }
+      return { success: 'Magic link sent! Check your email.', error: null }
+      
+    } else if (mode === 'forgot_password') {
+      if (!email) return { error: 'Email is required', success: null }
+      
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${origin}/update-password`,
+      })
+      if (error) return { error: error.message, success: null }
+      return { success: 'Password reset instructions sent to your email.', error: null }
+      
+    } else {
+      return { error: 'Invalid action', success: null }
     }
 
-    const data = await res.json()
-
     if (mode === 'login' || mode === 'signup') {
-      if (data.session) {
-        const supabase = await createClient()
-        await supabase.auth.setSession({
-          access_token: data.session.access_token,
-          refresh_token: data.session.refresh_token
-        })
-        
-        const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
-        if (aalData?.nextLevel === 'aal2') {
-          redirect('/login/mfa')
-        }
+      const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
+      if (aalData?.nextLevel === 'aal2') {
+        redirect('/login/mfa')
       }
       
       revalidatePath('/', 'layout')
       redirect('/home')
-    } else if (mode === 'magic_link') {
-      return { success: 'Magic link sent! Check your email.', error: null }
-    } else if (mode === 'forgot_password') {
-      return { success: 'Password reset instructions sent to your email.', error: null }
     }
 
     return { error: null, success: null }
