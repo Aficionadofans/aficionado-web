@@ -18,6 +18,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // ClipCut cinematic rose button
+        clipcut: [
+          'bg-[#F43F5E] text-white font-bold',
+          'hover:bg-[#E11D48] hover:shadow-[0_0_24px_rgba(244,63,94,0.45)]',
+          'active:scale-[0.97] transition-all duration-200',
+        ],
         // Trend agency high-impact button
         trend: [
           'bg-white text-[#0A0A0C] font-semibold',

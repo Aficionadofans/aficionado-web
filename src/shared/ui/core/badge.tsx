@@ -9,6 +9,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
+        clipcut: "bg-[#F43F5E]/15 text-[#FB7185] border border-[#F43F5E]/35 font-bold uppercase tracking-wider text-[10px] shadow-[0_0_12px_rgba(244,63,94,0.25)]",
         default: "bg-primary text-primary-foreground shadow-[0_0_12px_rgba(0,212,200,0.2)]",
         secondary: "bg-secondary text-secondary-foreground border border-white/5",
         monetization: "bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/35 shadow-[0_0_12px_rgba(245,158,11,0.2)] font-bold uppercase tracking-wider text-[10px]",

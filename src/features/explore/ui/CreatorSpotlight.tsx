@@ -48,12 +48,12 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
   return (
     <section aria-label="Creator Spotlight Videos">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
-          <Video className="w-5 h-5 text-primary" />
+        <div className="w-10 h-10 rounded-2xl bg-[#100F17] border border-[#F43F5E]/30 flex items-center justify-center shadow-[0_0_20px_rgba(244,63,94,0.3)]">
+          <Video className="w-5 h-5 text-[#FB7185]" />
         </div>
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Featured UGC Showcase</span>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">Creator Spotlight</h2>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FB7185]">03 / Popular Clips</span>
+          <h2 className="text-2xl font-extrabold text-white tracking-tight">ClipCut Spotlight</h2>
         </div>
       </div>
       
@@ -74,8 +74,8 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
               tabIndex={0}
               role="button"
               aria-label={`Play spotlight for ${spotlight.role}`}
-              className={`min-w-[240px] w-[240px] aspect-[9/16] shrink-0 snap-center liquid-glass-hover border-white/10 overflow-hidden relative cursor-pointer animate-fade-in-up transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
-                isPlaying ? 'ring-2 ring-primary shadow-[0_0_25px_rgba(0,212,200,0.4)] scale-[1.02]' : ''
+              className={`min-w-[240px] w-[240px] aspect-[9/16] shrink-0 snap-center clipcut-card-hover border-white/10 overflow-hidden relative cursor-pointer animate-fade-in-up transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F43F5E]/60 ${
+                isPlaying ? 'ring-2 ring-[#F43F5E] shadow-[0_0_25px_rgba(244,63,94,0.5)] scale-[1.02]' : ''
               }`}
               style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
             >
@@ -107,21 +107,25 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
                     >
                       {isMuted ? <VolumeX className="w-4 h-4 text-white" /> : <Volume2 className="w-4 h-4 text-white" />}
                     </button>
-                  ) : <div />}
+                  ) : (
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest bg-[#F43F5E]/20 text-[#FB7185] border border-[#F43F5E]/30 backdrop-blur-md">
+                      1.2M Views
+                    </span>
+                  )}
                   <div className={`w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center border transition-all ${
                     isPlaying 
-                      ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(0,212,200,0.5)]' 
-                      : 'bg-black/50 text-white border-white/20 shadow-lg'
+                      ? 'bg-[#F43F5E] text-white border-[#F43F5E] shadow-[0_0_20px_rgba(244,63,94,0.6)]' 
+                      : 'bg-black/60 text-white border-white/20 shadow-lg group-hover:scale-110'
                   }`}>
-                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5 fill-white" />}
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/40 backdrop-blur-sm border border-white/10 ${spotlight.color}`}>
+                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/50 backdrop-blur-sm border border-white/10 ${spotlight.color}`}>
                     {spotlight.role}
                   </span>
-                  <p className="text-sm font-medium text-white line-clamp-3 leading-snug text-pretty drop-shadow-md">
+                  <p className="text-sm font-semibold text-white line-clamp-3 leading-snug text-pretty drop-shadow-md">
                     {spotlight.description}
                   </p>
                 </div>

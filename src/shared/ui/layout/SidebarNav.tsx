@@ -25,14 +25,14 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
             <div
               className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105"
               style={{
-                background: 'linear-gradient(135deg, rgba(0,212,200,0.25), rgba(0,240,181,0.12))',
-                border: '1px solid rgba(0,212,200,0.5)',
-                boxShadow: '0 0 20px rgba(0,212,200,0.25)',
+                background: 'linear-gradient(135deg, rgba(244,63,94,0.3), rgba(0,212,200,0.15))',
+                border: '1px solid rgba(244,63,94,0.5)',
+                boxShadow: '0 0 20px rgba(244,63,94,0.3)',
               }}
             >
               <span
-                className="font-black text-lg text-primary"
-                style={{ textShadow: '0 0 10px rgba(0,212,200,0.8)' }}
+                className="font-black text-lg text-[#FB7185]"
+                style={{ textShadow: '0 0 10px rgba(244,63,94,0.8)' }}
               >
                 A
               </span>
@@ -41,23 +41,23 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
               <span
                 className="text-xl font-extrabold tracking-tight bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: 'linear-gradient(to right, #00D4C8, #FFFFFF, #00F0B5)',
+                  backgroundImage: 'linear-gradient(to right, #FB7185, #FFFFFF, #00D4C8)',
                   fontFamily: 'var(--font-heading)',
                   letterSpacing: '-0.04em',
                 }}
               >
                 Aficionado
               </span>
-              <span className="text-[9px] font-bold tracking-[0.2em] text-primary/80 uppercase flex items-center gap-1">
+              <span className="text-[9px] font-bold tracking-[0.2em] text-[#FB7185]/90 uppercase flex items-center gap-1">
                 <Sparkles className="w-2.5 h-2.5" />
-                UGC Platform
+                ClipCut Media
               </span>
             </div>
           </Link>
 
           {/* Section title */}
-          <div className="px-2 mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60">
-            Platform Navigation
+          <div className="px-2 mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#FB7185]/80">
+            ClipCut Platform
           </div>
 
           {/* Nav Items */}

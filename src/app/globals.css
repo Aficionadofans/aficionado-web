@@ -192,6 +192,42 @@
 }
 
 /* ─────────────────────────────────────────
+   ClipCut Framer Template Utilities
+───────────────────────────────────────── */
+
+@utility clipcut-card {
+  background: #100F17;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility clipcut-card-hover {
+  @apply clipcut-card;
+  &:hover {
+    border-color: rgba(244, 63, 94, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7), 0 0 24px rgba(244, 63, 94, 0.16);
+  }
+}
+
+@utility clipcut-pill {
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #FB7185;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@utility clipcut-hero-gradient {
+  background: radial-gradient(circle at 50% 0%, rgba(244, 63, 94, 0.18) 0%, rgba(0, 212, 200, 0.08) 40%, transparent 70%);
+}
+
+/* ─────────────────────────────────────────
    Trend Framer Template Utilities
 ───────────────────────────────────────── */
 
