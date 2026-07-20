@@ -36,31 +36,36 @@ export function SettingsView({ userType, email, username, bio, avatarUrl, zipCod
   const tabs = userType === 'fan' ? fanTabs : aficionadoTabs
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 min-h-[80dvh]">
+    <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 min-h-[80dvh] pb-20 md:pb-8">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 flex-shrink-0">
-        <h1 className="text-2xl font-bold text-white mb-6">Settings</h1>
+      <aside className="w-full md:w-64 flex-shrink-0 animate-fade-in-up">
+        <h1 className="text-3xl font-black text-off-white mb-6 tracking-tight drop-shadow-md">Settings</h1>
         <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto hide-scrollbar">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium whitespace-nowrap',
+                'flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-300 font-semibold whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400',
                 activeTab === tab.id
-                  ? 'bg-amber-500/20 text-amber-500 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.1)]'
-                  : 'text-muted-foreground hover:bg-white/5 hover:text-white'
+                  ? 'liquid-glass border-amber-500/40 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.25)] scale-[1.02]'
+                  : 'text-muted-foreground hover:bg-white/5 hover:text-off-white'
               )}
             >
-              {tab.icon}
-              {tab.label}
+              <div className={cn(
+                'w-7 h-7 rounded-xl flex items-center justify-center transition-colors',
+                activeTab === tab.id ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40' : 'bg-white/5 text-muted-foreground'
+              )}>
+                {tab.icon}
+              </div>
+              <span className="text-sm">{tab.label}</span>
             </button>
           ))}
         </nav>
       </aside>
 
       {/* Content */}
-      <main className="flex-1 glass-panel rounded-3xl p-6 md:p-8 relative overflow-hidden">
+      <main className="flex-1 liquid-glass rounded-3xl p-6 md:p-8 relative overflow-hidden border border-white/10 shadow-2xl">
         {activeTab === 'profile' && (
           <ProfileTab
             username={username}
@@ -127,52 +132,52 @@ function ProfileTab({ username, bio, zipCode }: { username?: string; bio?: strin
   }
 
   return (
-    <div className="animate-fade-in">
-      <h2 className="text-xl font-bold text-white mb-6">Profile Information</h2>
+    <div className="animate-fade-in-up">
+      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Profile Information</h2>
       <div className="space-y-6 max-w-md">
         <div>
-          <label className="text-sm font-medium text-muted-foreground block mb-2">Username</label>
+          <label className="text-sm font-semibold text-muted-foreground block mb-2">Username</label>
           <input
             type="text"
             value={usernameVal}
             onChange={e => setUsernameVal(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
             placeholder="your_username"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500/50"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium"
           />
-          <p className="text-xs text-muted-foreground mt-1">Used for your public profile URL</p>
+          <p className="text-xs text-muted-foreground mt-1.5">Used for your public profile URL</p>
         </div>
         <div>
-          <label className="text-sm font-medium text-muted-foreground block mb-2">Bio</label>
+          <label className="text-sm font-semibold text-muted-foreground block mb-2">Bio</label>
           <textarea
             rows={3}
             value={bioVal}
             onChange={e => setBioVal(e.target.value)}
             maxLength={300}
             placeholder="Tell your community about yourself…"
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500/50 resize-none"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium resize-none"
           />
-          <p className="text-xs text-muted-foreground mt-1">{bioVal.length}/300</p>
+          <p className="text-xs text-muted-foreground mt-1.5">{bioVal.length}/300</p>
         </div>
         <div>
-          <label className="text-sm font-medium text-muted-foreground block mb-2">Zip Code</label>
+          <label className="text-sm font-semibold text-muted-foreground block mb-2">Zip Code</label>
           <input
             type="text"
             value={zipVal}
             onChange={e => setZipVal(e.target.value)}
             placeholder="12345"
             maxLength={10}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500/50"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium"
           />
-          <p className="text-xs text-muted-foreground mt-1">Used for local neighborhood communities</p>
+          <p className="text-xs text-muted-foreground mt-1.5">Used for local neighborhood communities</p>
         </div>
 
-        {error && <p className="text-destructive text-sm p-3 bg-destructive/10 border border-destructive/20 rounded-lg">{error}</p>}
-        {message && <p className="text-primary text-sm p-3 bg-primary/10 border border-primary/20 rounded-lg">{message}</p>}
+        {error && <p className="text-destructive text-xs sm:text-sm font-semibold p-3.5 bg-destructive/10 border border-destructive/20 rounded-2xl animate-fade-in-up">{error}</p>}
+        {message && <p className="text-primary text-xs sm:text-sm font-semibold p-3.5 bg-primary/10 border border-primary/20 rounded-2xl animate-fade-in-up">{message}</p>}
 
         <button
           onClick={handleSave}
           disabled={isPending}
-          className="px-6 py-3 rounded-full bg-amber-500 text-black font-bold hover:bg-amber-400 transition-colors disabled:opacity-50"
+          className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-black font-bold hover:bg-amber-400 transition-all duration-300 disabled:opacity-50 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
         >
           {isPending ? 'Saving…' : 'Save Changes'}
         </button>
@@ -213,34 +218,34 @@ function SecurityTab({ email }: { email?: string }) {
   }
 
   return (
-    <div className="animate-fade-in">
-      <h2 className="text-xl font-bold text-white mb-6">Security &amp; Login</h2>
+    <div className="animate-fade-in-up">
+      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Security &amp; Login</h2>
       <div className="space-y-6 max-w-md">
         <div>
-          <label className="text-sm font-medium text-muted-foreground block mb-2">Account Email</label>
+          <label className="text-sm font-semibold text-muted-foreground block mb-2">Account Email</label>
           <input
             type="email"
             value={email ?? ''}
             readOnly
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white/50 cursor-not-allowed"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white/50 cursor-not-allowed text-sm font-medium"
           />
         </div>
 
-        {error && <p className="text-destructive text-sm p-3 bg-destructive/10 border border-destructive/20 rounded-lg">{error}</p>}
-        {message && <p className="text-primary text-sm p-3 bg-primary/10 border border-primary/20 rounded-lg">{message}</p>}
+        {error && <p className="text-destructive text-xs sm:text-sm font-semibold p-3.5 bg-destructive/10 border border-destructive/20 rounded-2xl animate-fade-in-up">{error}</p>}
+        {message && <p className="text-primary text-xs sm:text-sm font-semibold p-3.5 bg-primary/10 border border-primary/20 rounded-2xl animate-fade-in-up">{message}</p>}
 
         <div className="space-y-3">
           <button
             onClick={handleResetPassword}
             disabled={isPending || !email}
-            className="w-full px-6 py-3 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 transition-colors disabled:opacity-50"
+            className="w-full px-6 py-3.5 rounded-full border border-white/20 text-off-white font-bold hover:bg-white/10 transition-all duration-300 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {isPending ? 'Sending…' : 'Send Password Reset Email'}
           </button>
           <button
             onClick={handleSignOutAll}
             disabled={isPending}
-            className="w-full px-6 py-3 rounded-full border border-destructive/40 text-destructive font-medium hover:bg-destructive/10 transition-colors disabled:opacity-50"
+            className="w-full px-6 py-3.5 rounded-full border border-destructive/40 text-destructive font-bold hover:bg-destructive/15 transition-all duration-300 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive"
           >
             Sign Out All Devices
           </button>
@@ -254,27 +259,30 @@ function SecurityTab({ email }: { email?: string }) {
 
 function MonetizationTab() {
   return (
-    <div className="animate-fade-in">
-      <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-        <DollarSign className="w-6 h-6 text-amber-500" /> Monetization Dashboard
+    <div className="animate-fade-in-up">
+      <h2 className="text-xl font-black text-off-white mb-6 flex items-center gap-2 tracking-tight">
+        <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
+          <DollarSign className="w-5 h-5 text-amber-400" />
+        </div>
+        <span>Monetization Dashboard</span>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-6 rounded-2xl">
-          <span className="text-sm font-medium text-amber-500/80">Available to Payout</span>
-          <div className="text-4xl font-bold text-amber-500 mt-2">—</div>
-          <p className="text-xs text-muted-foreground mt-1">Connect Stripe to enable payouts</p>
-          <button className="mt-4 px-4 py-2 rounded-full bg-amber-500 text-black font-bold text-sm w-full hover:bg-amber-400 opacity-50 cursor-not-allowed" disabled>
+        <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+          <span className="text-xs font-bold uppercase tracking-widest text-amber-400/90">Available to Payout</span>
+          <div className="text-4xl font-black text-amber-400 mt-2">$0.00</div>
+          <p className="text-xs text-muted-foreground mt-2 font-medium">Connect Stripe to enable direct payouts</p>
+          <button className="mt-5 px-6 py-3 rounded-full bg-amber-500 text-black font-bold text-xs uppercase tracking-widest w-full hover:bg-amber-400 transition-all opacity-50 cursor-not-allowed" disabled>
             Withdraw to Bank
           </button>
         </div>
-        <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-center justify-between">
+        <div className="liquid-glass border border-white/10 p-6 rounded-3xl flex items-center justify-between">
           <div>
-            <span className="text-sm font-medium text-muted-foreground block mb-1">Stripe Account</span>
-            <span className="text-muted-foreground font-medium flex items-center gap-2">
-              <Wallet className="w-4 h-4" /> Not connected
+            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-1">Stripe Account</span>
+            <span className="text-off-white font-semibold flex items-center gap-2 text-sm">
+              <Wallet className="w-4 h-4 text-bio-teal" /> Not connected
             </span>
           </div>
-          <button className="px-4 py-2 rounded-full border border-white/20 text-white text-sm hover:bg-white/5">
+          <button className="px-5 py-2.5 rounded-full border border-white/20 text-off-white text-xs font-bold uppercase tracking-wider hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             Connect
           </button>
         </div>
@@ -287,11 +295,13 @@ function MonetizationTab() {
 
 function SubscriptionsTab() {
   return (
-    <div className="animate-fade-in">
-      <h2 className="text-xl font-bold text-white mb-6">Active Subscriptions</h2>
-      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-        <StarIcon className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-        <p className="text-muted-foreground text-sm">No active subscriptions yet.</p>
+    <div className="animate-fade-in-up">
+      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Active Subscriptions</h2>
+      <div className="p-8 rounded-3xl liquid-glass border border-white/10 text-center">
+        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3">
+          <StarIcon className="w-6 h-6 text-muted-foreground" />
+        </div>
+        <p className="text-muted-foreground text-sm font-medium">No active subscriptions yet.</p>
       </div>
     </div>
   )
@@ -301,12 +311,14 @@ function SubscriptionsTab() {
 
 function PaymentTab() {
   return (
-    <div className="animate-fade-in">
-      <h2 className="text-xl font-bold text-white mb-6">Payment Methods</h2>
-      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-        <CreditCard className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-        <p className="text-muted-foreground text-sm mb-4">No payment methods added.</p>
-        <button className="px-6 py-2 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-colors">
+    <div className="animate-fade-in-up">
+      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Payment Methods</h2>
+      <div className="p-8 rounded-3xl liquid-glass border border-white/10 text-center">
+        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3">
+          <CreditCard className="w-6 h-6 text-muted-foreground" />
+        </div>
+        <p className="text-muted-foreground text-sm mb-5 font-medium">No payment methods added.</p>
+        <button className="px-6 py-2.5 rounded-full bg-off-white text-black font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           Add Card
         </button>
       </div>
