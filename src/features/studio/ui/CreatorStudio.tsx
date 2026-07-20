@@ -33,42 +33,54 @@ export function CreatorStudio({
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12">
-      <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-white">Creator Studio</h1>
-        <p className="mt-2 text-muted-foreground">Manage your content, engage your fans, and track growth.</p>
+      <header className="mb-10 animate-fade-in-up">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-3">
+          <TrendingUp className="w-3.5 h-3.5" />
+          <span>Creator Hub</span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-off-white drop-shadow-md">Creator Studio</h1>
+        <p className="mt-2 text-muted-foreground text-sm font-medium leading-relaxed">Manage your content, engage your fans, and track community growth.</p>
       </header>
 
       {/* Quick Actions */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        <button className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl liquid-glass-hover bg-amber-500/10 border border-amber-500/30 group">
-          <Upload className="w-8 h-8 text-amber-500 group-hover:-translate-y-1 transition-transform" />
-          <span className="text-base font-bold text-amber-500">Upload Video</span>
+        <button className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-amber-500/30 group relative overflow-hidden">
+          <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+            <Upload className="w-7 h-7 text-amber-500" />
+          </div>
+          <span className="text-base font-bold text-amber-400">Upload Video</span>
         </button>
 
         <Link
           href={liveUrl}
-          className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl liquid-glass-hover bg-amber-500/10 border border-amber-500/30 group"
+          className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-amber-500/30 group relative overflow-hidden"
           aria-disabled={!username}
         >
-          <Video className="w-8 h-8 text-amber-500 group-hover:scale-110 transition-transform" />
-          <span className="text-base font-bold text-amber-500">Go Live</span>
+          <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+            <Video className="w-7 h-7 text-amber-500" />
+          </div>
+          <span className="text-base font-bold text-amber-400">Go Live</span>
         </Link>
 
         <button
           onClick={() => setIsDropModalOpen(true)}
-          className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl liquid-glass-hover bg-amber-500/20 border border-amber-500 group shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+          className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-bio-teal/30 group relative overflow-hidden shadow-[0_0_20px_rgba(0,240,181,0.15)]"
         >
-          <svg className="w-8 h-8 text-amber-500 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className="text-base font-bold text-amber-500">Create Drop</span>
+          <div className="w-14 h-14 rounded-2xl bg-bio-teal/10 border border-bio-teal/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,240,181,0.25)]">
+            <svg className="w-7 h-7 text-bio-teal" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <span className="text-base font-bold text-bio-teal">Create Drop</span>
         </button>
 
         <button
           onClick={() => setIsTimeCapsuleModalOpen(true)}
-          className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl liquid-glass-hover bg-indigo-500/10 border border-indigo-500/30 group"
+          className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-indigo-500/30 group relative overflow-hidden"
         >
-          <Lock className="w-8 h-8 text-indigo-400 group-hover:scale-110 transition-transform" />
+          <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(99,102,241,0.2)]">
+            <Lock className="w-7 h-7 text-indigo-400" />
+          </div>
           <span className="text-base font-bold text-indigo-400">Time Capsule</span>
         </button>
       </section>

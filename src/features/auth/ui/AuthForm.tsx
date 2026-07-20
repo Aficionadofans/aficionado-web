@@ -31,7 +31,7 @@ function SubmitButton({ mode }: { mode: AuthMode }) {
     <button
       type="submit"
       disabled={pending}
-      className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_14px_0_rgba(0,240,181,0.39)] hover:shadow-[0_6px_20px_rgba(0,240,181,0.5)] hover:-translate-y-0.5 active:scale-95"
+      className="w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-full text-black bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-[1.02] active:scale-[0.98]"
     >
       {pending ? 'Processing...' : (
         mode === 'login' ? 'Sign In' :

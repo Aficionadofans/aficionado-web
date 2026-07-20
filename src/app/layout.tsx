@@ -1,9 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/shared/ui/layout/Navigation'
 import { MainLayout } from '@/shared/ui/layout/MainLayout'
 import { createClient } from '@/shared/lib/supabase/server'
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-heading',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+})
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -51,7 +57,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
+        className={`${plusJakartaSans.variable} ${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
         {/* Ambient background orbs for Liquid Glass aesthetic */}

@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-heading), var(--font-geist-sans);
   
   --color-charcoal-dark: #09090b;
   --color-charcoal-deep: #18181b;
@@ -146,7 +146,9 @@
     @apply font-sans;
   }
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
     text-wrap: balance;
+    letter-spacing: -0.025em;
   }
   p, blockquote, li {
     text-wrap: pretty;
