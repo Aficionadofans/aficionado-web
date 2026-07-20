@@ -167,11 +167,11 @@ export function AuthForm() {
               className={[
                 'flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
                 mode === m
-                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  ? 'bg-primary text-primary-foreground shadow-sm font-semibold'
                   : 'text-muted-foreground hover:text-foreground',
               ].join(' ')}
             >
-              {m === 'login' ? 'Sign In' : 'Sign Up'}
+              {m === 'login' ? 'Login' : 'Sign Up'}
             </button>
           ))}
         </div>
@@ -190,7 +190,7 @@ export function AuthForm() {
               name="email"
               type="email"
               label="Email"
-              placeholder="you@example.com"
+              placeholder="Email address (you@example.com)"
               autoComplete="email"
               required
             />
@@ -214,6 +214,7 @@ export function AuthForm() {
                       key={t}
                       type="button"
                       onClick={() => setUserType(t)}
+                      aria-label={t === 'fan' ? "I'm a Fan" : "I'm an Aficionado"}
                       className={[
                         'relative z-10 flex-1 py-2 text-sm font-medium rounded-lg transition-colors duration-150 focus-visible:outline-none',
                         userType === t ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/80',
@@ -233,7 +234,7 @@ export function AuthForm() {
                   name="password"
                   type="password"
                   label="Password"
-                  placeholder="••••••••"
+                  placeholder="Password (••••••••)"
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   required
                 />
@@ -247,7 +248,7 @@ export function AuthForm() {
                   name="zipCode"
                   type="text"
                   label="Zip Code"
-                  placeholder="90210"
+                  placeholder="Zip Code (90210)"
                   pattern="[0-9]{5}(-[0-9]{4})?"
                   title="5-digit ZIP code"
                   hint="Required for local community features"

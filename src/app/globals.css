@@ -104,9 +104,9 @@
     100% { transform: scale(1.1); }
   }
 
-  @keyframes heartbeat-resting {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.03); }
   }
 }
 
@@ -171,6 +171,7 @@
     @apply bg-background text-foreground;
     font-feature-settings: "cv11", "ss01";
     font-variation-settings: "opsz" 14;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;
@@ -195,11 +196,11 @@
 ───────────────────────────────────────── */
 
 @utility liquid-glass {
-  background: linear-gradient(135deg, rgba(28, 28, 31, 0.5) 0%, rgba(17, 17, 19, 0.7) 50%, rgba(8, 8, 8, 0.85) 100%);
-  backdrop-filter: blur(24px) saturate(1.3);
-  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  background: linear-gradient(135deg, rgba(28, 28, 31, 0.55) 0%, rgba(17, 17, 19, 0.75) 50%, rgba(8, 8, 8, 0.9) 100%);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -207,9 +208,9 @@
 @utility liquid-glass-hover {
   @apply liquid-glass;
   &:hover {
-    background: linear-gradient(135deg, rgba(28, 28, 31, 0.6) 0%, rgba(17, 17, 19, 0.8) 50%, rgba(8, 8, 8, 0.92) 100%);
-    border-color: rgba(0, 212, 200, 0.3);
-    box-shadow: 0 12px 40px -4px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 212, 200, 0.1);
+    background: linear-gradient(135deg, rgba(32, 32, 36, 0.65) 0%, rgba(20, 20, 24, 0.85) 50%, rgba(8, 8, 8, 0.95) 100%);
+    border-color: rgba(0, 212, 200, 0.35);
+    box-shadow: 0 14px 44px -4px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.12), 0 0 24px rgba(0, 212, 200, 0.14);
     transform: translateY(-2px) scale(1.01);
   }
   &:active {
@@ -218,27 +219,26 @@
 }
 
 @utility glass-panel {
-  background: linear-gradient(145deg, rgba(17, 17, 19, 0.78) 0%, rgba(8, 8, 8, 0.94) 100%);
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: linear-gradient(145deg, rgba(20, 20, 23, 0.82) 0%, rgba(8, 8, 8, 0.95) 100%);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 @utility glass-pill {
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 9999px;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Now uses teal, not amber */
 @utility glass-pill-active {
-  background: linear-gradient(135deg, rgba(0, 212, 200, 0.18) 0%, rgba(0, 212, 200, 0.06) 100%);
-  border-color: rgba(0, 212, 200, 0.35);
-  box-shadow: 0 0 16px rgba(0, 212, 200, 0.2);
+  background: linear-gradient(135deg, rgba(0, 212, 200, 0.2) 0%, rgba(0, 212, 200, 0.08) 100%);
+  border-color: rgba(0, 212, 200, 0.4);
+  box-shadow: 0 0 20px rgba(0, 212, 200, 0.25);
   color: #00D4C8;
 }
 
@@ -250,7 +250,6 @@
   }
 }
 
-/* Shimmer uses teal highlight */
 @utility shimmer {
   position: relative;
   overflow: hidden;
@@ -261,7 +260,7 @@
     background: linear-gradient(
       110deg,
       transparent 25%,
-      rgba(0, 212, 200, 0.07) 37%,
+      rgba(0, 212, 200, 0.09) 37%,
       transparent 63%
     );
     animation: shimmer 3s ease-in-out infinite;
@@ -291,3 +290,4 @@
 
 @keyframes fade-out { to { opacity: 0; } }
 @keyframes fade-in { from { opacity: 0; } }
+

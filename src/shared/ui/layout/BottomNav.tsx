@@ -7,16 +7,16 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
   return (
     <nav
       aria-label="Mobile Bottom Navigation"
-      className="fixed bottom-0 left-0 z-40 w-full md:hidden"
-      style={{
-        background: 'rgba(8, 8, 8, 0.92)',
-        backdropFilter: 'blur(40px) saturate(1.5)',
-        WebkitBackdropFilter: 'blur(40px) saturate(1.5)',
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-        paddingBottom: 'env(safe-area-inset-bottom)',
-      }}
+      className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-md md:hidden"
     >
-      <div className="grid h-16 grid-cols-5 max-w-md mx-auto px-2">
+      <div
+        className="grid grid-cols-5 h-16 items-center px-2 rounded-full border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300"
+        style={{
+          background: 'linear-gradient(135deg, rgba(20, 20, 24, 0.88) 0%, rgba(10, 10, 12, 0.94) 100%)',
+          backdropFilter: 'blur(32px) saturate(1.5)',
+          WebkitBackdropFilter: 'blur(32px) saturate(1.5)',
+        }}
+      >
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive =
@@ -29,35 +29,34 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
               href={item.href}
               aria-current={isActive ? 'page' : undefined}
               className={[
-                'inline-flex flex-col items-center justify-center min-h-[44px] py-1 px-2 relative',
-                'transition-all duration-200',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-xl',
+                'inline-flex flex-col items-center justify-center h-12 py-1 px-1 relative rounded-full',
+                'transition-all duration-200 active:scale-95',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
                 isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
               ].join(' ')}
             >
-              {/* Active top indicator */}
+              {/* Active ambient glow pill */}
               {isActive && (
                 <div
-                  className="absolute top-0 w-8 h-0.5 rounded-b-full"
+                  className="absolute inset-1 rounded-full z-0 pointer-events-none transition-all"
                   style={{
-                    background: 'linear-gradient(to right, #00D4C8, #00F0B5)',
-                    boxShadow: '0 0 8px rgba(0,212,200,0.6)',
+                    background: 'radial-gradient(circle, rgba(0,212,200,0.18) 0%, transparent 80%)',
                   }}
                   aria-hidden="true"
                 />
               )}
               <Icon
-                className="w-5 h-5 transition-all duration-200"
+                className="w-5 h-5 relative z-10 transition-transform duration-200"
                 style={
                   isActive
-                    ? { filter: 'drop-shadow(0 0 6px rgba(0,212,200,0.7))' }
+                    ? { filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))', transform: 'scale(1.1)' }
                     : undefined
                 }
               />
               <span
                 className={[
-                  'text-[11px] font-medium mt-0.5 tracking-normal',
-                  isActive ? 'text-primary' : 'text-muted-foreground',
+                  'text-[10px] font-semibold mt-0.5 tracking-tight relative z-10',
+                  isActive ? 'text-primary font-bold' : 'text-muted-foreground/80',
                 ].join(' ')}
               >
                 {item.name}

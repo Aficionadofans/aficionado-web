@@ -8,7 +8,6 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
   // Simulate checking the requested neighborhood against the user's verified zip code
   // In a real app, this would be a dynamic route like /communities/neighborhood/[zipcode]
   const [targetZip, setTargetZip] = useState('90210')
-  const [inputZip, setInputZip] = useState('')
 
   const isVerified = userZipCode === targetZip
 
@@ -25,7 +24,7 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
           </Link>
           <div>
             <h1 className="text-lg font-bold text-white">Local Square</h1>
-            <p className="text-xs text-bio-teal font-medium flex items-center gap-1">
+            <p className="text-xs text-primary font-medium flex items-center gap-1">
               <MapPin className="w-3 h-3" /> Zip: {targetZip}
             </p>
           </div>
@@ -50,7 +49,7 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
             <p className="text-sm text-white/70 mb-3">Try visiting your verified neighborhood:</p>
             <button 
               onClick={() => setTargetZip(userZipCode)}
-              className="w-full py-3 rounded-xl bg-bio-teal text-black font-bold uppercase tracking-wider hover:bg-bio-emerald transition-colors"
+              className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-[#00BCAF] transition-all duration-200 shadow-[0_0_20px_rgba(0,212,200,0.3)] active:scale-[0.98]"
             >
               Go to {userZipCode}
             </button>
@@ -59,8 +58,8 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
       ) : (
         <div className="flex-1 flex flex-col animate-fade-in">
           {/* Feed Switcher Simulation */}
-          <div className="p-4 bg-bio-teal/10 border-b border-bio-teal/20 mb-4 flex items-center justify-between">
-            <span className="text-sm font-bold text-bio-teal">Verified Resident</span>
+          <div className="p-4 bg-primary/10 border-b border-primary/20 mb-4 flex items-center justify-between">
+            <span className="text-sm font-bold text-primary">Verified Resident</span>
             <div className="flex gap-2 text-xs text-muted-foreground">
               <span className="text-white font-medium">Local Feed</span>
               <span>•</span>
