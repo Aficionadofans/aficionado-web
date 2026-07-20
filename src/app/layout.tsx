@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/shared/ui/layout/Navigation'
+import { MainLayout } from '@/shared/ui/layout/MainLayout'
 import { createClient } from '@/shared/lib/supabase/server'
 
 const geistSans = Geist({
@@ -53,18 +54,19 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
-        {/* Ambient background orbs */}
+        {/* Ambient background orbs for Liquid Glass aesthetic */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-fuchsia-900/30 blur-[120px] mix-blend-screen animate-float" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-yellow-600/20 blur-[150px] mix-blend-screen animate-float-delayed" />
-          <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-amber-500/20 blur-[100px] mix-blend-screen animate-float" />
+          <div className="absolute top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-bio-teal/15 blur-[120px] mix-blend-screen animate-breathe-calm" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[150px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
+          <div className="absolute top-[35%] left-[55%] w-[35vw] h-[35vw] rounded-full bg-bio-emerald/10 blur-[110px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
         </div>
 
         <Navigation isAdmin={isAdmin} userType={userType} />
-        <main className="flex-1 md:ml-64 pb-20 md:pb-0 z-0">
+        <MainLayout>
           {children}
-        </main>
+        </MainLayout>
       </body>
     </html>
   )
 }
+
