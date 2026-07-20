@@ -42,7 +42,7 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
   return (
     <div className="min-h-[100dvh] bg-black text-white flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-4 py-3 flex items-center gap-4">
+      <header className="sticky top-0 z-50 liquid-glass rounded-none border-t-0 border-l-0 border-r-0 border-b border-white/10 px-4 py-3 flex items-center gap-4">
         <button
           onClick={() => router.back()}
           className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -117,28 +117,29 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
             </div>
           ) : (
             <div className="grid grid-cols-3 gap-0.5 p-0.5">
-              {contentItems.map((item) => (
+              {contentItems.map((item, index) => (
                 <Link
                   key={item.id}
                   href={`/content/${item.id}`}
-                  className="aspect-[9/16] bg-white/5 relative overflow-hidden group cursor-pointer"
+                  className="aspect-[9/16] bg-white/5 relative overflow-hidden group cursor-pointer animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   {item.mux_playback_id ? (
                     <img
                       src={`https://image.mux.com/${item.mux_playback_id}/thumbnail.jpg?width=400`}
                       alt={item.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="w-full h-full bg-white/5" />
+                    <div className="w-full h-full bg-white/5 transition-transform duration-500 group-hover:scale-110" />
                   )}
                   {item.visibility === 'subscriber' && (
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                       <Lock className="w-5 h-5 text-amber-500" />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                    <Play className="w-4 h-4 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                    <Play className="w-6 h-6 text-white drop-shadow-md" />
                   </div>
                 </Link>
               ))}
