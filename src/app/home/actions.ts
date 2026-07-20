@@ -12,7 +12,7 @@ export async function submitCheckIn() {
   const { error } = await supabase
     .from('check_ins')
     .insert({
-      user_id: user.id,
+      author_id: user.id,
       mood: 'Good', // Simplification for now
       urge_level: 0,
       journal: 'Daily check-in completed from web.',
