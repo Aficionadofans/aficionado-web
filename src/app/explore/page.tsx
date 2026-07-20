@@ -51,12 +51,12 @@ export default async function ExplorePage() {
         <div className="space-y-12">
           <section aria-label="Today&apos;s Featured Voices">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,212,200,0.2)]">
-                <Star className="w-4 h-4 text-primary" />
+              <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
+                <Star className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-off-white tracking-wide">Today&apos;s Voices</h2>
-                <p className="text-xs text-muted-foreground">Handpicked creators sharing deep-form drops</p>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">01 / Featured Voices</span>
+                <h2 className="text-2xl font-extrabold text-white tracking-tight">Today&apos;s Voices</h2>
               </div>
             </div>
             
@@ -66,7 +66,7 @@ export default async function ExplorePage() {
                   <CuratorCard key={creator.id} creator={creator} index={index} />
                 ))
               ) : (
-                <div className="col-span-2 p-6 rounded-2xl liquid-glass text-center">
+                <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
                   <p className="text-muted-foreground text-sm font-medium">No creators featured today. Check back tomorrow!</p>
                 </div>
               )}
@@ -75,12 +75,12 @@ export default async function ExplorePage() {
 
           <section aria-label="Featured Community Circles">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-full liquid-glass border-bio-emerald/20 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                <Hash className="w-4 h-4 text-bio-emerald" />
+              <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
+                <Hash className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-off-white tracking-wide">Featured Circles</h2>
-                <p className="text-xs text-muted-foreground">Intimate communities around focused topics</p>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">02 / Community Hubs</span>
+                <h2 className="text-2xl font-extrabold text-white tracking-tight">Featured Circles</h2>
               </div>
             </div>
             
@@ -90,7 +90,7 @@ export default async function ExplorePage() {
                   <CircleHighlight key={circle.id} circle={circle} index={index} />
                 ))
               ) : (
-                <div className="col-span-2 p-6 rounded-2xl liquid-glass text-center">
+                <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
                   <p className="text-muted-foreground text-sm font-medium">No active circles found right now.</p>
                 </div>
               )}
