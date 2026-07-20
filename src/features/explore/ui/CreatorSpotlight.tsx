@@ -57,7 +57,7 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
         </div>
       </div>
       
-      <div className="flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide">
+      <div className="flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar">
         {spotlights.map((spotlight, index) => {
           const isPlaying = playingId === spotlight.id;
           
