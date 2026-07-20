@@ -32,7 +32,7 @@ const statusDotSize: Record<AvatarSize, string> = {
   xl: 'size-3.5',
 }
 
-interface AvatarProps extends Omit<AvatarPrimitive.Root.Props, 'children'> {
+interface AvatarProps extends AvatarPrimitive.Root.Props {
   size?: AvatarSize
   ring?: AvatarRing
   status?: AvatarStatus
@@ -40,6 +40,7 @@ interface AvatarProps extends Omit<AvatarPrimitive.Root.Props, 'children'> {
   alt?: string
   name?: string
   className?: string
+  children?: React.ReactNode
 }
 
 function Avatar({
@@ -50,6 +51,7 @@ function Avatar({
   alt,
   name,
   className,
+  children,
   ...props
 }: AvatarProps) {
   const initials = name
@@ -80,22 +82,28 @@ function Avatar({
       )}
       {...props}
     >
-      {src && (
-        <AvatarPrimitive.Image
-          src={src}
-          alt={alt ?? name ?? 'Avatar'}
-          className="aspect-square size-full rounded-full object-cover"
-        />
+      {children ? (
+        children
+      ) : (
+        <>
+          {src && (
+            <AvatarPrimitive.Image
+              src={src}
+              alt={alt ?? name ?? 'Avatar'}
+              className="aspect-square size-full rounded-full object-cover"
+            />
+          )}
+          <AvatarPrimitive.Fallback
+            className={cn(
+              'flex size-full items-center justify-center rounded-full font-bold',
+              'bg-primary/10 text-primary',
+              fallbackTextSize[size]
+            )}
+          >
+            {initials}
+          </AvatarPrimitive.Fallback>
+        </>
       )}
-      <AvatarPrimitive.Fallback
-        className={cn(
-          'flex size-full items-center justify-center rounded-full font-bold',
-          'bg-primary/10 text-primary',
-          fallbackTextSize[size]
-        )}
-      >
-        {initials}
-      </AvatarPrimitive.Fallback>
 
       {/* Status indicator */}
       {status !== 'none' && (

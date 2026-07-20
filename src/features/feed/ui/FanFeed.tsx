@@ -106,7 +106,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                       muted={false}
                       autoPlay={autoPlayVideo ? 'any' : false}
                       streamType="on-demand"
-                      style={{ '--controls': 'none' } as React.CSSProperties}
+                      style={{ '--controls': 'none' } as any}
                     />
                   </div>
 
