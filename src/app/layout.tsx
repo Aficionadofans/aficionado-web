@@ -48,9 +48,10 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className="dark h-full antialiased">
+    <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
+        suppressHydrationWarning
       >
         {/* Ambient background orbs */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
