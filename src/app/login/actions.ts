@@ -16,6 +16,8 @@ export async function authAction(prevState: any, formData: FormData) {
   const headersList = await headers()
   const origin = headersList.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aficionado.fans'
 
+  let redirectPath = ''
+  
   try {
     if (mode === 'signup') {
       if (!email || !password) return { error: 'Email and password are required', success: null }
@@ -75,20 +77,24 @@ export async function authAction(prevState: any, formData: FormData) {
     if (mode === 'login' || mode === 'signup') {
       const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
       if (aalData?.nextLevel === 'aal2') {
-        redirect('/login/mfa')
+        redirectPath = '/login/mfa'
+      } else {
+        redirectPath = '/home'
       }
-      
-      revalidatePath('/', 'layout')
-      redirect('/home')
     }
 
-    return { error: null, success: null }
   } catch (err: any) {
-    if (err.message === 'NEXT_REDIRECT') {
-      throw err // Let Next.js handle redirects
-    }
     return { error: err.message || 'An error occurred', success: null }
   }
+  
+  if (redirectPath) {
+    if (redirectPath === '/home') {
+      revalidatePath('/', 'layout')
+    }
+    redirect(redirectPath)
+  }
+  
+  return { error: null, success: null }
 }
 
 export async function logout() {
