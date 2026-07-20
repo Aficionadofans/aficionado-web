@@ -55,9 +55,9 @@ export default async function RootLayout({
       >
         {/* Ambient background orbs */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[120px] mix-blend-screen animate-float" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-amber-500/5 blur-[150px] mix-blend-screen animate-float-delayed" />
-          <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-amber-600/5 blur-[100px] mix-blend-screen animate-float" />
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-fuchsia-900/30 blur-[120px] mix-blend-screen animate-float" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-yellow-600/20 blur-[150px] mix-blend-screen animate-float-delayed" />
+          <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] rounded-full bg-amber-500/20 blur-[100px] mix-blend-screen animate-float" />
         </div>
 
         <Navigation isAdmin={isAdmin} userType={userType} />

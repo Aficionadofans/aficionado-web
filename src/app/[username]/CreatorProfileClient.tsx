@@ -49,22 +49,19 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
     : subscriberCount.toString()
 
   return (
-    <div className="min-h-[100dvh] bg-background text-foreground flex flex-col relative overflow-hidden">
-      {/* Dynamic Ambient Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--bio-teal)] opacity-20 blur-[100px] mix-blend-screen pointer-events-none animate-breathe-calm" />
-      <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-[var(--bio-emerald)] opacity-10 blur-[100px] mix-blend-screen pointer-events-none animate-breathe-calm" style={{ animationDelay: '2s' }} />
+    <div className="min-h-[100dvh] bg-background text-foreground flex flex-col relative overflow-hidden pb-16 md:pb-6">
 
       {/* Header — shrinks on scroll */}
       <header
         className={cn(
           'sticky top-0 z-50 liquid-glass rounded-none border-t-0 border-l-0 border-r-0 border-b flex items-center transition-all duration-300 ease-out',
-          scrolled ? 'px-3 py-2 gap-2 border-white/5 shadow-md' : 'px-4 py-4 gap-4 border-transparent'
+          scrolled ? 'px-3 py-2 gap-2 border-white/10 shadow-lg bg-background/90' : 'px-4 py-4 gap-4 border-transparent bg-background/60'
         )}
       >
         <button
           onClick={() => router.back()}
           className={cn(
-            'rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all duration-300',
+            'rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
             scrolled ? 'w-8 h-8' : 'w-10 h-10'
           )}
           aria-label="Go back"
@@ -79,14 +76,14 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               width={scrolled ? 28 : 36}
               height={scrolled ? 28 : 36}
               className={cn(
-                'rounded-full object-cover flex-shrink-0 transition-all duration-300 shadow-sm',
+                'rounded-full object-cover flex-shrink-0 transition-all duration-300 shadow-sm border border-white/10',
                 scrolled ? 'w-7 h-7' : 'w-9 h-9'
               )}
             />
           )}
           <div className="min-w-0">
             <h1 className={cn(
-              'font-bold truncate transition-all duration-300',
+              'font-bold truncate transition-all duration-300 text-off-white',
               scrolled ? 'text-sm' : 'text-base'
             )}>@{profile.username}</h1>
             <p className={cn(
@@ -110,19 +107,22 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
 
       {/* Segmented Pill Tabs */}
       <div className="flex justify-center p-4">
-        <div className="liquid-glass rounded-full p-1 flex relative w-full max-w-sm shadow-sm border border-white/5">
+        <div className="liquid-glass rounded-full p-1 flex relative w-full max-w-sm shadow-sm border border-white/10" role="tablist" aria-label="Creator Profile Views">
           {/* Active indicator pill */}
           <div
             className={cn(
-              "absolute inset-y-1 rounded-full bg-white/10 transition-all duration-300 ease-out",
+              "absolute inset-y-1 rounded-full bg-primary/20 border border-primary/30 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(245,158,11,0.25)]",
               activeTab === 'feed' ? "left-1 w-[calc(50%-0.25rem)]" : "left-[50%] w-[calc(50%-0.25rem)]"
             )}
+            aria-hidden="true"
           />
           <button
+            role="tab"
+            aria-selected={activeTab === 'feed'}
             onClick={() => setActiveTab('feed')}
             className={cn(
-              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-medium tracking-wide transition-colors z-10',
-              activeTab === 'feed' ? 'text-white' : 'text-white/50 hover:text-white/80'
+              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-semibold tracking-wide transition-colors z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full',
+              activeTab === 'feed' ? 'text-primary' : 'text-white/60 hover:text-white'
             )}
           >
             <div className="flex items-center justify-center gap-2">
@@ -130,10 +130,12 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
             </div>
           </button>
           <button
+            role="tab"
+            aria-selected={activeTab === 'circle'}
             onClick={() => setActiveTab('circle')}
             className={cn(
-              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-medium tracking-wide transition-colors z-10',
-              activeTab === 'circle' ? 'text-amber-400' : 'text-amber-500/50 hover:text-amber-400/80'
+              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-semibold tracking-wide transition-colors z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-full',
+              activeTab === 'circle' ? 'text-amber-400' : 'text-amber-500/60 hover:text-amber-400'
             )}
           >
             <div className="flex items-center justify-center gap-2">
@@ -143,7 +145,7 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
         </div>
       </div>
 
-      {/* Content */}
+      {/* Content Grid */}
       <div className="flex-1 relative z-10">
         {activeTab === 'feed' ? (
           contentItems.length === 0 ? (
@@ -154,12 +156,12 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               <p className="text-sm">No public content available yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-3 gap-0.5 p-0.5">
+            <div className="grid grid-cols-3 gap-0.5 p-0.5" role="region" aria-label="Public Video Grid">
               {contentItems.map((item, index) => (
                 <Link
                   key={item.id}
                   href={`/content/${item.id}`}
-                  className="aspect-[9/16] bg-white/5 relative overflow-hidden group cursor-pointer animate-fade-in-up"
+                  className="aspect-[9/16] bg-white/5 relative overflow-hidden group cursor-pointer animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   {item.mux_playback_id ? (
@@ -169,11 +171,15 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="w-full h-full bg-white/5 transition-transform duration-500 group-hover:scale-110" />
+                    <div className="w-full h-full bg-white/5 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                      <Play className="w-6 h-6 text-white/30" />
+                    </div>
                   )}
                   {item.visibility === 'subscriber' && (
-                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                      <Lock className="w-5 h-5 text-amber-500" />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.3)]">
+                        <Lock className="w-4 h-4 text-amber-500" />
+                      </div>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
@@ -197,3 +203,4 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
     </div>
   )
 }
+
