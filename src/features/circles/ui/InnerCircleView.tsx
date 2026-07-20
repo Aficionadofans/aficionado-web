@@ -1,13 +1,64 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Lock, Star, MessageCircle, Send, DollarSign } from 'lucide-react'
 import { TipModal } from '@/features/monetization/ui/TipModal'
+import { createClient } from '@/shared/lib/supabase/client'
 
-export function InnerCircleView({ username }: { username: string }) {
+export function InnerCircleView({ username, circleId }: { username: string, circleId: string }) {
   // Mocking the subscription state for the prototype
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [isTipModalOpen, setIsTipModalOpen] = useState(false)
+  
+  const [messages, setMessages] = useState<{ id: string; author_id: string; text: string }[]>([])
+  const [input, setInput] = useState('')
+  const supabase = createClient()
+
+  useEffect(() => {
+    if (!isSubscribed) return
+
+    // 1. Fetch initial messages
+    const fetchMessages = async () => {
+      const { data } = await supabase
+        .from('chat_messages')
+        .select('id, author_id, text')
+        .eq('circle_id', circleId)
+        .order('created_at', { ascending: true })
+      
+      if (data) setMessages(data)
+    }
+    fetchMessages()
+
+    // 2. Subscribe to new messages
+    const channel = supabase.channel(`circle_${circleId}`)
+      .on('postgres_changes', {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'chat_messages',
+        filter: `circle_id=eq.${circleId}`
+      }, (payload) => {
+        const newMessage = payload.new as { id: string; author_id: string; text: string }
+        setMessages(prev => [...prev, newMessage])
+      })
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [isSubscribed, circleId, supabase])
+
+  const handleSend = async () => {
+    if (!input.trim()) return
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+
+    await supabase.from('chat_messages').insert({
+      circle_id: circleId,
+      author_id: user.id,
+      text: input.trim()
+    })
+    setInput('')
+  }
 
   if (!isSubscribed) {
     return (
@@ -58,22 +109,16 @@ export function InnerCircleView({ username }: { username: string }) {
           </p>
         </div>
 
-        {/* Mock Chat Feed */}
+        {/* Chat Feed */}
         <div className="flex flex-col gap-4">
-          <div className="flex gap-3">
-            <img src={`https://i.pravatar.cc/150?u=${username}`} className="w-8 h-8 rounded-full border border-amber-500/50" alt="" />
-            <div className="bg-white/10 rounded-2xl rounded-tl-none p-3 max-w-[80%]">
-              <span className="text-xs font-bold text-amber-500 block mb-1">@{username} <span className="text-white/50 text-[10px] ml-1 font-normal">Creator</span></span>
-              <p className="text-sm text-white">Hey VIPs! Dropping a new exclusive video here tomorrow at 5PM. Be ready! 🔥</p>
+          {messages.map(msg => (
+            <div key={msg.id} className="flex gap-3">
+              <div className="bg-white/10 rounded-2xl rounded-tl-none p-3 max-w-[80%]">
+                <span className="text-xs font-bold text-amber-500 block mb-1">{msg.author_id}</span>
+                <p className="text-sm text-white">{msg.text}</p>
+              </div>
             </div>
-          </div>
-          
-          <div className="flex gap-3 flex-row-reverse">
-            <img src="https://i.pravatar.cc/150?u=fan1" className="w-8 h-8 rounded-full" alt="" />
-            <div className="bg-amber-500/20 border border-amber-500/30 rounded-2xl rounded-tr-none p-3 max-w-[80%]">
-              <p className="text-sm text-white">Can't wait!!</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -90,10 +135,16 @@ export function InnerCircleView({ username }: { username: string }) {
           <div className="relative flex-1">
             <input 
               type="text" 
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSend()}
               placeholder="Chat with the Inner Circle..." 
               className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-4 pr-12 text-sm text-white focus:outline-none focus:border-amber-500/50 transition-colors placeholder:text-white/30"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-amber-500 text-black flex items-center justify-center hover:scale-105 transition-transform">
+            <button 
+              onClick={handleSend}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-amber-500 text-black flex items-center justify-center hover:scale-105 transition-transform"
+            >
               <Send className="w-4 h-4 ml-0.5" />
             </button>
           </div>

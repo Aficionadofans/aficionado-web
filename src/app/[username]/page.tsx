@@ -36,11 +36,19 @@ export default async function CreatorProfilePage({
     .order('created_at', { ascending: false })
     .limit(12)
 
+  // Fetch circle ID
+  const { data: circle } = await supabase
+    .from('circles')
+    .select('id')
+    .eq('owner_id', profile.id)
+    .single()
+
   return (
     <CreatorProfileClient
       profile={profile}
       subscriberCount={subscriberCount ?? 0}
       contentItems={contentItems ?? []}
+      circleId={circle?.id ?? ''}
     />
   )
 }

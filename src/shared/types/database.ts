@@ -10,110 +10,27 @@
 // Discriminated union literals
 // ──────────────────────────────────────────
 
-export type UserType = 'aficionado' | 'fan'
+import { Database } from './supabase'
 
-export type ContentVisibility = 'public' | 'subscriber' | 'ppv'
+export type UserType = Database['public']['Enums']['user_type']
+export type ContentVisibility = Database['public']['Enums']['content_visibility']
+export type ModerationStatus = Database['public']['Enums']['moderation_status']
+export type SubscriptionStatus = Database['public']['Enums']['subscription_status']
 
-export type ModerationStatus = 'approved' | 'pending_review' | 'rejected'
+export type Profile = Database['public']['Tables']['profiles']['Row']
+export type Content = Database['public']['Tables']['content']['Row']
+export type Subscription = Database['public']['Tables']['subscriptions']['Row']
+export type WaitlistEntry = Database['public']['Tables']['creator_waitlists']['Row']
+export type Post = Database['public']['Tables']['posts']['Row']
+export type CheckIn = Database['public']['Tables']['check_ins']['Row']
+export type Circle = Database['public']['Tables']['circles']['Row']
+export type LiveMessage = Database['public']['Tables']['live_messages']['Row']
+export type ChatMessage = Database['public']['Tables']['chat_messages']['Row']
 
-export type SubscriptionStatus = 'active' | 'past_due' | 'canceled'
-
-// ──────────────────────────────────────────
-// Table row types
-// ──────────────────────────────────────────
-
-/** profiles table — extends auth.users */
-export type Profile = {
-  id: string
-  created_at: string
-  avatar_url: string | null
-  bio: string | null
-  goal: string | null
-  strictness: string | null
-  ai_tone: string | null
-  user_type: UserType | null
-  // Creator monetization columns
-  username: string | null
-  platform_fee_percent: number
-  waitlist_goal_reached: boolean
-}
-
-/** content table — creator media (videos, paywalled content) */
-export type Content = {
-  id: string
-  author_id: string
-  title: string
-  description: string | null
-  mux_playback_id: string | null
-  visibility: ContentVisibility
-  required_tier: number
-  price_ppv: number | null
-  moderation_status: ModerationStatus
-  nsfw_score: number
-  boost_factor: number
-  engagement_score: number
-  created_at: string
-}
-
-/** subscriptions table — Stripe subscription sync */
-export type Subscription = {
-  id: string
-  stripe_subscription_id: string
-  fan_id: string
-  creator_id: string
-  status: SubscriptionStatus
-  current_period_end: string
-  created_at: string
-}
-
-/** creator_waitlists table — pre-launch waitlist signups */
-export type WaitlistEntry = {
-  id: string
-  creator_id: string
-  fan_email: string
-  created_at: string
-}
-
-/** posts table — community wellness posts */
-export type Post = {
-  id: string
-  created_at: string
-  user_id: string
-  circle_id: string | null
-  content: string | null
-  media_url: string | null
-  requires_support: boolean
-}
-
-/** check_ins table — private wellness data */
-export type CheckIn = {
-  id: string
-  created_at: string
-  user_id: string
-  mood: string | null
-  urge_level: number | null
-  journal: string | null
-}
-
-/** circles table */
-export type Circle = {
-  id: string
-  created_at: string
-  name: string
-  description: string | null
-  owner_id: string
-}
-
-// ──────────────────────────────────────────
-// Composed query-result types
-// ──────────────────────────────────────────
-
-/** Content row joined with the author's profile (select subset) */
 export type ContentWithProfile = Content & {
   profiles: Pick<Profile, 'username' | 'avatar_url'> | null
 }
 
-/** Post row joined with the author's profile (select subset) */
 export type PostWithProfile = Post & {
   profiles: Pick<Profile, 'avatar_url' | 'ai_tone'> | null
 }

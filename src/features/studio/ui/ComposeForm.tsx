@@ -3,7 +3,8 @@
 import { ImagePlus, Send, Sparkles } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
 import { createPost } from '@/app/create/actions'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createClient } from '@/shared/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
 function SubmitButton() {
@@ -23,6 +24,19 @@ function SubmitButton() {
 
 export function ComposeForm() {
   const [tone, setTone] = useState<'gentle' | 'direct' | 'clinical'>('gentle')
+  const supabase = createClient()
+
+  useEffect(() => {
+    const fetchTone = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      const { data } = await supabase.from('profiles').select('ai_tone').eq('id', user.id).single()
+      if (data?.ai_tone) {
+        setTone(data.ai_tone as 'gentle' | 'direct' | 'clinical')
+      }
+    }
+    fetchTone()
+  }, [supabase])
   
   return (
     <div className="liquid-glass p-6 animate-fade-in-up">
@@ -36,7 +50,6 @@ export function ComposeForm() {
         
         <div className="h-px w-full bg-white/10 my-4"></div>
         
-        {/* Mock AI Tone Selector */}
         <div className="mb-6">
           <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1.5 mb-3">
             <Sparkles className="w-3 h-3 text-primary" />

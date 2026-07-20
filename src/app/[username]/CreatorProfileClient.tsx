@@ -28,9 +28,10 @@ interface Props {
   profile: Profile
   subscriberCount: number
   contentItems: ContentItem[]
+  circleId: string
 }
 
-export function CreatorProfileClient({ profile, subscriberCount, contentItems }: Props) {
+export function CreatorProfileClient({ profile, subscriberCount, contentItems, circleId }: Props) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'feed' | 'circle'>('feed')
 
@@ -143,8 +144,12 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems }:
               ))}
             </div>
           )
+        ) : circleId ? (
+          <InnerCircleView username={profile.username} circleId={circleId} />
         ) : (
-          <InnerCircleView username={profile.username} />
+          <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
+            This creator does not have an inner circle yet.
+          </div>
         )}
       </div>
     </div>

@@ -62,7 +62,6 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
           </header>
 
           <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-            {/* Mock ephemeral content display */}
             <div className="w-20 h-20 rounded-full bg-amber-500/20 flex items-center justify-center mb-6">
               <Play className="w-10 h-10 text-amber-500 ml-1" />
             </div>
