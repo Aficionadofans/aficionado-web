@@ -17,8 +17,18 @@ export function WatchPartyTheater({ username }: { username: string }) {
   const [profilesCache, setProfilesCache] = useState<Record<string, Profile>>({})
   const [input, setInput] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [reactions, setReactions] = useState<{ id: string; emoji: string; left: number }[]>([])
   const chatScrollRef = useRef<HTMLDivElement>(null)
   const supabase = createClient()
+
+  const triggerReaction = (emoji: string) => {
+    const id = Math.random().toString(36).substring(2, 9)
+    const left = Math.floor(Math.random() * 25) + 70 // 70% to 95%
+    setReactions(prev => [...prev.slice(-15), { id, emoji, left }])
+    setTimeout(() => {
+      setReactions(prev => prev.filter(r => r.id !== id))
+    }, 2000)
+  }
 
   const hydrateProfiles = async (authorIds: string[]) => {
     const unknownIds = [...new Set(authorIds)].filter(id => !profilesCache[id])
@@ -140,7 +150,7 @@ export function WatchPartyTheater({ username }: { username: string }) {
         </div>
 
         {/* Video Player Shell */}
-        <div className="flex-1 bg-black/60 backdrop-blur-sm flex items-center justify-center relative border-r border-white/5">
+        <div className="flex-1 bg-black/60 backdrop-blur-sm flex items-center justify-center relative border-r border-white/5 overflow-hidden">
           {/* Mock live stream placeholder */}
           <div className="text-center animate-pulse p-6">
             <div className="w-24 h-24 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(245,158,11,0.25)]">
@@ -149,6 +159,31 @@ export function WatchPartyTheater({ username }: { username: string }) {
             <p className="text-muted-foreground text-sm font-medium tracking-wide">Connecting to video feed...</p>
           </div>
           
+          {/* Floating animated reactions */}
+          {reactions.map(r => (
+            <div
+              key={r.id}
+              className="absolute bottom-16 text-2xl sm:text-3xl pointer-events-none animate-fade-in-up transition-all duration-1000 ease-out"
+              style={{ left: `${r.left}%`, animationDuration: '1.8s' }}
+            >
+              {r.emoji}
+            </div>
+          ))}
+
+          {/* Reaction Dock */}
+          <div className="absolute bottom-4 right-4 z-30 flex items-center gap-2 px-3 py-2 rounded-full liquid-glass border border-white/10 shadow-2xl backdrop-blur-md">
+            {['❤️', '🔥', '✨', '⭐', '👏'].map(emoji => (
+              <button
+                key={emoji}
+                onClick={() => triggerReaction(emoji)}
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/20 active:scale-125 transition-transform flex items-center justify-center text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                aria-label={`Send ${emoji} reaction`}
+              >
+                {emoji}
+              </button>
+            ))}
+          </div>
+
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/90 via-transparent to-transparent" />
         </div>
       </div>
