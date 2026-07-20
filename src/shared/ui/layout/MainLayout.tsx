@@ -9,7 +9,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const isNavHidden = hideNavRoutes.some(route => pathname === route || pathname.startsWith(route + '/'))
 
   return (
-    <main className={`flex-1 transition-all duration-300 z-0 ${isNavHidden ? 'ml-0 pb-0' : 'md:ml-64 pb-20 md:pb-0'}`}>
+    <main className={`flex-1 transition-all duration-300 z-0 ${isNavHidden ? 'ml-0 pb-0' : 'md:ml-60 pb-16 md:pb-0'}`}>
       {children}
     </main>
   )

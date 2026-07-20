@@ -36,36 +36,57 @@ export function SettingsView({ userType, email, username, bio, avatarUrl, zipCod
   const tabs = userType === 'fan' ? fanTabs : aficionadoTabs
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-8 min-h-[80dvh] pb-20 md:pb-8">
+    <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-6 min-h-[80dvh] pb-20 md:pb-8">
       {/* Sidebar */}
-      <aside className="w-full md:w-64 flex-shrink-0 animate-fade-in-up">
-        <h1 className="text-3xl font-black text-off-white mb-6 tracking-tight drop-shadow-md">Settings</h1>
-        <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto hide-scrollbar">
+      <aside className="w-full md:w-56 flex-shrink-0 animate-fade-in-up">
+        <h1
+          className="text-3xl font-bold text-foreground mb-6"
+          style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
+        >
+          Settings
+        </h1>
+        <nav className="flex flex-row md:flex-col gap-1 overflow-x-auto hide-scrollbar">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                'flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-300 font-semibold whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400',
+                'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium whitespace-nowrap',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
                 activeTab === tab.id
-                  ? 'liquid-glass border-amber-500/40 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.25)] scale-[1.02]'
-                  : 'text-muted-foreground hover:bg-white/5 hover:text-off-white'
+                  ? 'text-primary'
+                  : 'text-muted-foreground hover:bg-[rgba(255,255,255,0.04)] hover:text-foreground',
               )}
+              style={
+                activeTab === tab.id
+                  ? { background: 'rgba(0,212,200,0.08)', border: '1px solid rgba(0,212,200,0.25)' }
+                  : { border: '1px solid transparent' }
+              }
             >
               <div className={cn(
-                'w-7 h-7 rounded-xl flex items-center justify-center transition-colors',
-                activeTab === tab.id ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40' : 'bg-white/5 text-muted-foreground'
+                'w-6 h-6 rounded-lg flex items-center justify-center transition-colors flex-shrink-0',
+                activeTab === tab.id
+                  ? 'bg-primary/15 text-primary'
+                  : 'bg-[rgba(255,255,255,0.05)] text-muted-foreground',
               )}>
                 {tab.icon}
               </div>
-              <span className="text-sm">{tab.label}</span>
+              <span>{tab.label}</span>
             </button>
           ))}
         </nav>
       </aside>
 
       {/* Content */}
-      <main className="flex-1 liquid-glass rounded-3xl p-6 md:p-8 relative overflow-hidden border border-white/10 shadow-2xl">
+      <main
+        className="flex-1 rounded-[var(--radius-xl)] p-6 md:p-8 relative overflow-hidden"
+        style={{
+          background: 'rgba(17,17,19,0.7)',
+          backdropFilter: 'blur(24px)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+        }}
+      >
         {activeTab === 'profile' && (
           <ProfileTab
             username={username}
@@ -133,51 +154,88 @@ function ProfileTab({ username, bio, zipCode }: { username?: string; bio?: strin
 
   return (
     <div className="animate-fade-in-up">
-      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Profile Information</h2>
-      <div className="space-y-6 max-w-md">
-        <div>
-          <label className="text-sm font-semibold text-muted-foreground block mb-2">Username</label>
+      <h2 className="text-lg font-semibold text-foreground mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+        Profile Information
+      </h2>
+      <div className="space-y-5 max-w-md">
+        <div className="space-y-1.5">
+          <label className="text-sm font-medium text-foreground/75 block">Username</label>
           <input
             type="text"
             value={usernameVal}
             onChange={e => setUsernameVal(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ''))}
             placeholder="your_username"
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium"
+            className="w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-200 focus:shadow-[0_0_0_3px_rgba(0,212,200,0.15)]"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
+            onFocus={e => { e.currentTarget.style.borderColor = 'var(--color-primary)' }}
+            onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
           />
-          <p className="text-xs text-muted-foreground mt-1.5">Used for your public profile URL</p>
+          <p className="text-xs text-muted-foreground">Used for your public profile URL</p>
         </div>
-        <div>
-          <label className="text-sm font-semibold text-muted-foreground block mb-2">Bio</label>
+
+        <div className="space-y-1.5">
+          <label className="text-sm font-medium text-foreground/75 block">Bio</label>
           <textarea
             rows={3}
             value={bioVal}
             onChange={e => setBioVal(e.target.value)}
             maxLength={300}
             placeholder="Tell your community about yourself…"
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium resize-none"
+            className="w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-200 resize-none focus:shadow-[0_0_0_3px_rgba(0,212,200,0.15)]"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
+            onFocus={e => { e.currentTarget.style.borderColor = 'var(--color-primary)' }}
+            onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
           />
-          <p className="text-xs text-muted-foreground mt-1.5">{bioVal.length}/300</p>
+          <p className="text-xs text-muted-foreground">{bioVal.length}/300</p>
         </div>
-        <div>
-          <label className="text-sm font-semibold text-muted-foreground block mb-2">Zip Code</label>
+
+        <div className="space-y-1.5">
+          <label className="text-sm font-medium text-foreground/75 block">Zip Code</label>
           <input
             type="text"
             value={zipVal}
             onChange={e => setZipVal(e.target.value)}
             placeholder="12345"
             maxLength={10}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60 focus-visible:border-amber-400 transition-all text-sm font-medium"
+            className="w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-foreground outline-none transition-all duration-200 focus:shadow-[0_0_0_3px_rgba(0,212,200,0.15)]"
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+            }}
+            onFocus={e => { e.currentTarget.style.borderColor = 'var(--color-primary)' }}
+            onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
           />
-          <p className="text-xs text-muted-foreground mt-1.5">Used for local neighborhood communities</p>
+          <p className="text-xs text-muted-foreground">Required for local neighborhood communities</p>
         </div>
 
-        {error && <p className="text-destructive text-xs sm:text-sm font-semibold p-3.5 bg-destructive/10 border border-destructive/20 rounded-2xl animate-fade-in-up">{error}</p>}
-        {message && <p className="text-primary text-xs sm:text-sm font-semibold p-3.5 bg-primary/10 border border-primary/20 rounded-2xl animate-fade-in-up">{message}</p>}
+        {error && (
+          <p className="text-xs text-destructive p-3 rounded-xl animate-fade-in-up"
+            style={{ background: 'rgba(244,63,94,0.1)', border: '1px solid rgba(244,63,94,0.2)' }}>
+            {error}
+          </p>
+        )}
+        {message && (
+          <p className="text-xs text-primary p-3 rounded-xl animate-fade-in-up"
+            style={{ background: 'rgba(0,212,200,0.1)', border: '1px solid rgba(0,212,200,0.2)' }}>
+            {message}
+          </p>
+        )}
 
         <button
           onClick={handleSave}
           disabled={isPending}
-          className="px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-black font-bold hover:bg-amber-400 transition-all duration-300 disabled:opacity-50 shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          className="px-7 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 disabled:opacity-40 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          style={{
+            background: 'var(--color-primary)',
+            color: 'var(--color-primary-foreground)',
+            boxShadow: '0 0 16px rgba(0,212,200,0.25)',
+          }}
         >
           {isPending ? 'Saving…' : 'Save Changes'}
         </button>
@@ -201,11 +259,8 @@ function SecurityTab({ email }: { email?: string }) {
       const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/update-password`,
       })
-      if (err) {
-        setError(err.message)
-      } else {
-        setMessage('Password reset email sent. Check your inbox.')
-      }
+      if (err) setError(err.message)
+      else setMessage('Password reset email sent. Check your inbox.')
     })
   }
 
@@ -219,33 +274,46 @@ function SecurityTab({ email }: { email?: string }) {
 
   return (
     <div className="animate-fade-in-up">
-      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Security &amp; Login</h2>
-      <div className="space-y-6 max-w-md">
-        <div>
-          <label className="text-sm font-semibold text-muted-foreground block mb-2">Account Email</label>
+      <h2 className="text-lg font-semibold text-foreground mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+        Security &amp; Login
+      </h2>
+      <div className="space-y-5 max-w-md">
+        <div className="space-y-1.5">
+          <label className="text-sm font-medium text-foreground/75 block">Account Email</label>
           <input
             type="email"
             value={email ?? ''}
             readOnly
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-off-white/50 cursor-not-allowed text-sm font-medium"
+            className="w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-muted-foreground cursor-not-allowed"
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
           />
         </div>
 
-        {error && <p className="text-destructive text-xs sm:text-sm font-semibold p-3.5 bg-destructive/10 border border-destructive/20 rounded-2xl animate-fade-in-up">{error}</p>}
-        {message && <p className="text-primary text-xs sm:text-sm font-semibold p-3.5 bg-primary/10 border border-primary/20 rounded-2xl animate-fade-in-up">{message}</p>}
+        {error && (
+          <p className="text-xs text-destructive p-3 rounded-xl" style={{ background: 'rgba(244,63,94,0.1)', border: '1px solid rgba(244,63,94,0.2)' }}>
+            {error}
+          </p>
+        )}
+        {message && (
+          <p className="text-xs text-primary p-3 rounded-xl" style={{ background: 'rgba(0,212,200,0.1)', border: '1px solid rgba(0,212,200,0.2)' }}>
+            {message}
+          </p>
+        )}
 
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           <button
             onClick={handleResetPassword}
             disabled={isPending || !email}
-            className="w-full px-6 py-3.5 rounded-full border border-white/20 text-off-white font-bold hover:bg-white/10 transition-all duration-300 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="w-full px-5 py-2.5 rounded-full text-sm font-medium text-foreground transition-all duration-200 disabled:opacity-40 hover:bg-[rgba(255,255,255,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            style={{ border: '1px solid rgba(255,255,255,0.15)' }}
           >
             {isPending ? 'Sending…' : 'Send Password Reset Email'}
           </button>
           <button
             onClick={handleSignOutAll}
             disabled={isPending}
-            className="w-full px-6 py-3.5 rounded-full border border-destructive/40 text-destructive font-bold hover:bg-destructive/15 transition-all duration-300 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive"
+            className="w-full px-5 py-2.5 rounded-full text-sm font-medium text-destructive transition-all duration-200 disabled:opacity-40 hover:bg-destructive/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destructive/40"
+            style={{ border: '1px solid rgba(244,63,94,0.3)' }}
           >
             Sign Out All Devices
           </button>
@@ -260,29 +328,41 @@ function SecurityTab({ email }: { email?: string }) {
 function MonetizationTab() {
   return (
     <div className="animate-fade-in-up">
-      <h2 className="text-xl font-black text-off-white mb-6 flex items-center gap-2 tracking-tight">
-        <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center">
-          <DollarSign className="w-5 h-5 text-amber-400" />
+      <h2 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+        <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-monetization-glow)', border: '1px solid rgba(245,158,11,0.25)' }}>
+          <DollarSign className="w-4 h-4 text-[var(--color-monetization)]" />
         </div>
-        <span>Monetization Dashboard</span>
+        Monetization Dashboard
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl shadow-[0_0_20px_rgba(245,158,11,0.15)]">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400/90">Available to Payout</span>
-          <div className="text-4xl font-black text-amber-400 mt-2">$0.00</div>
-          <p className="text-xs text-muted-foreground mt-2 font-medium">Connect Stripe to enable direct payouts</p>
-          <button className="mt-5 px-6 py-3 rounded-full bg-amber-500 text-black font-bold text-xs uppercase tracking-widest w-full hover:bg-amber-400 transition-all opacity-50 cursor-not-allowed" disabled>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        {/* Payout card — amber: payment context */}
+        <div className="p-5 rounded-xl" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-monetization)]/80">Available to Payout</span>
+          <div className="text-4xl font-bold mt-1.5 mb-1 text-[var(--color-monetization)]" style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.03em' }}>
+            $0.00
+          </div>
+          <p className="text-xs text-muted-foreground mb-4">Connect Stripe to enable payouts</p>
+          <button
+            disabled
+            className="w-full py-2 rounded-full text-xs font-semibold opacity-40 cursor-not-allowed"
+            style={{ background: 'var(--color-monetization)', color: 'var(--color-monetization-foreground)' }}
+          >
             Withdraw to Bank
           </button>
         </div>
-        <div className="liquid-glass border border-white/10 p-6 rounded-3xl flex items-center justify-between">
+
+        {/* Stripe card */}
+        <div className="p-5 rounded-xl flex items-center justify-between" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground block mb-1">Stripe Account</span>
-            <span className="text-off-white font-semibold flex items-center gap-2 text-sm">
-              <Wallet className="w-4 h-4 text-bio-teal" /> Not connected
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground block mb-1">Stripe Account</span>
+            <span className="text-sm font-medium text-foreground flex items-center gap-1.5">
+              <Wallet className="w-4 h-4 text-primary" /> Not connected
             </span>
           </div>
-          <button className="px-5 py-2.5 rounded-full border border-white/20 text-off-white text-xs font-bold uppercase tracking-wider hover:bg-white/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+          <button
+            className="px-4 py-2 rounded-full text-xs font-semibold text-foreground transition-all hover:bg-[rgba(255,255,255,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            style={{ border: '1px solid rgba(255,255,255,0.15)' }}
+          >
             Connect
           </button>
         </div>
@@ -291,34 +371,37 @@ function MonetizationTab() {
   )
 }
 
-// ── Subscriptions Tab ──────────────────────────────────────────────────────
-
 function SubscriptionsTab() {
   return (
     <div className="animate-fade-in-up">
-      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Active Subscriptions</h2>
-      <div className="p-8 rounded-3xl liquid-glass border border-white/10 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3">
-          <StarIcon className="w-6 h-6 text-muted-foreground" />
+      <h2 className="text-lg font-semibold text-foreground mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+        Active Subscriptions
+      </h2>
+      <div className="p-8 rounded-xl text-center" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <StarIcon className="w-5 h-5 text-muted-foreground" />
         </div>
-        <p className="text-muted-foreground text-sm font-medium">No active subscriptions yet.</p>
+        <p className="text-sm text-muted-foreground">No active subscriptions yet.</p>
       </div>
     </div>
   )
 }
 
-// ── Payment Tab ────────────────────────────────────────────────────────────
-
 function PaymentTab() {
   return (
     <div className="animate-fade-in-up">
-      <h2 className="text-xl font-black text-off-white mb-6 tracking-tight">Payment Methods</h2>
-      <div className="p-8 rounded-3xl liquid-glass border border-white/10 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-3">
-          <CreditCard className="w-6 h-6 text-muted-foreground" />
+      <h2 className="text-lg font-semibold text-foreground mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
+        Payment Methods
+      </h2>
+      <div className="p-8 rounded-xl text-center" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <CreditCard className="w-5 h-5 text-muted-foreground" />
         </div>
-        <p className="text-muted-foreground text-sm mb-5 font-medium">No payment methods added.</p>
-        <button className="px-6 py-2.5 rounded-full bg-off-white text-black font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        <p className="text-sm text-muted-foreground mb-4">No payment methods added yet.</p>
+        <button
+          className="px-5 py-2 rounded-full text-sm font-medium text-foreground hover:bg-[rgba(255,255,255,0.06)] transition-all"
+          style={{ border: '1px solid rgba(255,255,255,0.15)' }}
+        >
           Add Card
         </button>
       </div>

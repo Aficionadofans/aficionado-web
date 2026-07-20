@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { X, Play, Sparkles } from 'lucide-react'
+import { Avatar } from '@/shared/ui/core'
 
 export interface Drop {
   id: string
@@ -16,73 +17,116 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
 
   return (
     <>
-      {/* Horizontal Carousel */}
-      <div className="w-full pt-4 pb-2 px-4 overflow-x-auto hide-scrollbar flex gap-4 items-center">
+      {/* Horizontal carousel */}
+      <div className="w-full pt-3 pb-2 px-4 overflow-x-auto hide-scrollbar flex gap-3 items-center">
         {drops.map((drop) => (
-          <button 
+          <button
             key={drop.id}
             onClick={() => setActiveDrop(drop)}
             aria-label={`View drop from ${drop.creator}`}
-            className="flex flex-col items-center gap-1 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-full"
+            className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
           >
-            <div className={`w-16 h-16 rounded-full p-[2.5px] transition-all duration-300 group-hover:scale-105 group-active:scale-95 ${
-              drop.hasUnread 
-                ? 'bg-gradient-to-tr from-amber-500 via-bio-teal to-primary shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
-                : 'bg-white/15'
-            }`}>
-              <div className="w-full h-full rounded-full border-2 border-background overflow-hidden bg-background flex items-center justify-center">
-                 <img src={drop.avatar} alt={drop.creator} className="w-full h-full object-cover" />
+            {/* Ring: teal gradient for unread, neutral for read */}
+            <div
+              className="w-[62px] h-[62px] rounded-full p-[2px] transition-all duration-300 group-hover:scale-105 group-active:scale-95"
+              style={{
+                background: drop.hasUnread
+                  ? 'linear-gradient(135deg, #00D4C8, #00F0B5, #00D4C8)'
+                  : 'rgba(255,255,255,0.12)',
+                boxShadow: drop.hasUnread
+                  ? '0 0 12px rgba(0,212,200,0.4)'
+                  : 'none',
+              }}
+            >
+              <div className="w-full h-full rounded-full border-2 border-background overflow-hidden bg-muted">
+                <Avatar
+                  src={drop.avatar}
+                  alt={drop.creator}
+                  name={drop.creator}
+                  size="lg"
+                  className="w-full h-full rounded-full"
+                />
               </div>
             </div>
-            <span className="text-[10px] text-off-white/90 truncate w-16 text-center font-semibold drop-shadow-md group-hover:text-primary transition-colors">
+            <span className="text-[10px] text-foreground/80 truncate w-14 text-center font-medium group-hover:text-primary transition-colors">
               {drop.creator}
             </span>
           </button>
         ))}
       </div>
 
-      {/* Fullscreen Drop Viewer Modal */}
+      {/* Fullscreen drop viewer */}
       {activeDrop && (
-        <div 
+        <div
           role="dialog"
           aria-modal="true"
           aria-label={`Drop story by ${activeDrop.creator}`}
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-2xl flex flex-col animate-fade-in-up"
         >
-          {/* Top progress bar */}
-          <div className="w-full p-4 flex gap-1 pt-12">
-            <div className="h-1 bg-gradient-to-r from-bio-teal to-primary rounded-full flex-1 shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+          {/* Progress bar — teal */}
+          <div className="w-full px-4 pt-12 pb-1 flex gap-1">
+            <div
+              className="h-0.5 flex-1 rounded-full"
+              style={{
+                background: 'linear-gradient(to right, #00D4C8, #00F0B5)',
+                boxShadow: '0 0 8px rgba(0,212,200,0.6)',
+              }}
+            />
           </div>
-          
-          <header className="flex items-center justify-between px-6 pb-4">
+
+          <header className="flex items-center justify-between px-5 py-3">
             <div className="flex items-center gap-3">
-              <img src={activeDrop.avatar} className="w-10 h-10 rounded-full object-cover border border-white/20 shadow-md" alt="" />
+              <Avatar
+                src={activeDrop.avatar}
+                alt={activeDrop.creator}
+                name={activeDrop.creator}
+                size="md"
+                ring="primary"
+              />
               <div>
-                <span className="text-sm font-bold text-off-white block">@{activeDrop.creator}</span>
-                <span className="text-[10px] text-primary/80 font-bold uppercase tracking-widest flex items-center gap-1">
+                <span className="text-sm font-semibold text-foreground">@{activeDrop.creator}</span>
+                <span className="text-[10px] text-primary/80 font-medium uppercase tracking-widest flex items-center gap-1 mt-0.5">
                   <Sparkles className="w-2.5 h-2.5" /> Exclusive Drop
                 </span>
               </div>
             </div>
-            <button 
+            <button
               onClick={() => setActiveDrop(null)}
-              aria-label="Close drop modal"
-              className="w-10 h-10 rounded-full liquid-glass flex items-center justify-center text-white hover:bg-white/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              aria-label="Close drop"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-[rgba(255,255,255,0.08)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              style={{ border: '1px solid rgba(255,255,255,0.1)' }}
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </header>
 
-          <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-            <div className="w-24 h-24 rounded-full liquid-glass border border-primary/40 flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(245,158,11,0.3)] animate-float">
-              <Play className="w-12 h-12 text-primary ml-1 drop-shadow-[0_0_10px_rgba(245,158,11,0.8)]" />
+          <div className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-6">
+            {/* Play button */}
+            <div
+              className="w-20 h-20 rounded-full flex items-center justify-center animate-float"
+              style={{
+                background: 'rgba(0,212,200,0.1)',
+                border: '1px solid rgba(0,212,200,0.35)',
+                boxShadow: '0 0 40px rgba(0,212,200,0.2)',
+              }}
+            >
+              <Play
+                className="w-9 h-9 text-primary ml-1"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))' }}
+              />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-off-white mb-3 tracking-wide">{activeDrop.content}</h2>
-            <p className="text-muted-foreground text-sm font-medium">Tap to view full high-definition drop</p>
+            <div>
+              <h2
+                className="text-2xl font-bold text-foreground mb-2"
+                style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
+              >
+                {activeDrop.content}
+              </h2>
+              <p className="text-sm text-muted-foreground">Tap to view this exclusive drop</p>
+            </div>
           </div>
         </div>
       )}
     </>
   )
 }
-

@@ -15,30 +15,49 @@ export function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <nav className="space-y-1">
+    <nav className="flex flex-col gap-1">
       {adminNavItems.map((item) => {
         const Icon = item.icon
-        const isActive = item.href === '/admin'
-          ? pathname === '/admin'
-          : pathname.startsWith(item.href)
+        const isActive =
+          item.href === '/admin'
+            ? pathname === '/admin'
+            : pathname.startsWith(item.href)
 
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group relative overflow-hidden ${
+            className={[
+              'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 relative text-sm font-medium',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
               isActive
-                ? 'bg-white/8 text-foreground'
-                : 'text-foreground/60 hover:bg-white/5 hover:text-foreground'
-            }`}
+                ? 'text-primary'
+                : 'text-muted-foreground hover:text-foreground hover:translate-x-0.5',
+            ].join(' ')}
+            style={
+              isActive
+                ? {
+                    background: 'rgba(0,212,200,0.08)',
+                    border: '1px solid rgba(0,212,200,0.25)',
+                  }
+                : { border: '1px solid transparent' }
+            }
           >
             {isActive && (
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-muted-gold rounded-r-full shadow-[0_0_8px_rgba(212,175,55,0.5)]" />
+              <div
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full"
+                style={{
+                  background: 'linear-gradient(to bottom, #00D4C8, #00F0B5)',
+                  boxShadow: '0 0 8px rgba(0,212,200,0.7)',
+                }}
+                aria-hidden="true"
+              />
             )}
-            <Icon className={`w-5 h-5 transition-all duration-300 group-hover:scale-110 ${
-              isActive ? 'text-muted-gold' : ''
-            }`} />
-            <span className="font-medium text-sm">{item.name}</span>
+            <Icon
+              className="w-4 h-4 flex-shrink-0"
+              style={isActive ? { filter: 'drop-shadow(0 0 5px rgba(0,212,200,0.7))' } : undefined}
+            />
+            <span>{item.name}</span>
           </Link>
         )
       })}

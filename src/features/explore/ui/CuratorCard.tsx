@@ -25,7 +25,7 @@ export function CuratorCard({ creator, index }: CuratorCardProps) {
       >
         <CardContent className="p-4 sm:p-5 flex items-center gap-4 relative">
           <div className="relative">
-            <Avatar className="w-12 h-12 border border-white/15 shadow-[0_0_15px_rgba(245,158,11,0.25)] transition-transform duration-300 group-hover:scale-105">
+            <Avatar className="w-12 h-12 border border-white/15 shadow-[0_0_15px_rgba(0,212,200,0.25)] transition-transform duration-300 group-hover:scale-105">
               <AvatarImage src={creator.avatar_url || ''} alt={titleName} />
               <AvatarFallback className="bg-white/10">
                 <UserCircle2 className="w-6 h-6 text-muted-foreground" />

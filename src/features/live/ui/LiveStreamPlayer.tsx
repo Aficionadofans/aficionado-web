@@ -49,8 +49,8 @@ export function LiveStreamPlayer({ username, viewerCount = 1204 }: LiveStreamPla
           </div>
         </div>
 
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-          <Users className="w-4 h-4 text-amber-400" />
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass border border-primary/30 shadow-[0_0_15px_rgba(0,212,200,0.2)]">
+          <Users className="w-4 h-4 text-primary" />
           <span className="text-xs sm:text-sm font-black text-off-white tracking-wide">{viewerCount.toLocaleString()} Viewers</span>
         </div>
       </div>
@@ -58,8 +58,8 @@ export function LiveStreamPlayer({ username, viewerCount = 1204 }: LiveStreamPla
       {/* Video Player Shell */}
       <div className="flex-1 bg-black/60 backdrop-blur-sm flex items-center justify-center relative border-r border-white/5 overflow-hidden">
         <div className="text-center animate-pulse p-6">
-          <div className="w-24 h-24 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(245,158,11,0.25)]">
-            <span className="text-amber-500 font-black tracking-widest text-sm">STREAM</span>
+          <div className="w-24 h-24 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(0,212,200,0.25)]">
+            <span className="text-primary font-black tracking-widest text-sm">STREAM</span>
           </div>
           <p className="text-muted-foreground text-sm font-medium tracking-wide">Connecting to video feed...</p>
         </div>
@@ -81,7 +81,7 @@ export function LiveStreamPlayer({ username, viewerCount = 1204 }: LiveStreamPla
             <button
               key={emoji}
               onClick={() => triggerReaction(emoji)}
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/20 active:scale-125 transition-transform flex items-center justify-center text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 hover:bg-white/20 active:scale-125 transition-transform flex items-center justify-center text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               aria-label={`Send ${emoji} reaction`}
             >
               {emoji}

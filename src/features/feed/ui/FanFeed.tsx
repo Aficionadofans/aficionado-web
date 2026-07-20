@@ -2,11 +2,12 @@
 
 import React, { useState } from 'react'
 import MuxPlayer from '@mux/mux-player-react'
-import { Heart, MessageCircle, Share2, DollarSign, Star, Lock, Clock, EyeOff, Users, Check } from 'lucide-react'
+import { Star, Lock, Clock, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
 import { TipModal } from '@/features/monetization/ui/TipModal'
 import { VideoOverlayActions } from './VideoOverlayActions'
+import { Avatar, Button } from '@/shared/ui/core'
 
 export interface Video {
   id: string
@@ -20,41 +21,30 @@ export interface Video {
   moderationStatus?: string
 }
 
-export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
+export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
   const [activeVideo, setActiveVideo] = useState(0)
   const [tipModalCreator, setTipModalCreator] = useState<string | null>(null)
   const [likedMap, setLikedMap] = useState<Record<string, boolean>>({})
   const [subscribedMap, setSubscribedMap] = useState<Record<string, boolean>>({})
   const [copiedId, setCopiedId] = useState<string | null>(null)
-  
+
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget
     const index = Math.round(container.scrollTop / container.clientHeight)
-    if (index !== activeVideo) {
-      setActiveVideo(index)
-    }
+    if (index !== activeVideo) setActiveVideo(index)
   }
 
-  const toggleLike = (id: string) => {
-    setLikedMap(prev => ({ ...prev, [id]: !prev[id] }))
-  }
-
-  const toggleSubscribe = (creator: string) => {
-    setSubscribedMap(prev => ({ ...prev, [creator]: !prev[creator] }))
-  }
+  const toggleLike = (id: string) => setLikedMap(prev => ({ ...prev, [id]: !prev[id] }))
+  const toggleSubscribe = (creator: string) => setSubscribedMap(prev => ({ ...prev, [creator]: !prev[creator] }))
 
   const handleShare = async (id: string, creator: string) => {
     const shareUrl = `${window.location.origin}/content/${id}`
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
-        await navigator.share({
-          title: `@${creator} on Aficionado`,
-          text: `Check out @${creator}'s exclusive drop on Aficionado!`,
-          url: shareUrl,
-        })
+        await navigator.share({ title: `@${creator} on Aficionado`, url: shareUrl })
         return
       } catch {
-        // Fallback to clipboard if share dialog was cancelled or unsupported
+        // fallback below
       }
     }
     navigator.clipboard?.writeText?.(shareUrl)
@@ -63,136 +53,189 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
   }
 
   return (
-    <div className="h-full w-full max-w-md mx-auto relative bg-background">
-      {/* Absolute top Drop Zone Carousel */}
-      <div className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-background/90 to-transparent pt-2">
+    <div className="h-dvh w-full max-w-md mx-auto relative bg-background overflow-hidden">
+      {/* Drop Zone carousel overlay */}
+      <div className="absolute top-0 left-0 right-0 z-50 bg-gradient-to-b from-background/85 to-transparent">
         <DropZoneCarousel drops={drops} />
       </div>
 
-      {/* Main scrolling video feed */}
-      <div 
-        className="h-full w-full relative snap-y snap-mandatory overflow-y-scroll hide-scrollbar bg-background"
+      {/* Full-screen snap scroll feed */}
+      <div
+        className="h-dvh w-full snap-y snap-mandatory overflow-y-scroll hide-scrollbar"
         onScroll={handleScroll}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-      {videos.map((video, idx) => {
-        const isLocked = video.unlocksAt && new Date(video.unlocksAt) > new Date();
-        const unlockDateString = video.unlocksAt ? new Date(video.unlocksAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-        const isNsfw = video.moderationStatus === 'rejected';
-        const isLiked = likedMap[video.id];
-        const isSubscribed = video.isSubscribed || subscribedMap[video.creator];
-        
-        const autoPlayVideo = !isLocked && !isNsfw && idx === activeVideo;
+        {videos.map((video, idx) => {
+          const isLocked = video.unlocksAt && new Date(video.unlocksAt) > new Date()
+          const unlockDateString = video.unlocksAt
+            ? new Date(video.unlocksAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+            : ''
+          const isNsfw = video.moderationStatus === 'rejected'
+          const isLiked = likedMap[video.id]
+          const isSubscribed = video.isSubscribed || subscribedMap[video.creator]
+          const autoPlayVideo = !isLocked && !isNsfw && idx === activeVideo
 
-        return (
-        <div key={video.id} className="h-full w-full snap-start relative bg-background flex justify-center items-center overflow-hidden">
-          
-          {isNsfw ? (
-            <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center bg-background">
-              <div className="w-20 h-20 rounded-full bg-destructive/10 border border-destructive/30 flex items-center justify-center mb-6">
-                <EyeOff className="w-10 h-10 text-destructive" />
-              </div>
-              <h3 className="text-2xl font-black text-foreground mb-2 uppercase tracking-widest drop-shadow-lg">Content Removed</h3>
-              <p className="text-destructive/80 font-medium max-w-[80%] text-sm text-pretty">
-                This content was removed for violating our strict Community Guidelines against adult material.
-              </p>
-            </div>
-          ) : (
-            <>
-              {/* Video Player */}
-              <div className={`absolute inset-0 transition-all duration-1000 ${isLocked ? 'blur-[40px] scale-125 opacity-40' : ''}`}>
-                <MuxPlayer
-                  playbackId={video.playbackId}
-                  className="h-full w-full object-cover pointer-events-none"
-                  loop
-                  muted={false}
-                  autoPlay={autoPlayVideo ? "any" : false}
-                  streamType="on-demand"
-                  style={{ '--controls': 'none' } as any}
-                />
-              </div>
-
-              {isLocked && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
-                  {/* VIP Glows for Time Capsule */}
-                  <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/20 rounded-full blur-[80px] animate-breathe-calm pointer-events-none"></div>
-                  
-                  <div className="relative z-10 w-24 h-24 rounded-full liquid-glass border border-indigo-500/40 mx-auto flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(99,102,241,0.25)]">
-                    <Lock className="w-10 h-10 text-indigo-400 drop-shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
+          return (
+            <div
+              key={video.id}
+              className="h-dvh w-full snap-start relative bg-background flex justify-center items-center overflow-hidden"
+            >
+              {isNsfw ? (
+                /* ── Content Removed ── */
+                <div className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 text-center">
+                  <div className="w-16 h-16 rounded-full bg-destructive/10 border border-destructive/25 flex items-center justify-center mb-5">
+                    <EyeOff className="w-8 h-8 text-destructive" />
                   </div>
-                  <h3 className="relative z-10 text-3xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-lg">Time Capsule</h3>
-                  <p className="relative z-10 text-indigo-200/80 font-medium mb-8 max-w-[80%] text-pretty">This exclusive drop is sealed and waiting for the right moment.</p>
-                  
-                  <div className="relative z-10 liquid-glass px-6 py-5 rounded-[2rem] flex items-center gap-4 mb-8 border border-white/10">
-                    <div className="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
-                      <Clock className="w-6 h-6 text-indigo-400 animate-pulse" />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-xs text-indigo-200/70 font-bold uppercase tracking-widest mb-1">Unlocks On</div>
-                      <div className="text-xl font-bold text-white tracking-tight">{unlockDateString}</div>
-                    </div>
-                  </div>
-
-                  <button className="relative z-10 px-8 py-4 rounded-full bg-indigo-500 text-white font-bold tracking-wider hover:bg-indigo-400 transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] hover:-translate-y-1 uppercase text-sm">
-                    Set Reminder
-                  </button>
+                  <h3
+                    className="text-xl font-bold text-foreground mb-2"
+                    style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}
+                  >
+                    Content Removed
+                  </h3>
+                  <p className="text-destructive/70 text-sm max-w-[75%] text-pretty">
+                    Removed for violating our Community Guidelines.
+                  </p>
                 </div>
-              )}
-            </>
-          )}
-
-          {/* Overlay UI (Liquid Glass) */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-background/20 via-transparent to-background/90" />
-
-          {/* Right Floating Actions */}
-          <VideoOverlayActions
-            videoId={video.id}
-            creator={video.creator}
-            likes={video.likes}
-            comments={video.comments}
-            isLiked={isLiked}
-            copiedId={copiedId}
-            onToggleLike={toggleLike}
-            onOpenTipModal={setTipModalCreator}
-            onShare={handleShare}
-          />
-
-          {/* Bottom Left Info */}
-          <div className="absolute left-4 bottom-20 max-w-[70%] z-10 pointer-events-auto">
-            <div className="flex items-center gap-3 mb-2">
-              <Link href={`/${video.creator}`}>
-                <h2 className="text-lg font-bold text-white drop-shadow-lg hover:underline decoration-amber-500">@{video.creator}</h2>
-              </Link>
-              {!isSubscribed ? (
-                <button 
-                  onClick={() => toggleSubscribe(video.creator)}
-                  className="px-4 py-1.5 text-xs font-bold rounded-full bg-amber-500 text-black uppercase tracking-wider hover:bg-amber-400 transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:scale-105"
-                >
-                  Subscribe
-                </button>
               ) : (
-                <div className="flex items-center gap-1 px-3 py-1.5 rounded-full liquid-glass border-amber-500/40 bg-amber-500/10">
-                  <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500 drop-shadow-[0_0_5px_rgba(245,158,11,0.8)]" />
-                  <span className="text-[10px] font-bold text-amber-500 uppercase tracking-widest">VIP</span>
-                </div>
+                <>
+                  {/* ── Video player ── */}
+                  <div className={`absolute inset-0 transition-all duration-700 ${isLocked ? 'blur-[40px] scale-125 opacity-40' : ''}`}>
+                    <MuxPlayer
+                      playbackId={video.playbackId}
+                      className="h-full w-full object-cover pointer-events-none"
+                      loop
+                      muted={false}
+                      autoPlay={autoPlayVideo ? 'any' : false}
+                      streamType="on-demand"
+                      style={{ '--controls': 'none' } as React.CSSProperties}
+                    />
+                  </div>
+
+                  {/* ── Time Capsule overlay ── */}
+                  {isLocked && (
+                    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center animate-fade-in-up">
+                      {/* Indigo glow (kept — distinct from brand/monetization) */}
+                      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-indigo-500/20 rounded-full blur-[80px] animate-breathe-calm pointer-events-none" />
+
+                      <div
+                        className="relative z-10 w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-5"
+                        style={{
+                          background: 'rgba(99,102,241,0.12)',
+                          border: '1px solid rgba(99,102,241,0.4)',
+                          boxShadow: '0 0 32px rgba(99,102,241,0.2)',
+                        }}
+                      >
+                        <Lock className="w-8 h-8 text-indigo-400" style={{ filter: 'drop-shadow(0 0 10px rgba(99,102,241,0.7))' }} />
+                      </div>
+
+                      <h3
+                        className="relative z-10 text-2xl font-bold text-white mb-1.5"
+                        style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
+                      >
+                        Time Capsule
+                      </h3>
+                      <p className="relative z-10 text-indigo-200/70 text-sm mb-7 max-w-[75%] text-pretty">
+                        This exclusive drop is sealed and waiting.
+                      </p>
+
+                      <div
+                        className="relative z-10 flex items-center gap-4 px-5 py-4 rounded-2xl mb-7"
+                        style={{
+                          background: 'rgba(99,102,241,0.1)',
+                          border: '1px solid rgba(99,102,241,0.25)',
+                          backdropFilter: 'blur(16px)',
+                        }}
+                      >
+                        <div className="w-10 h-10 rounded-full bg-indigo-500/15 flex items-center justify-center border border-indigo-500/25">
+                          <Clock className="w-5 h-5 text-indigo-400 animate-pulse" />
+                        </div>
+                        <div className="text-left">
+                          <div className="text-[10px] text-indigo-200/60 font-semibold uppercase tracking-widest mb-0.5">Unlocks On</div>
+                          <div className="text-base font-bold text-white">{unlockDateString}</div>
+                        </div>
+                      </div>
+
+                      <button
+                        className="relative z-10 px-7 py-3 rounded-full text-white text-sm font-semibold transition-all hover:-translate-y-0.5"
+                        style={{
+                          background: 'rgba(99,102,241,0.9)',
+                          boxShadow: '0 0 20px rgba(99,102,241,0.35)',
+                        }}
+                      >
+                        Set Reminder
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
+
+              {/* Gradient vignette — subtle bottom fade */}
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-background/80" />
+
+              {/* Right action column */}
+              <VideoOverlayActions
+                videoId={video.id}
+                creator={video.creator}
+                likes={video.likes}
+                comments={video.comments}
+                isLiked={isLiked}
+                copiedId={copiedId}
+                onToggleLike={toggleLike}
+                onOpenTipModal={setTipModalCreator}
+                onShare={handleShare}
+              />
+
+              {/* Bottom-left creator info */}
+              <div className="absolute left-4 bottom-20 max-w-[68%] z-10 pointer-events-auto">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <Avatar
+                    name={video.creator}
+                    size="sm"
+                    className="ring-1 ring-white/20 flex-shrink-0"
+                  />
+                  <Link href={`/${video.creator}`}>
+                    <span className="text-base font-semibold text-white drop-shadow-md hover:text-primary transition-colors">
+                      @{video.creator}
+                    </span>
+                  </Link>
+
+                  {/* Subscribe / VIP — amber: monetization */}
+                  {!isSubscribed ? (
+                    <Button
+                      variant="monetization"
+                      size="xs"
+                      rounded="full"
+                      onClick={() => toggleSubscribe(video.creator)}
+                      className="uppercase tracking-wide text-[10px] shadow-[0_0_12px_rgba(245,158,11,0.25)]"
+                    >
+                      Subscribe
+                    </Button>
+                  ) : (
+                    <div
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                      style={{
+                        background: 'rgba(245,158,11,0.12)',
+                        border: '1px solid rgba(245,158,11,0.35)',
+                        color: '#F59E0B',
+                      }}
+                    >
+                      <Star className="w-3 h-3 fill-[#F59E0B] text-[#F59E0B]" />
+                      VIP
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-sm text-white/85 drop-shadow-sm line-clamp-2 leading-snug text-pretty">
+                  {video.description}
+                </p>
+              </div>
             </div>
-            <p className="text-sm text-white/90 drop-shadow-md text-pretty line-clamp-2 leading-relaxed">
-              {video.description}
-            </p>
-          </div>
-        </div>
-        );
-      })}
+          )
+        })}
       </div>
 
       {tipModalCreator && (
-        <TipModal 
-          creatorId={tipModalCreator} 
-          onClose={() => setTipModalCreator(null)} 
-        />
+        <TipModal creatorId={tipModalCreator} onClose={() => setTipModalCreator(null)} />
       )}
     </div>
   )
 }
-

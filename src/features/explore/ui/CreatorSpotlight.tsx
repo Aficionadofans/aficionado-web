@@ -48,8 +48,8 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
   return (
     <section aria-label="Creator Spotlight Videos">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-full liquid-glass border-blue-500/20 flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-          <Video className="w-5 h-5 text-blue-400" />
+        <div className="w-10 h-10 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,212,200,0.2)]">
+          <Video className="w-5 h-5 text-primary" />
         </div>
         <div>
           <h2 className="text-2xl font-bold text-off-white tracking-wide">Creator Spotlight</h2>
@@ -74,8 +74,8 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
               tabIndex={0}
               role="button"
               aria-label={`Play spotlight for ${spotlight.role}`}
-              className={`min-w-[240px] w-[240px] aspect-[9/16] shrink-0 snap-center liquid-glass-hover border-white/10 overflow-hidden relative cursor-pointer animate-fade-in-up transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 ${
-                isPlaying ? 'ring-2 ring-primary shadow-[0_0_25px_rgba(245,158,11,0.4)] scale-[1.02]' : ''
+              className={`min-w-[240px] w-[240px] aspect-[9/16] shrink-0 snap-center liquid-glass-hover border-white/10 overflow-hidden relative cursor-pointer animate-fade-in-up transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
+                isPlaying ? 'ring-2 ring-primary shadow-[0_0_25px_rgba(0,212,200,0.4)] scale-[1.02]' : ''
               }`}
               style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
             >
@@ -110,7 +110,7 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
                   ) : <div />}
                   <div className={`w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center border transition-all ${
                     isPlaying 
-                      ? 'bg-primary text-black border-primary shadow-[0_0_15px_rgba(245,158,11,0.5)]' 
+                      ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(0,212,200,0.5)]' 
                       : 'bg-black/50 text-white border-white/20 shadow-lg'
                   }`}>
                     {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}

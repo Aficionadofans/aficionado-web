@@ -19,22 +19,22 @@ export function StudioQuickActions({
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-      <button className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-amber-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
-        <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-          <Upload className="w-7 h-7 text-amber-500" />
+      <button className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-primary/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,212,200,0.2)]">
+          <Upload className="w-7 h-7 text-primary" />
         </div>
-        <span className="text-base font-bold text-amber-400 tracking-tight">Upload Video</span>
+        <span className="text-base font-bold text-primary tracking-tight">Upload Video</span>
       </button>
 
       <Link
         href={liveUrl}
-        className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-amber-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+        className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-primary/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
         aria-disabled={!username}
       >
-        <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-          <Video className="w-7 h-7 text-amber-500" />
+        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,212,200,0.2)]">
+          <Video className="w-7 h-7 text-primary" />
         </div>
-        <span className="text-base font-bold text-amber-400 tracking-tight">Go Live</span>
+        <span className="text-base font-bold text-primary tracking-tight">Go Live</span>
       </Link>
 
       <button

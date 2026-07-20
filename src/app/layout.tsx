@@ -1,24 +1,28 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, Geist, Geist_Mono } from 'next/font/google'
+import { Syne, Inter, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/shared/ui/layout/Navigation'
 import { MainLayout } from '@/shared/ui/layout/MainLayout'
 import { createClient } from '@/shared/lib/supabase/server'
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: '--font-heading',
+const syne = Syne({
+  variable: '--font-syne',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['600', '700', '800'],
+  display: 'swap',
 })
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -57,14 +61,14 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
-        className={`${plusJakartaSans.variable} ${geistSans.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
+        className={`${syne.variable} ${inter.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
-        {/* Ambient background orbs for Liquid Glass aesthetic */}
+        {/* Ambient background orbs — electric teal brand */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
-          <div className="absolute top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-bio-teal/15 blur-[120px] mix-blend-screen animate-breathe-calm" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[150px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
-          <div className="absolute top-[35%] left-[55%] w-[35vw] h-[35vw] rounded-full bg-bio-emerald/10 blur-[110px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-primary/12 blur-[130px] mix-blend-screen animate-breathe-calm" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/8 blur-[160px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
+          <div className="absolute top-[35%] left-[55%] w-[35vw] h-[35vw] rounded-full bg-bio-emerald/8 blur-[120px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
         </div>
 
         <Navigation isAdmin={isAdmin} userType={userType} />

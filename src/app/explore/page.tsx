@@ -51,7 +51,7 @@ export default async function ExplorePage() {
         <div className="space-y-12">
           <section aria-label="Today&apos;s Featured Voices">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+              <div className="w-9 h-9 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,212,200,0.2)]">
                 <Star className="w-4 h-4 text-primary" />
               </div>
               <div>
@@ -113,7 +113,7 @@ export default async function ExplorePage() {
               </p>
               <Link 
                 href="/home" 
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-black font-bold text-xs sm:text-sm tracking-wide hover:bg-amber-400 transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-bold text-xs sm:text-sm tracking-wide hover:bg-primary-hover transition-all shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
               >
                 <span>Return to Feed</span>
                 <span>→</span>

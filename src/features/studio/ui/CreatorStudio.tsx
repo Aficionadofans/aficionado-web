@@ -33,7 +33,7 @@ export function CreatorStudio({
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12 pb-20 md:pb-12">
       <header className="mb-10 animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-3 shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-3 shadow-[0_0_15px_rgba(0,212,200,0.15)]">
           <TrendingUp className="w-3.5 h-3.5" />
           <span>Creator Hub</span>
         </div>

@@ -5,41 +5,33 @@ import { useSearchParams } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/client'
 import { authAction } from '@/app/login/actions'
 import { useFormStatus } from 'react-dom'
-
-// Simple Google Icon SVG
-const GoogleIcon = () => (
-  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-  </svg>
-)
-
-const GithubIcon = () => (
-  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
-  </svg>
-)
+import { Github, Chrome } from 'lucide-react'
+import { Button } from '@/shared/ui/core'
+import { FormField } from '@/shared/ui/core'
+import { GlassCard } from '@/shared/ui/core'
 
 type AuthMode = 'login' | 'signup' | 'magic_link' | 'forgot_password'
 
 function SubmitButton({ mode }: { mode: AuthMode }) {
   const { pending } = useFormStatus()
-  
+
+  const label =
+    mode === 'login' ? 'Sign In' :
+    mode === 'signup' ? 'Create Account' :
+    mode === 'magic_link' ? 'Send Magic Link' :
+    'Send Reset Link'
+
   return (
-    <button
+    <Button
       type="submit"
-      disabled={pending}
-      className="w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-full text-black bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-[1.02] active:scale-[0.98]"
+      variant="primary"
+      size="lg"
+      rounded="full"
+      loading={pending}
+      className="w-full"
     >
-      {pending ? 'Processing...' : (
-        mode === 'login' ? 'Sign In' :
-        mode === 'signup' ? 'Create Account' :
-        mode === 'magic_link' ? 'Send Magic Link' :
-        'Send Reset Link'
-      )}
-    </button>
+      {!pending && label}
+    </Button>
   )
 }
 
@@ -50,14 +42,9 @@ export function AuthForm() {
   const [state, formAction] = useActionState(authAction, null)
   const [mode, setMode] = useState<AuthMode>('login')
   const [userType, setUserType] = useState<'aficionado' | 'fan'>('fan')
-
-  // Requirement 1: client-side checkbox validation state
   const [checkboxError, setCheckboxError] = useState<string | null>(null)
-
-  // Requirement 2: track which mode produced the current action state to suppress stale messages
   const [submittedMode, setSubmittedMode] = useState<AuthMode | null>(null)
 
-  // Requirement 2 + 3: clear stale action state and checkbox error on mode switch
   const switchMode = (next: AuthMode) => {
     setMode(next)
     setCheckboxError(null)
@@ -68,10 +55,9 @@ export function AuthForm() {
     if (mode === 'signup') {
       const termsChecked = (document.getElementById('terms') as HTMLInputElement | null)?.checked
       if (!termsChecked) {
-        setCheckboxError('You must accept the Terms of Service and Privacy Policy to sign up with ' + provider + '.')
+        setCheckboxError(`You must accept the Terms of Service to sign up with ${provider}.`)
         return
       }
-
       if (userType === 'aficionado') {
         const creatorChecked = (document.getElementById('creator-agreement') as HTMLInputElement | null)?.checked
         if (!creatorChecked) {
@@ -80,23 +66,17 @@ export function AuthForm() {
         }
       }
     }
-
     setCheckboxError(null)
     const supabase = createClient()
     const redirectParams = mode === 'signup' ? `?userType=${userType}` : ''
-    
     await supabase.auth.signInWithOAuth({
       provider,
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback${redirectParams}`
-      }
+      options: { redirectTo: `${window.location.origin}/auth/callback${redirectParams}` },
     })
   }
 
-  // Requirement 1: intercept submit to validate checkboxes before dispatching server action
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (mode !== 'signup') return
-
     const form = e.currentTarget
     const termsChecked = (form.elements.namedItem('terms') as HTMLInputElement)?.checked
     const creatorChecked =
@@ -115,13 +95,10 @@ export function AuthForm() {
       setCheckboxError('You must accept the Creator Monetization Agreement.')
       return
     }
-
     setCheckboxError(null)
     setSubmittedMode(mode)
-    // allow normal form action dispatch to proceed
   }
 
-  // Requirement 2: show action error/success only when it belongs to the current mode
   const displayError =
     checkboxError ??
     (submittedMode === mode ? (state?.error ?? null) : null) ??
@@ -130,218 +107,247 @@ export function AuthForm() {
   const displaySuccess = submittedMode === mode ? (state?.success ?? null) : null
 
   return (
-    <div className="w-full max-w-md space-y-8 liquid-glass p-8 relative overflow-hidden">
-      {/* Dynamic Background Glow Based on Mode */}
-      <div className={`absolute -top-20 -left-20 w-48 h-48 rounded-full blur-[80px] mix-blend-screen pointer-events-none transition-colors duration-1000 ${
-        mode === 'signup' ? 'bg-primary/20' : mode === 'magic_link' ? 'bg-blue-500/20' : 'bg-primary/10'
-      }`}></div>
+    <div className="flex min-h-dvh items-center justify-center p-4">
+      <GlassCard
+        variant="raised"
+        className="w-full max-w-sm p-8 space-y-6 relative overflow-hidden"
+      >
+        {/* Ambient teal glow top-left */}
+        <div
+          className="absolute -top-24 -left-24 w-48 h-48 rounded-full pointer-events-none"
+          style={{
+            background: mode === 'signup'
+              ? 'rgba(0,212,200,0.18)'
+              : 'rgba(0,212,200,0.12)',
+            filter: 'blur(60px)',
+            transition: 'background 0.8s ease',
+          }}
+        />
 
-      <div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-off-white transition-all">
-          {mode === 'login' && 'Welcome Back'}
-          {mode === 'signup' && 'Join Aficionado'}
-          {mode === 'magic_link' && 'Magic Link'}
-          {mode === 'forgot_password' && 'Reset Password'}
-        </h2>
-        <p className="mt-2 text-center text-sm text-muted-foreground">
-          {mode === 'login' && 'Sign in to access your wellness cockpit'}
-          {mode === 'signup' && 'Create your account today'}
-          {mode === 'magic_link' && 'Sign in securely without a password'}
-          {mode === 'forgot_password' && 'We&apos;ll send you reset instructions'}
-        </p>
-      </div>
-
-      <div className="flex justify-center space-x-2 border-b border-white/10 pb-4">
-        <button onClick={() => switchMode('login')} className={`text-sm font-medium transition-colors ${mode === 'login' ? 'text-primary' : 'text-muted-foreground hover:text-white'}`}>Login</button>
-        <span className="text-muted-foreground/30">•</span>
-        <button onClick={() => switchMode('signup')} className={`text-sm font-medium transition-colors ${mode === 'signup' ? 'text-primary' : 'text-muted-foreground hover:text-white'}`}>Sign Up</button>
-      </div>
-
-      {displaySuccess ? (
-        <div className="text-primary text-sm text-center p-4 bg-primary/10 border border-primary/20 rounded-lg animate-fade-in-up">
-          {displaySuccess}
+        {/* Heading */}
+        <div className="relative text-center space-y-1.5">
+          <h1
+            className="text-3xl font-bold text-foreground"
+            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.03em' }}
+          >
+            {mode === 'login' && 'Welcome Back'}
+            {mode === 'signup' && 'Join Aficionado'}
+            {mode === 'magic_link' && 'Magic Link'}
+            {mode === 'forgot_password' && 'Reset Password'}
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {mode === 'login' && 'Sign in to your account'}
+            {mode === 'signup' && 'Create your account today'}
+            {mode === 'magic_link' && 'Sign in without a password'}
+            {mode === 'forgot_password' && "We'll send you reset instructions"}
+          </p>
         </div>
-      ) : (
-        <form action={formAction} onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <input type="hidden" name="mode" value={mode} />
-          {mode === 'signup' && <input type="hidden" name="userType" value={userType} />}
-          
-          <div className="rounded-md shadow-sm space-y-4">
-            <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-xl relative block w-full px-3 py-3 border border-white/10 bg-white/5 text-off-white placeholder-muted-foreground focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm transition-all"
-                placeholder="Email address"
-              />
-            </div>
-            
+
+        {/* Mode tabs — pill toggle */}
+        <div className="relative flex items-center rounded-xl p-1 bg-[rgba(255,255,255,0.05)] border border-border">
+          {(['login', 'signup'] as const).map((m) => (
+            <button
+              key={m}
+              type="button"
+              onClick={() => switchMode(m)}
+              className={[
+                'flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                mode === m
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground',
+              ].join(' ')}
+            >
+              {m === 'login' ? 'Sign In' : 'Sign Up'}
+            </button>
+          ))}
+        </div>
+
+        {displaySuccess ? (
+          <div className="text-primary text-sm text-center p-4 bg-primary/10 border border-primary/20 rounded-xl animate-fade-in-up">
+            {displaySuccess}
+          </div>
+        ) : (
+          <form action={formAction} onSubmit={handleSubmit} className="space-y-4">
+            <input type="hidden" name="mode" value={mode} />
+            {mode === 'signup' && <input type="hidden" name="userType" value={userType} />}
+
+            <FormField
+              id="email-address"
+              name="email"
+              type="email"
+              label="Email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              required
+            />
+
+            {/* Fan / Creator toggle */}
             {mode === 'signup' && (
-              <div className="animate-fade-in-up flex space-x-4">
-                <button
-                  type="button"
-                  onClick={() => setUserType('fan')}
-                  className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
-                    userType === 'fan'
-                      ? 'bg-primary/20 border-primary text-off-white font-semibold shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                      : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
-                  }`}
+              <div className="animate-fade-in-up space-y-1.5">
+                <span className="text-sm font-medium text-foreground/80">I am a…</span>
+                <div
+                  className="relative flex rounded-xl p-1 bg-[rgba(255,255,255,0.05)] border border-border"
+                  style={{ isolation: 'isolate' }}
                 >
-                  I&apos;m a Fan
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setUserType('aficionado')}
-                  className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
-                    userType === 'aficionado'
-                      ? 'bg-primary/20 border-primary text-off-white font-semibold shadow-[0_0_15px_rgba(245,158,11,0.2)]'
-                      : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
-                  }`}
-                >
-                  I&apos;m an Aficionado
-                </button>
+                  {/* Sliding indicator */}
+                  <div
+                    className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg bg-[rgba(255,255,255,0.08)] border border-border transition-transform duration-200 ease-out"
+                    style={{ transform: `translateX(${userType === 'fan' ? '4px' : 'calc(100% + 0px)'})`}}
+                    aria-hidden="true"
+                  />
+                  {(['fan', 'aficionado'] as const).map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      onClick={() => setUserType(t)}
+                      className={[
+                        'relative z-10 flex-1 py-2 text-sm font-medium rounded-lg transition-colors duration-150 focus-visible:outline-none',
+                        userType === t ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/80',
+                      ].join(' ')}
+                    >
+                      {t === 'fan' ? "I'm a Fan" : "I'm a Creator"}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
-            
+
             {(mode === 'login' || mode === 'signup') && (
               <div className="animate-fade-in-up">
-                <label htmlFor="password" className="sr-only">Password</label>
-                <input
+                <FormField
                   id="password"
                   name="password"
                   type="password"
+                  label="Password"
+                  placeholder="••••••••"
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   required
-                  className="appearance-none rounded-xl relative block w-full px-3 py-3 border border-white/10 bg-white/5 text-off-white placeholder-muted-foreground focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm transition-all"
-                  placeholder="Password"
                 />
               </div>
             )}
 
             {mode === 'signup' && (
               <div className="animate-fade-in-up">
-                <label htmlFor="zipCode" className="sr-only">Zip Code (Required for Neighborhoods)</label>
-                <input
+                <FormField
                   id="zipCode"
                   name="zipCode"
                   type="text"
+                  label="Zip Code"
+                  placeholder="90210"
                   pattern="[0-9]{5}(-[0-9]{4})?"
-                  title="5-digit ZIP code or ZIP+4 format (e.g. 90210 or 90210-1234)"
+                  title="5-digit ZIP code"
+                  hint="Required for local community features"
                   required
-                  className="appearance-none rounded-xl relative block w-full px-3 py-3 border border-white/10 bg-white/5 text-off-white placeholder-muted-foreground focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm transition-all"
-                  placeholder="Zip Code (Required for Local Communities)"
                 />
               </div>
             )}
-          </div>
 
-          {mode === 'signup' && (
-            <div className="space-y-4 animate-fade-in-up">
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  {/* Requirement 1.5: removed native `required` — validation handled in JS */}
+            {mode === 'signup' && (
+              <div className="space-y-3 animate-fade-in-up">
+                {/* Terms checkbox */}
+                <label className="flex items-start gap-3 cursor-pointer group">
                   <input
                     id="terms"
                     name="terms"
                     type="checkbox"
-                    className="focus:ring-primary h-4 w-4 text-primary border-white/20 bg-white/5 rounded"
+                    className="mt-0.5 h-4 w-4 rounded border-border bg-[rgba(255,255,255,0.05)] text-primary focus:ring-primary focus:ring-offset-0 flex-shrink-0"
                   />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor="terms" className="font-medium text-white/80">
-                    I agree to the <a href="/terms" target="_blank" className="text-primary hover:underline">Terms of Service</a> and <a href="/privacy" target="_blank" className="text-primary hover:underline">Privacy Policy</a>
-                  </label>
-                  <p className="text-muted-foreground text-xs mt-1">Includes strict prohibition of adult content.</p>
-                </div>
-              </div>
+                  <span className="text-xs text-foreground/70 leading-relaxed">
+                    I agree to the{' '}
+                    <a href="/terms" target="_blank" className="text-primary hover:underline">Terms of Service</a>
+                    {' '}and{' '}
+                    <a href="/privacy" target="_blank" className="text-primary hover:underline">Privacy Policy</a>.
+                    <span className="block text-muted-foreground mt-0.5">Includes strict prohibition of adult content.</span>
+                  </span>
+                </label>
 
-              {userType === 'aficionado' && (
-                <div className="flex items-start animate-fade-in-up">
-                  <div className="flex items-center h-5">
-                    {/* Requirement 1.5: removed native `required` — validation handled in JS */}
+                {userType === 'aficionado' && (
+                  <label className="flex items-start gap-3 cursor-pointer animate-fade-in-up">
                     <input
                       id="creator-agreement"
                       name="creator-agreement"
                       type="checkbox"
-                      className="focus:ring-primary h-4 w-4 text-primary border-white/20 bg-white/5 rounded"
+                      className="mt-0.5 h-4 w-4 rounded border-border bg-[rgba(255,255,255,0.05)] text-primary focus:ring-primary flex-shrink-0"
                     />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label htmlFor="creator-agreement" className="font-medium text-white/80">
-                      I agree to the <a href="/creator-agreement" target="_blank" className="text-primary hover:underline">Creator Monetization Agreement</a>
-                    </label>
-                  </div>
+                    <span className="text-xs text-foreground/70 leading-relaxed">
+                      I agree to the{' '}
+                      <a href="/creator-agreement" target="_blank" className="text-primary hover:underline">Creator Monetization Agreement</a>.
+                    </span>
+                  </label>
+                )}
+              </div>
+            )}
+
+            {/* Error / hint area */}
+            <div className="min-h-[40px]">
+              {displayError && (
+                <div
+                  role="alert"
+                  className="text-xs text-destructive text-center p-3 rounded-xl animate-fade-in-up"
+                  style={{ background: 'rgba(244,63,94,0.1)', border: '1px solid rgba(244,63,94,0.2)' }}
+                >
+                  {displayError}
                 </div>
               )}
             </div>
-          )}
 
-          <div className="min-h-[48px] flex items-center justify-center w-full">
-            {displayError && (
-              <div className="w-full text-destructive text-sm text-center p-3 bg-destructive/10 border border-destructive/20 rounded-lg animate-fade-in-up">
-                {displayError}
-              </div>
-            )}
-          </div>
-
-          <div className="flex items-center justify-between mt-4">
+            {/* Forgot / Magic link links */}
             {mode === 'login' && (
-              <>
+              <div className="flex items-center justify-between -mt-2">
                 <button type="button" onClick={() => switchMode('forgot_password')} className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                  Forgot your password?
+                  Forgot password?
                 </button>
                 <button type="button" onClick={() => switchMode('magic_link')} className="text-xs text-muted-foreground hover:text-primary transition-colors">
                   Use Magic Link
                 </button>
-              </>
+              </div>
             )}
             {(mode === 'magic_link' || mode === 'forgot_password') && (
               <button type="button" onClick={() => switchMode('login')} className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                Back to Login
+                ← Back to Sign In
               </button>
             )}
-          </div>
 
-          <SubmitButton mode={mode} />
-        </form>
-      )}
+            <SubmitButton mode={mode} />
+          </form>
+        )}
 
-      {/* OAuth Providers */}
-      {(mode === 'login' || mode === 'signup') && (
-        <div className="mt-8 animate-fade-in-up" style={{ animationDelay: '100ms', animationFillMode: 'both' }}>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-background/80 text-muted-foreground backdrop-blur-sm rounded-full">
-                Or continue with
+        {/* OAuth */}
+        {(mode === 'login' || mode === 'signup') && (
+          <div className="space-y-4 animate-fade-in-up">
+            <div className="relative flex items-center gap-3">
+              <div className="flex-1 h-px bg-border" />
+              <span className="text-xs text-muted-foreground px-2 bg-[rgba(24,24,27,0.85)] rounded-full">
+                or continue with
               </span>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                type="button"
+                variant="glass"
+                size="default"
+                className="w-full gap-2"
+                onClick={() => handleOAuth('google')}
+              >
+                <Chrome className="w-4 h-4" />
+                Google
+              </Button>
+              <Button
+                type="button"
+                variant="glass"
+                size="default"
+                className="w-full gap-2"
+                onClick={() => handleOAuth('github')}
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </Button>
             </div>
           </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <button
-              onClick={() => handleOAuth('google')}
-              className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-white/10 rounded-xl shadow-sm bg-white/5 text-sm font-medium text-off-white hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              <GoogleIcon />
-              Google
-            </button>
-            <button
-              onClick={() => handleOAuth('github')}
-              className="w-full inline-flex justify-center items-center py-2.5 px-4 border border-white/10 rounded-xl shadow-sm bg-white/5 text-sm font-medium text-off-white hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-            >
-              <GithubIcon />
-              GitHub
-            </button>
-          </div>
-        </div>
-      )}
+        )}
+      </GlassCard>
     </div>
   )
 }
