@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { InnerCircleView } from '@/features/circles/ui/InnerCircleView'
 import { ArrowLeft, Grip, Lock, Play } from 'lucide-react'
@@ -49,12 +49,16 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
     : subscriberCount.toString()
 
   return (
-    <div className="min-h-[100dvh] bg-black text-white flex flex-col">
+    <div className="min-h-[100dvh] bg-background text-foreground flex flex-col relative overflow-hidden">
+      {/* Dynamic Ambient Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--bio-teal)] opacity-20 blur-[100px] mix-blend-screen pointer-events-none animate-breathe-calm" />
+      <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-[var(--bio-emerald)] opacity-10 blur-[100px] mix-blend-screen pointer-events-none animate-breathe-calm" style={{ animationDelay: '2s' }} />
+
       {/* Header — shrinks on scroll */}
       <header
         className={cn(
-          'sticky top-0 z-50 liquid-glass rounded-none border-t-0 border-l-0 border-r-0 border-b border-white/10 flex items-center transition-all duration-300 ease-out',
-          scrolled ? 'px-3 py-1.5 gap-2' : 'px-4 py-3 gap-4'
+          'sticky top-0 z-50 liquid-glass rounded-none border-t-0 border-l-0 border-r-0 border-b flex items-center transition-all duration-300 ease-out',
+          scrolled ? 'px-3 py-2 gap-2 border-white/5 shadow-md' : 'px-4 py-4 gap-4 border-transparent'
         )}
       >
         <button
@@ -75,7 +79,7 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               width={scrolled ? 28 : 36}
               height={scrolled ? 28 : 36}
               className={cn(
-                'rounded-full object-cover flex-shrink-0 transition-all duration-300',
+                'rounded-full object-cover flex-shrink-0 transition-all duration-300 shadow-sm',
                 scrolled ? 'w-7 h-7' : 'w-9 h-9'
               )}
             />
@@ -97,49 +101,57 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
 
       {/* Bio */}
       {profile.bio && (
-        <div className="px-4 py-3 border-b border-white/10">
-          <p className="text-sm text-muted-foreground">{profile.bio}</p>
+        <div className="px-6 py-6 border-b border-white/5 flex flex-col items-center text-center">
+          <p className="text-sm text-muted-foreground text-pretty max-w-xl mx-auto leading-relaxed">
+            {profile.bio}
+          </p>
         </div>
       )}
 
-      {/* Tabs */}
-      <div className="flex border-b border-white/10">
-        <button
-          onClick={() => setActiveTab('feed')}
-          className={cn(
-            'flex-1 py-4 text-sm font-bold uppercase tracking-wider relative transition-colors',
-            activeTab === 'feed' ? 'text-white' : 'text-white/40 hover:text-white/60'
-          )}
-        >
-          <div className="flex items-center justify-center gap-2">
-            <Grip className="w-4 h-4" /> Public Feed
-          </div>
-          {activeTab === 'feed' && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab('circle')}
-          className={cn(
-            'flex-1 py-4 text-sm font-bold uppercase tracking-wider relative transition-colors',
-            activeTab === 'circle' ? 'text-amber-500' : 'text-amber-500/40 hover:text-amber-500/60'
-          )}
-        >
-          <div className="flex items-center justify-center gap-2">
-            <Lock className="w-4 h-4" /> Inner Circle
-          </div>
-          {activeTab === 'circle' && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-          )}
-        </button>
+      {/* Segmented Pill Tabs */}
+      <div className="flex justify-center p-4">
+        <div className="liquid-glass rounded-full p-1 flex relative w-full max-w-sm shadow-sm border border-white/5">
+          {/* Active indicator pill */}
+          <div
+            className={cn(
+              "absolute inset-y-1 rounded-full bg-white/10 transition-all duration-300 ease-out",
+              activeTab === 'feed' ? "left-1 w-[calc(50%-0.25rem)]" : "left-[50%] w-[calc(50%-0.25rem)]"
+            )}
+          />
+          <button
+            onClick={() => setActiveTab('feed')}
+            className={cn(
+              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-medium tracking-wide transition-colors z-10',
+              activeTab === 'feed' ? 'text-white' : 'text-white/50 hover:text-white/80'
+            )}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Grip className="w-4 h-4" /> Feed
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab('circle')}
+            className={cn(
+              'relative flex-1 py-2 px-4 text-xs sm:text-sm font-medium tracking-wide transition-colors z-10',
+              activeTab === 'circle' ? 'text-amber-400' : 'text-amber-500/50 hover:text-amber-400/80'
+            )}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Lock className="w-4 h-4" /> Inner Circle
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative z-10">
         {activeTab === 'feed' ? (
           contentItems.length === 0 ? (
-            <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
-              No content yet.
+            <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-fade-in-up">
+              <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center mb-4">
+                <Play className="w-8 h-8 opacity-40" />
+              </div>
+              <p className="text-sm">No public content available yet.</p>
             </div>
           ) : (
             <div className="grid grid-cols-3 gap-0.5 p-0.5">
@@ -174,8 +186,11 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
         ) : circleId ? (
           <InnerCircleView username={profile.username} circleId={circleId} />
         ) : (
-          <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
-            This creator does not have an inner circle yet.
+          <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-fade-in-up">
+            <div className="w-16 h-16 rounded-2xl bg-amber-500/5 border border-amber-500/10 flex items-center justify-center mb-4">
+              <Lock className="w-8 h-8 text-amber-500/40" />
+            </div>
+            <p className="text-sm">This creator does not have an inner circle yet.</p>
           </div>
         )}
       </div>
