@@ -69,25 +69,32 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
           <ArrowLeft className={cn('transition-all duration-300', scrolled ? 'w-4 h-4' : 'w-5 h-5')} />
         </button>
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          {profile.avatar_url && (
-            <Image
-              src={profile.avatar_url}
-              alt={profile.username}
-              width={scrolled ? 28 : 36}
-              height={scrolled ? 28 : 36}
-              className={cn(
-                'rounded-full object-cover flex-shrink-0 transition-all duration-300 shadow-sm border border-white/10',
-                scrolled ? 'w-7 h-7' : 'w-9 h-9'
-              )}
-            />
-          )}
+          {profile.avatar_url ? (
+            <div className="relative">
+              <Image
+                src={profile.avatar_url}
+                alt={profile.username}
+                width={scrolled ? 28 : 40}
+                height={scrolled ? 28 : 40}
+                className={cn(
+                  'rounded-full object-cover flex-shrink-0 transition-all duration-300 border-2 border-primary/40 shadow-[0_0_15px_rgba(245,158,11,0.3)]',
+                  scrolled ? 'w-7 h-7' : 'w-10 h-10'
+                )}
+              />
+            </div>
+          ) : null}
           <div className="min-w-0">
             <h1 className={cn(
-              'font-bold truncate transition-all duration-300 text-off-white',
-              scrolled ? 'text-sm' : 'text-base'
-            )}>@{profile.username}</h1>
+              'font-black truncate transition-all duration-300 text-off-white flex items-center gap-1.5',
+              scrolled ? 'text-sm' : 'text-lg tracking-tight'
+            )}>
+              <span>@{profile.username}</span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-bold text-primary uppercase tracking-widest shadow-[0_0_10px_rgba(245,158,11,0.2)]">
+                Verified
+              </span>
+            </h1>
             <p className={cn(
-              'text-muted-foreground transition-all duration-300',
+              'text-muted-foreground transition-all duration-300 font-semibold',
               scrolled ? 'text-[10px] leading-tight' : 'text-xs'
             )}>
               {formattedCount} Subscriber{subscriberCount !== 1 ? 's' : ''}
@@ -98,8 +105,8 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
 
       {/* Bio */}
       {profile.bio && (
-        <div className="px-6 py-6 border-b border-white/5 flex flex-col items-center text-center">
-          <p className="text-sm text-muted-foreground text-pretty max-w-xl mx-auto leading-relaxed">
+        <div className="px-6 py-6 border-b border-white/5 flex flex-col items-center text-center animate-fade-in-up">
+          <p className="text-sm font-medium text-muted-foreground text-pretty max-w-xl mx-auto leading-relaxed">
             {profile.bio}
           </p>
         </div>

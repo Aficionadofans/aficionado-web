@@ -17,3 +17,11 @@ When working on the Aficionado Web project, all agents MUST follow these core gu
 4. **Finite Navigation**: Do not add infinite scrolling. The app strictly enforces finite feeds and content limits to promote digital well-being.
 5. **Supabase SSR**: Always use the provided helper clients (`src/utils/supabase/server.ts` and `client.ts`) for database queries. Never fetch directly from the client without the helper.
 6. **Vercel Environments**: The app depends on Vercel environment variables (`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`). Ensure you run builds locally using `bun run build` to verify typings before pushing.
+7. **Always Deploy**: Always deploy changes (by pushing to `main` or deploying via Vercel) after completing features or UI refactoring tasks.
+8. **Bleeding-Edge Best Practices**: Always use modern, state-of-the-art web standards, design practices (Liquid Glass, View Transitions, HSL color tokens), and latest framework APIs.
+9. **Planning Mode Initially**: Always start tasks by researching first, creating an `implementation_plan.md` artifact, and obtaining explicit user review and approval before executing changes.
+10. **Supabase Backend Source of Truth**: Always treat the Supabase database schema, RLS policies, and SSR helpers as the single source of truth for application state and data access.
+
+
+
+
