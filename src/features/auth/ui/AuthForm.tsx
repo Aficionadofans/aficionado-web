@@ -147,7 +147,7 @@ export function AuthForm() {
           {mode === 'login' && 'Sign in to access your wellness cockpit'}
           {mode === 'signup' && 'Create your account today'}
           {mode === 'magic_link' && 'Sign in securely without a password'}
-          {mode === 'forgot_password' && 'We\'ll send you reset instructions'}
+          {mode === 'forgot_password' && 'We&apos;ll send you reset instructions'}
         </p>
       </div>
 
@@ -187,22 +187,22 @@ export function AuthForm() {
                   onClick={() => setUserType('fan')}
                   className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
                     userType === 'fan'
-                      ? 'bg-primary/20 border-primary text-off-white'
+                      ? 'bg-primary/20 border-primary text-off-white font-semibold shadow-[0_0_15px_rgba(245,158,11,0.2)]'
                       : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
                   }`}
                 >
-                  I'm a Fan
+                  I&apos;m a Fan
                 </button>
                 <button
                   type="button"
                   onClick={() => setUserType('aficionado')}
                   className={`flex-1 py-3 px-4 rounded-xl border transition-all ${
                     userType === 'aficionado'
-                      ? 'bg-primary/20 border-primary text-off-white'
+                      ? 'bg-primary/20 border-primary text-off-white font-semibold shadow-[0_0_15px_rgba(245,158,11,0.2)]'
                       : 'bg-white/5 border-white/10 text-muted-foreground hover:bg-white/10'
                   }`}
                 >
-                  I'm an Aficionado
+                  I&apos;m an Aficionado
                 </button>
               </div>
             )}

@@ -82,7 +82,7 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
                 </div>
               </div>
               <p className="text-sm text-white/90 mb-3">
-                Anyone else's power flicker just now near Elm St? Wondering if I need to reset the router again.
+                Anyone else&apos;s power flicker just now near Elm St? Wondering if I need to reset the router again.
               </p>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <button className="hover:text-white transition-colors">Like (12)</button>
