@@ -49,13 +49,13 @@ export default async function ExplorePage() {
         <DiscoverySearch />
 
         <div className="space-y-12">
-          <section aria-label="Today's Featured Voices">
+          <section aria-label="Today&apos;s Featured Voices">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 <Star className="w-4 h-4 text-primary" />
               </div>
               <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-off-white tracking-wide">Today's Voices</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-off-white tracking-wide">Today&apos;s Voices</h2>
                 <p className="text-xs text-muted-foreground">Handpicked creators sharing deep-form drops</p>
               </div>
             </div>
@@ -107,9 +107,9 @@ export default async function ExplorePage() {
               <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto mb-4">
                 <Compass className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-off-white mb-2 tracking-wide">You're all caught up for today!</h3>
+              <h3 className="text-xl font-bold text-off-white mb-2 tracking-wide">You&apos;re all caught up for today!</h3>
               <p className="text-muted-foreground text-xs sm:text-sm max-w-md mx-auto mb-6 leading-relaxed text-pretty">
-                That's everything in today's digest. We limit daily content to help protect your attention and focus.
+                That&apos;s everything in today&apos;s digest. We limit daily content to help protect your attention and focus.
               </p>
               <Link 
                 href="/home" 

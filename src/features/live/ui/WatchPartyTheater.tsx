@@ -121,7 +121,7 @@ export function WatchPartyTheater({ username }: { username: string }) {
             <div>
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
-                <h1 className="text-white font-bold drop-shadow-md tracking-wide text-sm sm:text-base">LIVE: @{username}'s Watch Party</h1>
+                <h1 className="text-white font-bold drop-shadow-md tracking-wide text-sm sm:text-base">LIVE: @{username}&apos;s Watch Party</h1>
               </div>
               <p className="text-xs text-amber-500 font-semibold tracking-widest uppercase mt-0.5">VIP Event</p>
             </div>

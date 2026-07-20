@@ -176,7 +176,7 @@ export function InnerCircleView({ username, circleId }: { username: string, circ
             <Star className="w-5 h-5 fill-amber-400 text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.8)]" /> VIP Lounge
           </h3>
           <p className="text-xs sm:text-sm text-white/85 relative z-10 leading-relaxed text-pretty max-w-[90%]">
-            You're in! Thanks for supporting @{username}. This space is for exclusive drops and real-time chat with the community.
+            You&apos;re in! Thanks for supporting @{username}. This space is for exclusive drops and real-time chat with the community.
           </p>
         </div>
 
