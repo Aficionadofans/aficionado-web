@@ -65,11 +65,30 @@ export function AuthForm() {
   }
 
   const handleOAuth = async (provider: 'google' | 'github') => {
+    if (mode === 'signup') {
+      const termsChecked = (document.getElementById('terms') as HTMLInputElement | null)?.checked
+      if (!termsChecked) {
+        setCheckboxError('You must accept the Terms of Service and Privacy Policy to sign up with ' + provider + '.')
+        return
+      }
+
+      if (userType === 'aficionado') {
+        const creatorChecked = (document.getElementById('creator-agreement') as HTMLInputElement | null)?.checked
+        if (!creatorChecked) {
+          setCheckboxError('You must accept the Creator Monetization Agreement.')
+          return
+        }
+      }
+    }
+
+    setCheckboxError(null)
     const supabase = createClient()
+    const redirectParams = mode === 'signup' ? `?userType=${userType}` : ''
+    
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`
+        redirectTo: `${window.location.origin}/auth/callback${redirectParams}`
       }
     })
   }
@@ -261,11 +280,13 @@ export function AuthForm() {
             </div>
           )}
 
-          {displayError && (
-            <div className="text-destructive text-sm text-center p-3 bg-destructive/10 border border-destructive/20 rounded-lg animate-fade-in-up">
-              {displayError}
-            </div>
-          )}
+          <div className="min-h-[48px] flex items-center justify-center w-full">
+            {displayError && (
+              <div className="w-full text-destructive text-sm text-center p-3 bg-destructive/10 border border-destructive/20 rounded-lg animate-fade-in-up">
+                {displayError}
+              </div>
+            )}
+          </div>
 
           <div className="flex items-center justify-between mt-4">
             {mode === 'login' && (

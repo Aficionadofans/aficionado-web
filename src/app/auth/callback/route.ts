@@ -6,6 +6,7 @@ export async function GET(request: Request) {
   const code = requestUrl.searchParams.get('code')
   const error = requestUrl.searchParams.get('error')
   const errorDescription = requestUrl.searchParams.get('error_description')
+  const userType = requestUrl.searchParams.get('userType')
 
   // Handle OAuth/magic link errors from Supabase
   if (error) {
@@ -24,6 +25,24 @@ export async function GET(request: Request) {
       const loginUrl = new URL('/login', request.url)
       loginUrl.searchParams.set('message', 'Session could not be established. Please sign in again.')
       return NextResponse.redirect(loginUrl)
+    }
+
+    // If userType is provided (from an OAuth signup flow), ensure the profile is updated
+    if (userType === 'fan' || userType === 'aficionado') {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        // We do an update. Note that the handle_new_user trigger may have already 
+        // inserted a row with a null user_type.
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ user_type: userType })
+          .eq('id', user.id)
+          .is('user_type', null) // Only set it if it hasn't been set yet (prevents overwriting established users on subsequent logins)
+
+        if (updateError) {
+          console.error('Failed to set OAuth userType:', updateError.message)
+        }
+      }
     }
   }
 
