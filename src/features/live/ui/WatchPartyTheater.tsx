@@ -120,15 +120,22 @@ export function WatchPartyTheater({ username }: { username: string }) {
             </Link>
             <div>
               <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
-                <h1 className="text-white font-bold drop-shadow-md tracking-wide text-sm sm:text-base">LIVE: @{username}&apos;s Watch Party</h1>
+                <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_12px_rgba(239,68,68,0.9)]"></div>
+                <h1 className="text-off-white font-black drop-shadow-md tracking-tight text-sm sm:text-base flex items-center gap-2">
+                  <span>LIVE: @{username}&apos;s Watch Party</span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-[10px] font-bold text-red-400 uppercase tracking-widest">
+                    LIVE
+                  </span>
+                </h1>
               </div>
-              <p className="text-xs text-amber-500 font-semibold tracking-widest uppercase mt-0.5">VIP Event</p>
+              <p className="text-xs text-amber-400 font-bold tracking-widest uppercase mt-0.5 flex items-center gap-1">
+                <Star className="w-3 h-3 fill-amber-400 text-amber-400" /> VIP Event
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full liquid-glass border border-white/10 shadow-md">
-            <Users className="w-4 h-4 text-amber-500" />
-            <span className="text-sm font-bold text-white">1,204</span>
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+            <Users className="w-4 h-4 text-amber-400" />
+            <span className="text-xs sm:text-sm font-black text-off-white tracking-wide">1,204 Viewers</span>
           </div>
         </div>
 

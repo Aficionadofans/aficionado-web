@@ -42,8 +42,21 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
     setSubscribedMap(prev => ({ ...prev, [creator]: !prev[creator] }))
   }
 
-  const handleShare = (id: string) => {
-    navigator.clipboard?.writeText?.(`${window.location.origin}/content/${id}`)
+  const handleShare = async (id: string, creator: string) => {
+    const shareUrl = `${window.location.origin}/content/${id}`
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `@${creator} on Aficionado`,
+          text: `Check out @${creator}'s exclusive drop on Aficionado!`,
+          url: shareUrl,
+        })
+        return
+      } catch {
+        // Fallback to clipboard if share dialog was cancelled or unsupported
+      }
+    }
+    navigator.clipboard?.writeText?.(shareUrl)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
@@ -178,7 +191,7 @@ export function FanFeed({ videos, drops }: { videos: Video[], drops: Drop[] }) {
             </Link>
 
             <button 
-              onClick={() => handleShare(video.id)}
+              onClick={() => handleShare(video.id, video.creator)}
               aria-label="Share video link"
               className="flex flex-col items-center gap-1 group focus-visible:outline-none"
             >
