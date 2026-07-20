@@ -18,12 +18,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Trend agency high-impact button
+        trend: [
+          'bg-white text-[#0A0A0C] font-semibold',
+          'hover:bg-white/90 hover:shadow-[0_0_24px_rgba(255,255,255,0.35)]',
+          'active:scale-[0.97] transition-all duration-200',
+        ],
         // Teal — primary actions
         primary: [
-          'bg-primary text-primary-foreground',
+          'bg-primary text-primary-foreground font-semibold',
           'hover:bg-[var(--color-primary-hover)]',
-          'hover:shadow-[0_0_20px_var(--color-primary-glow)]',
-          'active:scale-[0.98]',
+          'hover:shadow-[0_0_24px_var(--color-primary-glow)]',
+          'active:scale-[0.97]',
         ],
         // Amber — monetization only (tips, subscriptions, payments)
         monetization: [

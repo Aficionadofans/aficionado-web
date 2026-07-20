@@ -157,17 +157,17 @@ export function AuthForm() {
           </p>
         </div>
 
-        {/* Mode tabs — pill toggle */}
-        <div className="relative flex items-center rounded-xl p-1 bg-[rgba(255,255,255,0.05)] border border-border">
+        {/* Mode tabs — Trend agency pill toggle */}
+        <div className="relative flex items-center rounded-2xl p-1 bg-[#121216] border border-white/10 shadow-lg">
           {(['login', 'signup'] as const).map((m) => (
             <button
               key={m}
               type="button"
               onClick={() => switchMode(m)}
               className={[
-                'flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                'flex-1 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
                 mode === m
-                  ? 'bg-primary text-primary-foreground shadow-sm font-semibold'
+                  ? 'bg-primary text-primary-foreground shadow-[0_2px_12px_rgba(0,212,200,0.3)] font-bold'
                   : 'text-muted-foreground hover:text-foreground',
               ].join(' ')}
             >

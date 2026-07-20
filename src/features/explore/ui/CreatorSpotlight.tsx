@@ -48,12 +48,12 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
   return (
     <section aria-label="Creator Spotlight Videos">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-full liquid-glass border-primary/20 flex items-center justify-center shadow-[0_0_15px_rgba(0,212,200,0.2)]">
+        <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
           <Video className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-off-white tracking-wide">Creator Spotlight</h2>
-          <p className="text-xs text-muted-foreground">Tap any video to play directly</p>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Featured UGC Showcase</span>
+          <h2 className="text-2xl font-extrabold text-white tracking-tight">Creator Spotlight</h2>
         </div>
       </div>
       

@@ -184,49 +184,56 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                 onShare={handleShare}
               />
 
-              {/* Bottom-left creator info */}
-              <div className="absolute left-4 bottom-20 max-w-[68%] z-10 pointer-events-auto">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <Avatar
-                    name={video.creator}
-                    size="sm"
-                    className="ring-1 ring-white/20 flex-shrink-0"
-                  />
-                  <Link href={`/${video.creator}`}>
-                    <span className="text-base font-semibold text-white drop-shadow-md hover:text-primary transition-colors">
-                      @{video.creator}
-                    </span>
-                  </Link>
+              {/* Bottom-left creator info — Trend agency card layout */}
+              <div className="absolute left-4 bottom-22 max-w-[72%] z-10 pointer-events-auto">
+                <div
+                  className="p-3.5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl"
+                  style={{
+                    background: 'rgba(18, 18, 22, 0.85)',
+                  }}
+                >
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <Avatar
+                      name={video.creator}
+                      size="sm"
+                      className="ring-2 ring-primary/40 flex-shrink-0"
+                    />
+                    <Link href={`/${video.creator}`}>
+                      <span className="text-sm font-bold text-white tracking-tight hover:text-primary transition-colors">
+                        @{video.creator}
+                      </span>
+                    </Link>
 
-                  {/* Subscribe / VIP — amber: monetization */}
-                  {!isSubscribed ? (
-                    <Button
-                      variant="monetization"
-                      size="xs"
-                      rounded="full"
-                      onClick={() => toggleSubscribe(video.creator)}
-                      className="uppercase tracking-wide text-[10px] shadow-[0_0_12px_rgba(245,158,11,0.25)]"
-                    >
-                      Subscribe
-                    </Button>
-                  ) : (
-                    <div
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest"
-                      style={{
-                        background: 'rgba(245,158,11,0.12)',
-                        border: '1px solid rgba(245,158,11,0.35)',
-                        color: '#F59E0B',
-                      }}
-                    >
-                      <Star className="w-3 h-3 fill-[#F59E0B] text-[#F59E0B]" />
-                      VIP
-                    </div>
-                  )}
+                    {/* Subscribe / VIP */}
+                    {!isSubscribed ? (
+                      <Button
+                        variant="monetization"
+                        size="xs"
+                        rounded="full"
+                        onClick={() => toggleSubscribe(video.creator)}
+                        className="uppercase tracking-widest text-[9px] font-bold shadow-[0_0_12px_rgba(245,158,11,0.25)]"
+                      >
+                        Subscribe
+                      </Button>
+                    ) : (
+                      <div
+                        className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest"
+                        style={{
+                          background: 'rgba(245,158,11,0.15)',
+                          border: '1px solid rgba(245,158,11,0.4)',
+                          color: '#F59E0B',
+                        }}
+                      >
+                        <Star className="w-2.5 h-2.5 fill-[#F59E0B] text-[#F59E0B]" />
+                        VIP
+                      </div>
+                    )}
+                  </div>
+
+                  <p className="text-xs text-white/90 line-clamp-2 leading-relaxed tracking-tight">
+                    {video.description}
+                  </p>
                 </div>
-
-                <p className="text-sm text-white/85 drop-shadow-sm line-clamp-2 leading-snug text-pretty">
-                  {video.description}
-                </p>
               </div>
             </div>
           )
