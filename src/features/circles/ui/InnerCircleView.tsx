@@ -15,6 +15,25 @@ export function InnerCircleView({ username, circleId }: { username: string, circ
   const supabase = createClient()
 
   useEffect(() => {
+    const checkSubscription = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      const { data } = await supabase
+        .from('circle_members')
+        .select('*')
+        .eq('circle_id', circleId)
+        .eq('user_id', user.id)
+        .maybeSingle()
+
+      if (data) {
+        setIsSubscribed(true)
+      }
+    }
+    checkSubscription()
+  }, [circleId, supabase])
+
+  useEffect(() => {
     if (!isSubscribed) return
 
     // 1. Fetch initial messages

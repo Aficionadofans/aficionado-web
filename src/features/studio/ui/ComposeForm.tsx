@@ -72,6 +72,7 @@ export function ComposeForm() {
               </button>
             ))}
           </div>
+          <input type="hidden" name="ai_tone" value={tone} />
         </div>
 
         <div className="flex items-center justify-between">

@@ -15,6 +15,11 @@ export async function createPost(formData: FormData) {
     throw new Error('Post content cannot be empty')
   }
 
+  const aiTone = formData.get('ai_tone') as string | null
+  if (aiTone) {
+    await supabase.from('profiles').update({ ai_tone: aiTone }).eq('id', user.id)
+  }
+
   const { error } = await supabase
     .from('posts')
     .insert({
