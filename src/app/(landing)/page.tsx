@@ -1,19 +1,8 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
+import { LandingPage } from '@/features/landing/ui/LandingPage'
 
-// Placeholder until src/features/landing/ui/LandingPage is built in a later task.
-function LandingPagePlaceholder() {
-  return (
-    <div className="min-h-[100dvh] flex flex-col items-center justify-center gap-6 bg-background">
-      <h1 className="font-heading text-5xl md:text-7xl font-black tracking-tight text-foreground" style={{ letterSpacing: '-0.04em' }}>
-        Aficionado
-      </h1>
-      <p className="text-muted-foreground text-xl">The anti-dopamine social network.</p>
-    </div>
-  )
-}
-
-export default async function LandingPage({
+export default async function LandingPageRoute({
   searchParams,
 }: {
   searchParams: Promise<{ code?: string; next?: string }>
@@ -34,7 +23,5 @@ export default async function LandingPage({
     redirect('/home')
   }
 
-  // TODO: Replace placeholder with <LandingPage /> once
-  // src/features/landing/ui/LandingPage.tsx is created.
-  return <LandingPagePlaceholder />
+  return <LandingPage />
 }
