@@ -19,40 +19,49 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
     <>
       {/* Horizontal carousel */}
       <div className="w-full pt-3 pb-2 px-4 overflow-x-auto hide-scrollbar flex gap-3 items-center">
-        {drops.map((drop) => (
-          <button
-            key={drop.id}
-            onClick={() => setActiveDrop(drop)}
-            aria-label={`View drop from ${drop.creator}`}
-            className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
-          >
-            {/* Ring: teal gradient for unread, neutral for read */}
-            <div
-              className="w-[62px] h-[62px] rounded-full p-[2px] transition-all duration-300 group-hover:scale-105 group-active:scale-95"
-              style={{
-                background: drop.hasUnread
-                  ? 'linear-gradient(135deg, #00D4C8, #00F0B5, #00D4C8)'
-                  : 'rgba(255,255,255,0.12)',
-                boxShadow: drop.hasUnread
-                  ? '0 0 12px rgba(0,212,200,0.4)'
-                  : 'none',
-              }}
-            >
-              <div className="w-full h-full rounded-full border-2 border-background overflow-hidden bg-muted">
-                <Avatar
-                  src={drop.avatar}
-                  alt={drop.creator}
-                  name={drop.creator}
-                  size="lg"
-                  className="w-full h-full rounded-full"
-                />
+        {drops.length === 0 ? (
+          /* Empty state: 4 skeleton avatar circles */
+          <>
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center gap-1.5 flex-shrink-0"
+              >
+                <div className="w-16 h-16 rounded-full bg-muted shimmer" />
+                <div className="w-10 h-2 rounded-full bg-muted shimmer" />
               </div>
-            </div>
-            <span className="text-[10px] text-foreground/80 truncate w-14 text-center font-medium group-hover:text-primary transition-colors">
-              {drop.creator}
-            </span>
-          </button>
-        ))}
+            ))}
+          </>
+        ) : (
+          drops.map((drop) => (
+            <button
+              key={drop.id}
+              onClick={() => setActiveDrop(drop)}
+              aria-label={`View drop from ${drop.creator}`}
+              className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
+            >
+              {/* Avatar with teal ring + unread dot */}
+              <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+                <div className="w-full h-full rounded-full overflow-hidden ring-2 ring-primary/40 shadow-[0_0_12px_rgba(0,212,200,0.35)]">
+                  <Avatar
+                    src={drop.avatar}
+                    alt={drop.creator}
+                    name={drop.creator}
+                    size="lg"
+                    className="w-full h-full rounded-full"
+                  />
+                </div>
+                {/* Unread indicator: 8px teal dot at bottom-right */}
+                {drop.hasUnread && (
+                  <span className="absolute bottom-0 right-0 w-2 h-2 bg-primary rounded-full ring-2 ring-background" />
+                )}
+              </div>
+              <span className="text-[10px] text-foreground/80 truncate w-14 text-center font-medium group-hover:text-primary transition-colors">
+                {drop.creator}
+              </span>
+            </button>
+          ))
+        )}
       </div>
 
       {/* Fullscreen drop viewer */}

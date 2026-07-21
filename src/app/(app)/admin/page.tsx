@@ -1,8 +1,7 @@
 import { createClient } from '@/shared/lib/supabase/server'
-import { Users, FileVideo, ShieldAlert, TrendingUp, Mail, DollarSign } from 'lucide-react'
+import { Users, FileVideo, ShieldCheck, Mail } from 'lucide-react'
 import Link from 'next/link'
-import { SectionHeader } from '@/shared/ui/core'
-import { EmptyState } from '@/shared/ui/core'
+import { SectionHeader, EmptyState, StatCounter } from '@/shared/ui/core'
 
 export const metadata = { title: 'Admin Dashboard' }
 
@@ -38,52 +37,82 @@ export default async function AdminDashboardPage() {
     .order('created_at', { ascending: false })
     .limit(5)
 
-  const stats = [
-    { label: 'Total Users',          value: totalUsers ?? 0,          icon: Users,       color: 'text-blue-400',        bg: 'bg-blue-500/10',        border: 'border-blue-500/20' },
-    { label: 'Creators',             value: totalCreators ?? 0,       icon: TrendingUp,  color: 'text-[#F59E0B]',       bg: 'bg-[#F59E0B]/10',       border: 'border-[#F59E0B]/20' },
-    { label: 'Fans',                 value: totalFans ?? 0,           icon: Users,       color: 'text-primary',         bg: 'bg-primary/10',         border: 'border-primary/20' },
-    { label: 'Active Subscriptions', value: activeSubscriptions ?? 0, icon: DollarSign,  color: 'text-[#F59E0B]',       bg: 'bg-[#F59E0B]/10',       border: 'border-[#F59E0B]/20' },
-    { label: 'Total Content',        value: totalContent ?? 0,        icon: FileVideo,   color: 'text-purple-400',      bg: 'bg-purple-500/10',      border: 'border-purple-500/20' },
-    { label: 'Flagged Content',      value: flaggedContent ?? 0,      icon: ShieldAlert, color: 'text-destructive',     bg: 'bg-destructive/10',     border: 'border-destructive/20' },
-  ]
+  // suppress unused-variable warnings — these vars are kept for future use
+  void activeSubscriptions
+  void totalCreators
+  void totalFans
 
   return (
     <div className="space-y-8">
       <SectionHeader
-        title="Dashboard"
-        subtitle="Platform overview and key metrics"
-        size="lg"
+        variant="editorial"
+        number="00"
+        label="ADMIN DASHBOARD"
+        title="Platform Overview"
       />
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {stats.map(stat => {
-          const Icon = stat.icon
-          return (
-            <div
-              key={stat.label}
-              className={`p-4 rounded-xl border ${stat.bg} ${stat.border}`}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</span>
-                <Icon className={`w-4 h-4 ${stat.color}`} />
-              </div>
-              <div className={`text-2xl font-bold ${stat.color}`}>
-                {stat.value.toLocaleString()}
-              </div>
-            </div>
-          )
-        })}
+      {/* Stats Row */}
+      <div className="clipcut-card flex flex-row items-center justify-around gap-6 p-6">
+        <StatCounter target={totalUsers ?? 0} label="Total Users" />
+        <StatCounter target={totalContent ?? 0} label="Total Content" />
+        <StatCounter target={flaggedContent ?? 0} label="Pending Queue" />
       </div>
 
+      <div className="section-divider" />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {/* Recent Signups */}
+        {/* Moderation Queue */}
         <div
           className="rounded-xl p-5"
           style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
         >
           <SectionHeader
-            title="Recent Signups"
+            variant="editorial"
+            number="01"
+            label="MODERATION QUEUE"
+            title="Moderation Queue"
+            size="sm"
+            className="mb-4"
+          />
+          {recentFlagged && recentFlagged.length > 0 ? (
+            <div className="space-y-1">
+              {recentFlagged.map(c => (
+                <div key={c.id} className="flex items-center justify-between py-2.5 border-b border-border last:border-0 gap-2">
+                  <Link href={`/content/${c.id}`} className="text-sm text-foreground hover:text-primary truncate max-w-[50%] transition-colors">
+                    {c.title}
+                  </Link>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={() => {}}
+                      className="text-[11px] px-2.5 py-1 rounded-md font-semibold bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => {}}
+                      className="text-[11px] px-2.5 py-1 rounded-md font-semibold bg-destructive/10 text-destructive border border-destructive/30 hover:bg-destructive/20 transition-colors"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <EmptyState icon={ShieldCheck} title="Queue Clear" description="No content awaiting review." />
+          )}
+        </div>
+
+        {/* User Management */}
+        <div
+          className="rounded-xl p-5"
+          style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+        >
+          <SectionHeader
+            variant="editorial"
+            number="02"
+            label="USER MANAGEMENT"
+            title="User Management"
             size="sm"
             className="mb-4"
             action={
@@ -116,39 +145,6 @@ export default async function AdminDashboardPage() {
             <EmptyState icon={Users} title="No signups yet" />
           )}
         </div>
-
-        {/* Flagged Content */}
-        <div
-          className="rounded-xl p-5"
-          style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
-        >
-          <SectionHeader
-            title="Flagged Content"
-            size="sm"
-            className="mb-4"
-            action={
-              <Link href="/admin/moderation" className="text-xs text-primary hover:underline">
-                View all
-              </Link>
-            }
-          />
-          {recentFlagged && recentFlagged.length > 0 ? (
-            <div className="space-y-1">
-              {recentFlagged.map(c => (
-                <div key={c.id} className="flex items-center justify-between py-2.5 border-b border-border last:border-0">
-                  <Link href={`/content/${c.id}`} className="text-sm text-foreground hover:text-primary truncate max-w-[68%] transition-colors">
-                    {c.title}
-                  </Link>
-                  <span className="text-[10px] text-destructive bg-destructive/10 px-1.5 py-0.5 rounded-full font-medium">
-                    {c.moderation_status}
-                  </span>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <EmptyState icon={ShieldAlert} title="No flagged content" description="The platform is clean." />
-          )}
-        </div>
       </div>
 
       {/* Quick Links */}
@@ -156,7 +152,7 @@ export default async function AdminDashboardPage() {
         {[
           { href: '/admin/email',      label: 'Send Email',    icon: Mail,       desc: 'Broadcast to users' },
           { href: '/admin/users',      label: 'Manage Users',  icon: Users,      desc: 'View & moderate accounts' },
-          { href: '/admin/moderation', label: 'Moderation',    icon: ShieldAlert, desc: 'Review flagged content' },
+          { href: '/admin/moderation', label: 'Moderation',    icon: ShieldCheck, desc: 'Review flagged content' },
         ].map(item => {
           const Icon = item.icon
           return (

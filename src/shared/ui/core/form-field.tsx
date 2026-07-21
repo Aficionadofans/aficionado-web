@@ -86,9 +86,8 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             onChange={onChange}
             onBlur={onBlur}
             className={cn(
-              // Base
-              'w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-foreground',
-              'bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]',
+              // Base — liquid-glass surface
+              'liquid-glass w-full rounded-[var(--radius-md)] px-3.5 py-3 text-sm text-foreground',
               'placeholder:text-muted-foreground',
               'outline-none transition-all duration-200',
               // Focus

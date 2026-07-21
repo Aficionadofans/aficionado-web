@@ -1,7 +1,5 @@
-import { UserCircle2, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/shared/ui/core/card";
+import { UserCircle2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/core/avatar";
-import Link from "next/link";
 
 interface CuratorCardProps {
   creator: {
@@ -13,42 +11,40 @@ interface CuratorCardProps {
   index: number;
 }
 
-export function CuratorCard({ creator, index }: CuratorCardProps) {
-  const titleName = creator.ai_tone || 'Featured Aficionado';
-  const bioText = creator.bio || 'Curating intentional content daily.';
+export function CuratorCard({ creator }: CuratorCardProps) {
+  const displayName = creator.ai_tone || "Featured Aficionado";
+  const bioText = creator.bio || "Curating intentional content daily.";
 
   return (
-    <Link href={`/creator`}>
-      <Card 
-        className="trend-card-hover border-white/10 cursor-pointer overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 hover:shadow-[0_0_24px_rgba(0,212,200,0.35)]"
+    <div className="clipcut-card-hover flex flex-col items-center text-center gap-4 p-6 cursor-pointer">
+      {/* Creator avatar */}
+      <Avatar className="w-16 h-16 border border-white/20 shadow-[0_0_16px_rgba(0,212,200,0.25)]">
+        <AvatarImage src={creator.avatar_url || ""} alt={displayName} />
+        <AvatarFallback className="bg-white/10">
+          <UserCircle2 className="w-8 h-8 text-muted-foreground" />
+        </AvatarFallback>
+      </Avatar>
+
+      {/* Display name — Syne font-bold */}
+      <h3
+        className="text-base font-bold text-white leading-tight tracking-tight"
+        style={{ fontFamily: "var(--font-heading)" }}
       >
-        <CardContent className="p-5 flex items-center gap-4 relative">
-          <div className="relative">
-            <Avatar className="w-12 h-12 border border-white/20 shadow-[0_0_16px_rgba(0,212,200,0.25)] transition-transform duration-300 group-hover:scale-105">
-              <AvatarImage src={creator.avatar_url || ''} alt={titleName} />
-              <AvatarFallback className="bg-white/10">
-                <UserCircle2 className="w-6 h-6 text-muted-foreground" />
-              </AvatarFallback>
-            </Avatar>
-            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-bio-emerald border-2 border-[#0A0A0C] shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[9px] font-bold uppercase tracking-widest text-primary px-2 py-0.5 rounded-full bg-primary/10 border border-primary/25">
-                Verified Creator
-              </span>
-            </div>
-            <h3 className="text-base font-extrabold text-white truncate group-hover:text-primary transition-colors tracking-tight">
-              {titleName}
-            </h3>
-            <p className="text-xs text-muted-foreground/90 truncate leading-relaxed">
-              {bioText}
-            </p>
-          </div>
-          <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 text-primary transition-all duration-300 flex-shrink-0" />
-        </CardContent>
-      </Card>
-    </Link>
+        {displayName}
+      </h3>
+
+      {/* Bio — 2-line clamp */}
+      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+        {bioText}
+      </p>
+
+      {/* Follow CTA — teal clipcut-pill */}
+      <button
+        type="button"
+        className="clipcut-pill text-xs font-bold uppercase tracking-[0.05em] px-4 py-1.5 rounded-full"
+      >
+        Follow
+      </button>
+    </div>
   );
 }
-

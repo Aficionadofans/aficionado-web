@@ -38,7 +38,7 @@ export default async function ExplorePage() {
 
       <div className="relative z-10 max-w-3xl px-4 py-8 mx-auto lg:py-12">
         <header className="mb-8 animate-fade-in-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-3">
+          <div className="clipcut-pill inline-flex items-center gap-2 px-3 py-1 mb-3">
             <Star className="w-3.5 h-3.5 fill-primary" />
             <span>Curated Daily</span>
           </div>
@@ -55,7 +55,7 @@ export default async function ExplorePage() {
             <SectionHeader
               variant="editorial"
               number="01"
-              label="Featured Voices"
+              label="FEATURED VOICES"
               title="Today's Voices"
               icon={<Star className="w-5 h-5" />}
             />
@@ -81,7 +81,7 @@ export default async function ExplorePage() {
             <SectionHeader
               variant="editorial"
               number="02"
-              label="Community Hubs"
+              label="COMMUNITY HUBS"
               title="Featured Circles"
               icon={<Hash className="w-5 h-5" />}
             />

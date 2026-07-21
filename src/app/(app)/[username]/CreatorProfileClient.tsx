@@ -7,34 +7,7 @@ import { ArrowLeft, Grip, Lock, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useCountUp } from '@/shared/hooks/useCountUp'
-import { useRevealOnScroll } from '@/shared/hooks/useRevealOnScroll'
-
-// Internal stat counter component — not exported
-function StatCounter({ label, target }: { label: string; target: number }) {
-  const { ref, isVisible } = useRevealOnScroll()
-  const { value, start } = useCountUp(target)
-
-  useEffect(() => {
-    if (isVisible) {
-      start()
-    }
-  }, [isVisible, start])
-
-  const display = target >= 1000
-    ? `${(value / 1000).toFixed(1)}K`
-    : value.toString()
-
-  return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className="flex flex-col items-center gap-0.5"
-    >
-      <span className="text-2xl font-extrabold text-off-white tabular-nums">{display}</span>
-      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">{label}</span>
-    </div>
-  )
-}
+import { StatCounter } from '@/shared/ui/core'
 
 interface Profile {
   id: string
@@ -149,29 +122,39 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               alt={profile.username}
               width={96}
               height={96}
-              className="w-24 h-24 rounded-full object-cover ring-2 ring-primary/60 shadow-[0_0_24px_rgba(0,212,200,0.35)]"
+              className="w-24 h-24 rounded-full object-cover ring-2 ring-primary/60 glow-teal"
             />
           </div>
         ) : (
-          <div className="w-24 h-24 rounded-full bg-white/10 ring-2 ring-primary/60 shadow-[0_0_24px_rgba(0,212,200,0.35)]" />
+          <div className="w-24 h-24 rounded-full bg-white/10 ring-2 ring-primary/60 glow-teal" />
         )}
 
-        {/* Username */}
-        <h2 className="font-extrabold text-3xl text-off-white tracking-tight">
+        {/* Display name */}
+        <h1
+          className="font-black text-3xl md:text-4xl text-off-white"
+          style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.03em' }}
+        >
           @{profile.username}
-        </h2>
+        </h1>
 
         {/* Verified badge */}
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-bold text-primary uppercase tracking-widest shadow-[0_0_10px_rgba(0,212,200,0.2)]">
-          ✓ Verified
-        </span>
+        <span className="clipcut-pill">✓ Verified</span>
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-3 mt-1">
-          <button className="bg-primary text-primary-foreground rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+          <button className="clipcut-pill inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
             Subscribe
           </button>
-          <button className="bg-[#F59E0B] text-[#080808] rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_16px_rgba(245,158,11,0.3)] hover:shadow-[0_0_24px_rgba(245,158,11,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60">
+          <button
+            className="rounded-full px-6 py-2.5 text-sm font-bold transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60"
+            style={{
+              background: 'var(--color-monetization, #F59E0B)',
+              color: '#080808',
+              boxShadow: '0 0 16px rgba(245,158,11,0.3)',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 24px rgba(245,158,11,0.5)')}
+            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 16px rgba(245,158,11,0.3)')}
+          >
             Tip ✦
           </button>
         </div>

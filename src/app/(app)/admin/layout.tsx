@@ -49,7 +49,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </div>
           </div>
           <div className="px-1 mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
-            01 / Admin Panel
+            00 / ADMIN DASHBOARD
           </div>
           <AdminSidebar />
         </div>
