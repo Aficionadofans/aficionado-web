@@ -26,21 +26,22 @@ export function LandingNav() {
             : 'liquid-glass border-white/10'
         }`}
       >
-        {/* Brand Logo (Exact ClipCut Match) */}
+        {/* Brand Logo (Aficionado Brand + Framer Pill Aesthetic) */}
         <Link
           href="/"
           className="flex items-center gap-2 focus-visible:outline-none rounded-full"
         >
-          <div className="w-8 h-8 rounded-xl bg-[#E8501A] flex items-center justify-center text-white shadow-[0_0_16px_rgba(232,80,26,0.5)]">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF5500] to-[#E8501A] flex items-center justify-center text-white shadow-[0_0_16px_rgba(232,80,26,0.5)]">
             <Sparkles className="w-4 h-4 fill-current" />
           </div>
           <span
-            className="text-xl font-bold tracking-tight text-white"
+            className="text-xl font-extrabold tracking-tight text-white font-heading"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            ClipCut
+            Aficionado<span className="text-[#E8501A]">.</span>
           </span>
         </Link>
+
 
         {/* Desktop Links */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Landing Navigation">
