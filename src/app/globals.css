@@ -212,6 +212,59 @@
 }
 
 /* ─────────────────────────────────────────
+   Framer ClipCut Exact Typography Utilities
+ ───────────────────────────────────────── */
+
+.framer-h1 {
+  font-family: var(--font-bricolage), var(--font-heading);
+  font-size: clamp(2.5rem, 5.5vw, 5.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.framer-h2 {
+  font-family: var(--font-bricolage), var(--font-heading);
+  font-size: clamp(1.85rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.framer-h3 {
+  font-family: var(--font-bricolage), var(--font-heading);
+  font-size: clamp(1.35rem, 2.2vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.framer-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+  font-weight: 400;
+  color: #a1958d;
+}
+
+.framer-badge {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.framer-btn {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ─────────────────────────────────────────
    ClipCut Framer Template Utilities
 ───────────────────────────────────────── */
 

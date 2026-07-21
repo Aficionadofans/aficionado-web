@@ -10,42 +10,39 @@ export function LandingHero() {
       {/* Hero Central Header Content */}
       <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-6 mt-8">
         {/* Eyebrow Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 text-white/90 text-xs font-medium backdrop-blur-md shadow-lg animate-fade-in-up">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 text-white/90 framer-badge backdrop-blur-md shadow-lg animate-fade-in-up">
           <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-current" />
           <span>Trusted by 100+ creators & brands</span>
         </div>
 
-        {/* H1 Display Title (Exact Bricolage Grotesque Pure White Text) */}
-        <h1
-          className="text-[2.75rem] sm:text-[4.5rem] md:text-[5.75rem] lg:text-[6.75rem] font-black tracking-[-0.04em] text-white leading-[0.98] max-w-6xl uppercase"
-          style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
-        >
+        {/* H1 Display Title (Exact Framer Typography Class) */}
+        <h1 className="framer-h1 max-w-5xl">
           Short-form video editing that <br />
           actually gets results
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl md:text-2xl text-[#a1958d] max-w-3xl leading-relaxed font-sans font-normal">
+        <p className="framer-subtitle max-w-2xl">
           We turn your raw clips into high-performing Reels, TikToks, and Shorts — designed to grab attention, boost engagement, and grow your audience faster.
         </p>
 
-
-        {/* Action Buttons (Solid Orange CTA + Dark Secondary) */}
+        {/* Action Buttons (Exact Framer Button Class) */}
         <div className="flex flex-row items-center gap-4 mt-2">
           <Link
             href="/login"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E8501A] px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#FF5500] hover:shadow-[0_0_28px_rgba(232,80,26,0.5)]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E8501A] px-7 py-3 framer-btn text-white transition-all duration-200 hover:bg-[#FF5500] hover:shadow-[0_0_28px_rgba(232,80,26,0.5)]"
           >
             <span>Start a Project</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
           <a
             href="#showcase"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-[#1A1310] px-7 py-3 text-sm font-medium text-white/90 transition-all duration-200 hover:bg-white/10 hover:border-white/30"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-[#1A1310] px-7 py-3 framer-btn text-white/90 transition-all duration-200 hover:bg-white/10 hover:border-white/30"
           >
             <span>See Our Works</span>
           </a>
         </div>
+
       </div>
 
       {/* 6-Card Fan-out Vertical Video Portrait Showcase Container (Exact Framer Match) */}
