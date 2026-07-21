@@ -16,16 +16,28 @@ import { LandingFooter } from './LandingFooter'
 
 export function LandingPage() {
   return (
-    <div className="w-full h-screen bg-[#090401] overflow-hidden">
-      <iframe
-        src="/framer-template.html"
-        title="Video Editing Agency Landing Page"
-        className="w-full h-full border-0 block"
-        style={{ width: '100vw', height: '100vh' }}
-      />
+    <div className="min-h-screen bg-[#090401] text-foreground flex flex-col font-sans selection:bg-[#E8501A] selection:text-white overflow-x-hidden">
+      <LandingNav />
+      <main className="flex-1 w-full">
+        <LandingHero />
+        <LandingMarquee />
+        <LandingProblem />
+        <LandingFix />
+        <LandingServices />
+        <LandingProcess />
+        <LandingShowcase />
+        <LandingResultsGrid />
+        <LandingTestimonial />
+        <LandingPricing />
+        <LandingToolsMarquee />
+        <LandingFAQ />
+        <LandingCTA />
+      </main>
+      <LandingFooter />
     </div>
   )
 }
+
 
 
 
