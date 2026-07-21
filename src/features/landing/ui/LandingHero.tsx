@@ -131,7 +131,7 @@ export function LandingHero() {
       <div className="absolute top-[-120px] left-[-120px] w-[650px] h-[650px] rounded-full bg-gradient-to-br from-[#FF5500] via-[#E8501A] to-amber-700/20 blur-[140px] opacity-80 pointer-events-none z-0" />
 
       {/* Hero Header Content */}
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-6 mt-8">
+      <div className="relative z-10 max-w-[856px] mx-auto text-center flex flex-col items-center gap-6 mt-8">
         {/* Eyebrow Pill Badge */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -148,7 +148,7 @@ export function LandingHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="framer-h1 max-w-5xl"
+          className="framer-h1 max-w-[856px]"
         >
           Short-form video editing that <br />
           actually gets results
@@ -173,25 +173,26 @@ export function LandingHero() {
         >
           <Link
             href="/login"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E8501A] px-7 py-3 framer-btn text-white transition-all duration-200 hover:bg-[#FF5500] hover:shadow-[0_0_28px_rgba(232,80,26,0.5)]"
+            className="inline-flex items-center justify-center gap-1.5 framer-btn-primary"
           >
             <span>Start a Project</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
           <a
             href="#showcase"
-            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-[#1A1310] px-7 py-3 framer-btn text-white/90 transition-all duration-200 hover:bg-white/10 hover:border-white/30"
+            className="inline-flex items-center justify-center gap-1.5 framer-btn-secondary"
           >
             <span>See Our Works</span>
           </a>
         </motion.div>
       </div>
 
-      {/* 6-Card Fan-out Animated HTML5 Video Reel Container */}
+      {/* 7-Card Fan-out Animated HTML5 Video Reel Container (80px gap from buttons) */}
       <motion.div
         style={{ rotateX: tiltRotateX, rotateY: tiltRotateY }}
-        className="relative z-10 w-full max-w-7xl mx-auto mt-10 flex items-end justify-center gap-2 sm:gap-4 overflow-visible px-2 transform-gpu"
+        className="relative z-10 w-full max-w-7xl mx-auto mt-16 md:mt-20 flex items-end justify-center gap-2 sm:gap-4 overflow-visible px-2 transform-gpu"
       >
+
         {cards.map((card) => (
           <motion.div
             key={card.id}
