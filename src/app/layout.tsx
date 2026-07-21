@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Syne, Inter, Geist_Mono } from 'next/font/google'
+import { DustParticles } from '@/shared/ui/motion/DustParticles'
 import './globals.css'
+
 
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
@@ -48,8 +50,8 @@ export const metadata: Metadata = {
   },
 }
 
-
 export default function RootLayout({
+
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -58,12 +60,16 @@ export default function RootLayout({
         className={`${bricolage.variable} ${syne.variable} ${inter.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
+        {/* Floating white dust particle animation */}
+        <DustParticles />
+
         {/* Ambient background orbs — fiery orange + electric teal gradient theme */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#090401]">
           <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#E8501A]/10 blur-[150px] mix-blend-screen animate-breathe-calm" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[160px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
           <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-[#FF3B00]/8 blur-[140px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
         </div>
+
 
         {children}
       </body>
