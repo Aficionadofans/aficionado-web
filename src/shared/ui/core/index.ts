@@ -28,3 +28,7 @@ export type { SectionHeaderProps } from './section-header'
 export { EmptyState } from './empty-state'
 export type { EmptyStateProps } from './empty-state'
 export { HoldToAppreciate } from './HoldToAppreciate'
+
+// ── Animation ───────────────────────────────────────────────────────────────
+export { StatCounter } from './stat-counter'
+export type { StatCounterProps } from './stat-counter'

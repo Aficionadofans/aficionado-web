@@ -29,6 +29,12 @@
   --color-charcoal-muted: #18181b;
   --color-off-white: #fafafa;
 
+  /* V2 design tokens */
+  --color-landing-hero-bg: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 212, 200, 0.14) 0%, transparent 70%);
+  --color-nav-pill-bg: radial-gradient(circle, rgba(0, 212, 200, 0.18) 0%, transparent 80%);
+  --color-pricing-highlight-border: rgba(0, 212, 200, 0.45);
+  --color-pricing-highlight-bg: rgba(0, 212, 200, 0.06);
+
   /* Accent colors (supporting) */
   --color-bio-teal: #00F0B5;
   --color-bio-emerald: #10B981;

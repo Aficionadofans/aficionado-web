@@ -54,7 +54,7 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
 
           {/* Section title */}
           <div className="px-2 mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary/80">
-            01 / Navigation
+            01 / NAVIGATION
           </div>
 
           {/* Nav Items */}
@@ -87,7 +87,7 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
                           ? {
                               background: '#121216',
                               border: '1px solid rgba(0,212,200,0.3)',
-                              boxShadow: '0 4px 16px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06)',
+                              boxShadow: '0 0 24px rgba(0,212,200,0.35), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06)',
                             }
                           : { border: '1px solid transparent' }
                       }

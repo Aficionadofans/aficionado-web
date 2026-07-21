@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
 import { Syne, Inter, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Navigation } from '@/shared/ui/layout/Navigation'
-import { MainLayout } from '@/shared/ui/layout/MainLayout'
-import { createClient } from '@/shared/lib/supabase/server'
 
 const syne = Syne({
   variable: '--font-syne',
@@ -38,26 +35,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  let userType: 'aficionado' | 'fan' | null = null
-  let isAdmin = false
-
-  if (user) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('user_type, is_admin')
-      .eq('id', user.id)
-      .single()
-
-    userType = (profile?.user_type as 'aficionado' | 'fan' | null) ?? null
-    isAdmin = profile?.is_admin === true
-  }
-
   return (
     <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
@@ -71,12 +51,8 @@ export default async function RootLayout({
           <div className="absolute top-[35%] left-[55%] w-[35vw] h-[35vw] rounded-full bg-bio-emerald/8 blur-[120px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
         </div>
 
-        <Navigation isAdmin={isAdmin} userType={userType} />
-        <MainLayout>
-          {children}
-        </MainLayout>
+        {children}
       </body>
     </html>
   )
 }
-
