@@ -26,25 +26,21 @@ export function LandingNav() {
             : 'liquid-glass border-white/10'
         }`}
       >
-        {/* Brand Logo (Aficionado Brand + Framer Pill Aesthetic) */}
+        {/* Brand Logo (Ultra Appealing Wordless 3D Crystal Emblem) */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 focus-visible:outline-none rounded-full group"
+          className="flex items-center focus-visible:outline-none rounded-full group"
         >
-          <div className="w-9 h-9 rounded-xl overflow-hidden bg-black/60 border border-white/15 flex items-center justify-center shadow-[0_0_20px_rgba(232,80,26,0.4)] group-hover:scale-105 transition-transform duration-300">
+          <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090401]/90 border border-white/20 flex items-center justify-center shadow-[0_0_24px_rgba(232,80,26,0.5)] group-hover:scale-110 group-hover:border-[#E8501A] group-hover:shadow-[0_0_30px_rgba(0,212,200,0.6)] transition-all duration-500 ease-out">
             <img
-              src="/icon.png"
-              alt="Aficionado Logo"
-              className="w-full h-full object-cover"
+              src="/nav-logo.png"
+              alt="Aficionado Crystal Logo Emblem"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <span
-            className="text-xl font-extrabold tracking-tight text-white font-heading"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            Aficionado<span className="text-[#E8501A]">.</span>
-          </span>
         </Link>
+
+
 
 
 
