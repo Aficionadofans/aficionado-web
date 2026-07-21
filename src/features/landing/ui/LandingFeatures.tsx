@@ -17,90 +17,105 @@ interface FeatureCard {
   icon: React.ReactNode
   headline: string
   body: string
+  badge?: string
 }
 
 const features: FeatureCard[] = [
   {
-    icon: <Upload className="w-6 h-6" />,
-    headline: 'Upload & Earn',
-    body: 'Upload content, set your price, and earn directly from fans — no middlemen, no revenue splits.',
+    icon: <Upload className="w-5 h-5" />,
+    headline: 'Upload & Monetize Direct',
+    body: 'Upload high-resolution video & audio drops, set direct fan prices, and keep 100% of your earnings.',
+    badge: 'Core Feature',
   },
   {
-    icon: <Radio className="w-6 h-6" />,
-    headline: 'Live Streams',
-    body: 'Host intimate live sessions with your inner circle and engage your most dedicated fans in real time.',
+    icon: <Radio className="w-5 h-5" />,
+    headline: 'Interactive Live Broadcasts',
+    body: 'Host real-time HD streams with low-latency chat, fan tipping, and exclusive Q&As for inner circles.',
+    badge: 'Live Stream',
   },
   {
-    icon: <Users className="w-6 h-6" />,
-    headline: 'Inner Circles',
-    body: 'Create exclusive membership tiers for your biggest fans with gated content and private perks.',
+    icon: <Users className="w-5 h-5" />,
+    headline: 'Gated Inner Circles',
+    body: 'Build multi-tier fan memberships with custom perks, private discussions, and VIP content vaults.',
+    badge: 'Community',
   },
   {
-    icon: <Shield className="w-6 h-6" />,
-    headline: 'Anti-Dopamine Feed',
-    body: "Curated content, not infinite scroll. A feed designed to respect your audience's attention.",
+    icon: <Shield className="w-5 h-5" />,
+    headline: 'Anti-Dopamine Finite Feed',
+    body: "Curated content feeds designed to protect user well-being and eliminate mindless infinite scrolling.",
+    badge: 'Well-Being',
   },
   {
-    icon: <BarChart2 className="w-6 h-6" />,
-    headline: 'Creator Stats',
-    body: "Deep analytics on your audience and revenue so you always know what's working.",
+    icon: <BarChart2 className="w-5 h-5" />,
+    headline: 'Real-Time Creator Analytics',
+    body: "Track subscriber growth, revenue breakdown, retention cohorts, and stream engagement instantly.",
   },
   {
-    icon: <Globe className="w-6 h-6" />,
-    headline: 'Community Hubs',
-    body: 'Build and manage your own community circles where fans connect around your world.',
+    icon: <Globe className="w-5 h-5" />,
+    headline: 'Custom Community Hubs',
+    body: 'Customizable creator spaces with topic channels, discussion boards, and digital event scheduling.',
   },
   {
-    icon: <CreditCard className="w-6 h-6" />,
-    headline: 'Secure Payments',
-    body: 'Transparent, instant payouts with no hidden fees — your earnings, on your schedule.',
+    icon: <CreditCard className="w-5 h-5" />,
+    headline: 'Instant Stripe Payouts',
+    body: 'Direct Stripe & Supabase SSR infrastructure ensuring payouts reach your bank account within 24 hours.',
   },
   {
-    icon: <Lock className="w-6 h-6" />,
-    headline: 'Privacy First',
-    body: 'Your data belongs to you, always. We never sell or share what you create or who you are.',
+    icon: <Lock className="w-5 h-5" />,
+    headline: 'Data Sovereignty & Privacy',
+    body: 'You own 100% of your creator data and subscriber contacts. Zero algorithm censorship or tracking.',
   },
 ]
 
 export function LandingFeatures() {
   return (
-    <section id="features" className="w-full py-20 md:py-28 px-4">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeader
-          variant="editorial"
-          number="03"
-          label="FEATURES"
-          title="Everything you need to own your audience."
-          className="mb-12"
-        />
+    <section id="features" className="w-full py-24 px-4 relative z-10">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <SectionHeader
+            variant="editorial"
+            number="02"
+            label="PLATFORM CAPABILITIES"
+            title="Everything required to build a sovereign creator business."
+            className="mb-4"
+          />
+          <p className="text-sm sm:text-base text-muted-foreground">
+            A comprehensive suite of production-ready tools built on Next.js 16, Supabase, and Stripe.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {features.map((feature, index) => (
-            <RevealSection key={feature.headline} delay={index * 80}>
-              <div className="clipcut-card-hover h-full p-5 md:p-6 flex flex-col gap-3">
-                {/* Icon tile */}
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{
-                    background: 'rgba(0, 212, 200, 0.08)',
-                    border: '1px solid rgba(0, 212, 200, 0.2)',
-                  }}
-                >
-                  <span className="text-primary">{feature.icon}</span>
+            <RevealSection key={feature.headline} delay={index * 60}>
+              <div className="liquid-glass-hover h-full p-6 flex flex-col justify-between gap-4 border border-white/8 rounded-2xl group transition-all duration-300">
+                <div className="flex flex-col gap-4">
+                  {/* Top row with icon & badge */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300">
+                      {feature.icon}
+                    </div>
+                    {feature.badge && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary">
+                        {feature.badge}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Headline & Body */}
+                  <div className="flex flex-col gap-2">
+                    <h3
+                      className="text-base font-bold text-foreground leading-snug group-hover:text-primary transition-colors"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {feature.headline}
+                    </h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {feature.body}
+                    </p>
+                  </div>
                 </div>
 
-                {/* Text */}
-                <div className="flex flex-col gap-1.5">
-                  <h3
-                    className="text-sm md:text-base font-bold text-white leading-tight"
-                    style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}
-                  >
-                    {feature.headline}
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                    {feature.body}
-                  </p>
-                </div>
+                <div className="w-full h-[1px] bg-white/8 group-hover:bg-primary/30 transition-colors" />
               </div>
             </RevealSection>
           ))}
@@ -109,3 +124,4 @@ export function LandingFeatures() {
     </section>
   )
 }
+

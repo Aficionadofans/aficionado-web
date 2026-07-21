@@ -1,93 +1,95 @@
-import Link from 'next/link'
-import { Globe } from 'lucide-react'
+import NextLink from 'next/link'
+import { Sparkles, Globe, Share2, MessageCircle } from 'lucide-react'
 
 export function LandingFooter() {
   return (
-    <footer className="w-full bg-[#0A0A0C]">
-      {/* Section divider */}
-      <div className="section-divider" aria-hidden="true" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          {/* Left: wordmark + copyright */}
-          <div className="flex flex-col gap-1.5">
-            <Link
-              href="/"
-              className="inline-block w-fit focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-              aria-label="Aficionado home"
-            >
+    <footer className="w-full bg-[#050507] border-t border-white/10 relative z-10 text-xs">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-white/8">
+          {/* Brand Column */}
+          <div className="md:col-span-2 flex flex-col gap-4">
+            <NextLink href="/" className="flex items-center gap-2 w-fit">
+              <div className="w-7 h-7 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(0,212,200,0.3)]">
+                <Sparkles className="w-3.5 h-3.5" />
+              </div>
               <span
-                className="text-lg font-bold tracking-[-0.04em]"
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  background: 'linear-gradient(135deg, #00D4C8 0%, #ffffff 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
+                className="text-lg font-extrabold tracking-[-0.03em] text-foreground"
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
-                Aficionado
+                Aficionado<span className="text-primary">.</span>
               </span>
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              © 2025 Aficionado. All rights reserved.
+            </NextLink>
+
+            <p className="text-muted-foreground text-xs leading-relaxed max-w-sm">
+              The sovereign creator platform designed for finite engagement, direct fan monetization, and digital well-being.
             </p>
-          </div>
 
-          {/* Right: legal links + social icons */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-            {/* Legal links */}
-            <nav
-              className="flex flex-wrap items-center gap-4"
-              aria-label="Legal links"
-            >
-              <Link
-                href="/terms"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-              >
-                Terms
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="/creator-agreement"
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
-              >
-                Creator Agreement
-              </Link>
-            </nav>
-
-            {/* Social icon links */}
-            <div className="flex items-center gap-3" aria-label="Social links">
-              {/* X (Twitter) — inline SVG as lucide-react dropped the Twitter icon */}
+            <div className="flex items-center gap-3 mt-2 text-muted-foreground">
               <a
-                href="https://twitter.com/aficionadohq"
+                href="https://x.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Aficionado on X (Twitter)"
-                className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded p-0.5"
+                className="p-2 rounded-full border border-white/10 hover:border-primary/40 hover:text-primary transition-colors"
+                aria-label="X (Twitter)"
               >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.26 5.632L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
-                </svg>
+                <Share2 className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com/aficionadohq"
+                href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Aficionado on Instagram"
-                className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded p-0.5"
+                className="p-2 rounded-full border border-white/10 hover:border-primary/40 hover:text-primary transition-colors"
+                aria-label="Instagram"
               >
-                <Globe className="h-4 w-4" aria-hidden="true" />
+                <Globe className="w-4 h-4" />
+              </a>
+              <a
+                href="https://discord.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full border border-white/10 hover:border-primary/40 hover:text-primary transition-colors"
+                aria-label="Discord"
+              >
+                <MessageCircle className="w-4 h-4" />
               </a>
             </div>
           </div>
+
+
+          {/* Navigation Column */}
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Platform</h4>
+            <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</a>
+            <a href="#showcase" className="text-muted-foreground hover:text-primary transition-colors">Showcase</a>
+            <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a>
+            <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">FAQ</a>
+          </div>
+
+          {/* Product Column */}
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Creators</h4>
+            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Creator Login</NextLink>
+            <NextLink href="/monetization" className="text-muted-foreground hover:text-primary transition-colors">Direct Payouts</NextLink>
+            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Inner Circles</NextLink>
+            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Live Broadcasts</NextLink>
+          </div>
+
+          {/* Legal Column */}
+          <div className="flex flex-col gap-3">
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Legal & Governance</h4>
+            <NextLink href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</NextLink>
+            <NextLink href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</NextLink>
+            <NextLink href="/creator-agreement" className="text-muted-foreground hover:text-primary transition-colors">Creator Agreement</NextLink>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-muted-foreground text-[11px]">
+          <p>© {new Date().getFullYear()} Aficionado. All rights reserved.</p>
+          <p className="font-mono">Built for Sovereign Creators • Next.js 16 Client</p>
         </div>
       </div>
     </footer>
   )
 }
+

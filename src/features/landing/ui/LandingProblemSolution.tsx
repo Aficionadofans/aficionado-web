@@ -1,99 +1,103 @@
 import { SectionHeader } from '@/shared/ui/core'
+import { XCircle, CheckCircle2 } from 'lucide-react'
 
 export function LandingProblemSolution() {
   return (
-    <section aria-label="The Problem and The Solution" className="py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mobile: divider above */}
-        <div className="section-divider lg:hidden mb-12" />
+    <section aria-label="The Problem and The Solution" className="py-24 px-4 relative z-10">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <SectionHeader
+            variant="editorial"
+            number="01"
+            label="THE PARADIGM SHIFT"
+            title="Designed to empower creators, not exploit them."
+            className="mb-4"
+          />
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Legacy social networks profit by keeping users addicted to infinite feeds while taking massive platform cuts. Aficionado flips the model completely.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-12 lg:gap-0 items-start">
-          {/* Left column — The Problem */}
-          <div className="space-y-6 lg:pr-12">
-            <SectionHeader
-              variant="editorial"
-              number="01"
-              label="THE PROBLEM"
-              title="Creators Deserve Better"
-            />
-            <div className="space-y-5">
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          {/* Legacy Platforms Card */}
+          <div className="liquid-glass p-6 sm:p-8 rounded-3xl border border-red-500/20 bg-red-950/10 flex flex-col justify-between gap-6 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="flex flex-col gap-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider w-fit">
+                <XCircle className="w-4 h-4" />
+                <span>The Legacy Trap</span>
+              </div>
+
+              <h3
+                className="text-2xl sm:text-3xl font-extrabold text-foreground"
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
-                Most platforms treat creators like content farms. Algorithms decide who sees your
-                work, burying your best posts behind pay-to-boost mechanics and engagement traps
-                designed to keep fans scrolling — not connecting.
-              </p>
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Revenue share is a joke. Platforms take up to 50% of your earnings while your
-                dedicated fans never hear from you directly. You built the audience. Someone else
-                is cashing in.
-              </p>
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Intimacy is impossible at scale. Comment sections become cesspools, DMs get
-                flooded, and the real fans — the ones who show up every day — get lost in
-                the noise.
-              </p>
+                Broken Algorithms & Revenue Cuts
+              </h3>
+
+              <ul className="flex flex-col gap-4 mt-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-3">
+                  <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <span><strong>50% Platform Cuts:</strong> Legacy giants take up to half of creator revenue while controlling your audience list.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <span><strong>Infinite Scroll Drain:</strong> Algorithms prioritize rage-bait and mindless doomscrolling over quality creator-fan depth.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  <span><strong>Pay-to-Reach Mechanics:</strong> Only 5-10% of your followers ever see your posts unless you pay for ads.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-xl bg-black/40 border border-white/5 text-xs text-red-300 font-mono">
+              Status: High Burnout • Low Creator Retention
             </div>
           </div>
 
-          {/* Divider — vertical on desktop, horizontal on mobile (handled via grid gap above) */}
-          <div className="hidden lg:block self-stretch">
-            <div
-              className="h-full w-px mx-auto"
-              style={{
-                background:
-                  'linear-gradient(to bottom, transparent, rgba(0, 212, 200, 0.5), transparent)',
-              }}
-            />
-          </div>
+          {/* Aficionado Solution Card */}
+          <div className="liquid-glass p-6 sm:p-8 rounded-3xl border border-primary/30 bg-primary/5 flex flex-col justify-between gap-6 relative overflow-hidden shadow-[0_0_40px_rgba(0,212,200,0.15)]">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Right column — The Solution */}
-          <div className="space-y-6 lg:pl-12">
-            <SectionHeader
-              variant="editorial"
-              number="02"
-              label="THE SOLUTION"
-              title="Aficionado"
-            />
-            <div className="space-y-5">
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
+            <div className="flex flex-col gap-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 border border-primary/40 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>The Aficionado Model</span>
+              </div>
+
+              <h3
+                className="text-2xl sm:text-3xl font-extrabold text-foreground"
+                style={{ fontFamily: 'var(--font-heading)' }}
               >
-                Direct creator-fan connection — no algorithm in between. Your content reaches
-                every subscriber, every time. Inner Circles let your closest fans access
-                exclusive drops and personal conversations.
-              </p>
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Fair revenue, full stop. Creators keep the vast majority of what they earn —
-                from subscriptions, tips, and exclusive content. You built it, you keep it.
-              </p>
-              <p
-                className="text-lg text-muted-foreground leading-relaxed"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                An anti-dopamine feed built for depth. No infinite scroll engineered for
-                addiction. Aficionado surfaces content your fans actually asked for, creating
-                real engagement — not phantom metrics.
-              </p>
+                Sovereign Monetization & Anti-Addiction Feeds
+              </h3>
+
+              <ul className="flex flex-col gap-4 mt-2 text-sm text-muted-foreground">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span><strong>100% Direct Payouts:</strong> Direct fan subscriptions and tips straight to your account with zero platform extortion.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span><strong>Finite Digital Well-Being:</strong> Anti-dopamine feed guarantees fans stay engaged without endless doomscrolling.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span><strong>Gated Fan Inner Circles:</strong> Host live sessions and drop exclusive content for your most loyal supporters.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="p-4 rounded-xl bg-black/60 border border-primary/20 text-xs text-primary font-mono flex items-center justify-between">
+              <span>Status: Sovereign Creator Control</span>
+              <span className="font-bold">100% Verified</span>
             </div>
           </div>
         </div>
-
-        {/* Mobile: divider below */}
-        <div className="section-divider lg:hidden mt-12" />
       </div>
     </section>
   )
 }
+
