@@ -2,7 +2,7 @@
 
 import { ImagePlus, Send, Sparkles } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
-import { createPost } from '@/app/create/actions'
+import { createPost } from '@/app/(app)/create/actions'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/shared/lib/supabase/client'
 import { cn } from '@/lib/utils'

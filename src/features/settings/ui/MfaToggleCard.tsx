@@ -3,7 +3,7 @@
 import { useActionState, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/core/card'
 import { Shield, ShieldAlert, CheckCircle2 } from 'lucide-react'
-import { enrollMfa, verifyAndEnableMfa, unenrollMfa } from '@/app/settings/security/actions'
+import { enrollMfa, verifyAndEnableMfa, unenrollMfa } from '@/app/(app)/settings/security/actions'
 import { useFormStatus } from 'react-dom'
 
 function SubmitButton({ text, pendingText, disabled, variant = 'primary' }: { text: string, pendingText: string, disabled?: boolean, variant?: 'primary' | 'destructive' | 'outline' }) {

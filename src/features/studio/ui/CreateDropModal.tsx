@@ -3,7 +3,7 @@
 import React from 'react'
 import { X, ImagePlus, Send } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
-import { createPost } from '@/app/create/actions'
+import { createPost } from '@/app/(app)/create/actions'
 
 function SubmitButton() {
   const { pending } = useFormStatus()
