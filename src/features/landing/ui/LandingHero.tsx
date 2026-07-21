@@ -5,54 +5,54 @@ export function LandingHero() {
   return (
     <section className="relative min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center overflow-hidden bg-[#070709]">
       {/* Hero ambient radial glow overlay */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/10 blur-[140px] pointer-events-none rounded-full" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(232,80,26,0.18)_0%,rgba(0,212,200,0.1)_40%,transparent_70%)] blur-[120px] pointer-events-none rounded-full" />
 
       {/* Hero content container */}
       <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-8">
         
-        {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-bold uppercase tracking-widest animate-fade-in-up">
-          <Zap className="w-3.5 h-3.5" />
-          <span>Anti-Addiction Creator Platform</span>
+        {/* ClipCut Eyebrow Pill Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8501A]/10 border border-[#E8501A]/40 text-[#E8501A] text-xs font-bold uppercase tracking-widest animate-fade-in-up shadow-[0_0_16px_rgba(232,80,26,0.25)]">
+          <Zap className="w-3.5 h-3.5 fill-current" />
+          <span>SOVEREIGN CREATOR ENGINE • SHORT-FORM DROPS</span>
         </div>
 
-        {/* High-Impact Display Headline */}
+        {/* Bricolage Display Headline */}
         <h1
-          className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] text-foreground leading-[1.05] max-w-4xl"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.04em] text-foreground leading-[0.98] max-w-5xl uppercase"
+          style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
         >
-          YOUR VOICE.{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-teal-200 to-white">
-            YOUR EMPIRE.
+          SCALE YOUR BRAND WITH{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#E8501A] to-primary">
+            BOLD SHORT-FORM DROPS.
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base md:text-xl text-muted-foreground max-w-2xl leading-relaxed font-sans">
-          The sovereign creator platform that puts you in full control — monetize your content directly, build exclusive inner circles, and stream live without algorithms or infinite scroll traps.
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed font-sans">
+          The high-converting sovereign creator platform — drop exclusive videos, stream live to your Inner Circle, and keep 100% of fan payments without algorithm traps or infinite scroll.
         </p>
 
-        {/* Dual CTA Buttons */}
+        {/* Dual Action CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 w-full sm:w-auto">
           <Link
             href="/login"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all duration-300 hover:bg-primary-hover hover:shadow-[0_0_30px_rgba(0,212,200,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#E8501A] px-9 py-4 text-xs font-extrabold uppercase tracking-widest text-white transition-all duration-300 hover:bg-[#FF5500] hover:shadow-[0_0_36px_rgba(232,80,26,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8501A]"
           >
             <span>Get Started Free</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
             href="#showcase"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-foreground transition-all duration-300 hover:border-primary/40 hover:bg-white/10 hover:text-primary"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-9 py-4 text-xs font-extrabold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-[#E8501A]/50 hover:bg-white/10 hover:text-white"
           >
-            <span>Explore Showcase</span>
+            <span>Explore Video Showcase</span>
           </a>
         </div>
 
-        {/* Key Selling Highlights Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mt-4 text-xs font-semibold text-muted-foreground/80">
+        {/* Highlight Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-6 mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground/80">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-primary" />
+            <ShieldCheck className="w-4 h-4 text-[#E8501A]" />
             <span>100% Direct Payouts</span>
           </div>
           <div className="flex items-center gap-2">
@@ -60,10 +60,11 @@ export function LandingHero() {
             <span>Zero Infinite Scroll</span>
           </div>
           <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-primary" />
+            <Heart className="w-4 h-4 text-[#E8501A]" />
             <span>Gated Fan Circles</span>
           </div>
         </div>
+
 
         {/* Interactive Media Showcase Card Frame (ClipCut Template Feature) */}
         <div className="w-full max-w-4xl mt-8 rounded-2xl liquid-glass border border-white/12 p-3 sm:p-4 shadow-[0_24px_64px_rgba(0,0,0,0.8)] relative group overflow-hidden">

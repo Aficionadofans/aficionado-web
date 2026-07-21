@@ -9,7 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-syne), var(--font-inter);
+  --font-heading: var(--font-bricolage), var(--font-syne), var(--font-inter);
   
   /* Brand — Electric teal/cyan */
   --color-primary: var(--primary);
@@ -121,7 +121,14 @@
   }
 
   --animate-count-up: count-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
 }
+
 
 :root, .dark {
   /* Backgrounds — Matte agency charcoal */

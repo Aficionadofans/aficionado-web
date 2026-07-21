@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
-import { Syne, Inter, Geist_Mono } from 'next/font/google'
+import { Bricolage_Grotesque, Syne, Inter, Geist_Mono } from 'next/font/google'
 import './globals.css'
+
+const bricolage = Bricolage_Grotesque({
+  variable: '--font-bricolage',
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  display: 'swap',
+})
 
 const syne = Syne({
   variable: '--font-syne',
@@ -27,7 +34,7 @@ export const metadata: Metadata = {
     default: 'Aficionado',
     template: '%s | Aficionado',
   },
-  description: 'A premium social platform connecting creators and fans through immersive short-form video and direct engagement.',
+  description: 'The bold, conversion-focused sovereign creator platform for short-form video drops, live streams, and direct fan monetization.',
   metadataBase: new URL('https://aficionado.fans'),
   openGraph: {
     siteName: 'Aficionado',
@@ -41,14 +48,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
-        className={`${syne.variable} ${inter.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
+        className={`${bricolage.variable} ${syne.variable} ${inter.variable} ${geistMono.variable} min-h-full flex flex-col bg-background text-foreground relative overflow-x-hidden`}
         suppressHydrationWarning
       >
-        {/* Ambient background orbs — electric teal brand */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-background">
-          <div className="absolute top-[-10%] left-[-10%] w-[45vw] h-[45vw] rounded-full bg-primary/12 blur-[130px] mix-blend-screen animate-breathe-calm" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/8 blur-[160px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
-          <div className="absolute top-[35%] left-[55%] w-[35vw] h-[35vw] rounded-full bg-bio-emerald/8 blur-[120px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
+        {/* Ambient background orbs — fiery orange + electric teal gradient theme */}
+        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#090401]">
+          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#E8501A]/10 blur-[150px] mix-blend-screen animate-breathe-calm" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[160px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
+          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-[#FF3B00]/8 blur-[140px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
         </div>
 
         {children}
@@ -56,3 +63,4 @@ export default function RootLayout({
     </html>
   )
 }
+
