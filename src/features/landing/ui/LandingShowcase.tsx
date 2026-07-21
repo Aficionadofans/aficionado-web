@@ -150,9 +150,9 @@ export function LandingShowcase() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredItems.map((item, index) => (
             <RevealSection key={item.id} delay={index * 80}>
-              <div className="liquid-glass-hover rounded-2xl border border-white/10 p-5 flex flex-col justify-between gap-6 group transition-all duration-300">
+              <div className="liquid-glass-card glass-shimmer-sweep p-5 flex flex-col justify-between gap-6 group">
                 {/* Media card thumbnail frame */}
-                <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${item.thumbnailGradient} border border-white/10 overflow-hidden flex flex-col justify-between p-4`}>
+                <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${item.thumbnailGradient} border border-white/10 overflow-hidden flex flex-col justify-between p-4 group-hover:border-primary/40 transition-all duration-300`}>
                   {/* Top tags */}
                   <div className="flex items-center justify-between z-10">
                     <span className="clipcut-pill px-3 py-1 text-[10px]">

@@ -24,9 +24,9 @@ export function LandingProblem() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Views that don't convert */}
           <RevealSection delay={0}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 relative overflow-hidden group">
+            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
               <div className="flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400">
+                <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 shadow-[0_0_16px_rgba(239,68,68,0.2)]">
                   <TrendingDown className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">Views that don’t convert</h3>
@@ -36,24 +36,24 @@ export function LandingProblem() {
               </div>
 
               {/* Retention Graph Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2">
+              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2 backdrop-blur-md">
                 <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                   <span>Avg. Audience Retention</span>
                   <span className="text-red-400 font-bold">-68% Drop</span>
                 </div>
-                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full w-[32%] bg-red-500 rounded-full" />
+                <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full w-[32%] bg-gradient-to-r from-red-600 to-red-400 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
                 </div>
-                <span className="text-[10px] font-mono text-red-400/80">50% Viewers dropped past 3s</span>
+                <span className="text-[10px] font-mono text-red-400/90">50% Viewers dropped past 3s</span>
               </div>
             </div>
           </RevealSection>
 
           {/* Card 2: Likes don't pay the bills */}
           <RevealSection delay={100}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 relative overflow-hidden group">
+            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
               <div className="flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.2)]">
                   <Coins className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">Likes don’t pay the bills</h3>
@@ -63,7 +63,7 @@ export function LandingProblem() {
               </div>
 
               {/* Likes vs Revenue Metric Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex items-center justify-between">
+              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex items-center justify-between backdrop-blur-md">
                 <div>
                   <div className="text-xs font-mono text-white font-bold">120K Likes</div>
                   <div className="text-[10px] text-muted-foreground">Platform Ad Revenue</div>
@@ -78,9 +78,9 @@ export function LandingProblem() {
 
           {/* Card 3: No system, no consistency */}
           <RevealSection delay={200}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 relative overflow-hidden group">
+            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
               <div className="flex flex-col gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#E8501A]/10 border border-[#E8501A]/30 flex items-center justify-center text-[#E8501A]">
+                <div className="w-12 h-12 rounded-2xl bg-[#E8501A]/10 border border-[#E8501A]/30 flex items-center justify-center text-[#E8501A] shadow-[0_0_16px_rgba(232,80,26,0.25)]">
                   <CalendarX className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">No system, no consistency</h3>
@@ -90,7 +90,7 @@ export function LandingProblem() {
               </div>
 
               {/* Activity Output Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2">
+              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2 backdrop-blur-md">
                 <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
                   <span>Weekly Output</span>
                   <span className="text-[#E8501A] font-bold">3 / 10 Posts</span>
@@ -99,8 +99,8 @@ export function LandingProblem() {
                   {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
                     <div
                       key={i}
-                      className={`flex-1 h-6 rounded-md flex items-center justify-center text-[9px] font-mono font-bold ${
-                        i < 3 ? 'bg-[#E8501A] text-black' : 'bg-white/5 text-muted-foreground'
+                      className={`flex-1 h-6 rounded-md flex items-center justify-center text-[9px] font-mono font-bold transition-all ${
+                        i < 3 ? 'bg-[#E8501A] text-black shadow-[0_0_8px_rgba(232,80,26,0.4)]' : 'bg-white/5 text-muted-foreground'
                       }`}
                     >
                       {day}
@@ -111,6 +111,7 @@ export function LandingProblem() {
             </div>
           </RevealSection>
         </div>
+
       </div>
     </section>
   )

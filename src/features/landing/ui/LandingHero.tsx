@@ -204,7 +204,7 @@ export function LandingHero() {
               transition: { type: 'spring', stiffness: 300, damping: 20 },
             }}
             style={{ rotate: card.rotate }}
-            className={`relative ${card.width} ${card.height} ${card.borderRadius} overflow-hidden border border-white/12 hover:border-[#E8501A] shadow-[0_24px_50px_rgba(0,0,0,0.85)] group bg-[#160F14] cursor-pointer flex-shrink-0`}
+            className={`relative ${card.width} ${card.height} ${card.borderRadius} overflow-hidden border border-white/12 hover:border-[#E8501A] shadow-[0_24px_50px_rgba(0,0,0,0.85)] group bg-[#160F14] cursor-pointer flex-shrink-0 glass-shimmer-sweep`}
           >
             {/* HTML5 Autoplay Looping Video Reel */}
             <video
@@ -217,17 +217,20 @@ export function LandingHero() {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
             />
 
-            {/* Play overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent p-4 flex flex-col justify-between text-left opacity-90 group-hover:opacity-100 transition-opacity">
+            {/* Play overlay gradient & glass shine */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-between text-left opacity-90 group-hover:opacity-100 transition-opacity">
               <div className="flex items-center justify-between">
-                <span className="px-2.5 py-1 rounded-full bg-[#E8501A]/90 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-md">
+                <span className="px-2.5 py-1 rounded-full bg-[#E8501A]/90 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-md backdrop-blur-md">
                   <Play className="w-2.5 h-2.5 fill-current" />
                   <span>Reel #{card.id}</span>
                 </span>
+                <span className="w-6 h-6 rounded-full bg-black/40 border border-white/20 flex items-center justify-center text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Sparkles className="w-3 h-3 text-amber-400" />
+                </span>
               </div>
               <div>
-                <span className="text-xs font-bold text-white font-heading block">{card.title}</span>
-                <span className="text-[10px] font-mono text-amber-300">{card.views}</span>
+                <span className="text-xs font-bold text-white font-heading block drop-shadow-md">{card.title}</span>
+                <span className="text-[10px] font-mono text-amber-300 font-semibold">{card.views}</span>
               </div>
             </div>
           </motion.div>
