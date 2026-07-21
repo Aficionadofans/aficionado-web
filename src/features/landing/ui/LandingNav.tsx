@@ -26,65 +26,61 @@ export function LandingNav() {
             : 'liquid-glass border-white/10'
         }`}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo (Exact ClipCut Match) */}
         <Link
           href="/"
-          className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
+          className="flex items-center gap-2 focus-visible:outline-none rounded-full"
         >
-          <div className="w-7 h-7 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary shadow-[0_0_12px_rgba(0,212,200,0.3)]">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="w-8 h-8 rounded-xl bg-[#E8501A] flex items-center justify-center text-white shadow-[0_0_16px_rgba(232,80,26,0.5)]">
+            <Sparkles className="w-4 h-4 fill-current" />
           </div>
           <span
-            className="text-lg font-extrabold tracking-[-0.03em] text-foreground"
+            className="text-xl font-bold tracking-tight text-white"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Aficionado<span className="text-primary">.</span>
+            ClipCut
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <nav className="hidden md:flex items-center gap-6" aria-label="Landing Navigation">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Landing Navigation">
           <a
-            href="#features"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
+            href="#services"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
-            Features
+            Services
           </a>
           <a
             href="#showcase"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
-            Showcase
+            Work
           </a>
           <a
             href="#pricing"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
             Pricing
           </a>
           <a
             href="#faq"
-            className="text-xs font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
+            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
-            FAQ
+            Contact
           </a>
         </nav>
 
-        {/* Action CTAs */}
+        {/* Action Button (Exact White Pill Button Match) */}
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/login"
-            className="text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5"
+            className="inline-flex items-center justify-center gap-1 rounded-full bg-white px-5 py-2 text-sm font-semibold text-black transition-all hover:bg-white/90 shadow-md"
           >
-            Sign In
-          </Link>
-          <Link
-            href="/login"
-            className="inline-flex items-center rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:bg-primary-hover hover:shadow-[0_0_20px_rgba(0,212,200,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
-          >
-            Get Started
+            <span>Get Started</span>
+            <span className="text-xs font-bold font-mono">↗</span>
           </Link>
         </div>
+
 
         {/* Mobile Toggle */}
         <button

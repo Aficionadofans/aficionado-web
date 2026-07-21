@@ -1,170 +1,134 @@
 import Link from 'next/link'
-import { Play, ArrowRight, ShieldCheck, Zap, Heart } from 'lucide-react'
+import { Sparkles, ArrowUpRight, Film, Target, TrendingUp } from 'lucide-react'
 
 export function LandingHero() {
   return (
-    <section className="relative min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center overflow-hidden bg-[#070709]">
-      {/* Hero ambient radial glow overlay */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(232,80,26,0.18)_0%,rgba(0,212,200,0.1)_40%,transparent_70%)] blur-[120px] pointer-events-none rounded-full" />
+    <section className="relative min-h-screen pt-28 pb-16 px-4 flex flex-col items-center justify-between overflow-hidden bg-[#090401]">
+      {/* Top-Left Gigantic Glowing Orange Radial Orb (Framer Screenshot Match) */}
+      <div className="absolute top-[-120px] left-[-120px] w-[650px] h-[650px] rounded-full bg-gradient-to-br from-[#FF5500] via-[#E8501A] to-amber-700/20 blur-[140px] opacity-75 pointer-events-none z-0" />
 
-      {/* Hero content container */}
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-8">
-        
-        {/* ClipCut Eyebrow Pill Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E8501A]/10 border border-[#E8501A]/40 text-[#E8501A] text-xs font-bold uppercase tracking-widest animate-fade-in-up shadow-[0_0_16px_rgba(232,80,26,0.25)]">
-          <Zap className="w-3.5 h-3.5 fill-current" />
-          <span>SOVEREIGN CREATOR ENGINE • SHORT-FORM DROPS</span>
+      {/* Hero Central Header Content */}
+      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-6 mt-8">
+        {/* Eyebrow Pill Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 text-white/90 text-xs font-medium backdrop-blur-md shadow-lg animate-fade-in-up">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-current" />
+          <span>Trusted by 100+ creators & brands</span>
         </div>
 
-        {/* Bricolage Display Headline */}
+        {/* H1 Display Title (Exact Bricolage Grotesque Pure White Text) */}
         <h1
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.04em] text-foreground leading-[0.98] max-w-5xl uppercase"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.035em] text-white leading-[1.04] max-w-5xl"
           style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
         >
-          SCALE YOUR BRAND WITH{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#E8501A] to-primary">
-            BOLD SHORT-FORM DROPS.
-          </span>
+          Short-form video editing that <br />
+          actually gets results
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed font-sans">
-          The high-converting sovereign creator platform — drop exclusive videos, stream live to your Inner Circle, and keep 100% of fan payments without algorithm traps or infinite scroll.
+        <p className="text-base sm:text-lg md:text-xl text-[#a1958d] max-w-2xl leading-relaxed font-sans font-normal">
+          We turn your raw clips into high-performing Reels, TikToks, and Shorts — designed to grab attention, boost engagement, and grow your audience faster.
         </p>
 
-        {/* Dual Action CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 w-full sm:w-auto">
+        {/* Action Buttons (Solid Orange CTA + Dark Secondary) */}
+        <div className="flex flex-row items-center gap-4 mt-2">
           <Link
             href="/login"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#E8501A] px-9 py-4 text-xs font-extrabold uppercase tracking-widest text-white transition-all duration-300 hover:bg-[#FF5500] hover:shadow-[0_0_36px_rgba(232,80,26,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8501A]"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#E8501A] px-7 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#FF5500] hover:shadow-[0_0_28px_rgba(232,80,26,0.5)]"
           >
-            <span>Get Started Free</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Start a Project</span>
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
           <a
             href="#showcase"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-9 py-4 text-xs font-extrabold uppercase tracking-widest text-foreground transition-all duration-300 hover:border-[#E8501A]/50 hover:bg-white/10 hover:text-white"
+            className="inline-flex items-center justify-center gap-1.5 rounded-full border border-white/15 bg-[#1A1310] px-7 py-3 text-sm font-medium text-white/90 transition-all duration-200 hover:bg-white/10 hover:border-white/30"
           >
-            <span>Explore Video Showcase</span>
+            <span>See Our Works</span>
           </a>
         </div>
+      </div>
 
-        {/* Highlight Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mt-2 text-xs font-bold uppercase tracking-wider text-muted-foreground/80">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#E8501A]" />
-            <span>100% Direct Payouts</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-primary" />
-            <span>Zero Infinite Scroll</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-[#E8501A]" />
-            <span>Gated Fan Circles</span>
-          </div>
-        </div>
-
-
-        {/* Animated Curved Cards 3D Stack Container (Framer Template Feature) */}
-        <div className="w-full max-w-5xl mt-12 relative flex items-center justify-center min-h-[420px] sm:min-h-[480px]">
-          {/* Back Curved Card Left (-6deg rotation) */}
-          <div className="curved-card p-6 w-[280px] sm:w-[340px] h-[360px] sm:h-[400px] absolute left-2 sm:left-12 top-4 -rotate-6 scale-95 opacity-60 hover:opacity-100 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 border border-[#E8501A]/30 bg-[#160E1A]/90 hidden md:flex flex-col justify-between shadow-2xl">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-[#E8501A]/20 border border-[#E8501A]/40 text-[#E8501A] text-[10px] font-bold uppercase tracking-wider">
-                Reels & TikTok Drop
-              </span>
-              <span className="text-xs font-mono text-white/50">9:16 HD</span>
-            </div>
-            <div className="my-auto text-left flex flex-col gap-2">
-              <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary mb-2">
-                <Play className="w-4 h-4 fill-current ml-0.5" />
-              </div>
-              <h4 className="text-base font-extrabold text-white font-heading">High-Retention Short Edits</h4>
-              <p className="text-xs text-muted-foreground">+420% Audience Retention & Reach</p>
-            </div>
-            <div className="p-3 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-primary">
-              <span>Views: 1.4M</span>
-              <span>100% Verified</span>
-            </div>
-          </div>
-
-          {/* Back Curved Card Right (+6deg rotation) */}
-          <div className="curved-card p-6 w-[280px] sm:w-[340px] h-[360px] sm:h-[400px] absolute right-2 sm:right-12 top-4 rotate-6 scale-95 opacity-60 hover:opacity-100 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 border border-primary/30 bg-[#0C151A]/90 hidden md:flex flex-col justify-between shadow-2xl">
-            <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-wider">
-                Gated Inner Circle
-              </span>
-              <span className="text-xs font-mono text-emerald-400 font-bold">$49/mo</span>
-            </div>
-            <div className="my-auto text-left flex flex-col gap-2">
-              <div className="w-10 h-10 rounded-full bg-[#E8501A]/20 border border-[#E8501A]/40 flex items-center justify-center text-[#E8501A] mb-2">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h4 className="text-base font-extrabold text-white font-heading">VIP Fan Vault & Stream</h4>
-              <p className="text-xs text-muted-foreground">Direct Fan Subscriptions straight to bank</p>
-            </div>
-            <div className="p-3 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-emerald-400 font-bold">
-              <span>Subscribers: 4,820</span>
-              <span>100% Payout</span>
-            </div>
-          </div>
-
-          {/* Center Main Hero Curved Card (0deg rotation, z-20) */}
-          <div className="curved-card-hover p-5 sm:p-7 w-full max-w-xl h-[380px] sm:h-[420px] relative z-20 flex flex-col justify-between border-2 border-[#E8501A]/50 bg-gradient-to-br from-[#1A1222]/95 via-[#110D18]/95 to-[#09060E]/95 shadow-[0_30px_70px_rgba(0,0,0,0.95)] group">
-            {/* Top Bar */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="font-mono text-[11px] text-muted-foreground ml-1">aficionado.fans/@sovereignty</span>
-              </div>
-              <span className="px-3 py-1 rounded-full bg-[#E8501A] text-black font-extrabold text-[10px] uppercase tracking-widest shadow-[0_0_12px_rgba(232,80,26,0.5)]">
-                LIVE DEMO
-              </span>
-            </div>
-
-            {/* Middle Player View */}
-            <div className="my-auto flex flex-col items-center gap-4 text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-[#FF5500] to-[#E8501A] flex items-center justify-center text-white shadow-[0_0_30px_rgba(232,80,26,0.6)] group-hover:scale-110 transition-transform duration-300 cursor-pointer">
-                <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-current ml-1" />
-              </div>
-              <div>
-                <h3
-                  className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase"
-                  style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
-                >
-                  THE SOVEREIGN CREATOR ENGINE
-                </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto mt-1">
-                  Experience short-form video drops & live streaming built with 2rem curved card containers.
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Metrics Bar */}
-            <div className="p-3 sm:p-4 rounded-2xl bg-black/70 border border-white/10 flex items-center justify-between text-xs font-mono">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#E8501A]/20 border border-[#E8501A] flex items-center justify-center text-xs font-bold text-[#E8501A]">
-                  AF
-                </div>
-                <div className="text-left">
-                  <div className="font-bold text-white">Sovereign Drop #08</div>
-                  <div className="text-[10px] text-muted-foreground">Short-Form Video & Audio</div>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-primary font-bold text-sm">$32.4k/mo</div>
-                <div className="text-[10px] text-muted-foreground uppercase">100% Direct Payout</div>
-              </div>
-            </div>
+      {/* 6-Card Fan-out Vertical Video Portrait Showcase Container (Exact Framer Match) */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto mt-10 flex items-end justify-center gap-2 sm:gap-4 overflow-visible px-2">
+        {/* Card 1: Far Left Big (-8deg rotation) */}
+        <div className="relative w-[180px] sm:w-[260px] md:w-[300px] h-[280px] sm:h-[380px] md:h-[430px] rounded-[28px] sm:rounded-[36px] overflow-hidden border border-white/12 shadow-[0_24px_50px_rgba(0,0,0,0.8)] transform -rotate-6 sm:-rotate-8 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+            alt="Creator studio editing drop"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-4 flex flex-col justify-end text-left">
+            <span className="text-xs font-bold text-white font-heading">Studio Short Edit</span>
+            <span className="text-[10px] text-white/70">1.2M Views</span>
           </div>
         </div>
 
+        {/* Card 2: Left Mid (-3deg rotation) */}
+        <div className="relative w-[120px] sm:w-[180px] md:w-[210px] h-[220px] sm:h-[300px] md:h-[340px] rounded-[20px] sm:rounded-[28px] overflow-hidden border border-white/12 shadow-[0_20px_40px_rgba(0,0,0,0.8)] transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop"
+            alt="Lifestyle short drop"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
 
+        {/* Card 3: Center Left (-1deg rotation) */}
+        <div className="relative w-[100px] sm:w-[150px] md:w-[180px] h-[190px] sm:h-[260px] md:h-[290px] rounded-[18px] sm:rounded-[24px] overflow-hidden border border-white/12 shadow-[0_16px_32px_rgba(0,0,0,0.8)] transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop"
+            alt="Product review drop"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        {/* Card 4: Center Right (+1deg rotation) */}
+        <div className="relative w-[100px] sm:w-[150px] md:w-[180px] h-[190px] sm:h-[260px] md:h-[290px] rounded-[18px] sm:rounded-[24px] overflow-hidden border border-white/12 shadow-[0_16px_32px_rgba(0,0,0,0.8)] transform rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1483721074892-4a858076436c?q=80&w=600&auto=format&fit=crop"
+            alt="Fitness reel edit"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        {/* Card 5: Right Mid (+3deg rotation) */}
+        <div className="relative w-[120px] sm:w-[180px] md:w-[210px] h-[220px] sm:h-[300px] md:h-[340px] rounded-[20px] sm:rounded-[28px] overflow-hidden border border-white/12 shadow-[0_20px_40px_rgba(0,0,0,0.8)] transform rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop"
+            alt="Outdoor reel edit"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+        </div>
+
+        {/* Card 6: Far Right Big (+8deg rotation) */}
+        <div className="relative w-[180px] sm:w-[260px] md:w-[300px] h-[280px] sm:h-[380px] md:h-[430px] rounded-[28px] sm:rounded-[36px] overflow-hidden border border-white/12 shadow-[0_24px_50px_rgba(0,0,0,0.8)] transform rotate-6 sm:rotate-8 -translate-y-4 hover:rotate-0 hover:scale-105 transition-all duration-500 group bg-[#160F14]">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+            alt="Creator interview drop"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent p-4 flex flex-col justify-end text-left">
+            <span className="text-xs font-bold text-white font-heading">High-Retention Edit</span>
+            <span className="text-[10px] text-white/70">758K Views</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Bottom Pill Badge (Short Video Editing | Content Strategy | Growth Optimization) */}
+      <div className="relative z-20 mt-6 inline-flex items-center justify-center gap-4 sm:gap-8 px-6 py-2.5 rounded-full bg-[#120B08]/90 border border-white/15 backdrop-blur-xl shadow-2xl text-xs font-semibold text-white/90">
+        <div className="flex items-center gap-2">
+          <Film className="w-3.5 h-3.5 text-[#E8501A]" />
+          <span>Short Video Editing</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-2">
+          <Target className="w-3.5 h-3.5 text-primary" />
+          <span>Content Strategy</span>
+        </div>
+        <div className="hidden md:flex items-center gap-2">
+          <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+          <span>Growth Optimization</span>
+        </div>
       </div>
     </section>
   )
 }
+
 
