@@ -4,83 +4,97 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import Link from 'next/link'
 import { Sparkles, ArrowUpRight, Film, Target, TrendingUp, Play } from 'lucide-react'
 
-const arms = [
+const heroCards = [
   {
     id: 1,
-    name: 'Arm 1',
-    rotateY: 0,
-    videoLeft: 'https://framerusercontent.com/assets/DbZSLkpXo1zcSnI9ysFDBJDfbA.mp4',
-    videoRight: 'https://framerusercontent.com/assets/xwwcsY1bO4mvg40HfBIphxImK0.mp4',
-    titleLeft: 'Studio Short Edit',
-    titleRight: 'Visual Masterclass',
-    viewsLeft: '1.2M Views',
-    viewsRight: '840K Views',
+    video: 'https://framerusercontent.com/assets/DbZSLkpXo1zcSnI9ysFDBJDfbA.mp4',
+    poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
+    title: 'Studio Short Edit',
+    views: '1.2M Views',
+    rotate: -10,
+    yOffset: -16,
+    width: 'w-[150px] sm:w-[210px] md:w-[240px]',
+    height: 'h-[250px] sm:h-[330px] md:h-[380px]',
+    borderRadius: 'rounded-[24px] sm:rounded-[30px]',
+    delay: 0,
   },
   {
     id: 2,
-    name: 'Arm 2',
-    rotateY: 30,
-    videoLeft: 'https://framerusercontent.com/assets/0O56ed5D4Df3A8PfmCNF5GC9eno.mp4',
-    videoRight: 'https://framerusercontent.com/assets/VLYpQEgJksWEMFbKP3YaHxFfVs.mp4',
-    titleLeft: 'Lifestyle Vlog',
-    titleRight: 'Tech Unboxing',
-    viewsLeft: '623K Views',
-    viewsRight: '1.1M Views',
+    video: 'https://framerusercontent.com/assets/0O56ed5D4Df3A8PfmCNF5GC9eno.mp4',
+    poster: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop',
+    title: 'Lifestyle Vlog',
+    views: '623K Views',
+    rotate: -6,
+    yOffset: -4,
+    width: 'w-[130px] sm:w-[180px] md:w-[210px]',
+    height: 'h-[220px] sm:h-[290px] md:h-[330px]',
+    borderRadius: 'rounded-[20px] sm:rounded-[26px]',
+    delay: 0.15,
   },
   {
     id: 3,
-    name: 'Arm 3',
-    rotateY: 60,
-    videoLeft: 'https://framerusercontent.com/assets/4e6W2vHiUa5qeeiGAcxaDg11GbM.mp4',
-    videoRight: 'https://framerusercontent.com/assets/4dSTZqfQShRZb2JWlBhMm2kAkA.mp4',
-    titleLeft: 'Product Unboxing',
-    titleRight: 'Fitness Reel',
-    viewsLeft: '487K Views',
-    viewsRight: '920K Views',
+    video: 'https://framerusercontent.com/assets/4e6W2vHiUa5qeeiGAcxaDg11GbM.mp4',
+    poster: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop',
+    title: 'Product Unboxing',
+    views: '487K Views',
+    rotate: -3,
+    yOffset: 8,
+    width: 'w-[110px] sm:w-[160px] md:w-[185px]',
+    height: 'h-[190px] sm:h-[260px] md:h-[290px]',
+    borderRadius: 'rounded-[18px] sm:rounded-[22px]',
+    delay: 0.3,
   },
   {
     id: 4,
-    name: 'Arm 4',
-    rotateY: 90,
-    videoLeft: 'https://framerusercontent.com/assets/18EExDeOIlPsFnEV5Fcbku7gdmo.mp4',
-    videoRight: 'https://framerusercontent.com/assets/09nVoDGdZaacUkvOk3LWbUqaFk.mp4',
-    titleLeft: 'Master Edit',
-    titleRight: 'Cinematic Ride',
-    viewsLeft: '2.4M Views',
-    viewsRight: '540K Views',
+    video: 'https://framerusercontent.com/assets/423HbpaxYIUVGK5fOFwnabw10.mp4',
+    poster: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
+    title: 'Master Edit',
+    views: '2.4M Views',
+    rotate: 0,
+    yOffset: 18,
+    width: 'w-[125px] sm:w-[175px] md:w-[205px]',
+    height: 'h-[210px] sm:h-[280px] md:h-[310px]',
+    borderRadius: 'rounded-[20px] sm:rounded-[24px]',
+    delay: 0.45,
   },
   {
     id: 5,
-    name: 'Arm 5',
-    rotateY: 120,
-    videoLeft: 'https://framerusercontent.com/assets/423HbpaxYIUVGK5fOFwnabw10.mp4',
-    videoRight: 'https://framerusercontent.com/assets/OUh0BxMeGqmebqe3OU950qgZd5Q.mp4',
-    titleLeft: 'Creator Interview',
-    titleRight: 'Brand Drop',
-    viewsLeft: '758K Views',
-    viewsRight: '1.5M Views',
+    video: 'https://framerusercontent.com/assets/18EExDeOIlPsFnEV5Fcbku7gdmo.mp4',
+    poster: 'https://images.unsplash.com/photo-1483721074892-4a858076436c?q=80&w=600&auto=format&fit=crop',
+    title: 'Fitness Reel',
+    views: '920K Views',
+    rotate: 3,
+    yOffset: 8,
+    width: 'w-[110px] sm:w-[160px] md:w-[185px]',
+    height: 'h-[190px] sm:h-[260px] md:h-[290px]',
+    borderRadius: 'rounded-[18px] sm:rounded-[22px]',
+    delay: 0.6,
   },
   {
     id: 6,
-    name: 'Arm 6',
-    rotateY: 150,
-    videoLeft: 'https://framerusercontent.com/assets/OF8Sj3bltaUyBpQsgUNxK11PKc.mp4',
-    videoRight: 'https://framerusercontent.com/assets/aaDgCGVVmNL57iUOvyPa1FHrT0.mp4',
-    titleLeft: 'Audiobook Spoken Word',
-    titleRight: 'Motion Reel',
-    viewsLeft: '390K Views',
-    viewsRight: '980K Views',
+    video: 'https://framerusercontent.com/assets/OF8Sj3bltaUyBpQsgUNxK11PKc.mp4',
+    poster: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop',
+    title: 'Cinematic Ride',
+    views: '540K Views',
+    rotate: 6,
+    yOffset: -4,
+    width: 'w-[130px] sm:w-[180px] md:w-[210px]',
+    height: 'h-[220px] sm:h-[290px] md:h-[330px]',
+    borderRadius: 'rounded-[20px] sm:rounded-[26px]',
+    delay: 0.75,
   },
   {
     id: 7,
-    name: 'Arm 7',
-    rotateY: 180,
-    videoLeft: 'https://framerusercontent.com/assets/FLMP26czSPqDNGSRZ1PfTOfD3E.mp4',
-    videoRight: 'https://framerusercontent.com/assets/XosFZVpUimK3yaRwQcx2OVdsuY.mp4',
-    titleLeft: 'VIP Circle Drop',
-    titleRight: 'Live Stream Highlights',
-    viewsLeft: '2.1M Views',
-    viewsRight: '670K Views',
+    video: 'https://framerusercontent.com/assets/FLMP26czSPqDNGSRZ1PfTOfD3E.mp4',
+    poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
+    title: 'Creator Interview',
+    views: '758K Views',
+    rotate: 10,
+    yOffset: -16,
+    width: 'w-[150px] sm:w-[210px] md:w-[240px]',
+    height: 'h-[250px] sm:h-[330px] md:h-[380px]',
+    borderRadius: 'rounded-[24px] sm:rounded-[30px]',
+    delay: 0.9,
   },
 ]
 
@@ -88,10 +102,10 @@ export function LandingHero() {
   // Cursor 3D spring tilt physics matching Framer Motion engine
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
-  const springX = useSpring(mouseX, { stiffness: 120, damping: 20 })
-  const springY = useSpring(mouseY, { stiffness: 120, damping: 20 })
-  const tiltRotateX = useTransform(springY, [-300, 300], [8, -8])
-  const tiltRotateY = useTransform(springX, [-500, 500], [-12, 12])
+  const springX = useSpring(mouseX, { stiffness: 150, damping: 20 })
+  const springY = useSpring(mouseY, { stiffness: 150, damping: 20 })
+  const tiltRotateX = useTransform(springY, [-300, 300], [6, -6])
+  const tiltRotateY = useTransform(springX, [-500, 500], [-8, 8])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -110,7 +124,7 @@ export function LandingHero() {
     <section
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen pt-28 pb-16 px-4 flex flex-col items-center justify-between overflow-hidden bg-[#090401] perspective-[1000px]"
+      className="relative min-h-screen pt-28 pb-16 px-4 flex flex-col items-center justify-between overflow-hidden bg-[#090401] perspective-[1200px]"
     >
       {/* Top-Left Gigantic Glowing Orange Radial Orb */}
       <div className="absolute top-[-120px] left-[-120px] w-[650px] h-[650px] rounded-full bg-gradient-to-br from-[#FF5500] via-[#E8501A] to-amber-700/20 blur-[140px] opacity-80 pointer-events-none z-0" />
@@ -172,80 +186,67 @@ export function LandingHero() {
         </motion.div>
       </div>
 
-      {/* Framer 3D Cylindrical Revolving Carousel Viewport */}
+      {/* 7-Card Fan-out Animated Video Carousel Container */}
       <motion.div
         style={{ rotateX: tiltRotateX, rotateY: tiltRotateY }}
-        className="relative z-10 w-full max-w-7xl mx-auto mt-16 md:mt-20 h-[380px] sm:h-[420px] flex items-center justify-center overflow-visible transform-gpu perspective-[1000px]"
+        className="relative z-10 w-full max-w-7xl mx-auto mt-16 md:mt-20 flex items-end justify-center gap-1.5 sm:gap-3.5 overflow-visible px-2 transform-gpu"
       >
-        {/* Continuous 3D Rotating Arms Container */}
-        <motion.div
-          animate={{ rotateY: [0, 360] }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          className="relative w-[800px] sm:w-[1100px] md:w-[1300px] h-[320px] sm:h-[360px] flex items-center justify-center transform-style-3d cursor-grab active:cursor-grabbing"
-        >
-          {arms.map((arm) => (
-            <div
-              key={arm.id}
-              style={{ transform: `rotateY(${arm.rotateY}deg)` }}
-              className="absolute w-full h-[240px] flex items-center justify-between pointer-events-auto transform-style-3d px-2"
-            >
-              {/* Left Video Box */}
-              <div
-                style={{ transform: 'rotateY(90deg)' }}
-                className="w-[170px] sm:w-[230px] md:w-[259px] h-[250px] sm:h-[340px] md:h-[389px] rounded-[24px] overflow-hidden border border-white/15 hover:border-[#E8501A] shadow-[0_24px_50px_rgba(0,0,0,0.85)] group bg-[#100B08] glass-shimmer-sweep transform-style-3d transition-transform duration-300 hover:scale-105"
-              >
-                <video
-                  src={arm.videoLeft}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-between text-left opacity-90 group-hover:opacity-100 transition-opacity">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-1 rounded-full bg-[#E8501A]/90 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-md backdrop-blur-md">
-                      <Play className="w-2.5 h-2.5 fill-current" />
-                      <span>Drop #{arm.id}A</span>
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-white font-heading block drop-shadow-md">{arm.titleLeft}</span>
-                    <span className="text-[10px] font-mono text-amber-300 font-semibold">{arm.viewsLeft}</span>
-                  </div>
-                </div>
-              </div>
+        {heroCards.map((card) => (
+          <motion.div
+            key={card.id}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{
+              opacity: 1,
+              y: [card.yOffset, card.yOffset - 10, card.yOffset],
+            }}
+            transition={{
+              y: {
+                duration: 5,
+                repeat: Infinity,
+                repeatType: 'mirror',
+                ease: 'easeInOut',
+                delay: card.delay,
+              },
+              opacity: { duration: 0.5, delay: card.delay },
+            }}
+            whileHover={{
+              scale: 1.1,
+              rotate: 0,
+              y: card.yOffset - 24,
+              zIndex: 50,
+              transition: { type: 'spring', stiffness: 300, damping: 20 },
+            }}
+            style={{ rotate: card.rotate }}
+            className={`relative ${card.width} ${card.height} ${card.borderRadius} overflow-hidden border border-white/12 hover:border-[#E8501A] shadow-[0_24px_50px_rgba(0,0,0,0.85)] group bg-[#100B08] cursor-pointer flex-shrink-0 glass-shimmer-sweep`}
+          >
+            {/* HTML5 Autoplay Looping Video Reel */}
+            <video
+              src={card.video}
+              poster={card.poster}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+            />
 
-              {/* Right Video Box */}
-              <div
-                style={{ transform: 'rotateY(-90deg)' }}
-                className="w-[170px] sm:w-[230px] md:w-[259px] h-[250px] sm:h-[340px] md:h-[389px] rounded-[24px] overflow-hidden border border-white/15 hover:border-[#E8501A] shadow-[0_24px_50px_rgba(0,0,0,0.85)] group bg-[#100B08] glass-shimmer-sweep transform-style-3d transition-transform duration-300 hover:scale-105"
-              >
-                <video
-                  src={arm.videoRight}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 flex flex-col justify-between text-left opacity-90 group-hover:opacity-100 transition-opacity">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-1 rounded-full bg-[#E8501A]/90 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-md backdrop-blur-md">
-                      <Play className="w-2.5 h-2.5 fill-current" />
-                      <span>Drop #{arm.id}B</span>
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-white font-heading block drop-shadow-md">{arm.titleRight}</span>
-                    <span className="text-[10px] font-mono text-amber-300 font-semibold">{arm.viewsRight}</span>
-                  </div>
-                </div>
+            {/* Play overlay gradient & glass shine */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-3.5 flex flex-col justify-between text-left opacity-90 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-between">
+                <span className="px-2.5 py-1 rounded-full bg-[#E8501A]/90 text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-md backdrop-blur-md">
+                  <Play className="w-2.5 h-2.5 fill-current" />
+                  <span>Reel #{card.id}</span>
+                </span>
+              </div>
+              <div>
+                <span className="text-xs font-bold text-white font-heading block drop-shadow-md">{card.title}</span>
+                <span className="text-[10px] font-mono text-amber-300 font-semibold">{card.views}</span>
               </div>
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
+        ))}
       </motion.div>
+
 
       {/* Floating Bottom Pill Badge */}
       <motion.div
