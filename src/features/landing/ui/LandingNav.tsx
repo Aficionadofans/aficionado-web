@@ -29,10 +29,14 @@ export function LandingNav() {
         {/* Brand Logo (Aficionado Brand + Framer Pill Aesthetic) */}
         <Link
           href="/"
-          className="flex items-center gap-2 focus-visible:outline-none rounded-full"
+          className="flex items-center gap-2.5 focus-visible:outline-none rounded-full group"
         >
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#FF5500] to-[#E8501A] flex items-center justify-center text-white shadow-[0_0_16px_rgba(232,80,26,0.5)]">
-            <Sparkles className="w-4 h-4 fill-current" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden bg-black/60 border border-white/15 flex items-center justify-center shadow-[0_0_20px_rgba(232,80,26,0.4)] group-hover:scale-105 transition-transform duration-300">
+            <img
+              src="/icon.png"
+              alt="Aficionado Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
           <span
             className="text-xl font-extrabold tracking-tight text-white font-heading"
@@ -41,6 +45,7 @@ export function LandingNav() {
             Aficionado<span className="text-[#E8501A]">.</span>
           </span>
         </Link>
+
 
 
         {/* Desktop Links */}

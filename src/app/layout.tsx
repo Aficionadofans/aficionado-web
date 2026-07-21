@@ -36,11 +36,18 @@ export const metadata: Metadata = {
   },
   description: 'The bold, conversion-focused sovereign creator platform for short-form video drops, live streams, and direct fan monetization.',
   metadataBase: new URL('https://aficionado.fans'),
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     siteName: 'Aficionado',
     type: 'website',
+    images: [{ url: '/logo.png', width: 1024, height: 1024, alt: 'Aficionado Logo' }],
   },
 }
+
 
 export default function RootLayout({
   children,
