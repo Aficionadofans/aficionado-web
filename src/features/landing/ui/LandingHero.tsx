@@ -17,7 +17,7 @@ export function LandingHero() {
 
         {/* H1 Display Title (Exact Bricolage Grotesque Pure White Text) */}
         <h1
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.035em] text-white leading-[1.04] max-w-5xl"
+          className="text-[2.75rem] sm:text-[4.5rem] md:text-[5.75rem] lg:text-[6.75rem] font-black tracking-[-0.04em] text-white leading-[0.98] max-w-6xl uppercase"
           style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
         >
           Short-form video editing that <br />
@@ -25,9 +25,10 @@ export function LandingHero() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-[#a1958d] max-w-2xl leading-relaxed font-sans font-normal">
+        <p className="text-lg sm:text-xl md:text-2xl text-[#a1958d] max-w-3xl leading-relaxed font-sans font-normal">
           We turn your raw clips into high-performing Reels, TikToks, and Shorts — designed to grab attention, boost engagement, and grow your audience faster.
         </p>
+
 
         {/* Action Buttons (Solid Orange CTA + Dark Secondary) */}
         <div className="flex flex-row items-center gap-4 mt-2">

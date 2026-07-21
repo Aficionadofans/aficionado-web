@@ -43,19 +43,20 @@ function SectionHeader({
         )}
         <div>
           {(number || label) && (
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary block">
-              {number && label ? `${number} / ${label}` : number || label}
+            <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#E8501A] block mb-2 font-mono">
+              {number && label ? `${number} • ${label}` : number || label}
             </span>
           )}
           <h2
-            className="text-2xl font-extrabold text-white tracking-tight"
-            style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.03em' }}
+            className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-[-0.035em] leading-[1.05]"
+            style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
           >
             {title}
           </h2>
           {subtitle && (
-            <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
+            <p className="text-base sm:text-lg text-muted-foreground mt-2 font-sans font-normal max-w-2xl">{subtitle}</p>
           )}
+
         </div>
         {action && (
           <div className="ml-auto flex-shrink-0 self-center">{action}</div>
