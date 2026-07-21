@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 import Link from 'next/link'
 import { Sparkles, ArrowUpRight, Film, Target, TrendingUp, Play } from 'lucide-react'
@@ -107,7 +108,22 @@ export function LandingHero() {
   const tiltRotateX = useTransform(springY, [-300, 300], [6, -6])
   const tiltRotateY = useTransform(springX, [-500, 500], [-8, 8])
 
+  // Force all video reels to play on mount to bypass browser autoplay blocks
+  useEffect(() => {
+    const playAllVideos = () => {
+      const vids = document.querySelectorAll('video')
+      vids.forEach((v) => {
+        v.muted = true
+        v.play().catch(() => {})
+      })
+    }
+    playAllVideos()
+    const timer = setTimeout(playAllVideos, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
