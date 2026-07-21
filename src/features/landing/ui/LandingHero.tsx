@@ -66,77 +66,102 @@ export function LandingHero() {
         </div>
 
 
-        {/* Interactive Media Showcase Card Frame (ClipCut Template Feature) */}
-        <div className="w-full max-w-4xl mt-8 rounded-2xl liquid-glass border border-white/12 p-3 sm:p-4 shadow-[0_24px_64px_rgba(0,0,0,0.8)] relative group overflow-hidden">
-          {/* Card header mockup */}
-          <div className="flex items-center justify-between px-3 py-2 border-b border-white/8 mb-3 text-xs text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/80" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <div className="w-3 h-3 rounded-full bg-green-500/80" />
-              <span className="ml-2 font-mono text-[11px]">aficionado.fans/live/@creator</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold text-[10px] uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" /> Live Session
+        {/* Animated Curved Cards 3D Stack Container (Framer Template Feature) */}
+        <div className="w-full max-w-5xl mt-12 relative flex items-center justify-center min-h-[420px] sm:min-h-[480px]">
+          {/* Back Curved Card Left (-6deg rotation) */}
+          <div className="curved-card p-6 w-[280px] sm:w-[340px] h-[360px] sm:h-[400px] absolute left-2 sm:left-12 top-4 -rotate-6 scale-95 opacity-60 hover:opacity-100 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 border border-[#E8501A]/30 bg-[#160E1A]/90 hidden md:flex flex-col justify-between shadow-2xl">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 rounded-full bg-[#E8501A]/20 border border-[#E8501A]/40 text-[#E8501A] text-[10px] font-bold uppercase tracking-wider">
+                Reels & TikTok Drop
               </span>
+              <span className="text-xs font-mono text-white/50">9:16 HD</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-2">
+              <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary mb-2">
+                <Play className="w-4 h-4 fill-current ml-0.5" />
+              </div>
+              <h4 className="text-base font-extrabold text-white font-heading">High-Retention Short Edits</h4>
+              <p className="text-xs text-muted-foreground">+420% Audience Retention & Reach</p>
+            </div>
+            <div className="p-3 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-primary">
+              <span>Views: 1.4M</span>
+              <span>100% Verified</span>
             </div>
           </div>
 
-          {/* Media Player Showcase Body */}
-          <div className="relative aspect-video rounded-xl bg-gradient-to-br from-[#121217] via-[#0E0E12] to-[#08080A] border border-white/8 overflow-hidden flex flex-col justify-between p-6">
-            {/* Background image mockup pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,212,200,0.15),transparent_60%)] pointer-events-none" />
-
-            {/* Top tags */}
-            <div className="relative z-10 flex items-center justify-between">
-              <span className="clipcut-pill px-3 py-1 text-[11px]">
-                Inner Circle Spotlight
+          {/* Back Curved Card Right (+6deg rotation) */}
+          <div className="curved-card p-6 w-[280px] sm:w-[340px] h-[360px] sm:h-[400px] absolute right-2 sm:right-12 top-4 rotate-6 scale-95 opacity-60 hover:opacity-100 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 border border-primary/30 bg-[#0C151A]/90 hidden md:flex flex-col justify-between shadow-2xl">
+            <div className="flex items-center justify-between">
+              <span className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-wider">
+                Gated Inner Circle
               </span>
-              <div className="flex items-center gap-2 text-xs font-mono text-white/70 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                <span>HD 4K</span>
-                <span>•</span>
-                <span>60 FPS</span>
+              <span className="text-xs font-mono text-emerald-400 font-bold">$49/mo</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-2">
+              <div className="w-10 h-10 rounded-full bg-[#E8501A]/20 border border-[#E8501A]/40 flex items-center justify-center text-[#E8501A] mb-2">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h4 className="text-base font-extrabold text-white font-heading">VIP Fan Vault & Stream</h4>
+              <p className="text-xs text-muted-foreground">Direct Fan Subscriptions straight to bank</p>
+            </div>
+            <div className="p-3 rounded-2xl bg-black/60 border border-white/10 flex items-center justify-between text-xs font-mono text-emerald-400 font-bold">
+              <span>Subscribers: 4,820</span>
+              <span>100% Payout</span>
+            </div>
+          </div>
+
+          {/* Center Main Hero Curved Card (0deg rotation, z-20) */}
+          <div className="curved-card-hover p-5 sm:p-7 w-full max-w-xl h-[380px] sm:h-[420px] relative z-20 flex flex-col justify-between border-2 border-[#E8501A]/50 bg-gradient-to-br from-[#1A1222]/95 via-[#110D18]/95 to-[#09060E]/95 shadow-[0_30px_70px_rgba(0,0,0,0.95)] group">
+            {/* Top Bar */}
+            <div className="flex items-center justify-between border-b border-white/10 pb-3 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <span className="font-mono text-[11px] text-muted-foreground ml-1">aficionado.fans/@sovereignty</span>
+              </div>
+              <span className="px-3 py-1 rounded-full bg-[#E8501A] text-black font-extrabold text-[10px] uppercase tracking-widest shadow-[0_0_12px_rgba(232,80,26,0.5)]">
+                LIVE DEMO
+              </span>
+            </div>
+
+            {/* Middle Player View */}
+            <div className="my-auto flex flex-col items-center gap-4 text-center">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-[#FF5500] to-[#E8501A] flex items-center justify-center text-white shadow-[0_0_30px_rgba(232,80,26,0.6)] group-hover:scale-110 transition-transform duration-300 cursor-pointer">
+                <Play className="w-8 h-8 sm:w-10 sm:h-10 fill-current ml-1" />
+              </div>
+              <div>
+                <h3
+                  className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase"
+                  style={{ fontFamily: 'var(--font-bricolage), var(--font-heading)' }}
+                >
+                  THE SOVEREIGN CREATOR ENGINE
+                </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-sm mx-auto mt-1">
+                  Experience short-form video drops & live streaming built with 2rem curved card containers.
+                </p>
               </div>
             </div>
 
-            {/* Play Button Center Overlay */}
-            <div className="relative z-10 my-auto flex flex-col items-center gap-3">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(0,212,200,0.4)] cursor-pointer">
-                <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1" />
-              </div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Watch Platform Demo
-              </span>
-            </div>
-
-            {/* Bottom creator bar */}
-            <div className="relative z-10 flex items-center justify-between bg-black/60 backdrop-blur-xl p-3 sm:p-4 rounded-xl border border-white/10">
-              <div className="flex items-center gap-3 text-left">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-emerald-400 p-[2px]">
-                  <div className="w-full h-full rounded-full bg-black flex items-center justify-center font-bold text-xs text-primary">
-                    AF
-                  </div>
+            {/* Bottom Metrics Bar */}
+            <div className="p-3 sm:p-4 rounded-2xl bg-black/70 border border-white/10 flex items-center justify-between text-xs font-mono">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-[#E8501A]/20 border border-[#E8501A] flex items-center justify-center text-xs font-bold text-[#E8501A]">
+                  AF
                 </div>
-                <div>
-                  <h4 className="text-sm font-bold text-foreground">Elena Vance</h4>
-                  <p className="text-xs text-muted-foreground">Exclusive Audio & Video Drops</p>
+                <div className="text-left">
+                  <div className="font-bold text-white">Sovereign Drop #08</div>
+                  <div className="text-[10px] text-muted-foreground">Short-Form Video & Audio</div>
                 </div>
               </div>
-              <div className="hidden sm:flex items-center gap-4 text-xs font-mono">
-                <div className="text-right">
-                  <div className="text-primary font-bold">12.4k</div>
-                  <div className="text-[10px] text-muted-foreground uppercase">Subscribers</div>
-                </div>
-                <div className="w-[1px] h-6 bg-white/15" />
-                <div className="text-right">
-                  <div className="text-emerald-400 font-bold">$18.5k</div>
-                  <div className="text-[10px] text-muted-foreground uppercase">Monthly Revenue</div>
-                </div>
+              <div className="text-right">
+                <div className="text-primary font-bold text-sm">$32.4k/mo</div>
+                <div className="text-[10px] text-muted-foreground uppercase">100% Direct Payout</div>
               </div>
             </div>
           </div>
         </div>
+
 
       </div>
     </section>
