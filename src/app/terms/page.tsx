@@ -4,22 +4,29 @@ import { ArrowLeft, Shield } from 'lucide-react'
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen w-full bg-black flex flex-col items-center py-12 px-6">
+    <div
+      className="min-h-screen w-full bg-background flex flex-col items-center py-12 px-6 animate-fade-in-up"
+      style={{ animationDuration: '350ms', animationFillMode: 'both' }}
+    >
       <div className="w-full max-w-3xl">
-        <div className="mb-12">
-          <Link href="/login" className="inline-flex items-center gap-2 text-bio-teal hover:text-bio-emerald transition-colors">
+        <div className="mb-8">
+          <Link href="/login" className="inline-flex items-center gap-2 text-primary hover:text-primary-hover transition-colors text-sm font-medium">
             <ArrowLeft className="w-4 h-4" /> Back to Login
           </Link>
         </div>
 
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 rounded-full bg-bio-teal/20 flex items-center justify-center border border-bio-teal/50 shadow-[0_0_20px_rgba(45,212,191,0.2)]">
-            <Shield className="w-6 h-6 text-bio-teal" />
+        {/* Editorial heading */}
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary block mb-2">01 / LEGAL</span>
+          <div className="flex items-center gap-4 mb-2">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/30 shadow-[0_0_20px_rgba(0,212,200,0.2)]">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Terms of Use</h1>
           </div>
-          <h1 className="text-4xl font-black text-white">Terms of Use</h1>
         </div>
 
-        <div className="space-y-8 text-white/80 leading-relaxed">
+        <div className="glass-panel rounded-2xl p-8 space-y-8 text-white/80 leading-relaxed">
           
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>

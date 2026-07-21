@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
 import { TipModal } from '@/features/monetization/ui/TipModal'
 import { VideoOverlayActions } from './VideoOverlayActions'
-import { Avatar, Button } from '@/shared/ui/core'
+import { Avatar, Button, Badge } from '@/shared/ui/core'
 
 export interface Video {
   id: string
@@ -184,50 +184,34 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                 onShare={handleShare}
               />
 
-              {/* Bottom-left creator info — Trend agency card layout */}
-              <div className="absolute left-4 bottom-22 max-w-[72%] z-10 pointer-events-auto">
-                <div
-                  className="p-3.5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-xl"
-                  style={{
-                    background: 'rgba(18, 18, 22, 0.85)',
-                  }}
-                >
+              {/* Bottom-left creator info — glass-panel overlay */}
+              <div
+                key={video.id}
+                className="absolute left-4 bottom-22 max-w-[72%] z-10 pointer-events-auto animate-fade-in-up"
+                style={{ animationDuration: '150ms', animationFillMode: 'both' }}
+              >
+                <div className="glass-panel p-3.5 rounded-2xl border border-white/10 shadow-2xl">
                   <div className="flex items-center gap-2.5 mb-2">
                     <Avatar
+                      src=""
+                      alt={video.creator}
                       name={video.creator}
                       size="sm"
-                      className="ring-2 ring-primary/40 flex-shrink-0"
+                      className="shimmer"
                     />
-                    <Link href={`/${video.creator}`}>
-                      <span className="text-sm font-bold text-white tracking-tight hover:text-primary transition-colors">
-                        @{video.creator}
-                      </span>
-                    </Link>
-
-                    {/* Subscribe / VIP */}
-                    {!isSubscribed ? (
-                      <Button
-                        variant="monetization"
-                        size="xs"
-                        rounded="full"
-                        onClick={() => toggleSubscribe(video.creator)}
-                        className="uppercase tracking-widest text-[9px] font-bold shadow-[0_0_12px_rgba(245,158,11,0.25)]"
-                      >
-                        Subscribe
-                      </Button>
-                    ) : (
-                      <div
-                        className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest"
-                        style={{
-                          background: 'rgba(245,158,11,0.15)',
-                          border: '1px solid rgba(245,158,11,0.4)',
-                          color: '#F59E0B',
-                        }}
-                      >
-                        <Star className="w-2.5 h-2.5 fill-[#F59E0B] text-[#F59E0B]" />
-                        VIP
+                    <div className="flex flex-col min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <Link href={`/${video.creator}`}>
+                          <span className="font-extrabold text-sm text-white tracking-tight hover:text-primary transition-colors">
+                            @{video.creator}
+                          </span>
+                        </Link>
+                        <Badge variant="default" className="text-[9px] py-0 px-1.5">
+                          ClipCut
+                        </Badge>
                       </div>
-                    )}
+                      <span className="text-[10px] text-primary font-semibold">1.2M Views</span>
+                    </div>
                   </div>
 
                   <p className="text-xs text-white/90 line-clamp-2 leading-relaxed tracking-tight">

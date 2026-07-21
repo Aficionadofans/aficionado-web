@@ -12,7 +12,7 @@ export default function LoginPage() {
 
       {/* Brand */}
       <div className="z-10 mb-8 text-center animate-fade-in-up">
-        <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-bio-teal via-primary to-bio-emerald">
+        <h1 className="text-5xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-primary">
           Aficionado
         </h1>
         <p className="mt-2 text-sm text-muted-foreground max-w-xs mx-auto">

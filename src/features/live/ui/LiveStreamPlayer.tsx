@@ -35,10 +35,10 @@ export function LiveStreamPlayer({ username, viewerCount = 1204 }: LiveStreamPla
           </Link>
           <div>
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_12px_rgba(239,68,68,0.9)]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-primary animate-breathe-calm shadow-[0_0_12px_rgba(0,212,200,0.9)]" />
               <h1 className="text-off-white font-black drop-shadow-md tracking-tight text-sm sm:text-base flex items-center gap-2">
                 <span>LIVE: @{username}&apos;s Watch Party</span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/30 text-[10px] font-bold text-red-400 uppercase tracking-widest">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-bold text-primary uppercase tracking-widest">
                   LIVE
                 </span>
               </h1>

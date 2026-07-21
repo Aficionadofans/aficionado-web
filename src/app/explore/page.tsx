@@ -4,6 +4,8 @@ import { DiscoverySearch } from "@/features/explore/ui/DiscoverySearch";
 import { CuratorCard } from "@/features/explore/ui/CuratorCard";
 import { CircleHighlight } from "@/features/explore/ui/CircleHighlight";
 import { CreatorSpotlight } from "@/features/explore/ui/CreatorSpotlight";
+import { SectionHeader } from "@/shared/ui/core";
+import { RevealSection } from "@/shared/ui/motion/RevealSection";
 import Link from "next/link";
 
 export default async function ExplorePage() {
@@ -48,22 +50,22 @@ export default async function ExplorePage() {
 
         <DiscoverySearch />
 
-        <div className="space-y-12">
+        <div>
           <section aria-label="Today&apos;s Featured Voices">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
-                <Star className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">01 / Featured Voices</span>
-                <h2 className="text-2xl font-extrabold text-white tracking-tight">Today&apos;s Voices</h2>
-              </div>
-            </div>
+            <SectionHeader
+              variant="editorial"
+              number="01"
+              label="Featured Voices"
+              title="Today's Voices"
+              icon={<Star className="w-5 h-5" />}
+            />
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {featuredCreators && featuredCreators.length > 0 ? (
                 featuredCreators.map((creator, index) => (
-                  <CuratorCard key={creator.id} creator={creator} index={index} />
+                  <RevealSection key={creator.id} delay={index * 80}>
+                    <CuratorCard creator={creator} index={index} />
+                  </RevealSection>
                 ))
               ) : (
                 <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
@@ -73,21 +75,23 @@ export default async function ExplorePage() {
             </div>
           </section>
 
+          <hr className="section-divider my-8" />
+
           <section aria-label="Featured Community Circles">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-2xl bg-[#121216] border border-white/10 flex items-center justify-center shadow-[0_0_20px_rgba(0,212,200,0.25)]">
-                <Hash className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">02 / Community Hubs</span>
-                <h2 className="text-2xl font-extrabold text-white tracking-tight">Featured Circles</h2>
-              </div>
-            </div>
+            <SectionHeader
+              variant="editorial"
+              number="02"
+              label="Community Hubs"
+              title="Featured Circles"
+              icon={<Hash className="w-5 h-5" />}
+            />
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {activeCircles && activeCircles.length > 0 ? (
                 activeCircles.map((circle, index) => (
-                  <CircleHighlight key={circle.id} circle={circle} index={index} />
+                  <RevealSection key={circle.id} delay={index * 80}>
+                    <CircleHighlight circle={circle} index={index} />
+                  </RevealSection>
                 ))
               ) : (
                 <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
@@ -97,8 +101,12 @@ export default async function ExplorePage() {
             </div>
           </section>
 
+          <hr className="section-divider my-8" />
+
           <CreatorSpotlight spotlights={creatorSpotlights || []} />
-          
+
+          <hr className="section-divider my-8" />
+
           {/* Anti-Dopamine Stopper */}
           <div className="pt-12 pb-8 text-center animate-fade-in-up">
             <div className="w-20 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto rounded-full mb-6"></div>

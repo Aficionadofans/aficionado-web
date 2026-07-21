@@ -15,8 +15,7 @@ export function CircleHighlight({ circle, index }: CircleHighlightProps) {
   return (
     <Link href={`/communities`}>
       <Card 
-        className="trend-card-hover border-white/10 cursor-pointer animate-fade-in-up overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60" 
-        style={{ animationDelay: `${(index + 5) * 100}ms`, animationFillMode: 'forwards' }}
+        className="trend-card-hover border-white/10 cursor-pointer overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 hover:shadow-[0_0_24px_rgba(0,212,200,0.35)] hover:border-primary/40"
       >
         <CardContent className="p-5 relative">
           <div className="flex justify-between items-start gap-2 mb-2">

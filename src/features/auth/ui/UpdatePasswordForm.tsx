@@ -59,7 +59,7 @@ export function UpdatePasswordForm() {
   }
 
   return (
-    <div className="w-full max-w-md space-y-8 liquid-glass p-8 relative overflow-hidden animate-fade-in-up">
+    <div className="w-full max-w-md space-y-8 liquid-glass p-8 relative overflow-hidden animate-fade-in-up" style={{ animationDuration: '350ms', animationFillMode: 'both' }}>
       <div className="absolute -top-20 -left-20 w-48 h-48 bg-primary/20 rounded-full blur-[80px] mix-blend-screen pointer-events-none" />
 
       <div className="relative">
@@ -141,7 +141,7 @@ export function UpdatePasswordForm() {
           <button
             type="submit"
             disabled={isLoading || mismatch || password.length < 8}
-            className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-full text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_4px_14px_0_rgba(0,240,181,0.39)] hover:shadow-[0_6px_20px_rgba(0,240,181,0.5)] hover:-translate-y-0.5 active:scale-95"
+            className="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-full text-primary-foreground bg-primary hover:bg-primary-hover focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] hover:-translate-y-0.5 active:scale-95"
           >
             {isLoading ? 'Updating…' : 'Update Password'}
           </button>

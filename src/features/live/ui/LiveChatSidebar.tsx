@@ -101,7 +101,7 @@ export function LiveChatSidebar({ username }: { username: string }) {
   }
 
   return (
-    <div className="w-full h-[45vh] md:h-full md:w-[380px] flex flex-col liquid-glass border-l-0 md:border-l border-white/10 z-20 rounded-none rounded-t-3xl md:rounded-none shadow-[-20px_0_50px_rgba(0,0,0,0.5)] bg-background/40 backdrop-blur-[40px]">
+    <div className="w-full h-[45vh] md:h-full md:w-[380px] flex flex-col liquid-glass hide-scrollbar border-l-0 md:border-l border-white/10 z-20 rounded-none rounded-t-3xl md:rounded-none shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
       {/* Chat Header */}
       <div className="p-4 sm:p-5 border-b border-white/5 flex items-center justify-between">
         <div className="flex items-center gap-3">

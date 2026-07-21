@@ -40,7 +40,7 @@ export default async function AdminUsersPage() {
               users.map((u, i) => (
                 <tr
                   key={u.id}
-                  className="border-b border-border last:border-0 transition-colors hover:bg-[rgba(255,255,255,0.02)]"
+                  className="border-b border-border last:border-0 transition-colors hover:bg-primary/5"
                   style={i % 2 !== 0 ? { background: 'rgba(255,255,255,0.01)' } : undefined}
                 >
                   <td className="px-4 py-3 font-medium text-foreground">

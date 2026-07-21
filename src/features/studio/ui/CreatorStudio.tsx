@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { TrendingUp } from 'lucide-react'
+import { SectionHeader } from '@/shared/ui/core'
 import { CreateDropModal } from './CreateDropModal'
 import { TimeCapsuleModal } from './TimeCapsuleModal'
 import { StudioQuickActions } from './StudioQuickActions'
@@ -33,12 +34,14 @@ export function CreatorStudio({
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12 pb-20 md:pb-12">
       <header className="mb-10 animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full liquid-glass border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-3 shadow-[0_0_15px_rgba(0,212,200,0.15)]">
-          <TrendingUp className="w-3.5 h-3.5" />
-          <span>Creator Hub</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-off-white drop-shadow-md">Creator Studio</h1>
-        <p className="mt-2 text-muted-foreground text-sm font-medium leading-relaxed">Manage your content, engage your fans, and track community growth.</p>
+        <SectionHeader
+          variant="editorial"
+          number="01"
+          label="YOUR STUDIO"
+          title="Creator Studio"
+          icon={<TrendingUp className="w-5 h-5" />}
+          subtitle="Manage your content, engage your fans, and track community growth."
+        />
       </header>
 
       {/* Quick Actions */}

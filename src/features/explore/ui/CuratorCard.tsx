@@ -20,8 +20,7 @@ export function CuratorCard({ creator, index }: CuratorCardProps) {
   return (
     <Link href={`/creator`}>
       <Card 
-        className="trend-card-hover border-white/10 cursor-pointer animate-fade-in-up overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60" 
-        style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+        className="trend-card-hover border-white/10 cursor-pointer overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 hover:shadow-[0_0_24px_rgba(0,212,200,0.35)]"
       >
         <CardContent className="p-5 flex items-center gap-4 relative">
           <div className="relative">

@@ -121,10 +121,11 @@ export function AuthForm() {
   const displaySuccess = submittedMode === mode ? (state?.success ?? null) : null
 
   return (
-    <div className="flex min-h-dvh items-center justify-center p-4">
+    <>
       <GlassCard
         variant="raised"
-        className="w-full max-w-sm p-8 space-y-6 relative overflow-hidden"
+        className="w-full max-w-sm p-8 space-y-6 relative overflow-hidden animate-fade-in-up"
+        style={{ animationDuration: '350ms', animationFillMode: 'both' }}
       >
         {/* Ambient teal glow top-left */}
         <div
@@ -157,8 +158,8 @@ export function AuthForm() {
           </p>
         </div>
 
-        {/* Mode tabs — Trend agency pill toggle */}
-        <div className="relative flex items-center rounded-2xl p-1 bg-[#121216] border border-white/10 shadow-lg">
+        {/* Mode tabs — ClipCut rose pill toggle */}
+        <div className="relative flex items-center rounded-2xl p-1 bg-[#100F17] border border-primary/30 shadow-lg">
           {(['login', 'signup'] as const).map((m) => (
             <button
               key={m}
@@ -167,8 +168,8 @@ export function AuthForm() {
               className={[
                 'flex-1 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
                 mode === m
-                  ? 'bg-primary text-primary-foreground shadow-[0_2px_12px_rgba(0,212,200,0.3)] font-bold'
-                  : 'text-muted-foreground hover:text-foreground',
+                  ? 'bg-primary text-primary-foreground shadow-[0_2px_14px_rgba(0,212,200,0.45)] font-extrabold'
+                  : 'text-muted-foreground hover:text-white',
               ].join(' ')}
             >
               {m === 'login' ? 'Login' : 'Sign Up'}
@@ -176,8 +177,9 @@ export function AuthForm() {
           ))}
         </div>
 
+        <div key={mode} className="animate-fade-in-up" style={{ animationDuration: '200ms', animationFillMode: 'both' }}>
         {displaySuccess ? (
-          <div className="text-primary text-sm text-center p-4 bg-primary/10 border border-primary/20 rounded-xl animate-fade-in-up">
+          <div className="text-primary text-sm text-center p-4 bg-primary/10 border border-primary/20 rounded-xl">
             {displaySuccess}
           </div>
         ) : (
@@ -327,6 +329,8 @@ export function AuthForm() {
           </form>
         )}
 
+        </div>
+
         {/* OAuth */}
         {(mode === 'login' || mode === 'signup') && (
           <div className="space-y-4 animate-fade-in-up">
@@ -363,6 +367,6 @@ export function AuthForm() {
           </div>
         )}
       </GlassCard>
-    </div>
+    </>
   )
 }

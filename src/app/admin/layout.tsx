@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
 import type { Metadata } from 'next'
 import { AdminSidebar } from './AdminSidebar'
-import { Sparkles } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Admin Center — Aficionado',
@@ -23,17 +22,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <div className="flex flex-col md:flex-row min-h-screen pt-6 px-4 md:px-6 pb-20 md:pb-8 max-w-7xl mx-auto gap-6">
       {/* Admin sidebar panel */}
       <aside className="w-full md:w-56 shrink-0">
-        <div
-          className="sticky top-6 rounded-[var(--radius-xl)] p-5 shimmer"
-          style={{
-            background: 'rgba(9,9,11,0.92)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.06)',
-            boxShadow: '0 8px 28px rgba(0,0,0,0.5)',
-          }}
-        >
+        <div className="sticky top-6 glass-panel rounded-[var(--radius-xl)] p-5">
           {/* Admin brand mark */}
-          <div className="flex items-center gap-2.5 mb-5 px-1">
+          <div className="flex items-center gap-2.5 mb-2 px-1">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
               style={{
@@ -47,15 +38,18 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             </div>
             <div>
               <h2
-                className="text-sm font-bold tracking-tight text-foreground"
+                className="text-sm font-bold tracking-tight text-foreground flex items-center gap-1.5"
                 style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.02em' }}
               >
                 Admin Center
+                <span className="px-1.5 py-0.5 rounded-full border border-[#F59E0B]/30 text-[9px] font-bold uppercase text-[#F59E0B]">
+                  Admin
+                </span>
               </h2>
-              <span className="text-[9px] text-primary/60 uppercase tracking-[0.12em] flex items-center gap-0.5">
-                <Sparkles className="w-2 h-2" /> Aficionado
-              </span>
             </div>
+          </div>
+          <div className="px-1 mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+            01 / Admin Panel
           </div>
           <AdminSidebar />
         </div>

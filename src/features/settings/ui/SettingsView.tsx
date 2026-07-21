@@ -5,6 +5,8 @@ import { User, Shield, CreditCard, DollarSign, Wallet } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/shared/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { SectionHeader } from '@/shared/ui/core'
+import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
 type Tab = 'profile' | 'subscriptions' | 'payment' | 'monetization' | 'security'
 
@@ -39,12 +41,19 @@ export function SettingsView({ userType, email, username, bio, avatarUrl, zipCod
     <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-6 min-h-[80dvh] pb-20 md:pb-8">
       {/* Sidebar */}
       <aside className="w-full md:w-56 flex-shrink-0 animate-fade-in-up">
-        <h1
-          className="text-3xl font-bold text-foreground mb-6"
-          style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
-        >
-          Settings
-        </h1>
+        <SectionHeader
+          variant="editorial"
+          number="01"
+          label="ACCOUNT"
+          title="Settings"
+          icon={<User className="w-5 h-5" />}
+          className="mb-4"
+        />
+        {userType && (
+          <span className="inline-flex items-center px-3 py-1 rounded-full glass-pill border-primary/40 text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
+            {userType === 'aficionado' ? 'Aficionado ✦' : 'Fan'}
+          </span>
+        )}
         <nav className="flex flex-row md:flex-col gap-1 overflow-x-auto hide-scrollbar">
           {tabs.map(tab => (
             <button
@@ -78,17 +87,10 @@ export function SettingsView({ userType, email, username, bio, avatarUrl, zipCod
       </aside>
 
       {/* Content */}
-      <main
-        className="flex-1 rounded-[var(--radius-xl)] p-6 md:p-8 relative overflow-hidden"
-        style={{
-          background: 'rgba(17,17,19,0.7)',
-          backdropFilter: 'blur(24px)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-        }}
-      >
-        {activeTab === 'profile' && (
-          <ProfileTab
+      <RevealSection delay={100} className="flex-1">
+        <main className="flex-1 trend-card rounded-[var(--radius-xl)] p-6 md:p-8 relative overflow-hidden">
+          {activeTab === 'profile' && (
+            <ProfileTab
             username={username}
             bio={bio}
             zipCode={zipCode}
@@ -98,7 +100,8 @@ export function SettingsView({ userType, email, username, bio, avatarUrl, zipCod
         {activeTab === 'subscriptions' && <SubscriptionsTab />}
         {activeTab === 'payment' && <PaymentTab />}
         {activeTab === 'security' && <SecurityTab email={email} />}
-      </main>
+        </main>
+      </RevealSection>
     </div>
   )
 }

@@ -7,6 +7,34 @@ import { ArrowLeft, Grip, Lock, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useCountUp } from '@/shared/hooks/useCountUp'
+import { useRevealOnScroll } from '@/shared/hooks/useRevealOnScroll'
+
+// Internal stat counter component — not exported
+function StatCounter({ label, target }: { label: string; target: number }) {
+  const { ref, isVisible } = useRevealOnScroll()
+  const { value, start } = useCountUp(target)
+
+  useEffect(() => {
+    if (isVisible) {
+      start()
+    }
+  }, [isVisible, start])
+
+  const display = target >= 1000
+    ? `${(value / 1000).toFixed(1)}K`
+    : value.toString()
+
+  return (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="flex flex-col items-center gap-0.5"
+    >
+      <span className="text-2xl font-extrabold text-off-white tabular-nums">{display}</span>
+      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">{label}</span>
+    </div>
+  )
+}
 
 interface Profile {
   id: string
@@ -103,6 +131,59 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
         </div>
       </header>
 
+      {/* Hero Section */}
+      <div
+        className="clipcut-hero-gradient flex flex-col items-center pt-10 pb-8 px-6 gap-4 animate-fade-in-up"
+        style={{ animationDelay: '80ms' }}
+      >
+        {/* Editorial label */}
+        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary">
+          01 / CREATOR PROFILE
+        </span>
+
+        {/* Avatar */}
+        {profile.avatar_url ? (
+          <div className="relative">
+            <Image
+              src={profile.avatar_url}
+              alt={profile.username}
+              width={96}
+              height={96}
+              className="w-24 h-24 rounded-full object-cover ring-2 ring-primary/60 shadow-[0_0_24px_rgba(0,212,200,0.35)]"
+            />
+          </div>
+        ) : (
+          <div className="w-24 h-24 rounded-full bg-white/10 ring-2 ring-primary/60 shadow-[0_0_24px_rgba(0,212,200,0.35)]" />
+        )}
+
+        {/* Username */}
+        <h2 className="font-extrabold text-3xl text-off-white tracking-tight">
+          @{profile.username}
+        </h2>
+
+        {/* Verified badge */}
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-bold text-primary uppercase tracking-widest shadow-[0_0_10px_rgba(0,212,200,0.2)]">
+          ✓ Verified
+        </span>
+
+        {/* CTA Buttons */}
+        <div className="flex items-center gap-3 mt-1">
+          <button className="bg-primary text-primary-foreground rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+            Subscribe
+          </button>
+          <button className="bg-[#F59E0B] text-[#080808] rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_16px_rgba(245,158,11,0.3)] hover:shadow-[0_0_24px_rgba(245,158,11,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60">
+            Tip ✦
+          </button>
+        </div>
+
+        {/* Stat counters */}
+        <div className="flex items-start justify-center gap-10 pt-2 w-full">
+          <StatCounter label="Subscribers" target={subscriberCount} />
+          <StatCounter label="Content" target={contentItems.length} />
+          <StatCounter label="Inner Circle" target={0} />
+        </div>
+      </div>
+
       {/* Bio */}
       {profile.bio && (
         <div className="px-6 py-6 border-b border-white/5 flex flex-col items-center text-center animate-fade-in-up">
@@ -168,8 +249,12 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
                 <Link
                   key={item.id}
                   href={`/content/${item.id}`}
-                  className="aspect-[9/16] bg-white/5 relative overflow-hidden group cursor-pointer animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  style={{ animationDelay: `${index * 0.05}s` }}
+                  className="aspect-[9/16] relative overflow-hidden group cursor-pointer animate-fade-in-up focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-all duration-300 hover:shadow-[0_0_24px_rgba(0,212,200,0.35)] hover:border-primary/40"
+                  style={{
+                    background: '#100F17',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    animationDelay: `${index * 0.05}s`,
+                  }}
                 >
                   {item.mux_playback_id ? (
                     <img
