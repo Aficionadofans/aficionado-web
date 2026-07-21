@@ -1,12 +1,15 @@
 import { LandingNav } from './LandingNav'
 import { LandingHero } from './LandingHero'
 import { LandingMarquee } from './LandingMarquee'
-import { LandingStats } from './LandingStats'
-import { LandingProblemSolution } from './LandingProblemSolution'
-import { LandingFeatures } from './LandingFeatures'
+import { LandingProblem } from './LandingProblem'
+import { LandingFix } from './LandingFix'
+import { LandingServices } from './LandingServices'
 import { LandingProcess } from './LandingProcess'
 import { LandingShowcase } from './LandingShowcase'
+import { LandingResultsGrid } from './LandingResultsGrid'
+import { LandingTestimonial } from './LandingTestimonial'
 import { LandingPricing } from './LandingPricing'
+import { LandingToolsMarquee } from './LandingToolsMarquee'
 import { LandingFAQ } from './LandingFAQ'
 import { LandingCTA } from './LandingCTA'
 import { LandingFooter } from './LandingFooter'
@@ -18,12 +21,15 @@ export function LandingPage() {
       <main className="flex-1 w-full">
         <LandingHero />
         <LandingMarquee />
-        <LandingStats />
-        <LandingProblemSolution />
-        <LandingFeatures />
+        <LandingProblem />
+        <LandingFix />
+        <LandingServices />
         <LandingProcess />
         <LandingShowcase />
+        <LandingResultsGrid />
+        <LandingTestimonial />
         <LandingPricing />
+        <LandingToolsMarquee />
         <LandingFAQ />
         <LandingCTA />
       </main>
@@ -31,5 +37,6 @@ export function LandingPage() {
     </div>
   )
 }
+
 
 
