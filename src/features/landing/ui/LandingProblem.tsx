@@ -1,5 +1,6 @@
 'use client'
 
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 import { TrendingDown, Coins, CalendarX } from 'lucide-react'
@@ -8,18 +9,25 @@ export function LandingProblem() {
   return (
     <section className="py-24 px-4 relative z-10 bg-[#07070A] border-t border-white/8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
           <SectionHeader
             variant="editorial"
             number="01"
             label="THE PROBLEM"
-            title="Great content, but no real growth?"
-            className="mb-4"
+            title=""
+            className="mb-2"
           />
-          <p className="text-sm sm:text-base text-muted-foreground">
+          <WordReveal
+            as="h2"
+            text="Great content, but no real growth?"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-heading tracking-tight mb-4"
+            stagger={0.06}
+          />
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
             You’re spending hours creating videos, but the results just don’t match the effort. The problem isn’t consistency — it’s what happens after people hit play.
           </p>
         </div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Views that don't convert */}

@@ -1,5 +1,6 @@
 'use client'
 
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
@@ -36,18 +37,25 @@ export function LandingFix() {
   return (
     <section className="py-24 px-4 relative z-10 bg-[#0A070D] border-t border-white/8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
           <SectionHeader
             variant="editorial"
             number="02"
             label="HOW WE FIX IT"
-            title="A done-for-you sovereign content system"
-            className="mb-4"
+            title=""
+            className="mb-2"
           />
-          <p className="text-sm sm:text-base text-muted-foreground">
+          <WordReveal
+            as="h2"
+            text="A done-for-you sovereign content system"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-heading tracking-tight mb-4"
+            stagger={0.06}
+          />
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
             We don’t just host videos — we engineer each drop for retention, reach, and direct fan monetization. You drop the content, we handle everything else.
           </p>
         </div>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => (

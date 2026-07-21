@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
+
 import Link from 'next/link'
 import { Sparkles, ArrowUpRight, Film, Target, TrendingUp, Play } from 'lucide-react'
 
@@ -158,16 +160,15 @@ export function LandingHero() {
           <span>Trusted by 100+ creators & brands</span>
         </motion.div>
 
-        {/* H1 Display Title (Exact Bricolage Grotesque Pure White Text) */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        {/* H1 Display Title with Smooth Word-by-Word Reveal */}
+        <WordReveal
+          as="h1"
+          text="Short-form video editing that actually gets results"
           className="framer-h1 max-w-[856px]"
-        >
-          Short-form video editing that <br />
-          actually gets results
-        </motion.h1>
+          delay={0.1}
+          stagger={0.06}
+        />
+
 
         {/* Subtitle */}
         <motion.p
