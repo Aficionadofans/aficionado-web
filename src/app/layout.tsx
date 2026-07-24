@@ -33,10 +33,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aficionado',
+    default: 'Aficionado | Anti-dopamine Social Media',
     template: '%s | Aficionado',
   },
-  description: 'The bold, conversion-focused sovereign creator platform for short-form video drops, live streams, and direct fan monetization.',
+  description: 'The anti-dopamine social media platform for Aficionado and Fans. A finite, healthy feed for sovereign creators.',
   metadataBase: new URL('https://aficionado.fans'),
   icons: {
     icon: '/icon.png',
