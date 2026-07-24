@@ -15,6 +15,7 @@ import { SectionHeader, StatCounter } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 import { CreateDropModal } from './CreateDropModal'
 import { TimeCapsuleModal } from './TimeCapsuleModal'
+import { ImportFansModal } from './ImportFansModal'
 import { StudioQuickActions } from './StudioQuickActions'
 import { StudioMetricCards } from './StudioMetricCards'
 
@@ -74,6 +75,7 @@ export function CreatorStudio({
 }: CreatorStudioProps) {
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
   const [isTimeCapsuleModalOpen, setIsTimeCapsuleModalOpen] = useState(false)
+  const [isImportFansModalOpen, setIsImportFansModalOpen] = useState(false)
 
   const liveUrl = username ? `/live/${username}` : '#'
 
@@ -326,6 +328,7 @@ export function CreatorStudio({
         username={username}
         onOpenDropModal={() => setIsDropModalOpen(true)}
         onOpenTimeCapsuleModal={() => setIsTimeCapsuleModalOpen(true)}
+        onOpenImportFansModal={() => setIsImportFansModalOpen(true)}
       />
 
       <StudioMetricCards
@@ -337,6 +340,7 @@ export function CreatorStudio({
       {/* Modals */}
       {isDropModalOpen && <CreateDropModal onClose={() => setIsDropModalOpen(false)} />}
       {isTimeCapsuleModalOpen && <TimeCapsuleModal onClose={() => setIsTimeCapsuleModalOpen(false)} />}
+      {isImportFansModalOpen && <ImportFansModal onClose={() => setIsImportFansModalOpen(false)} username={username} />}
     </div>
   )
 }

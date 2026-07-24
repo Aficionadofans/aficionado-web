@@ -30,9 +30,10 @@ interface Props {
   subscriberCount: number
   contentItems: ContentItem[]
   circleId: string
+  source?: string
 }
 
-export function CreatorProfileClient({ profile, subscriberCount, contentItems, circleId }: Props) {
+export function CreatorProfileClient({ profile, subscriberCount, contentItems, circleId, source }: Props) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'feed' | 'circle'>('feed')
   const [scrolled, setScrolled] = useState(false)
@@ -103,6 +104,15 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
           </div>
         </div>
       </header>
+
+      {/* Dynamic Welcome Banner for imported fans */}
+      {source && (
+        <div className="bg-primary/10 border-b border-primary/20 py-2.5 px-4 text-center animate-in slide-in-from-top-4 duration-500">
+          <p className="text-sm text-primary font-bold tracking-tight">
+            Welcome, {source.charAt(0).toUpperCase() + source.slice(1)} supporters! @{profile.username} has a special Inner Circle space for you here.
+          </p>
+        </div>
+      )}
 
       {/* Hero Section */}
       <div

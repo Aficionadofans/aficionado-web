@@ -4,10 +4,14 @@ import { CreatorProfileClient } from './CreatorProfileClient'
 
 export default async function CreatorProfilePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ username: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const { username } = await params
+  const resolvedSearchParams = await searchParams
+  const source = typeof resolvedSearchParams.source === 'string' ? resolvedSearchParams.source : undefined
   const supabase = await createClient()
 
   // Fetch creator profile
@@ -49,6 +53,7 @@ export default async function CreatorProfilePage({
       subscriberCount={subscriberCount ?? 0}
       contentItems={contentItems ?? []}
       circleId={circle?.id ?? ''}
+      source={source}
     />
   )
 }

@@ -8,6 +8,7 @@ interface StudioQuickActionsProps {
   username: string
   onOpenDropModal: () => void
   onOpenTimeCapsuleModal: () => void
+  onOpenImportFansModal: () => void
 }
 
 export function StudioQuickActions({
@@ -71,6 +72,21 @@ export function StudioQuickActions({
           <Lock className="w-7 h-7 text-indigo-400" />
         </div>
         <span className="text-base font-bold text-indigo-400 tracking-tight text-center">Time Capsule</span>
+      </button>
+
+      <button
+        onClick={onOpenImportFansModal}
+        className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-emerald-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+      >
+        <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+          <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+        </div>
+        <span className="text-base font-bold text-emerald-500 tracking-tight text-center">Import Fans</span>
       </button>
 
       <button
