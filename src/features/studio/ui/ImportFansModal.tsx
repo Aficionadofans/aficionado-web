@@ -53,6 +53,10 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
 
   const handleImport = async () => {
     if (parsedEmails.length === 0) return
+    if (parsedEmails.length > 500) {
+      alert('Maximum 500 fans can be imported at once to prevent spam. Please split your CSV into smaller files.')
+      return
+    }
     setImportStatus('importing')
 
     try {
@@ -61,7 +65,7 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
     } catch (err) {
       console.error(err)
       setImportStatus('idle')
-      alert('Failed to import fans. Please try again.')
+      alert(err instanceof Error ? err.message : 'Failed to import fans. Please try again.')
     }
   }
 
