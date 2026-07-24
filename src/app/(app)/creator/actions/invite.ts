@@ -9,7 +9,7 @@ export async function processFanImport(emails: { email: string; name?: string }[
     throw new Error('Maximum 500 fans can be imported at once to prevent spam.')
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   
   const { data: { user }, error: authError } = await supabase.auth.getUser()
   if (authError || !user) {

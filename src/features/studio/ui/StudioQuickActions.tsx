@@ -15,6 +15,7 @@ export function StudioQuickActions({
   username,
   onOpenDropModal,
   onOpenTimeCapsuleModal,
+  onOpenImportFansModal,
 }: StudioQuickActionsProps) {
   const liveUrl = username ? `/live/${username}` : '#'
 
