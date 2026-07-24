@@ -163,7 +163,7 @@ export function LandingHero() {
         {/* H1 Display Title with Smooth Word-by-Word Reveal */}
         <WordReveal
           as="h1"
-          text="Short-form video editing that actually gets results"
+          text="Anti-dopamine social media for Aficionado and Fans"
           className="framer-h1 max-w-[856px]"
           delay={0.1}
           stagger={0.06}
