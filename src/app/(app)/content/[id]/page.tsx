@@ -18,12 +18,11 @@ async function getContent(id: string): Promise<Content | null> {
 }
 
 async function getMuxToken(playbackId: string, contentId: string): Promise<string | undefined> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/mux/sign?playbackId=${playbackId}&contentId=${contentId}`,
-    { cache: 'no-store' }
-  )
-  if (!res.ok) return undefined
-  const data = await res.json()
+  const supabase = await createClient()
+  const { data, error } = await supabase.functions.invoke('mux-sign', {
+    body: { playbackId, contentId },
+  })
+  if (error || !data?.token) return undefined
   return data.token
 }
 

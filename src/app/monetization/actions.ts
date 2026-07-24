@@ -22,25 +22,20 @@ export async function submitTip(formData: FormData) {
 
   if (!user) throw new Error('Not authenticated')
 
-  // Create Stripe checkout session via API route
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/stripe/checkout`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+  // Create Stripe checkout session via Supabase Edge Function
+  const { data, error } = await supabase.functions.invoke('stripe-checkout', {
+    body: {
       type: 'tip',
       amount: Math.round(amountNum * 100), // cents
       creatorId,
       fanId: user.id,
       message,
-    }),
+    },
   })
 
-  if (!res.ok) {
-    const err = await res.json()
-    throw new Error(err.error ?? 'Failed to process tip')
+  if (error || !data?.url) {
+    throw new Error(error?.message ?? data?.error ?? 'Failed to process tip')
   }
 
-  const { url } = await res.json()
-
-  return { success: true, url }
+  return { success: true, url: data.url }
 }
