@@ -10,6 +10,7 @@ interface Plan {
   badge?: string
   originalMonthlyPrice?: string
   originalAnnualPrice?: string
+  discountPercent?: string
   monthlyPrice: string
   annualPrice: string
   description: string
@@ -24,6 +25,7 @@ const plans: Plan[] = [
     name: 'Starter Plan',
     originalMonthlyPrice: '$699',
     originalAnnualPrice: '$559',
+    discountPercent: '60%',
     monthlyPrice: '$279',
     annualPrice: '$223',
     description: 'Perfect for creators & brands just getting started with short-form content.',
@@ -43,8 +45,9 @@ const plans: Plan[] = [
     badge: 'MOST POPULAR',
     originalMonthlyPrice: '$1,499',
     originalAnnualPrice: '$1,199',
-    monthlyPrice: '$599',
-    annualPrice: '$479',
+    discountPercent: '50%',
+    monthlyPrice: '$749',
+    annualPrice: '$599',
     description: 'For creators & brands ready to scale content reach and retention consistently.',
     highlighted: true,
     features: [
@@ -64,8 +67,9 @@ const plans: Plan[] = [
     badge: 'ENTERPRISE',
     originalMonthlyPrice: '$2,799',
     originalAnnualPrice: '$2,239',
-    monthlyPrice: '$1,119',
-    annualPrice: '$895',
+    discountPercent: '25%',
+    monthlyPrice: '$2,099',
+    annualPrice: '$1,679',
     description: 'Best for agencies & media studios scaling content at high volume.',
     features: [
       '30+ short-form video drops/month',
@@ -100,7 +104,7 @@ export function LandingPricing() {
           </p>
 
           <div className="mt-6 inline-flex animate-pulse items-center gap-2 rounded-full bg-primary/20 px-4 py-1.5 text-sm font-bold text-primary ring-1 ring-primary/30 shadow-[0_0_15px_rgba(0,212,200,0.4)]">
-            <Zap className="h-4 w-4 fill-current" /> LIMITED TIME: 60% OFF ALL PLANS
+            <Zap className="h-4 w-4 fill-current" /> LIMITED TIME: UP TO 60% OFF ALL PLANS
           </div>
 
           {/* Billing Toggle */}
@@ -176,7 +180,7 @@ export function LandingPricing() {
                       {isAnnual ? plan.originalAnnualPrice : plan.originalMonthlyPrice}
                     </span>
                     <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-bold text-primary">
-                      -60%
+                      -{plan.discountPercent}
                     </span>
                   </div>
                   <div className="flex items-baseline gap-1 mt-1">
