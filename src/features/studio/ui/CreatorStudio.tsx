@@ -9,6 +9,8 @@ import {
   ShieldCheck,
   AlertTriangle,
   FileText,
+  UserPlus,
+  Share2
 } from 'lucide-react'
 import Link from 'next/link'
 import { SectionHeader, StatCounter } from '@/shared/ui/core'
@@ -103,6 +105,30 @@ export function CreatorStudio({
       description: 'Update your bio, avatar, and display name',
       href: '/settings',
     },
+    {
+      icon: <UserPlus className="w-5 h-5 text-emerald-500" />,
+      title: 'Import Fans',
+      description: 'Upload a CSV to invite your existing audience',
+      onClick: () => setIsImportFansModalOpen(true),
+    },
+    {
+      icon: <Share2 className="w-5 h-5 text-amber-500" />,
+      title: 'Invite Fans',
+      description: 'Share your Inner Circle link on social media',
+      onClick: () => {
+        const url = `${window.location.origin}/${username}`
+        if (navigator.share) {
+          navigator.share({
+            title: `Join my Inner Circle`,
+            text: `Unlock exclusive behind-the-scenes content and direct chat with me!`,
+            url: url
+          }).catch(console.error)
+        } else {
+          navigator.clipboard.writeText(url)
+          alert('Link copied to clipboard!')
+        }
+      },
+    }
   ]
 
   // Placeholder recent content items (first 5 from flagged + padding with stubs)
@@ -177,7 +203,7 @@ export function CreatorStudio({
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {quickActions.map((action, index) => {
             const inner = (
               <>
