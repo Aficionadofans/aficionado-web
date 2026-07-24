@@ -8,6 +8,8 @@ import { SectionHeader } from '@/shared/ui/core'
 interface Plan {
   name: string
   badge?: string
+  originalMonthlyPrice?: string
+  originalAnnualPrice?: string
   monthlyPrice: string
   annualPrice: string
   description: string
@@ -20,8 +22,10 @@ interface Plan {
 const plans: Plan[] = [
   {
     name: 'Starter Plan',
-    monthlyPrice: '$699',
-    annualPrice: '$559',
+    originalMonthlyPrice: '$699',
+    originalAnnualPrice: '$559',
+    monthlyPrice: '$279',
+    annualPrice: '$223',
     description: 'Perfect for creators & brands just getting started with short-form content.',
     features: [
       'Up to 8 short-form video drops/month',
@@ -37,8 +41,10 @@ const plans: Plan[] = [
   {
     name: 'Professional Plan',
     badge: 'MOST POPULAR',
-    monthlyPrice: '$1,499',
-    annualPrice: '$1,199',
+    originalMonthlyPrice: '$1,499',
+    originalAnnualPrice: '$1,199',
+    monthlyPrice: '$599',
+    annualPrice: '$479',
     description: 'For creators & brands ready to scale content reach and retention consistently.',
     highlighted: true,
     features: [
@@ -56,8 +62,10 @@ const plans: Plan[] = [
   {
     name: 'Business / Studio',
     badge: 'ENTERPRISE',
-    monthlyPrice: '$2,799',
-    annualPrice: '$2,239',
+    originalMonthlyPrice: '$2,799',
+    originalAnnualPrice: '$2,239',
+    monthlyPrice: '$1,119',
+    annualPrice: '$895',
     description: 'Best for agencies & media studios scaling content at high volume.',
     features: [
       '30+ short-form video drops/month',
@@ -90,6 +98,10 @@ export function LandingPricing() {
           <p className="text-sm sm:text-base text-muted-foreground">
             Simple, predictable pricing. Keep 100% of your fan payments without platform extortion.
           </p>
+
+          <div className="mt-6 inline-flex animate-pulse items-center gap-2 rounded-full bg-primary/20 px-4 py-1.5 text-sm font-bold text-primary ring-1 ring-primary/30 shadow-[0_0_15px_rgba(0,212,200,0.4)]">
+            <Zap className="h-4 w-4 fill-current" /> LIMITED TIME: 60% OFF ALL PLANS
+          </div>
 
           {/* Billing Toggle */}
           <div className="inline-flex items-center gap-3 p-1.5 rounded-full liquid-glass border border-white/12 mt-8">
@@ -155,16 +167,29 @@ export function LandingPricing() {
                   </p>
                 </div>
 
-                <div className="flex items-baseline gap-1 my-2">
-                  <span
-                    className="text-4xl sm:text-5xl font-black text-foreground"
-                    style={{ fontFamily: 'var(--font-heading)' }}
-                  >
-                    {isAnnual ? plan.annualPrice : plan.monthlyPrice}
-                  </span>
-                  <span className="text-xs text-muted-foreground font-mono">
-                    {plan.monthlyPrice === '$0' ? '' : '/month'}
-                  </span>
+                <div className="flex flex-col mt-2">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="text-xl font-medium text-muted-foreground line-through opacity-70"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {isAnnual ? plan.originalAnnualPrice : plan.originalMonthlyPrice}
+                    </span>
+                    <span className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px] font-bold text-primary">
+                      -60%
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-1 mt-1">
+                    <span
+                      className="text-4xl sm:text-5xl font-black text-foreground"
+                      style={{ fontFamily: 'var(--font-heading)' }}
+                    >
+                      {isAnnual ? plan.annualPrice : plan.monthlyPrice}
+                    </span>
+                    <span className="text-xs text-muted-foreground font-mono">
+                      {plan.monthlyPrice === '$0' ? '' : '/month'}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="w-full h-[1px] bg-white/10 my-1" />
