@@ -30,9 +30,13 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
   const handleSubmit = async (formData: FormData) => {
     setIsSubmitting(true)
     try {
-      await submitTip(formData)
-      setSuccess(true)
-      setTimeout(() => onClose(), 2000)
+      const res = await submitTip(formData)
+      if (res.url) {
+        window.location.href = res.url
+      } else {
+        setSuccess(true)
+        setTimeout(() => onClose(), 2000)
+      }
     } catch (e) {
       console.error(e)
       setIsSubmitting(false)

@@ -40,8 +40,7 @@ export async function submitTip(formData: FormData) {
     throw new Error(err.error ?? 'Failed to process tip')
   }
 
-  revalidatePath('/home')
-  revalidatePath('/[username]', 'page')
+  const { url } = await res.json()
 
-  return { success: true }
+  return { success: true, url }
 }
