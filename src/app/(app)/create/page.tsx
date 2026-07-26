@@ -1,4 +1,4 @@
-import { ComposeForm } from "@/features/studio/ui/ComposeForm";
+import { StudioTabs } from "@/features/studio/ui/StudioTabs";
 import { Shield } from "lucide-react";
 
 export default function CreatePage() {
@@ -10,7 +10,7 @@ export default function CreatePage() {
         <p className="mt-2 text-muted-foreground text-sm">Share an update with your circles or followers.</p>
       </header>
 
-      <ComposeForm />
+      <StudioTabs />
       
       <div className="flex items-center justify-center gap-2 mt-8 px-8 animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
         <Shield className="w-3.5 h-3.5 text-primary/50" />

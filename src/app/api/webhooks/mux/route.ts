@@ -1,21 +1,70 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+import { getMux } from '@/lib/mux'
 
 /**
  * Mux webhook handler.
  * Receives events for video asset lifecycle (ready, errored, etc.)
  * and updates the corresponding records in Supabase.
  *
- * TODO: Implement full webhook verification and asset status sync.
+ * Uses service-role client to bypass RLS since webhooks arrive
+ * without a user session.
  */
 export async function POST(req: Request) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const webhookSecret = process.env.MUX_WEBHOOK_SECRET
+
+  if (!supabaseUrl || !serviceRoleKey || !webhookSecret) {
+    console.error('Missing Supabase or Mux env vars for Mux webhook')
+    return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 })
+  }
+
   try {
-    const body = await req.json()
+    const rawBody = await req.text()
+    const mux = getMux()
+    
+    // Verify Mux Signature
+    try {
+      await mux.webhooks.verifySignature(rawBody, req.headers, webhookSecret)
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Invalid signature'
+      console.error('Mux webhook signature verification failed:', msg)
+      return NextResponse.json({ error: msg }, { status: 400 })
+    }
 
-    // Log for debugging during development
-    console.log('Mux webhook received:', body.type)
+    const body = JSON.parse(rawBody)
+    console.log('Mux webhook event:', body.type)
 
-    // TODO: Verify Mux webhook signature
-    // TODO: Handle asset.ready, asset.errored, etc.
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey)
+
+    if (body.type === 'video.asset.ready') {
+      const assetId = body.data?.id
+      const playbackId = body.data?.playback_ids?.[0]?.id
+      const contentId = body.data?.passthrough
+
+      if (assetId && playbackId && contentId) {
+        // Update database: mark content as ready and attach playback ID
+        const { error } = await supabaseAdmin
+          .from('content')
+          .update({ mux_playback_id: playbackId, mux_asset_id: assetId, status: 'ready' })
+          .eq('id', contentId)
+
+        if (error) console.error('Mux asset.ready update error:', error.message)
+      }
+    } else if (body.type === 'video.asset.errored') {
+      const assetId = body.data?.id
+      const contentId = body.data?.passthrough
+      if (assetId && contentId) {
+        // Update database: mark content as errored so UI can show failure
+        const { error } = await supabaseAdmin
+          .from('content')
+          .update({ mux_asset_id: assetId, status: 'errored' })
+          .eq('id', contentId)
+
+        if (error) console.error('Mux asset.errored update error:', error.message)
+      }
+    }
 
     return NextResponse.json({ received: true })
   } catch (error: unknown) {
