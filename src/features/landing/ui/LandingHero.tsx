@@ -177,7 +177,7 @@ export function LandingHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="framer-subtitle max-w-2xl"
         >
-          We turn your raw clips into high-performing Reels, TikToks, and Shorts — designed to grab attention, boost engagement, and grow your audience faster.
+          Join and create circle for your fans. Community backed by zipcode.
         </motion.p>
 
         {/* Action Buttons (Exact Framer Button Class) */}
