@@ -1,6 +1,7 @@
 import { createClient } from '@/shared/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import MuxPlayer from '@mux/mux-player-react'
+import { getMux } from '@/lib/mux'
+import { MuxVideoPlayer } from './MuxVideoPlayer'
 import type { Content, ContentVisibility } from '@/shared/types/database'
 
 async function getContent(id: string): Promise<Content | null> {
@@ -17,13 +18,17 @@ async function getContent(id: string): Promise<Content | null> {
   return data
 }
 
-async function getMuxToken(playbackId: string, contentId: string): Promise<string | undefined> {
-  const supabase = await createClient()
-  const { data, error } = await supabase.functions.invoke('mux-sign', {
-    body: { playbackId, contentId },
-  })
-  if (error || !data?.token) return undefined
-  return data.token
+async function signPlayback(playbackId: string): Promise<string | undefined> {
+  try {
+    const mux = getMux()
+    return await mux.jwt.signPlaybackId(playbackId, {
+      type: 'video',
+      expiration: '6h',
+    })
+  } catch (err) {
+    console.error('Mux sign error:', err instanceof Error ? err.message : err)
+    return undefined
+  }
 }
 
 export default async function ContentPage({ params }: { params: Promise<{ id: string }> }) {
@@ -34,10 +39,10 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
     notFound()
   }
 
-  // If content is subscriber-only, get a signed JWT token for Mux playback
+  // If content is subscriber-only, sign the playback JWT directly (no HTTP round-trip)
   let muxToken: string | undefined
   if (content.visibility === ('subscriber' satisfies ContentVisibility) && content.mux_playback_id) {
-    muxToken = await getMuxToken(content.mux_playback_id, content.id)
+    muxToken = await signPlayback(content.mux_playback_id)
   }
 
   return (
@@ -50,12 +55,11 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
 
       <div className="aspect-video bg-black rounded-xl overflow-hidden">
         {content.mux_playback_id ? (
-          <MuxPlayer
+          <MuxVideoPlayer
             playbackId={content.mux_playback_id}
-            tokens={muxToken ? { playback: muxToken } : undefined}
-            metadata={{
-              video_title: content.title,
-            }}
+            envKey={process.env.NEXT_PUBLIC_MUX_ENV_KEY}
+            token={muxToken}
+            title={content.title}
           />
         ) : (
           <div className="flex items-center justify-center h-full text-muted-foreground">
