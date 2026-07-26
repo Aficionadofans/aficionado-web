@@ -86,6 +86,7 @@ export function CreatorStudio({
       icon: <Upload className="w-5 h-5 text-primary" />,
       title: 'Upload Content',
       description: 'Publish a new video drop to your channel',
+      href: '/create',
     },
     {
       icon: <Video className="w-5 h-5 text-primary" />,

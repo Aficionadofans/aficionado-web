@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 export function VideoUploadForm() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [visibility, setVisibility] = useState<'public' | 'subscribers' | 'ppv'>('subscribers')
+  const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
   const [pricePpv, setPricePpv] = useState<string>('')
   
   // Custom endpoint logic for the Mux uploader to fetch the upload URL from our backend
@@ -64,7 +64,7 @@ export function VideoUploadForm() {
             Visibility
           </label>
           <div className="flex flex-wrap gap-3">
-            {(['public', 'subscribers', 'ppv'] as const).map((v) => (
+            {(['public', 'subscriber', 'ppv'] as const).map((v) => (
               <button
                 key={v}
                 type="button"
@@ -76,7 +76,7 @@ export function VideoUploadForm() {
                     : "bg-white/5 text-muted-foreground border-white/5 hover:bg-white/10 hover:text-off-white"
                 )}
               >
-                {v === 'ppv' ? 'Pay-Per-View' : v.charAt(0).toUpperCase() + v.slice(1)}
+                {v === 'subscriber' ? 'Subscribers' : v === 'ppv' ? 'Pay-Per-View' : 'Public'}
               </button>
             ))}
           </div>

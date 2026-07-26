@@ -18,6 +18,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 })
     }
 
+    // Map visibility string to valid DB enum ('public' | 'subscriber')
+    const dbVisibility = (visibility === 'subscribers' || visibility === 'subscriber') ? 'subscriber' : 'public'
+
     // 1. Create a placeholder row in the database
     const { data: content, error: insertError } = await supabase
       .from('content')
@@ -25,10 +28,11 @@ export async function POST(req: Request) {
         author_id: user.id,
         title,
         description: description || null,
-        visibility: visibility || 'public',
+        visibility: dbVisibility,
         required_tier: requiredTier || null,
         price_ppv: pricePpv || null,
         status: 'processing', // Video is not yet ready
+        moderation_status: 'approved', // Auto-approve uploaded content
       })
       .select('id')
       .single()

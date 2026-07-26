@@ -31,9 +31,9 @@ export function Navigation({ isAdmin = false, userType }: { isAdmin?: boolean; u
   let finalNavItems = navItems
 
   if (userType === 'fan') {
-    finalNavItems = finalNavItems.filter(item => item.name !== 'Studio' && item.name !== 'Create')
+    finalNavItems = finalNavItems.filter(item => item.name !== 'Studio')
   } else if (userType === 'aficionado') {
-    finalNavItems = finalNavItems.filter(item => item.name !== 'Explore' && item.name !== 'Create')
+    finalNavItems = finalNavItems.filter(item => item.name !== 'Explore')
   }
 
   if (isAdmin) {
