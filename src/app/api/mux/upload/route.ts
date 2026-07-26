@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         description: description || null,
         visibility: dbVisibility,
         status: 'processing', // Video is not yet ready
-        moderation_status: 'approved', // Auto-approve uploaded content
+        moderation_status: 'pending', // Awaits AI moderation via Vercel Cron
       })
       .select('id')
       .single()
