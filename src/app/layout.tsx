@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Syne, Inter, Geist_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { DustParticles } from '@/shared/ui/motion/DustParticles'
 import './globals.css'
 
@@ -72,6 +73,7 @@ export default function RootLayout({
 
 
         {children}
+        <Analytics />
       </body>
     </html>
   )
