@@ -601,6 +601,11 @@ function AddCardModal({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
 
+  const [mounted, setMounted] = useState(false)
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Bleeding-edge keyboard listener (ESC to close)
   React.useEffect(() => {
     if (!isOpen) return
@@ -873,11 +878,6 @@ function AddCardModal({
       </div>
     </div>
   )
-
-  const [mounted, setMounted] = useState(false)
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
 
   if (!mounted || typeof document === 'undefined') {
     return null
