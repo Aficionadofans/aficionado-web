@@ -33,8 +33,29 @@ export function VideoUploadForm() {
     }
   }
 
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  const handleUploadSuccess = () => {
+    setIsSuccess(true)
+    setTitle('')
+    setDescription('')
+  }
+
   return (
     <div className="liquid-glass p-6 animate-fade-in-up">
+      {isSuccess && (
+        <div className="mb-6 p-4 rounded-xl bg-primary/10 border border-primary/30 text-primary text-sm font-semibold flex items-center justify-between animate-fade-in">
+          <span>✓ Video uploaded successfully! It is currently processing and will appear on the feed shortly.</span>
+          <button 
+            type="button" 
+            onClick={() => setIsSuccess(false)}
+            className="text-xs underline hover:opacity-80"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         <div>
           <input 
@@ -108,6 +129,7 @@ export function VideoUploadForm() {
           <Video className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
           <MuxUploader 
             endpoint={getUploadUrl}
+            onSuccess={handleUploadSuccess}
             className="mux-uploader-custom mx-auto"
           />
           <p className="text-xs text-muted-foreground mt-4">

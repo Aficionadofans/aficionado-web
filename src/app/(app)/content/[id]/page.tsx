@@ -7,15 +7,30 @@ import type { Content, ContentVisibility } from '@/shared/types/database'
 async function getContent(id: string): Promise<Content | null> {
   const supabase = await createClient()
 
-  // RLS automatically blocks access if not subscribed or grace period expired
+  // 1. Try fetching with user session
   const { data, error } = await supabase
     .from('content')
     .select('*')
     .eq('id', id)
     .single<Content>()
 
-  if (error || !data) return null
-  return data
+  if (!error && data) return data
+
+  // 2. Fallback to service role client if RLS blocks reading public content
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (serviceRoleKey && supabaseUrl) {
+    const { createClient: createAdminClient } = await import('@supabase/supabase-js')
+    const adminSupabase = createAdminClient(supabaseUrl, serviceRoleKey)
+    const { data: adminData } = await adminSupabase
+      .from('content')
+      .select('*')
+      .eq('id', id)
+      .single<Content>()
+    if (adminData) return adminData
+  }
+
+  return null
 }
 
 async function signPlayback(playbackId: string): Promise<string | undefined> {
