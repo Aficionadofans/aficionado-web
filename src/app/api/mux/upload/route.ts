@@ -29,8 +29,6 @@ export async function POST(req: Request) {
         title,
         description: description || null,
         visibility: dbVisibility,
-        required_tier: requiredTier || null,
-        price_ppv: pricePpv || null,
         status: 'processing', // Video is not yet ready
         moderation_status: 'approved', // Auto-approve uploaded content
       })
