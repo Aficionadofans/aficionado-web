@@ -8,7 +8,6 @@ import { LandingProcess } from './LandingProcess'
 import { LandingShowcase } from './LandingShowcase'
 import { LandingResultsGrid } from './LandingResultsGrid'
 import { LandingTestimonial } from './LandingTestimonial'
-import { LandingPricing } from './LandingPricing'
 import { LandingToolsMarquee } from './LandingToolsMarquee'
 import { LandingFAQ } from './LandingFAQ'
 import { LandingCTA } from './LandingCTA'
@@ -33,7 +32,6 @@ export function LandingPage() {
         <LandingShowcase />
         <LandingResultsGrid />
         <LandingTestimonial />
-        <LandingPricing />
         <LandingToolsMarquee />
         <LandingFAQ />
         <LandingCTA />

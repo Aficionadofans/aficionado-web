@@ -59,12 +59,6 @@ export function LandingNav() {
             Work
           </a>
           <a
-            href="#pricing"
-            className="text-sm font-medium text-white/70 transition-colors hover:text-white"
-          >
-            Pricing
-          </a>
-          <a
             href="#faq"
             className="text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
@@ -110,13 +104,6 @@ export function LandingNav() {
             className="text-sm font-semibold text-muted-foreground hover:text-primary py-1"
           >
             Showcase
-          </a>
-          <a
-            href="#pricing"
-            onClick={() => setMobileMenuOpen(false)}
-            className="text-sm font-semibold text-muted-foreground hover:text-primary py-1"
-          >
-            Pricing
           </a>
           <a
             href="#faq"

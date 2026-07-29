@@ -1,6 +1,5 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { createClient } from '@/shared/lib/supabase/server'
 
 export async function submitTip(formData: FormData) {
@@ -22,19 +21,26 @@ export async function submitTip(formData: FormData) {
 
   if (!user) throw new Error('Not authenticated')
 
-  // Create Stripe checkout session via Supabase Edge Function
-  const { data, error } = await supabase.functions.invoke('stripe-checkout', {
-    body: {
+  // Create Stripe checkout session via unified Next.js API route
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  if (!siteUrl) throw new Error('NEXT_PUBLIC_SITE_URL not configured')
+
+  const res = await fetch(`${siteUrl}/api/stripe/checkout`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
       type: 'tip',
       amount: Math.round(amountNum * 100), // cents
       creatorId,
       fanId: user.id,
       message,
-    },
+    }),
   })
 
-  if (error || !data?.url) {
-    throw new Error(error?.message ?? data?.error ?? 'Failed to process tip')
+  const data = await res.json()
+
+  if (!res.ok || !data?.url) {
+    throw new Error(data?.error ?? 'Failed to process tip')
   }
 
   return { success: true, url: data.url }

@@ -22,7 +22,7 @@ import { RevealSection } from './RevealSection'
  * observed element immediately after it is mounted.  Returns a cleanup fn.
  */
 function mockIntersectionObserver(intersecting = true) {
-  const callbacks: Array<(entries: IntersectionObserverEntry[]) => void> = []
+  const callbacks: Array<IntersectionObserverCallback> = []
   const MockIO = vi.fn().mockImplementation((cb: IntersectionObserverCallback) => {
     const self = {
       observe: vi.fn(() => {

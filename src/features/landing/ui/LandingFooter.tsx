@@ -61,7 +61,6 @@ export function LandingFooter() {
             <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Platform</h4>
             <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</a>
             <a href="#showcase" className="text-muted-foreground hover:text-primary transition-colors">Showcase</a>
-            <a href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</a>
             <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">FAQ</a>
           </div>
 

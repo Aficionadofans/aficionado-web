@@ -70,7 +70,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
           videos.map((video, index) => {
             const thumbnailUrl = `https://image.mux.com/${video.playbackId}/thumbnail.jpg?width=400`
             const card = (
-              <div className="clipcut-card overflow-hidden group cursor-pointer">
+              <Link href={`/content/${video.id}`} className="clipcut-card overflow-hidden group cursor-pointer block">
                 {/* Thumbnail */}
                 <div className="relative aspect-video w-full overflow-hidden bg-[#100F17]">
                   <Image
@@ -87,14 +87,16 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
 
                   {/* Creator username — bottom-left overlay */}
                   <div className="absolute bottom-3 left-3 z-10">
-                    <Link
-                      href={`/${video.creator}`}
-                      onClick={(e) => e.stopPropagation()}
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault()
+                        window.location.href = `/${video.creator}`
+                      }}
                       className="text-white text-sm font-semibold hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded"
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       @{video.creator}
-                    </Link>
+                    </span>
                   </div>
 
                   {/* Like + comment counts — bottom-right overlay */}
@@ -116,7 +118,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                     {video.description}
                   </p>
                 </div>
-              </div>
+              </Link>
             )
 
             // Wrap first 8 cards in RevealSection with stagger
