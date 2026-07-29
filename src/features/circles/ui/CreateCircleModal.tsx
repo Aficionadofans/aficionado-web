@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { X, Sparkles, PlusCircle, Compass, Music, Video, Cpu, HeartHandshake, Utensils, Smile } from 'lucide-react'
+import { X, Sparkles, PlusCircle, Compass, Music, Video, Cpu, HeartHandshake, Utensils, Smile, Waves, Mic } from 'lucide-react'
 import { createClient } from '@/shared/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -15,6 +15,8 @@ const CATEGORIES = [
   { id: 'music', label: 'Music & Audio', icon: Music, color: 'text-purple-400', border: 'border-purple-500/40', bg: 'bg-purple-500/20' },
   { id: 'film', label: 'Film & Motion', icon: Video, color: 'text-amber-400', border: 'border-amber-500/40', bg: 'bg-amber-500/20' },
   { id: 'tech', label: 'Tech & AI', icon: Cpu, color: 'text-cyan-400', border: 'border-cyan-500/40', bg: 'bg-cyan-500/20' },
+  { id: 'diving', label: 'Diving & Ocean', icon: Waves, color: 'text-sky-400', border: 'border-sky-500/40', bg: 'bg-sky-500/20' },
+  { id: 'speaking', label: 'Public Speaking', icon: Mic, color: 'text-orange-400', border: 'border-orange-500/40', bg: 'bg-orange-500/20' },
   { id: 'parenting', label: 'Parenting & Family', icon: HeartHandshake, color: 'text-pink-400', border: 'border-pink-500/40', bg: 'bg-pink-500/20' },
   { id: 'culinary', label: 'Culinary Arts', icon: Utensils, color: 'text-emerald-400', border: 'border-emerald-500/40', bg: 'bg-emerald-500/20' },
   { id: 'wellness', label: 'Mindfulness', icon: Smile, color: 'text-indigo-400', border: 'border-indigo-500/40', bg: 'bg-indigo-500/20' },

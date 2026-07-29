@@ -18,6 +18,8 @@ import {
   Smile,
   Hash,
   Sparkles,
+  Waves,
+  Mic,
 } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
@@ -36,6 +38,12 @@ interface CircleItem {
 // Icon helper based on circle name keywords
 function getCircleIcon(name: string) {
   const n = name.toLowerCase()
+  if (n.includes('dive') || n.includes('diver') || n.includes('scuba') || n.includes('ocean')) {
+    return { icon: Waves, color: 'text-sky-400', bg: 'bg-sky-500/20', border: 'border-sky-500/40' }
+  }
+  if (n.includes('speak') || n.includes('speaker') || n.includes('orator') || n.includes('keynote') || n.includes('stage')) {
+    return { icon: Mic, color: 'text-orange-400', bg: 'bg-orange-500/20', border: 'border-orange-500/40' }
+  }
   if (n.includes('sound') || n.includes('music') || n.includes('audio')) {
     return { icon: Music, color: 'text-purple-400', bg: 'bg-purple-500/20', border: 'border-purple-500/40' }
   }
