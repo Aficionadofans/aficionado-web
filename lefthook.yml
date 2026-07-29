@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome
+      glob: "*.{js,ts,jsx,tsx,json}"
+      run: ~/.bun/bin/bunx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+    - name: oxlint
+      glob: "*.{js,ts,jsx,tsx}"
+      run: ~/.bun/bin/bunx oxlint {staged_files}

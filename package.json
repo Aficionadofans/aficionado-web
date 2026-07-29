@@ -50,6 +50,7 @@
     "eslint-plugin-oxlint": "^1.76.0",
     "fast-check": "^3.23.2",
     "jsdom": "^25.0.0",
+    "lefthook": "^2.1.10",
     "oxlint": "^1.76.0",
     "tailwindcss": "^4",
     "typescript": "^5",
