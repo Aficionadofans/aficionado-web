@@ -3,11 +3,11 @@
 import { useState } from 'react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { Play, Radio, Headphones, Video, Sparkles } from 'lucide-react'
+import { Play, Radio, Video, Sparkles } from 'lucide-react'
 
 interface ShowcaseItem {
   id: string
-  category: 'video' | 'podcast' | 'circle' | 'live'
+  category: 'video' | 'circle' | 'live'
   title: string
   creator: string
   role: string
@@ -44,18 +44,6 @@ const items: ShowcaseItem[] = [
     description: 'Interactive broadcast exploring finite social design, audience retention, and well-being.',
   },
   {
-    id: '3',
-    category: 'podcast',
-    title: 'The Unfiltered Sovereign Podcast #042',
-    creator: 'Kaelen Vance',
-    role: 'Audiobook & Spoken Word Host',
-    avatarText: 'KV',
-    subscribers: '9.3k',
-    duration: '45:10',
-    thumbnailGradient: 'from-emerald-950/80 via-[#0C1A16] to-[#070709]',
-    description: 'Behind-the-scenes deep dive on direct audio distribution and fan-supported subscriptions.',
-  },
-  {
     id: '4',
     category: 'circle',
     title: 'Inner Circle VIP Vault: Private Stems & Clips',
@@ -70,7 +58,7 @@ const items: ShowcaseItem[] = [
 ]
 
 export function LandingShowcase() {
-  const [activeTab, setActiveTab] = useState<'all' | 'video' | 'live' | 'podcast' | 'circle'>('all')
+  const [activeTab, setActiveTab] = useState<'all' | 'video' | 'live' | 'circle'>('all')
 
   const filteredItems = activeTab === 'all'
     ? items
@@ -122,16 +110,6 @@ export function LandingShowcase() {
               }`}
             >
               <Radio className="w-3.5 h-3.5" /> Live Streams
-            </button>
-            <button
-              onClick={() => setActiveTab('podcast')}
-              className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                activeTab === 'podcast'
-                  ? 'bg-primary text-primary-foreground shadow-[0_0_16px_rgba(0,212,200,0.4)]'
-                  : 'bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10'
-              }`}
-            >
-              <Headphones className="w-3.5 h-3.5" /> Audio & Podcast
             </button>
             <button
               onClick={() => setActiveTab('circle')}
