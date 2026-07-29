@@ -13,72 +13,12 @@ export function LandingServices() {
             variant="editorial"
             number="03"
             label="WHAT WE DO"
-            title="Short-form drops optimized for every platform"
+            title="Short-form drops video optimized for your community backed by zip code in your area."
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Whether you're a solo creator building your empire or an agency managing top talent — we give you the sovereign content engine to deliver more, faster.
+            Ideal for solo creators building your social media presence empire.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {/* Service 1: YouTube Shorts */}
-          <RevealSection delay={0}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 group">
-              <div className="flex flex-col gap-4 text-left">
-                <div className="w-12 h-12 rounded-2xl bg-red-600/10 border border-red-600/30 flex items-center justify-center text-red-500">
-                  <Video className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white font-heading">YouTube Shorts Drops</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Hook-driven 9:16 short edits sized and optimized for YouTube's recommendation engine with uncompressed audio.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-white/8 flex items-center justify-between text-xs font-mono text-primary">
-                <span>9:16 Format</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </RevealSection>
-
-          {/* Service 2: Instagram Reels */}
-          <RevealSection delay={100}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 group">
-              <div className="flex flex-col gap-4 text-left">
-                <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400">
-                  <Camera className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white font-heading">Instagram Reels & Stories</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Trend-aware edits with dynamic captions, pacing, and hooks engineered to expand explore page reach.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-white/8 flex items-center justify-between text-xs font-mono text-pink-400">
-                <span>High Engagement</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </RevealSection>
-
-
-          {/* Service 3: TikTok & Live Streams */}
-          <RevealSection delay={200}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 group">
-              <div className="flex flex-col gap-4 text-left">
-                <div className="w-12 h-12 rounded-2xl bg-[#E8501A]/10 border border-[#E8501A]/30 flex items-center justify-center text-[#E8501A]">
-                  <Radio className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white font-heading">TikTok & Live Streams</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Fast-cut edits and HD low-latency broadcasts built around native behaviors and gated Inner Circle drops.
-                </p>
-              </div>
-              <div className="mt-8 pt-4 border-t border-white/8 flex items-center justify-between text-xs font-mono text-[#E8501A]">
-                <span>Native Pacing</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </RevealSection>
         </div>
 
         {/* Bottom Guarantee Banner from Framer Template */}
