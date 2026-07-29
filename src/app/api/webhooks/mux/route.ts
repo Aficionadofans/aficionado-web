@@ -44,25 +44,43 @@ export async function POST(req: Request) {
       const contentId = body.data?.passthrough
 
       if (assetId && playbackId && contentId) {
-        // Update database: mark content as ready and attach playback ID
-        const { error } = await supabaseAdmin
+        // Update database: attach playback ID (removed invalid status column)
+        const { error, data: updatedContent } = await supabaseAdmin
           .from('content')
-          .update({ mux_playback_id: playbackId, mux_asset_id: assetId, status: 'ready' })
+          .update({ mux_playback_id: playbackId, mux_asset_id: assetId })
           .eq('id', contentId)
+          .select('author_id, title')
+          .single()
 
         if (error) console.error('Mux asset.ready update error:', error.message)
+        
+        if (updatedContent) {
+          // Automate a drop for the new video
+          await supabaseAdmin.from('posts').insert({
+            author_id: updatedContent.author_id,
+            content: `I just dropped a new video: "${updatedContent.title}"! Go check it out.`
+          })
+        }
       }
     } else if (body.type === 'video.asset.errored') {
       const assetId = body.data?.id
       const contentId = body.data?.passthrough
       if (assetId && contentId) {
-        // Update database: mark content as errored so UI can show failure
         const { error } = await supabaseAdmin
           .from('content')
-          .update({ mux_asset_id: assetId, status: 'errored' })
+          .update({ mux_asset_id: assetId })
           .eq('id', contentId)
 
         if (error) console.error('Mux asset.errored update error:', error.message)
+      }
+    } else if (body.type === 'video.live_stream.active') {
+      const authorId = body.data?.passthrough
+      if (authorId) {
+        // Automatically drop a post when creator goes live
+        await supabaseAdmin.from('posts').insert({
+          author_id: authorId,
+          content: `🔴 I'm LIVE right now! Come join my watch party.`
+        })
       }
     }
 

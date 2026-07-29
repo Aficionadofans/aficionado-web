@@ -4,7 +4,15 @@ import React from 'react'
 import { LiveStreamPlayer } from './LiveStreamPlayer'
 import { LiveChatSidebar } from './LiveChatSidebar'
 
-export function WatchPartyTheater({ username }: { username: string }) {
+export function WatchPartyTheater({ 
+  username,
+  playbackId,
+  isOwner
+}: { 
+  username: string
+  playbackId?: string
+  isOwner?: boolean
+}) {
   return (
     <div
       className="relative min-h-[100dvh] w-full bg-background flex flex-col md:flex-row overflow-hidden select-none animate-fade-in-up"
@@ -16,7 +24,12 @@ export function WatchPartyTheater({ username }: { username: string }) {
 
       {/* Main Video Stream Player */}
       <div className="flex-1 glass-panel ring-2 ring-primary/30 shadow-[0_0_24px_rgba(0,212,200,0.2)] relative overflow-hidden">
-        <LiveStreamPlayer username={username} viewerCount={1204} />
+        <LiveStreamPlayer 
+          username={username} 
+          playbackId={playbackId}
+          isOwner={isOwner}
+          viewerCount={1204} 
+        />
       </div>
 
       {/* Real-time Live Chat Sidebar */}
