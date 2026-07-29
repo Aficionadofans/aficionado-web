@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 import { createClient } from '@/shared/lib/supabase/client'
 
-export function VideoUploadForm({ onUploadStart: _onUploadStart, onUploadSuccess: _onUploadSuccess }: { onUploadStart?: () => void, onUploadSuccess?: () => void }) {
+export function VideoUploadForm({ onUploadStart: _onUploadStart, onUploadSuccess: _onUploadSuccess }: { onUploadStart?: (contentId: string) => void, onUploadSuccess?: () => void }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
