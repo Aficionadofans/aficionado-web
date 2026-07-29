@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Users, X, Star, Settings, Copy, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import MuxPlayer from '@mux/mux-player-react'
+import { createClient } from '@/shared/lib/supabase/client'
 
 interface LiveStreamPlayerProps {
   username: string
@@ -19,6 +20,8 @@ export function LiveStreamPlayer({ username, playbackId, isOwner, viewerCount = 
   const [isProvisioning, setIsProvisioning] = useState(false)
   const [copied, setCopied] = useState(false)
 
+  const supabase = createClient()
+
   const triggerReaction = (emoji: string) => {
     const id = Math.random().toString(36).substring(2, 9)
     const left = Math.floor(Math.random() * 25) + 70 // 70% to 95%
@@ -31,9 +34,8 @@ export function LiveStreamPlayer({ username, playbackId, isOwner, viewerCount = 
   const handleProvisionStream = async () => {
     setIsProvisioning(true)
     try {
-      const res = await fetch('/api/live/provision', { method: 'POST' })
-      if (!res.ok) throw new Error('Failed to provision stream')
-      const data = await res.json()
+      const { data, error } = await supabase.functions.invoke('mux_live_provision', { method: 'POST' })
+      if (error) throw error
       setStreamData(data)
     } catch (err) {
       console.error(err)

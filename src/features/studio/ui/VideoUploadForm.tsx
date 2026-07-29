@@ -5,27 +5,28 @@ import { Sparkles, Video } from 'lucide-react'
 import MuxUploader from '@mux/mux-uploader-react'
 import { cn } from '@/lib/utils'
 
-export function VideoUploadForm() {
+import { createClient } from '@/shared/lib/supabase/client'
+
+export function VideoUploadForm({ onUploadStart, onUploadSuccess }: { onUploadStart?: () => void, onUploadSuccess?: () => void }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
   const [pricePpv, setPricePpv] = useState<string>('')
   
+  const supabase = createClient()
+  
   // Custom endpoint logic for the Mux uploader to fetch the upload URL from our backend
   const getUploadUrl = async () => {
     try {
-      const res = await fetch('/api/mux/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('mux_upload', {
+        body: {
           title: title || 'Untitled Video',
           description,
           visibility,
           pricePpv: visibility === 'ppv' ? parseFloat(pricePpv) : null,
-        }),
+        },
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Failed to get upload URL')
+      if (error) throw error
       return data.url
     } catch (e) {
       console.error('Upload error:', e)

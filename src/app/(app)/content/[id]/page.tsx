@@ -1,6 +1,5 @@
 import { createClient } from '@/shared/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import { getMux } from '@/lib/mux'
 import { MuxVideoPlayer } from './MuxVideoPlayer'
 import type { ContentWithProfile, ContentVisibility } from '@/shared/types/database'
 import { Lock } from 'lucide-react'
@@ -41,13 +40,14 @@ async function getContent(id: string): Promise<{ content: ContentWithProfile | n
   return { content: null, authorized: false }
 }
 
-async function signPlayback(playbackId: string): Promise<string | undefined> {
+async function signPlayback(playbackId: string, contentId: string, supabase: any): Promise<string | undefined> {
   try {
-    const mux = getMux()
-    return await mux.jwt.signPlaybackId(playbackId, {
-      type: 'video',
-      expiration: '6h',
+    const { data, error } = await supabase.functions.invoke('mux_sign', {
+      body: { playbackId, contentId }
     })
+    
+    if (error) throw error
+    return data?.token
   } catch (err) {
     console.error('Mux sign error:', err instanceof Error ? err.message : err)
     return undefined
@@ -65,7 +65,8 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
   // If authorized and content is subscriber-only, sign the playback JWT directly
   let muxToken: string | undefined
   if (authorized && content.visibility === ('subscriber' satisfies ContentVisibility) && content.mux_playback_id) {
-    muxToken = await signPlayback(content.mux_playback_id)
+    const supabase = await createClient()
+    muxToken = await signPlayback(content.mux_playback_id, content.id, supabase)
   }
 
   const profile = content.profiles
