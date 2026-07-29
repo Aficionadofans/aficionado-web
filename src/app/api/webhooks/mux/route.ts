@@ -44,10 +44,10 @@ export async function POST(req: Request) {
       const contentId = body.data?.passthrough
 
       if (assetId && playbackId && contentId) {
-        // Update database: attach playback ID (removed invalid status column)
+        // Update database: attach playback ID and mark as ready
         const { error, data: updatedContent } = await supabaseAdmin
           .from('content')
-          .update({ mux_playback_id: playbackId, mux_asset_id: assetId })
+          .update({ mux_playback_id: playbackId, mux_asset_id: assetId, status: 'ready' })
           .eq('id', contentId)
           .select('author_id, title')
           .single()
@@ -66,9 +66,10 @@ export async function POST(req: Request) {
       const assetId = body.data?.id
       const contentId = body.data?.passthrough
       if (assetId && contentId) {
+        // Update database: mark content as errored so UI can show failure
         const { error } = await supabaseAdmin
           .from('content')
-          .update({ mux_asset_id: assetId })
+          .update({ mux_asset_id: assetId, status: 'errored' })
           .eq('id', contentId)
 
         if (error) console.error('Mux asset.errored update error:', error.message)
