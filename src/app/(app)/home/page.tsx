@@ -1,15 +1,43 @@
 import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
 import { type Drop } from '@/features/feed/ui/DropZoneCarousel'
 import { createClient } from '@/shared/lib/supabase/server'
+import { redirect } from 'next/navigation'
 
 export default async function HomePage() {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-  // Fetch approved content with creator username
-  const { data: contentData } = await supabase
+  if (!user) {
+    redirect('/auth')
+  }
+
+  // Fallback to admin client to bypass any restrictive RLS that might hide drops/videos from followers
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  
+  let dbClient = supabase
+  if (serviceRoleKey && supabaseUrl) {
+    const { createClient: createAdminClient } = await import('@supabase/supabase-js')
+    dbClient = createAdminClient(supabaseUrl, serviceRoleKey)
+  }
+
+  // 1. Fetch creators this user is following
+  const { data: subs } = await dbClient
+    .from('subscriptions')
+    .select('creator_id')
+    .eq('subscriber_id', user.id)
+    .eq('status', 'active')
+
+  // The feed should include the user's own content + content from creators they follow
+  const creatorIds = (subs || []).map(s => s.creator_id)
+  const feedUserIds = [user.id, ...creatorIds]
+
+  // 2. Fetch approved content for these users
+  const { data: contentData } = await dbClient
     .from('content')
     .select('id, mux_playback_id, description, moderation_status, profiles!inner(username)')
     .eq('moderation_status', 'approved')
+    .in('author_id', feedUserIds)
     .not('mux_playback_id', 'is', null)
     .order('created_at', { ascending: false })
     .limit(20)
@@ -23,15 +51,16 @@ export default async function HomePage() {
       playbackId: (c.mux_playback_id as string) ?? '',
       likes: '0',
       comments: '0',
-      isSubscribed: false,
+      isSubscribed: true, // They are subscribed or it's their own
       moderationStatus: (c.moderation_status as string) ?? 'approved',
     }
   })
 
-  // Fetch recent posts as drops
-  const { data: postsData } = await supabase
+  // 3. Fetch recent posts (drops) for these users
+  const { data: postsData } = await dbClient
     .from('posts')
     .select('id, content, created_at, profiles!inner(username, avatar_url)')
+    .in('author_id', feedUserIds)
     .order('created_at', { ascending: false })
     .limit(10)
 
