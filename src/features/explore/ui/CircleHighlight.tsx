@@ -15,7 +15,7 @@ export function CircleHighlight({ circle }: CircleHighlightProps) {
   const memberCount = circle.member_count ?? null;
 
   return (
-    <Link href="/communities" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-[1.25rem]">
+    <Link href={`/communities/${circle.id}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-[1.25rem]">
       <div className="clipcut-card-hover flex flex-col gap-3 p-6 h-full cursor-pointer">
         {/* Circle name — Syne font */}
         <h3
