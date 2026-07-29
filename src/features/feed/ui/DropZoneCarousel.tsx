@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 import { X, Play, Sparkles } from 'lucide-react'
 import { Avatar } from '@/shared/ui/core'
+import type { Post, Profile } from '@/shared/types/database'
 
-export interface Drop {
-  id: string
-  creator: string
-  avatar: string
+export type Drop = Pick<Post, 'id'> & {
+  creator: Profile['username']
+  avatar: NonNullable<Profile['avatar_url']>
   hasUnread: boolean
   content: string
 }

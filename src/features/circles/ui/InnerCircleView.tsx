@@ -6,19 +6,15 @@ import { TipModal } from '@/features/monetization/ui/TipModal'
 import { createClient } from '@/shared/lib/supabase/client'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-
-interface Profile {
-  username: string
-  avatar_url?: string
-}
+import type { Profile, ChatMessage } from '@/shared/types/database'
 
 export function InnerCircleView({ username, circleId }: { username: string, circleId: string }) {
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [isTipModalOpen, setIsTipModalOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   
-  const [messages, setMessages] = useState<{ id: string; author_id: string; text: string }[]>([])
-  const [profilesCache, setProfilesCache] = useState<Record<string, Profile>>({})
+  const [messages, setMessages] = useState<Pick<ChatMessage, 'id' | 'author_id' | 'text'>[]>([])
+  const [profilesCache, setProfilesCache] = useState<Record<string, Pick<Profile, 'username' | 'avatar_url'>>>({})
   const [input, setInput] = useState('')
   const chatScrollRef = useRef<HTMLDivElement>(null)
   const supabase = createClient()
@@ -93,7 +89,7 @@ export function InnerCircleView({ username, circleId }: { username: string, circ
         table: 'chat_messages',
         filter: `circle_id=eq.${circleId}`
       }, (payload) => {
-        const newMessage = payload.new as { id: string; author_id: string; text: string }
+        const newMessage = payload.new as Pick<ChatMessage, 'id' | 'author_id' | 'text'>
         setMessages(prev => [...prev, newMessage])
         hydrateProfiles([newMessage.author_id])
         setTimeout(scrollToBottom, 100)

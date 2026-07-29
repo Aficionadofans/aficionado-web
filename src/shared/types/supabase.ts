@@ -78,6 +78,7 @@ export interface Database {
           mux_asset_id: string | null
           visibility: "public" | "subscriber"
           moderation_status: "pending" | "approved" | "rejected"
+          status: string
         }
       }
       subscriptions: {

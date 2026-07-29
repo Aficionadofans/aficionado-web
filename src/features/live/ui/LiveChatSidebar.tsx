@@ -4,22 +4,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { MessageCircle, Send, DollarSign, Star, User } from 'lucide-react'
 import { createClient } from '@/shared/lib/supabase/client'
 import Image from 'next/image'
-
-interface Profile {
-  username: string
-  avatar_url?: string
-}
-
-interface Message {
-  id: string
-  author_id: string
-  text: string
-  is_tip?: boolean
-}
+import type { LiveMessage, Profile } from '@/shared/types/database'
 
 export function LiveChatSidebar({ username }: { username: string }) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [profilesCache, setProfilesCache] = useState<Record<string, Profile>>({})
+  const [messages, setMessages] = useState<LiveMessage[]>([])
+  const [profilesCache, setProfilesCache] = useState<Record<string, Pick<Profile, 'username' | 'avatar_url'>>>({})
   const [input, setInput] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const chatScrollRef = useRef<HTMLDivElement>(null)
@@ -68,7 +57,7 @@ export function LiveChatSidebar({ username }: { username: string }) {
     const channel = supabase
       .channel('live_chat')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'live_messages' }, payload => {
-        const newMessage = payload.new as Message
+        const newMessage = payload.new as LiveMessage
         setMessages(prev => [...prev, newMessage].slice(-50))
         hydrateProfiles([newMessage.author_id])
         setTimeout(scrollToBottom, 100)

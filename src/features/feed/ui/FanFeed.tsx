@@ -7,16 +7,16 @@ import { Heart, MessageCircle, Compass } from 'lucide-react'
 import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
-export interface Video {
-  id: string
-  creator: string
-  description: string
+import type { Content, Profile } from '@/shared/types/database'
+
+export type Video = Pick<Content, 'id' | 'description'> & {
+  creator: Profile['username']
   playbackId: string
   likes: string
   comments: string
   isSubscribed: boolean
   unlocksAt?: string
-  moderationStatus?: string
+  moderationStatus?: Content['moderation_status']
 }
 
 export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {

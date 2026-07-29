@@ -8,27 +8,12 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import { StatCounter } from '@/shared/ui/core'
-
-interface Profile {
-  id: string
-  username: string
-  bio?: string
-  avatar_url?: string
-  user_type?: string
-}
-
-interface ContentItem {
-  id: string
-  mux_playback_id?: string
-  title: string
-  description?: string
-  visibility: string
-}
+import type { Profile, Content } from '@/shared/types/database'
 
 interface Props {
-  profile: Profile
+  profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'>
   subscriberCount: number
-  contentItems: ContentItem[]
+  contentItems: Pick<Content, 'id' | 'mux_playback_id' | 'title' | 'description' | 'visibility'>[]
   circleId: string
   source?: string
 }

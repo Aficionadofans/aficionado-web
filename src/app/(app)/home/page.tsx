@@ -2,6 +2,7 @@ import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
 import { type Drop } from '@/features/feed/ui/DropZoneCarousel'
 import { createClient } from '@/shared/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import type { Content } from '@/shared/types/database'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -52,7 +53,7 @@ export default async function HomePage() {
       likes: '0',
       comments: '0',
       isSubscribed: true, // They are subscribed or it's their own
-      moderationStatus: (c.moderation_status as string) ?? 'approved',
+      moderationStatus: (c.moderation_status as Content['moderation_status']) ?? 'approved',
     }
   })
 
