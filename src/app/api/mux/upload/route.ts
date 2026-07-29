@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     const upload = await mux.video.uploads.create({
       cors_origin: siteUrl,
       new_asset_settings: {
-        playback_policy: ['public'],
+        playback_policy: [dbVisibility === 'subscriber' ? 'signed' : 'public'],
         // passthrough is crucial: it lets the webhook map the asset back to the content row
         passthrough: content.id,
         video_quality: 'basic', // Using basic quality for standard uploads
