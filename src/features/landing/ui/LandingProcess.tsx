@@ -31,7 +31,7 @@ const steps: Step[] = [
     number: '03',
     title: 'Monetize Direct & Build Your Audience',
     subtitle: 'Instant 24hr Stripe payouts',
-    description: 'Collect fan subscriptions, exclusive post unlocks, and tips directly to your account.',
+    description: 'Exclusive post unlocks and tips directly to your account.',
     icon: <DollarSign className="w-6 h-6 text-primary" />,
   },
 ]
