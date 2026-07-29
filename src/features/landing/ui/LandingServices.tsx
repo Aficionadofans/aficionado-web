@@ -41,7 +41,7 @@ export function LandingServices() {
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>100% Revenue Ownership</span>
+                <span>Direct Fan Monetization</span>
               </div>
             </div>
           </div>

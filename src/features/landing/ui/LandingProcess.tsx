@@ -29,9 +29,9 @@ const steps: Step[] = [
   },
   {
     number: '03',
-    title: 'Monetize Direct & Keep 100% Revenue',
+    title: 'Monetize Direct & Build Your Audience',
     subtitle: 'Instant 24hr Stripe payouts',
-    description: 'Collect fan subscriptions, exclusive post unlocks, and tips directly to your account with zero platform cuts.',
+    description: 'Collect fan subscriptions, exclusive post unlocks, and tips directly to your account.',
     icon: <DollarSign className="w-6 h-6 text-primary" />,
   },
 ]
@@ -49,7 +49,7 @@ export function LandingProcess() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            3 simple steps to transition from legacy algorithmic dependency to 100% direct fan monetization.
+            3 simple steps to transition from legacy algorithmic dependency to direct fan monetization.
           </p>
         </div>
 
