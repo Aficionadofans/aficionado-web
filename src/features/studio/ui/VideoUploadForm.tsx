@@ -24,7 +24,7 @@ export function VideoUploadForm({
   // Custom endpoint logic for the Mux uploader to fetch the upload URL from our backend
   const getUploadUrl = async () => {
     try {
-      const { data, error } = await supabase.functions.invoke('mux_upload', {
+      const { data, error } = await supabase.functions.invoke('api/mux/upload', {
         body: {
           title: title || 'Untitled Video',
           description,

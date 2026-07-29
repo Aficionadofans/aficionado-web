@@ -49,7 +49,7 @@ async function signPlayback(
   supabase: any,
 ): Promise<string | undefined> {
   try {
-    const { data, error } = await supabase.functions.invoke('mux_sign', {
+    const { data, error } = await supabase.functions.invoke('api/mux/sign', {
       body: { playbackId, contentId },
     })
 

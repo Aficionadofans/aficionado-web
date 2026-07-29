@@ -41,7 +41,7 @@ export function LiveStreamPlayer({
   const handleProvisionStream = async () => {
     setIsProvisioning(true)
     try {
-      const { data, error } = await supabase.functions.invoke('mux_live_provision', {
+      const { data, error } = await supabase.functions.invoke('api/mux/live-provision', {
         method: 'POST',
       })
       if (error) throw error

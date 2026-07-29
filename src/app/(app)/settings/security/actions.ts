@@ -13,7 +13,7 @@ export async function enrollMfa(prevState: any, formData: FormData) {
   if (!session) return { error: 'Not authenticated', qrCode: null, secret: null, factorId: null }
 
   try {
-    const { data: responseData, error } = await supabase.functions.invoke('mfa', {
+    const { data: responseData, error } = await supabase.functions.invoke('api/mfa', {
       body: { action: 'enroll' },
     })
 
@@ -62,7 +62,7 @@ export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
   if (!session) return { error: 'Not authenticated', success: false }
 
   try {
-    const { data, error } = await supabase.functions.invoke('mfa', {
+    const { data, error } = await supabase.functions.invoke('api/mfa', {
       body: { action: 'challengeAndVerify', factorId, code },
     })
 
@@ -99,7 +99,7 @@ export async function unenrollMfa(prevState: any, formData: FormData) {
   if (!session) return { error: 'Not authenticated', success: false }
 
   try {
-    const { data, error } = await supabase.functions.invoke('mfa', {
+    const { data, error } = await supabase.functions.invoke('api/mfa', {
       body: { action: 'unenroll', factorId },
     })
 
