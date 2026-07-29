@@ -10,7 +10,8 @@ import {
   AlertTriangle,
   FileText,
   UserPlus,
-  Share2
+  Share2,
+  PlusCircle
 } from 'lucide-react'
 import Link from 'next/link'
 import { SectionHeader, StatCounter } from '@/shared/ui/core'
@@ -20,6 +21,7 @@ import { TimeCapsuleModal } from './TimeCapsuleModal'
 import { ImportFansModal } from './ImportFansModal'
 import { StudioQuickActions } from './StudioQuickActions'
 import { StudioMetricCards } from './StudioMetricCards'
+import { CreateCircleModal } from '@/features/circles/ui/CreateCircleModal'
 
 interface FlaggedItem {
   id: string
@@ -78,6 +80,7 @@ export function CreatorStudio({
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
   const [isTimeCapsuleModalOpen, setIsTimeCapsuleModalOpen] = useState(false)
   const [isImportFansModalOpen, setIsImportFansModalOpen] = useState(false)
+  const [isCreateCircleModalOpen, setIsCreateCircleModalOpen] = useState(false)
 
   const liveUrl = username ? `/live/${username}` : '#'
 
@@ -129,6 +132,12 @@ export function CreatorStudio({
           alert('Link copied to clipboard!')
         }
       },
+    },
+    {
+      icon: <PlusCircle className="w-5 h-5 text-purple-500" />,
+      title: 'Create Circle',
+      description: 'Start a new community space for your fans',
+      onClick: () => setIsCreateCircleModalOpen(true),
     }
   ]
 
@@ -368,6 +377,7 @@ export function CreatorStudio({
       {isDropModalOpen && <CreateDropModal onClose={() => setIsDropModalOpen(false)} />}
       {isTimeCapsuleModalOpen && <TimeCapsuleModal onClose={() => setIsTimeCapsuleModalOpen(false)} />}
       {isImportFansModalOpen && <ImportFansModal onClose={() => setIsImportFansModalOpen(false)} username={username} />}
+      <CreateCircleModal isOpen={isCreateCircleModalOpen} onClose={() => setIsCreateCircleModalOpen(false)} onSuccess={(id) => console.log('Circle created', id)} />
     </div>
   )
 }
