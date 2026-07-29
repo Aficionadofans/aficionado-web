@@ -3,6 +3,7 @@
 import { createClient } from '@/shared/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function enrollMfa(prevState: any, formData: FormData) {
   const supabase = await createClient()
   const { data: { session } } = await supabase.auth.getSession()
@@ -27,11 +28,12 @@ export async function enrollMfa(prevState: any, formData: FormData) {
       factorId: responseData.data.id,
       error: null
     }
-  } catch (err: any) {
-    return { error: err.message, qrCode: null, secret: null, factorId: null }
+  } catch (err: unknown) {
+    return { error: (err as Error).message, qrCode: null, secret: null, factorId: null }
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
   const factorId = formData.get('factorId') as string
   const code = formData.get('code') as string
@@ -62,11 +64,12 @@ export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
 
     revalidatePath('/settings/security')
     return { success: true, error: null }
-  } catch (err: any) {
-    return { error: err.message, success: false }
+  } catch (err: unknown) {
+    return { error: (err as Error).message, success: false }
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function unenrollMfa(prevState: any, formData: FormData) {
   const factorId = formData.get('factorId') as string
 
@@ -93,8 +96,8 @@ export async function unenrollMfa(prevState: any, formData: FormData) {
 
     revalidatePath('/settings/security')
     return { success: true, error: null }
-  } catch (err: any) {
-    return { error: err.message, success: false }
+  } catch (err: unknown) {
+    return { error: (err as Error).message, success: false }
   }
 }
 

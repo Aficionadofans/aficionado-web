@@ -91,8 +91,8 @@ export async function sendEmailAction(
       message: `Email delivered to ${to} (ID: ${data?.id})`,
       timestamp: Date.now(),
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('[Admin Email] Send failed:', error)
-    return { success: false, message: error.message || 'Failed to send email.' }
+    return { success: false, message: (error as Error).message || 'Failed to send email.' }
   }
 }

@@ -23,7 +23,9 @@ export function LiveStreamPlayer({ username, playbackId, isOwner, viewerCount = 
   const supabase = createClient()
 
   const triggerReaction = (emoji: string) => {
+    // eslint-disable-next-line react-hooks/purity
     const id = Math.random().toString(36).substring(2, 9)
+    // eslint-disable-next-line react-hooks/purity
     const left = Math.floor(Math.random() * 25) + 70 // 70% to 95%
     setReactions(prev => [...prev.slice(-15), { id, emoji, left }])
     setTimeout(() => {

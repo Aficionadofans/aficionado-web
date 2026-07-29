@@ -17,7 +17,7 @@ export function LandingTestimonial() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Real results from real clients. Here's what happened when they switched to our sovereign creator engine.
+            Real results from real clients. Here&apos;s what happened when they switched to our sovereign creator engine.
           </p>
         </div>
 

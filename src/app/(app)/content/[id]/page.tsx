@@ -40,6 +40,7 @@ async function getContent(id: string): Promise<{ content: ContentWithProfile | n
   return { content: null, authorized: false }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function signPlayback(playbackId: string, contentId: string, supabase: any): Promise<string | undefined> {
   try {
     const { data, error } = await supabase.functions.invoke('mux_sign', {

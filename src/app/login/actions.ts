@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
 import { headers } from 'next/headers'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function authAction(prevState: any, formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
@@ -83,8 +84,8 @@ export async function authAction(prevState: any, formData: FormData) {
       }
     }
 
-  } catch (err: any) {
-    return { error: err.message || 'An error occurred', success: null }
+  } catch (err: unknown) {
+    return { error: (err as Error).message || 'An error occurred', success: null }
   }
   
   if (redirectPath) {

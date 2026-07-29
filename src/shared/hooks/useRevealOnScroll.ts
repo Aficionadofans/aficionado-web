@@ -32,6 +32,7 @@ export function useRevealOnScroll(threshold = 0.15, rootMargin = '0px') {
       observer.observe(el)
     } catch {
       // IntersectionObserver unavailable — reveal immediately
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsVisible(true)
     }
 

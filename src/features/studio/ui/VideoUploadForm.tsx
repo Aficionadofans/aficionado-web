@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 import { createClient } from '@/shared/lib/supabase/client'
 
-export function VideoUploadForm({ onUploadStart, onUploadSuccess }: { onUploadStart?: () => void, onUploadSuccess?: () => void }) {
+export function VideoUploadForm({ onUploadStart: _onUploadStart, onUploadSuccess: _onUploadSuccess }: { onUploadStart?: () => void, onUploadSuccess?: () => void }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
@@ -27,6 +27,7 @@ export function VideoUploadForm({ onUploadStart, onUploadSuccess }: { onUploadSt
         },
       })
       if (error) throw error
+      _onUploadStart?.(data.contentId)
       return data.url
     } catch (e) {
       console.error('Upload error:', e)
@@ -38,6 +39,7 @@ export function VideoUploadForm({ onUploadStart, onUploadSuccess }: { onUploadSt
 
   const handleUploadSuccess = () => {
     setIsSuccess(true)
+    _onUploadSuccess?.()
     setTitle('')
     setDescription('')
   }

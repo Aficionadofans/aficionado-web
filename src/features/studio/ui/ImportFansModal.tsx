@@ -11,7 +11,7 @@ interface ImportFansModalProps {
 
 export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
   const [activeTab, setActiveTab] = useState<'csv' | 'link'>('csv')
-  const [isUploading, setIsUploading] = useState(false)
+
   const [parsedEmails, setParsedEmails] = useState<{ email: string; name: string }[]>([])
   const [importStatus, setImportStatus] = useState<'idle' | 'importing' | 'success'>('idle')
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -199,7 +199,7 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
           ) : (
             <div className="flex flex-col gap-5">
               <p className="text-sm text-muted-foreground">
-                Generate a unique referral link to share with your audience. We'll show a personalized welcome message based on the source.
+                Generate a unique referral link to share with your audience. We&apos;ll show a personalized welcome message based on the source.
               </p>
               
               <div className="space-y-2">

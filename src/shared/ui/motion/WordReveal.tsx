@@ -48,6 +48,7 @@ export function WordReveal({
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Tag = motion[as] as any
 
   return (

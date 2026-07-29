@@ -31,16 +31,16 @@ export function UrgeInterceptor() {
         setIsTriggered(false)
       }, BREATHE_DURATION_MS)
     }
-  }, [pathname])
+  }, [pathname, isTriggered])
 
   if (!isTriggered) return null
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-charcoal/95 backdrop-blur-md animate-fade-in transition-all">
       <div className="max-w-md w-full px-6 text-center">
-        <h2 className="text-2xl font-bold text-off-white mb-2">You're moving fast.</h2>
+        <h2 className="text-2xl font-bold text-off-white mb-2">You&apos;re moving fast.</h2>
         <p className="text-muted-foreground mb-16">
-          We noticed you're jumping between pages quickly. Let's take a 15-second breathing break to center your mind.
+          We noticed you&apos;re jumping between pages quickly. Let&apos;s take a 15-second breathing break to center your mind.
         </p>
 
         {/* Liquid Glass Breathing Ring */}
