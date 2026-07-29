@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "oxlint && eslint",
     "test": "vitest --run"
   },
   "dependencies": {
@@ -45,8 +45,10 @@
     "@vitest/coverage-v8": "^2.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "eslint-plugin-oxlint": "^1.76.0",
     "fast-check": "^3.23.2",
     "jsdom": "^25.0.0",
+    "oxlint": "^1.76.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^2.0.0"
