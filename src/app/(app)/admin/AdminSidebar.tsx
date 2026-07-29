@@ -19,9 +19,7 @@ export function AdminSidebar() {
       {adminNavItems.map((item) => {
         const Icon = item.icon
         const isActive =
-          item.href === '/admin'
-            ? pathname === '/admin'
-            : pathname.startsWith(item.href)
+          item.href === '/admin' ? pathname === '/admin' : pathname.startsWith(item.href)
 
         return (
           <Link

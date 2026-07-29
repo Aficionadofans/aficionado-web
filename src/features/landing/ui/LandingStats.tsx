@@ -49,9 +49,7 @@ export function LandingStats() {
                 <div className="text-sm font-bold text-foreground mt-1 group-hover:text-primary transition-colors">
                   {stat.label}
                 </div>
-                <div className="text-xs text-muted-foreground font-sans">
-                  {stat.sublabel}
-                </div>
+                <div className="text-xs text-muted-foreground font-sans">{stat.sublabel}</div>
               </div>
             ))}
           </div>
@@ -60,4 +58,3 @@ export function LandingStats() {
     </section>
   )
 }
-

@@ -20,7 +20,15 @@ export { Textarea } from './textarea'
 // ── Data Display ────────────────────────────────────────────────────────────
 export { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from './avatar'
 export { Badge } from './badge'
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, CardAction } from './card'
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardAction,
+} from './card'
 
 // ── Feedback & Structure ────────────────────────────────────────────────────
 export { SectionHeader } from './section-header'

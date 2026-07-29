@@ -11,7 +11,8 @@ const heroCards = [
   {
     id: 1,
     video: 'https://framerusercontent.com/assets/DbZSLkpXo1zcSnI9ysFDBJDfbA.mp4',
-    poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
     title: 'Studio Short Edit',
     views: '1.2M Views',
     rotate: -10,
@@ -24,7 +25,8 @@ const heroCards = [
   {
     id: 2,
     video: 'https://framerusercontent.com/assets/0O56ed5D4Df3A8PfmCNF5GC9eno.mp4',
-    poster: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop',
     title: 'Lifestyle Vlog',
     views: '623K Views',
     rotate: -6,
@@ -37,7 +39,8 @@ const heroCards = [
   {
     id: 3,
     video: 'https://framerusercontent.com/assets/4e6W2vHiUa5qeeiGAcxaDg11GbM.mp4',
-    poster: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop',
     title: 'Product Unboxing',
     views: '487K Views',
     rotate: -3,
@@ -50,7 +53,8 @@ const heroCards = [
   {
     id: 4,
     video: 'https://framerusercontent.com/assets/423HbpaxYIUVGK5fOFwnabw10.mp4',
-    poster: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
     title: 'Master Edit',
     views: '2.4M Views',
     rotate: 0,
@@ -63,7 +67,8 @@ const heroCards = [
   {
     id: 5,
     video: 'https://framerusercontent.com/assets/18EExDeOIlPsFnEV5Fcbku7gdmo.mp4',
-    poster: 'https://images.unsplash.com/photo-1483721074892-4a858076436c?q=80&w=600&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1483721074892-4a858076436c?q=80&w=600&auto=format&fit=crop',
     title: 'Fitness Reel',
     views: '920K Views',
     rotate: 3,
@@ -76,7 +81,8 @@ const heroCards = [
   {
     id: 6,
     video: 'https://framerusercontent.com/assets/OF8Sj3bltaUyBpQsgUNxK11PKc.mp4',
-    poster: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop',
     title: 'Cinematic Ride',
     views: '540K Views',
     rotate: 6,
@@ -89,7 +95,8 @@ const heroCards = [
   {
     id: 7,
     video: 'https://framerusercontent.com/assets/FLMP26czSPqDNGSRZ1PfTOfD3E.mp4',
-    poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
+    poster:
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
     title: 'Creator Interview',
     views: '758K Views',
     rotate: 10,
@@ -125,7 +132,6 @@ export function LandingHero() {
   }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left - rect.width / 2
     const y = e.clientY - rect.top - rect.height / 2
@@ -168,7 +174,6 @@ export function LandingHero() {
           delay={0.1}
           stagger={0.06}
         />
-
 
         {/* Subtitle */}
         <motion.p
@@ -256,14 +261,17 @@ export function LandingHero() {
                 </span>
               </div>
               <div>
-                <span className="text-xs font-bold text-white font-heading block drop-shadow-md">{card.title}</span>
-                <span className="text-[10px] font-mono text-amber-300 font-semibold">{card.views}</span>
+                <span className="text-xs font-bold text-white font-heading block drop-shadow-md">
+                  {card.title}
+                </span>
+                <span className="text-[10px] font-mono text-amber-300 font-semibold">
+                  {card.views}
+                </span>
               </div>
             </div>
           </motion.div>
         ))}
       </motion.div>
-
 
       {/* Floating Bottom Pill Badge */}
       <motion.div
@@ -288,4 +296,3 @@ export function LandingHero() {
     </section>
   )
 }
-

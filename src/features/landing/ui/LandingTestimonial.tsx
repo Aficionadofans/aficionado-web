@@ -17,7 +17,8 @@ export function LandingTestimonial() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Real results from real clients. Here&apos;s what happened when they switched to our sovereign creator engine.
+            Real results from real clients. Here&apos;s what happened when they switched to our
+            sovereign creator engine.
           </p>
         </div>
 
@@ -33,7 +34,9 @@ export function LandingTestimonial() {
                 </div>
                 <Quote className="w-8 h-8 text-[#E8501A]/40" />
                 <p className="text-sm text-white/90 leading-relaxed font-sans italic">
-                  “Before this, we were just posting randomly. Now every video has a purpose. Our reels started getting real reach, engagement went up, and we finally saw consistent growth.”
+                  “Before this, we were just posting randomly. Now every video has a purpose. Our
+                  reels started getting real reach, engagement went up, and we finally saw
+                  consistent growth.”
                 </p>
               </div>
 
@@ -68,7 +71,8 @@ export function LandingTestimonial() {
                 </div>
                 <Quote className="w-8 h-8 text-primary/40" />
                 <p className="text-sm text-white/90 leading-relaxed font-sans italic">
-                  “Bypassing YouTube and Instagram fee cuts allowed me to build an exclusive Inner Circle. 4.8k fans joined on day 1 with instant 24-hour payouts.”
+                  “Bypassing YouTube and Instagram fee cuts allowed me to build an exclusive Inner
+                  Circle. 4.8k fans joined on day 1 with instant 24-hour payouts.”
                 </p>
               </div>
 
@@ -103,7 +107,8 @@ export function LandingTestimonial() {
                 </div>
                 <Quote className="w-8 h-8 text-emerald-400/40" />
                 <p className="text-sm text-white/90 leading-relaxed font-sans italic">
-                  “The 24-hour video drop turnaround and retention hooks transformed our agency operations. We deliver 30+ short-form edits every week without friction.”
+                  “The 24-hour video drop turnaround and retention hooks transformed our agency
+                  operations. We deliver 30+ short-form edits every week without friction.”
                 </p>
               </div>
 

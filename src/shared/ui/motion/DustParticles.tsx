@@ -50,8 +50,7 @@ export function DustParticles() {
         if (p.x < -10) p.x = width + 10
         if (p.x > width + 10) p.x = -10
 
-        const currentOpacity =
-          p.opacity + Math.sin(p.pulseFactor) * 0.15
+        const currentOpacity = p.opacity + Math.sin(p.pulseFactor) * 0.15
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
@@ -72,10 +71,5 @@ export function DustParticles() {
     }
   }, [])
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 z-[1] pointer-events-none opacity-80"
-    />
-  )
+  return <canvas ref={canvasRef} className="fixed inset-0 z-[1] pointer-events-none opacity-80" />
 }

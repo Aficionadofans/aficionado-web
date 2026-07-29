@@ -15,37 +15,43 @@ const results: ResultCard[] = [
   {
     stat: '1.2M+ views on single reel',
     handle: '@nova.skincare',
-    description: 'We created product-focused short videos with strong hooks and clean visuals, reaching a massive new audience.',
+    description:
+      'We created product-focused short videos with strong hooks and clean visuals, reaching a massive new audience.',
     icon: <Flame className="w-5 h-5 text-[#E8501A]" />,
   },
   {
     stat: '+8K followers in 30 days',
     handle: '@Williams.fast',
-    description: 'A consistent content strategy combined with high-retention edits helped grow their audience steadily.',
+    description:
+      'A consistent content strategy combined with high-retention edits helped grow their audience steadily.',
     icon: <Users className="w-5 h-5 text-primary" />,
   },
   {
     stat: '3x engagement increase',
     handle: '@Khulna_para',
-    description: 'Better hooks and tighter storytelling pushed watch time up — and the recommendation engine noticed.',
+    description:
+      'Better hooks and tighter storytelling pushed watch time up — and the recommendation engine noticed.',
     icon: <TrendingUp className="w-5 h-5 text-emerald-400" />,
   },
   {
     stat: '2.5x leads from content',
     handle: '@Urban_sun',
-    description: 'Strategy-driven videos with clear messages and CTAs turned views into real business leads.',
+    description:
+      'Strategy-driven videos with clear messages and CTAs turned views into real business leads.',
     icon: <Zap className="w-5 h-5 text-amber-400" />,
   },
   {
     stat: '2.8x increase in sales',
     handle: '@Cook.johans',
-    description: 'Conversion-focused edits with clear CTAs turned passive viewers into paying customers.',
+    description:
+      'Conversion-focused edits with clear CTAs turned passive viewers into paying customers.',
     icon: <DollarSign className="w-5 h-5 text-emerald-400" />,
   },
   {
     stat: '100% direct payouts kept',
     handle: '@ElenaVance',
-    description: 'Bypassed platform algorithms and converted 4.8k followers into monthly Inner Circle subscribers.',
+    description:
+      'Bypassed platform algorithms and converted 4.8k followers into monthly Inner Circle subscribers.',
     icon: <Award className="w-5 h-5 text-[#E8501A]" />,
   },
 ]
@@ -84,7 +90,9 @@ export function LandingResultsGrid() {
                   >
                     {item.stat}
                   </h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
               </div>
             </RevealSection>

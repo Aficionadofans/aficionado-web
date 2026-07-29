@@ -89,7 +89,9 @@ export function VideoOverlayActions({
         >
           <MessageCircle className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
         </div>
-        <span className="text-[11px] font-medium text-white/80 drop-shadow-sm tabular-nums">{comments}</span>
+        <span className="text-[11px] font-medium text-white/80 drop-shadow-sm tabular-nums">
+          {comments}
+        </span>
       </button>
 
       {/* Tip — amber: monetization only */}

@@ -13,7 +13,6 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
 
   return (
     <div className="h-[100dvh] w-full bg-black flex flex-col max-w-md mx-auto relative border-x border-white/5 shadow-2xl">
-      
       {/* Header */}
       <div className="p-4 border-b border-white/10 flex items-center justify-between bg-black/80 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-3">
@@ -37,17 +36,20 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
           <div className="w-24 h-24 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
             <ShieldAlert className="w-12 h-12 text-red-500" />
           </div>
-          <h2 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-md">Access Denied</h2>
+          <h2 className="text-2xl font-black text-white mb-2 uppercase tracking-widest drop-shadow-md">
+            Access Denied
+          </h2>
           <p className="text-red-300 font-medium mb-2">
             You do not live in <span className="text-white font-bold">{targetZip}</span>.
           </p>
           <p className="text-muted-foreground text-sm max-w-[90%] mx-auto mb-8">
-            Neighborhood communities are strictly segregated by verified Zip Codes to ensure safe, authentic local connections.
+            Neighborhood communities are strictly segregated by verified Zip Codes to ensure safe,
+            authentic local connections.
           </p>
-          
+
           <div className="glass-panel p-4 rounded-2xl w-full">
             <p className="text-sm text-white/70 mb-3">Try visiting your verified neighborhood:</p>
-            <button 
+            <button
               onClick={() => setTargetZip(userZipCode)}
               className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-[#00BCAF] transition-all duration-200 shadow-[0_0_20px_rgba(0,212,200,0.3)] active:scale-[0.98]"
             >
@@ -81,7 +83,8 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
                 </div>
               </div>
               <p className="text-sm text-white/90 mb-3">
-                Anyone else&apos;s power flicker just now near Elm St? Wondering if I need to reset the router again.
+                Anyone else&apos;s power flicker just now near Elm St? Wondering if I need to reset
+                the router again.
               </p>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <button className="hover:text-white transition-colors">Like (12)</button>
@@ -101,7 +104,8 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
                 </div>
               </div>
               <p className="text-sm text-white/90 mb-3">
-                Hosting a local cleanup at the community park this Saturday at 9 AM! Coffee and donuts provided for anyone who helps out. 🍩☕️
+                Hosting a local cleanup at the community park this Saturday at 9 AM! Coffee and
+                donuts provided for anyone who helps out. 🍩☕️
               </p>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <button className="hover:text-white transition-colors">Like (45)</button>
@@ -113,9 +117,9 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
           {/* Create Post Input */}
           <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black to-transparent">
             <div className="relative">
-              <input 
-                type="text" 
-                placeholder="Share with the neighborhood..." 
+              <input
+                type="text"
+                placeholder="Share with the neighborhood..."
                 className="w-full bg-white/10 border border-white/20 rounded-full py-3 px-4 pr-12 text-sm text-white focus:outline-none focus:border-bio-teal/50 transition-colors backdrop-blur-md"
               />
               <button className="absolute right-1 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-bio-teal text-black flex items-center justify-center hover:scale-105 transition-transform">
@@ -130,7 +134,7 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
       {isVerified && (
         <div className="absolute -right-48 top-1/2 -translate-y-1/2 w-40 glass-panel p-4 rounded-xl hidden xl:block">
           <p className="text-xs text-muted-foreground mb-2">Simulate Boundary:</p>
-          <button 
+          <button
             onClick={() => setTargetZip('10001')}
             className="w-full py-2 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500/30 transition-colors"
           >

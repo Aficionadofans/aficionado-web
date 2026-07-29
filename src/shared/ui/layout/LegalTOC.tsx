@@ -22,7 +22,7 @@ export function LegalTOC({ headings }: LegalTOCProps) {
           }
         }
       },
-      { rootMargin: '0px 0px -60% 0px', threshold: 0 }
+      { rootMargin: '0px 0px -60% 0px', threshold: 0 },
     )
 
     headings.forEach(({ id }) => {
@@ -36,13 +36,8 @@ export function LegalTOC({ headings }: LegalTOCProps) {
   if (headings.length === 0) return null
 
   return (
-    <nav
-      aria-label="Table of contents"
-      className="glass-panel rounded-2xl p-5"
-    >
-      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-4">
-        Contents
-      </p>
+    <nav aria-label="Table of contents" className="glass-panel rounded-2xl p-5">
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-4">Contents</p>
       <ul className="flex flex-col gap-1.5">
         {headings.map(({ id, label }) => (
           <li key={id}>

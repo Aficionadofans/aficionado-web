@@ -32,12 +32,14 @@ export default async function LiveWatchPartyPage({
     .single()
 
   // 3. Check if current user is the owner
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
   const isOwner = user?.id === profile.id
 
   return (
-    <WatchPartyTheater 
-      username={username} 
+    <WatchPartyTheater
+      username={username}
       playbackId={liveRecord?.mux_playback_id || undefined}
       isOwner={isOwner}
     />

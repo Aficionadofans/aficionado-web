@@ -5,12 +5,12 @@ import { Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export const TOPIC_FILTERS = [
-  "Musicians",
-  "Writers",
-  "Parenting",
-  "Visual Art",
-  "Tech & Design",
-  "Wellness"
+  'Musicians',
+  'Writers',
+  'Parenting',
+  'Visual Art',
+  'Tech & Design',
+  'Wellness',
 ]
 
 interface TopicPillsProps {
@@ -37,10 +37,10 @@ export function TopicPills({
             key={topic}
             onClick={() => onFilterClick(topic)}
             className={cn(
-              "px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 shrink-0 border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60",
+              'px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 shrink-0 border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60',
               isActive
-                ? "bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(0,212,200,0.4)] scale-105"
-                : "liquid-glass text-muted-foreground border-white/10 hover:text-off-white hover:border-white/20"
+                ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(0,212,200,0.4)] scale-105'
+                : 'liquid-glass text-muted-foreground border-white/10 hover:text-off-white hover:border-white/20',
             )}
           >
             {topic}

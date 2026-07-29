@@ -8,14 +8,16 @@ import type { LiveMessage, Profile } from '@/shared/types/database'
 
 export function LiveChatSidebar({ username }: { username: string }) {
   const [messages, setMessages] = useState<LiveMessage[]>([])
-  const [profilesCache, setProfilesCache] = useState<Record<string, Pick<Profile, 'username' | 'avatar_url'>>>({})
+  const [profilesCache, setProfilesCache] = useState<
+    Record<string, Pick<Profile, 'username' | 'avatar_url'>>
+  >({})
   const [input, setInput] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const chatScrollRef = useRef<HTMLDivElement>(null)
   const supabase = createClient()
 
   const hydrateProfiles = async (authorIds: string[]) => {
-    const unknownIds = [...new Set(authorIds)].filter(id => !profilesCache[id])
+    const unknownIds = [...new Set(authorIds)].filter((id) => !profilesCache[id])
     if (unknownIds.length === 0) return
 
     const { data: profilesData } = await supabase
@@ -24,9 +26,11 @@ export function LiveChatSidebar({ username }: { username: string }) {
       .in('id', unknownIds)
 
     if (profilesData) {
-      setProfilesCache(prev => ({
+      setProfilesCache((prev) => ({
         ...prev,
-        ...Object.fromEntries(profilesData.map(p => [p.id, { username: p.username, avatar_url: p.avatar_url }]))
+        ...Object.fromEntries(
+          profilesData.map((p) => [p.id, { username: p.username, avatar_url: p.avatar_url }]),
+        ),
       }))
     }
   }
@@ -44,11 +48,11 @@ export function LiveChatSidebar({ username }: { username: string }) {
         .select('*')
         .order('created_at', { ascending: false })
         .limit(50)
-      
+
       if (data) {
         const reversed = data.reverse()
         setMessages(reversed)
-        hydrateProfiles(reversed.map(m => m.author_id))
+        hydrateProfiles(reversed.map((m) => m.author_id))
         setTimeout(scrollToBottom, 100)
       }
     }
@@ -56,12 +60,16 @@ export function LiveChatSidebar({ username }: { username: string }) {
 
     const channel = supabase
       .channel('live_chat')
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'live_messages' }, payload => {
-        const newMessage = payload.new as LiveMessage
-        setMessages(prev => [...prev, newMessage].slice(-50))
-        hydrateProfiles([newMessage.author_id])
-        setTimeout(scrollToBottom, 100)
-      })
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'live_messages' },
+        (payload) => {
+          const newMessage = payload.new as LiveMessage
+          setMessages((prev) => [...prev, newMessage].slice(-50))
+          hydrateProfiles([newMessage.author_id])
+          setTimeout(scrollToBottom, 100)
+        },
+      )
       .subscribe()
 
     return () => {
@@ -75,13 +83,15 @@ export function LiveChatSidebar({ username }: { username: string }) {
 
     setIsSubmitting(true)
     try {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) return
 
       await supabase.from('live_messages').insert({
         author_id: user.id,
         text: input.trim(),
-        is_tip: false
+        is_tip: false,
       })
       setInput('')
     } finally {
@@ -99,11 +109,13 @@ export function LiveChatSidebar({ username }: { username: string }) {
           </div>
           <h2 className="text-white font-bold tracking-wide text-sm sm:text-base">Live Chat</h2>
         </div>
-        <span className="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">Real-Time</span>
+        <span className="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">
+          Real-Time
+        </span>
       </div>
 
       {/* Chat Messages */}
-      <div 
+      <div
         ref={chatScrollRef}
         className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scroll-smooth hide-scrollbar"
       >
@@ -117,24 +129,32 @@ export function LiveChatSidebar({ username }: { username: string }) {
             const isCreator = author?.username === username
 
             return (
-              <div 
-                key={msg.id} 
+              <div
+                key={msg.id}
                 className={`flex gap-3 text-xs leading-relaxed animate-fade-in ${
-                  msg.is_tip 
-                    ? 'p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 to-amber-500/5 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)]' 
+                  msg.is_tip
+                    ? 'p-3 rounded-2xl bg-gradient-to-r from-amber-500/20 to-amber-500/5 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
                     : ''
                 }`}
               >
                 <div className="w-7 h-7 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center relative overflow-hidden border border-white/10">
                   {author?.avatar_url ? (
-                    <Image src={author.avatar_url} alt="" width={28} height={28} className="object-cover" />
+                    <Image
+                      src={author.avatar_url}
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="object-cover"
+                    />
                   ) : (
                     <User className="w-3.5 h-3.5 text-muted-foreground" />
                   )}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className={`font-bold ${isCreator ? 'text-amber-400' : 'text-off-white'}`}>
+                    <span
+                      className={`font-bold ${isCreator ? 'text-amber-400' : 'text-off-white'}`}
+                    >
                       @{author?.username || 'user'}
                     </span>
                     {isCreator && (
@@ -148,7 +168,13 @@ export function LiveChatSidebar({ username }: { username: string }) {
                       </span>
                     )}
                   </div>
-                  <p className={msg.is_tip ? 'text-amber-200 font-semibold' : 'text-muted-foreground font-medium'}>
+                  <p
+                    className={
+                      msg.is_tip
+                        ? 'text-amber-200 font-semibold'
+                        : 'text-muted-foreground font-medium'
+                    }
+                  >
                     {msg.text}
                   </p>
                 </div>
@@ -159,15 +185,18 @@ export function LiveChatSidebar({ username }: { username: string }) {
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSend} className="p-3 border-t border-white/5 bg-black/40 flex items-center gap-2">
-        <input 
-          type="text" 
+      <form
+        onSubmit={handleSend}
+        className="p-3 border-t border-white/5 bg-black/40 flex items-center gap-2"
+      >
+        <input
+          type="text"
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Send a message…"
           className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-amber-500/50"
         />
-        <button 
+        <button
           type="submit"
           disabled={!input.trim() || isSubmitting}
           className="w-9 h-9 rounded-full bg-amber-500 text-black flex items-center justify-center disabled:opacity-50 hover:bg-amber-400 transition-colors shadow-[0_0_10px_rgba(245,158,11,0.3)]"

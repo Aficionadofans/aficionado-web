@@ -3,7 +3,6 @@ import { Bricolage_Grotesque, Syne, Inter, Geist_Mono } from 'next/font/google'
 import { DustParticles } from '@/shared/ui/motion/DustParticles'
 import './globals.css'
 
-
 const bricolage = Bricolage_Grotesque({
   variable: '--font-bricolage',
   subsets: ['latin'],
@@ -36,7 +35,8 @@ export const metadata: Metadata = {
     default: 'Aficionado | Anti-dopamine Social Media',
     template: '%s | Aficionado',
   },
-  description: 'The anti-dopamine social media platform for Aficionado and Fans. A finite, healthy feed for sovereign creators.',
+  description:
+    'The anti-dopamine social media platform for Aficionado and Fans. A finite, healthy feed for sovereign creators.',
   metadataBase: new URL('https://aficionado.fans'),
   icons: {
     icon: '/icon.png',
@@ -50,10 +50,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark h-full antialiased" suppressHydrationWarning>
       <body
@@ -66,14 +63,18 @@ export default function RootLayout({
         {/* Ambient background orbs — fiery orange + electric teal gradient theme */}
         <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#090401]">
           <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#E8501A]/10 blur-[150px] mix-blend-screen animate-breathe-calm" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[160px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '3s' }} />
-          <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-[#FF3B00]/8 blur-[140px] mix-blend-screen animate-breathe-calm" style={{ animationDelay: '1.5s' }} />
+          <div
+            className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[160px] mix-blend-screen animate-breathe-calm"
+            style={{ animationDelay: '3s' }}
+          />
+          <div
+            className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-[#FF3B00]/8 blur-[140px] mix-blend-screen animate-breathe-calm"
+            style={{ animationDelay: '1.5s' }}
+          />
         </div>
-
 
         {children}
       </body>
     </html>
   )
 }
-

@@ -12,7 +12,10 @@ export async function GET(request: Request) {
   if (error) {
     console.error('Auth callback error:', error, errorDescription)
     const loginUrl = new URL('/login', request.url)
-    loginUrl.searchParams.set('message', errorDescription ?? 'Authentication failed. Please try again.')
+    loginUrl.searchParams.set(
+      'message',
+      errorDescription ?? 'Authentication failed. Please try again.',
+    )
     return NextResponse.redirect(loginUrl)
   }
 
@@ -23,15 +26,20 @@ export async function GET(request: Request) {
     if (exchangeError) {
       console.error('Code exchange error:', exchangeError.message)
       const loginUrl = new URL('/login', request.url)
-      loginUrl.searchParams.set('message', 'Session could not be established. Please sign in again.')
+      loginUrl.searchParams.set(
+        'message',
+        'Session could not be established. Please sign in again.',
+      )
       return NextResponse.redirect(loginUrl)
     }
 
     // If userType is provided (from an OAuth signup flow), ensure the profile is updated
     if (userType === 'fan' || userType === 'aficionado') {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (user) {
-        // We do an update. Note that the handle_new_user trigger may have already 
+        // We do an update. Note that the handle_new_user trigger may have already
         // inserted a row with a null user_type.
         const { error: updateError } = await supabase
           .from('profiles')

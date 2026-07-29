@@ -68,9 +68,12 @@ describe('SettingsView Payment Tab & Add Card Modal', () => {
     // Submit form
     await user.click(screen.getByRole('button', { name: /save card/i }))
 
-    await waitFor(() => {
-      expect(screen.getByText(/payment method added successfully/i)).toBeInTheDocument()
-    }, { timeout: 3000 })
+    await waitFor(
+      () => {
+        expect(screen.getByText(/payment method added successfully/i)).toBeInTheDocument()
+      },
+      { timeout: 3000 },
+    )
 
     expect(screen.getByText(/Jane Doe · Expires 12\/28/i)).toBeInTheDocument()
     expect(screen.getByText(/•••• •••• •••• 4242/i)).toBeInTheDocument()

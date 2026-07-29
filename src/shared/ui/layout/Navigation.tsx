@@ -1,14 +1,22 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Home, Compass, PlusSquare, MonitorPlay, Settings, ShieldAlert, LucideIcon } from 'lucide-react'
+import {
+  Home,
+  Compass,
+  PlusSquare,
+  MonitorPlay,
+  Settings,
+  ShieldAlert,
+  LucideIcon,
+} from 'lucide-react'
 import { SidebarNav } from './SidebarNav'
 import { BottomNav } from './BottomNav'
 
 export type NavigationItem = {
-  name: string;
-  href: string;
-  icon: LucideIcon;
+  name: string
+  href: string
+  icon: LucideIcon
 }
 
 export type NavigationItems = NavigationItem[]
@@ -21,19 +29,33 @@ const navItems: NavigationItems = [
   { name: 'Settings', href: '/settings', icon: Settings },
 ]
 
-export function Navigation({ isAdmin = false, userType }: { isAdmin?: boolean; userType?: 'aficionado' | 'fan' | null }) {
+export function Navigation({
+  isAdmin = false,
+  userType,
+}: {
+  isAdmin?: boolean
+  userType?: 'aficionado' | 'fan' | null
+}) {
   const pathname = usePathname()
 
   // Don't show nav on auth or legal pages
-  const hideNavRoutes = ['/login', '/update-password', '/auth', '/terms', '/privacy', '/creator-agreement']
-  if (hideNavRoutes.some(route => pathname === route || pathname.startsWith(route + '/'))) return null
+  const hideNavRoutes = [
+    '/login',
+    '/update-password',
+    '/auth',
+    '/terms',
+    '/privacy',
+    '/creator-agreement',
+  ]
+  if (hideNavRoutes.some((route) => pathname === route || pathname.startsWith(route + '/')))
+    return null
 
   let finalNavItems = navItems
 
   if (userType === 'fan') {
-    finalNavItems = finalNavItems.filter(item => item.name !== 'Studio')
+    finalNavItems = finalNavItems.filter((item) => item.name !== 'Studio')
   } else if (userType === 'aficionado') {
-    finalNavItems = finalNavItems.filter(item => item.name !== 'Explore')
+    finalNavItems = finalNavItems.filter((item) => item.name !== 'Explore')
   }
 
   if (isAdmin) {

@@ -39,7 +39,7 @@ function mockIntersectionObserver(intersecting = true) {
               time: 0,
             } as IntersectionObserverEntry,
           ],
-          self as unknown as IntersectionObserver
+          self as unknown as IntersectionObserver,
         )
       }),
       disconnect: vi.fn(),
@@ -98,7 +98,7 @@ describe('Property 1 — RevealSection delay propagation', () => {
           const { container, unmount } = render(
             <RevealSection delay={delay}>
               <span>content</span>
-            </RevealSection>
+            </RevealSection>,
           )
 
           const div = container.firstElementChild as HTMLElement
@@ -107,9 +107,9 @@ describe('Property 1 — RevealSection delay propagation', () => {
           expect(div.style.animationDelay).toBe(`${delay}ms`)
 
           unmount()
-        }
+        },
       ),
-      { numRuns: 100 }
+      { numRuns: 100 },
     )
 
     cleanup()
@@ -143,9 +143,9 @@ describe('Property 3 — Stagger delay invariant', () => {
 
           // Last item has delay (listLength - 1) * interval
           expect(delays[delays.length - 1]).toBe((listLength - 1) * interval)
-        }
+        },
       ),
-      { numRuns: 200 }
+      { numRuns: 200 },
     )
   })
 })
@@ -163,7 +163,7 @@ describe('RevealSection reduced-motion behaviour', () => {
     const { container } = render(
       <RevealSection delay={200}>
         <span data-testid="child">hello</span>
-      </RevealSection>
+      </RevealSection>,
     )
 
     const div = container.firstElementChild as HTMLElement
@@ -191,7 +191,7 @@ describe('RevealSection reduced-motion behaviour', () => {
     const { container } = render(
       <RevealSection delay={100}>
         <span data-testid="child">hello</span>
-      </RevealSection>
+      </RevealSection>,
     )
 
     const div = container.firstElementChild as HTMLElement
@@ -221,7 +221,7 @@ describe('RevealSection IntersectionObserver fallback', () => {
     const { container } = render(
       <RevealSection>
         <span data-testid="fallback-child">content</span>
-      </RevealSection>
+      </RevealSection>,
     )
 
     // Children must still be rendered

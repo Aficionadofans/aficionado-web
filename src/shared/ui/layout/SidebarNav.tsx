@@ -5,7 +5,13 @@ import { LogOut } from 'lucide-react'
 import { logout } from '@/app/login/actions'
 import { NavigationItems } from './Navigation'
 
-export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; pathname: string }) {
+export function SidebarNav({
+  navItems,
+  pathname,
+}: {
+  navItems: NavigationItems
+  pathname: string
+}) {
   return (
     <aside
       aria-label="Sidebar Navigation"
@@ -48,7 +54,6 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
               >
                 Aficionado
               </span>
-
             </div>
           </Link>
 
@@ -87,7 +92,8 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
                           ? {
                               background: '#121216',
                               border: '1px solid rgba(0,212,200,0.3)',
-                              boxShadow: '0 0 24px rgba(0,212,200,0.35), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06)',
+                              boxShadow:
+                                '0 0 24px rgba(0,212,200,0.35), 0 4px 16px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06)',
                             }
                           : { border: '1px solid transparent' }
                       }
@@ -106,9 +112,7 @@ export function SidebarNav({ navItems, pathname }: { navItems: NavigationItems; 
                       <Icon
                         className={[
                           'w-4.5 h-4.5 flex-shrink-0 transition-all duration-200',
-                          isActive
-                            ? 'text-primary'
-                            : 'group-hover:text-foreground',
+                          isActive ? 'text-primary' : 'group-hover:text-foreground',
                         ].join(' ')}
                         style={
                           isActive

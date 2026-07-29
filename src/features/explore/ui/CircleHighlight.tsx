@@ -1,26 +1,29 @@
-import { Users } from "lucide-react";
-import Link from "next/link";
+import { Users } from 'lucide-react'
+import Link from 'next/link'
 
 interface CircleHighlightProps {
   circle: {
-    id: string;
-    name: string;
-    description: string | null;
-    member_count?: number | null;
-  };
-  index: number;
+    id: string
+    name: string
+    description: string | null
+    member_count?: number | null
+  }
+  index: number
 }
 
 export function CircleHighlight({ circle }: CircleHighlightProps) {
-  const memberCount = circle.member_count ?? null;
+  const memberCount = circle.member_count ?? null
 
   return (
-    <Link href={`/communities/${circle.id}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-[1.25rem]">
+    <Link
+      href={`/communities/${circle.id}`}
+      className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-[1.25rem]"
+    >
       <div className="clipcut-card-hover flex flex-col gap-3 p-6 h-full cursor-pointer">
         {/* Circle name — Syne font */}
         <h3
           className="text-base font-bold text-white leading-tight tracking-tight"
-          style={{ fontFamily: "var(--font-heading)" }}
+          style={{ fontFamily: 'var(--font-heading)' }}
         >
           {circle.name}
         </h3>
@@ -31,7 +34,7 @@ export function CircleHighlight({ circle }: CircleHighlightProps) {
             <Users className="w-3.5 h-3.5 text-primary shrink-0" />
             <span
               className="text-2xl font-bold text-primary tabular-nums"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: 'var(--font-heading)' }}
             >
               {memberCount.toLocaleString()}
             </span>
@@ -43,7 +46,7 @@ export function CircleHighlight({ circle }: CircleHighlightProps) {
 
         {/* Description */}
         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">
-          {circle.description || "A vibrant community circle for like-minded aficionados."}
+          {circle.description || 'A vibrant community circle for like-minded aficionados.'}
         </p>
 
         {/* Join CTA — teal clipcut-pill */}
@@ -55,5 +58,5 @@ export function CircleHighlight({ circle }: CircleHighlightProps) {
         </button>
       </div>
     </Link>
-  );
+  )
 }

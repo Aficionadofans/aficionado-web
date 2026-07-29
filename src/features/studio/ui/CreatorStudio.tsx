@@ -11,7 +11,7 @@ import {
   FileText,
   UserPlus,
   Share2,
-  PlusCircle
+  PlusCircle,
 } from 'lucide-react'
 import Link from 'next/link'
 import { SectionHeader, StatCounter } from '@/shared/ui/core'
@@ -41,9 +41,7 @@ interface CreatorStudioProps {
 
 function ModerationBadge({ status }: { status: string }) {
   if (status === 'approved') {
-    return (
-      <span className="clipcut-pill text-[10px] px-2 py-0.5">approved</span>
-    )
+    return <span className="clipcut-pill text-[10px] px-2 py-0.5">approved</span>
   }
   if (status === 'pending_review') {
     return (
@@ -122,11 +120,13 @@ export function CreatorStudio({
       onClick: () => {
         const url = `${window.location.origin}/${username}`
         if (navigator.share) {
-          navigator.share({
-            title: `Join my Inner Circle`,
-            text: `Unlock exclusive behind-the-scenes content and direct chat with me!`,
-            url: url
-          }).catch(console.error)
+          navigator
+            .share({
+              title: `Join my Inner Circle`,
+              text: `Unlock exclusive behind-the-scenes content and direct chat with me!`,
+              url: url,
+            })
+            .catch(console.error)
         } else {
           navigator.clipboard.writeText(url)
           alert('Link copied to clipboard!')
@@ -138,18 +138,15 @@ export function CreatorStudio({
       title: 'Create Circle',
       description: 'Start a new community space for your fans',
       onClick: () => setIsCreateCircleModalOpen(true),
-    }
+    },
   ]
 
   // Placeholder recent content items (first 5 from flagged + padding with stubs)
   const recentContentItems: Array<{ id: string; title: string; moderation_status: string }> =
-    flaggedContent.length > 0
-      ? flaggedContent.slice(0, 5)
-      : []
+    flaggedContent.length > 0 ? flaggedContent.slice(0, 5) : []
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12 pb-20 md:pb-12">
-
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative rounded-3xl overflow-hidden mb-8 p-8 md:p-12">
         {/* Gradient overlay */}
@@ -242,10 +239,7 @@ export function CreatorStudio({
                     {inner}
                   </Link>
                 ) : (
-                  <button
-                    className={sharedClass + ' w-full'}
-                    onClick={action.onClick}
-                  >
+                  <button className={sharedClass + ' w-full'} onClick={action.onClick}>
                     {inner}
                   </button>
                 )}
@@ -375,9 +369,17 @@ export function CreatorStudio({
 
       {/* Modals */}
       {isDropModalOpen && <CreateDropModal onClose={() => setIsDropModalOpen(false)} />}
-      {isTimeCapsuleModalOpen && <TimeCapsuleModal onClose={() => setIsTimeCapsuleModalOpen(false)} />}
-      {isImportFansModalOpen && <ImportFansModal onClose={() => setIsImportFansModalOpen(false)} username={username} />}
-      <CreateCircleModal isOpen={isCreateCircleModalOpen} onClose={() => setIsCreateCircleModalOpen(false)} onSuccess={(id) => console.log('Circle created', id)} />
+      {isTimeCapsuleModalOpen && (
+        <TimeCapsuleModal onClose={() => setIsTimeCapsuleModalOpen(false)} />
+      )}
+      {isImportFansModalOpen && (
+        <ImportFansModal onClose={() => setIsImportFansModalOpen(false)} username={username} />
+      )}
+      <CreateCircleModal
+        isOpen={isCreateCircleModalOpen}
+        onClose={() => setIsCreateCircleModalOpen(false)}
+        onSuccess={(id) => console.log('Circle created', id)}
+      />
     </div>
   )
 }

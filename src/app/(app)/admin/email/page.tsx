@@ -9,8 +9,15 @@ import { Button } from '@/shared/ui/core/button'
 import { Textarea } from '@/shared/ui/core/textarea'
 import { sendEmailAction, previewEmailAction, type EmailActionState } from './actions'
 import {
-  Loader2, Send, CheckCircle2, AlertCircle,
-  Code, Eye, EyeOff, Sparkles, FileText
+  Loader2,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  Code,
+  Eye,
+  EyeOff,
+  Sparkles,
+  FileText,
 } from 'lucide-react'
 
 // ── Email Templates ─────────────────────────────────────────────
@@ -62,11 +69,7 @@ function SubmitButton() {
       disabled={pending}
       className="px-8 gap-2 bg-gradient-to-r from-ocean-muted to-primary hover:opacity-90 transition-all duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] active:scale-[0.97]"
     >
-      {pending ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
-      ) : (
-        <Send className="w-4 h-4" />
-      )}
+      {pending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
       {pending ? 'Sending...' : 'Send Email'}
     </Button>
   )
@@ -141,26 +144,29 @@ export default function EmailSenderPage() {
         <span className="text-xs text-foreground/40 uppercase tracking-wider font-medium mr-1">
           Template:
         </span>
-        {(Object.entries(EMAIL_TEMPLATES) as [TemplateName, typeof EMAIL_TEMPLATES[TemplateName]][]).map(
-          ([key, tmpl]) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => applyTemplate(key)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
-                activeTemplate === key
-                  ? 'bg-muted-gold/20 text-muted-gold border border-muted-gold/30'
-                  : 'bg-white/5 text-foreground/60 border border-white/[0.06] hover:bg-white/10 hover:text-foreground/80'
-              }`}
-            >
-              {key === 'blank' && <FileText className="w-3 h-3" />}
-              {key === 'welcome' && <Sparkles className="w-3 h-3" />}
-              {key === 'announcement' && '📢'}
-              {key === 'plaintext' && '✉️'}
-              {tmpl.label}
-            </button>
-          )
-        )}
+        {(
+          Object.entries(EMAIL_TEMPLATES) as [
+            TemplateName,
+            (typeof EMAIL_TEMPLATES)[TemplateName],
+          ][]
+        ).map(([key, tmpl]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => applyTemplate(key)}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
+              activeTemplate === key
+                ? 'bg-muted-gold/20 text-muted-gold border border-muted-gold/30'
+                : 'bg-white/5 text-foreground/60 border border-white/[0.06] hover:bg-white/10 hover:text-foreground/80'
+            }`}
+          >
+            {key === 'blank' && <FileText className="w-3 h-3" />}
+            {key === 'welcome' && <Sparkles className="w-3 h-3" />}
+            {key === 'announcement' && '📢'}
+            {key === 'plaintext' && '✉️'}
+            {tmpl.label}
+          </button>
+        ))}
       </div>
 
       {/* Form */}
@@ -173,7 +179,10 @@ export default function EmailSenderPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="to" className="text-foreground/80 text-xs uppercase tracking-wider font-medium">
+              <Label
+                htmlFor="to"
+                className="text-foreground/80 text-xs uppercase tracking-wider font-medium"
+              >
                 Recipient
               </Label>
               <Input
@@ -188,7 +197,10 @@ export default function EmailSenderPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="subject" className="text-foreground/80 text-xs uppercase tracking-wider font-medium">
+              <Label
+                htmlFor="subject"
+                className="text-foreground/80 text-xs uppercase tracking-wider font-medium"
+              >
                 Subject
               </Label>
               <Input
@@ -207,7 +219,10 @@ export default function EmailSenderPage() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="body" className="text-foreground/80 text-xs uppercase tracking-wider font-medium">
+              <Label
+                htmlFor="body"
+                className="text-foreground/80 text-xs uppercase tracking-wider font-medium"
+              >
                 Message Body
               </Label>
               <div className="flex items-center gap-3">
@@ -244,7 +259,9 @@ export default function EmailSenderPage() {
             </div>
 
             {/* Editor / Preview split */}
-            <div className={`grid gap-4 ${showPreview && isMarkdown ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
+            <div
+              className={`grid gap-4 ${showPreview && isMarkdown ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}
+            >
               <Textarea
                 id="body"
                 name="body"
@@ -253,7 +270,7 @@ export default function EmailSenderPage() {
                 rows={14}
                 value={bodyContent}
                 onChange={(e) => setBodyContent(e.target.value)}
-                placeholder={"Hello,\n\nWe wanted to let you know..."}
+                placeholder={'Hello,\n\nWe wanted to let you know...'}
                 className="glass-panel border-white/[0.08] focus:border-muted-gold/60 focus:ring-1 focus:ring-muted-gold/40 transition-all resize-y font-mono text-xs leading-relaxed text-foreground placeholder:text-foreground/30"
               />
 
@@ -267,7 +284,9 @@ export default function EmailSenderPage() {
                     </div>
                     <span className="text-[10px] text-foreground/40 font-mono tracking-wider flex items-center gap-2">
                       server_render_preview
-                      {isPendingPreview && <Loader2 className="w-3 h-3 animate-spin text-muted-gold" />}
+                      {isPendingPreview && (
+                        <Loader2 className="w-3 h-3 animate-spin text-muted-gold" />
+                      )}
                     </span>
                   </div>
                   <iframe
@@ -301,9 +320,7 @@ export default function EmailSenderPage() {
 
           <div className="flex items-center justify-between pt-2">
             <SubmitButton />
-            <span className="text-xs text-foreground/30">
-              via support@aficionado.fans
-            </span>
+            <span className="text-xs text-foreground/30">via support@aficionado.fans</span>
           </div>
         </form>
       </Card>

@@ -1,15 +1,6 @@
 'use client'
 
-import {
-  Upload,
-  Radio,
-  Users,
-  Shield,
-  BarChart2,
-  Globe,
-  CreditCard,
-  Lock,
-} from 'lucide-react'
+import { Upload, Radio, Users, Shield, BarChart2, Globe, CreditCard, Lock } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
@@ -42,13 +33,13 @@ const features: FeatureCard[] = [
   {
     icon: <Shield className="w-5 h-5" />,
     headline: 'Anti-Dopamine Finite Feed',
-    body: "Curated content feeds designed to protect user well-being and eliminate mindless infinite scrolling.",
+    body: 'Curated content feeds designed to protect user well-being and eliminate mindless infinite scrolling.',
     badge: 'Well-Being',
   },
   {
     icon: <BarChart2 className="w-5 h-5" />,
     headline: 'Real-Time Creator Analytics',
-    body: "Track subscriber growth, revenue breakdown, retention cohorts, and stream engagement instantly.",
+    body: 'Track subscriber growth, revenue breakdown, retention cohorts, and stream engagement instantly.',
   },
   {
     icon: <Globe className="w-5 h-5" />,
@@ -80,7 +71,8 @@ export function LandingFeatures() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            A comprehensive suite of production-ready tools built on Next.js 16, Supabase, and Stripe.
+            A comprehensive suite of production-ready tools built on Next.js 16, Supabase, and
+            Stripe.
           </p>
         </div>
 
@@ -109,9 +101,7 @@ export function LandingFeatures() {
                     >
                       {feature.headline}
                     </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {feature.body}
-                    </p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{feature.body}</p>
                   </div>
                 </div>
 
@@ -124,4 +114,3 @@ export function LandingFeatures() {
     </section>
   )
 }
-

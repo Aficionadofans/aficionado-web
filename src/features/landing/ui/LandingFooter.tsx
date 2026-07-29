@@ -21,7 +21,8 @@ export function LandingFooter() {
             </NextLink>
 
             <p className="text-muted-foreground text-xs leading-relaxed max-w-sm">
-              The sovereign creator platform designed for finite engagement, direct fan monetization, and digital well-being.
+              The sovereign creator platform designed for finite engagement, direct fan
+              monetization, and digital well-being.
             </p>
 
             <div className="flex items-center gap-3 mt-2 text-muted-foreground">
@@ -55,30 +56,82 @@ export function LandingFooter() {
             </div>
           </div>
 
-
           {/* Navigation Column */}
           <div className="flex flex-col gap-3">
-            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Platform</h4>
-            <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</a>
-            <a href="#showcase" className="text-muted-foreground hover:text-primary transition-colors">Showcase</a>
-            <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">FAQ</a>
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
+              Platform
+            </h4>
+            <a
+              href="#features"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Features
+            </a>
+            <a
+              href="#showcase"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Showcase
+            </a>
+            <a href="#faq" className="text-muted-foreground hover:text-primary transition-colors">
+              FAQ
+            </a>
           </div>
 
           {/* Product Column */}
           <div className="flex flex-col gap-3">
-            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Creators</h4>
-            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Creator Login</NextLink>
-            <NextLink href="/monetization" className="text-muted-foreground hover:text-primary transition-colors">Direct Payouts</NextLink>
-            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Inner Circles</NextLink>
-            <NextLink href="/login" className="text-muted-foreground hover:text-primary transition-colors">Live Broadcasts</NextLink>
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
+              Creators
+            </h4>
+            <NextLink
+              href="/login"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Creator Login
+            </NextLink>
+            <NextLink
+              href="/monetization"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Direct Payouts
+            </NextLink>
+            <NextLink
+              href="/login"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Inner Circles
+            </NextLink>
+            <NextLink
+              href="/login"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Live Broadcasts
+            </NextLink>
           </div>
 
           {/* Legal Column */}
           <div className="flex flex-col gap-3">
-            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">Legal & Governance</h4>
-            <NextLink href="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</NextLink>
-            <NextLink href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</NextLink>
-            <NextLink href="/creator-agreement" className="text-muted-foreground hover:text-primary transition-colors">Creator Agreement</NextLink>
+            <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
+              Legal & Governance
+            </h4>
+            <NextLink
+              href="/terms"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Terms of Service
+            </NextLink>
+            <NextLink
+              href="/privacy"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </NextLink>
+            <NextLink
+              href="/creator-agreement"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Creator Agreement
+            </NextLink>
           </div>
         </div>
 
@@ -91,4 +144,3 @@ export function LandingFooter() {
     </footer>
   )
 }
-

@@ -6,17 +6,17 @@ import { createClient } from '@/shared/lib/supabase/server'
 export async function submitCheckIn() {
   const supabase = await createClient()
 
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
   if (!user) throw new Error('Not authenticated')
 
-  const { error } = await supabase
-    .from('check_ins')
-    .insert({
-      author_id: user.id,
-      mood: 'Good', // Simplification for now
-      urge_level: 0,
-      journal: 'Daily check-in completed from web.',
-    })
+  const { error } = await supabase.from('check_ins').insert({
+    author_id: user.id,
+    mood: 'Good', // Simplification for now
+    urge_level: 0,
+    journal: 'Daily check-in completed from web.',
+  })
 
   if (error) {
     console.error('Error submitting check-in:', error)

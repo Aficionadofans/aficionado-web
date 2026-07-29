@@ -17,14 +17,16 @@ const steps: Step[] = [
     number: '01',
     title: 'Claim Your Sovereign Handle & Circle',
     subtitle: 'Setup in < 2 minutes',
-    description: 'Create your verified creator profile, set up your public feed parameters, and configure your gated Inner Circle tiers.',
+    description:
+      'Create your verified creator profile, set up your public feed parameters, and configure your gated Inner Circle tiers.',
     icon: <UserPlus className="w-6 h-6 text-primary" />,
   },
   {
     number: '02',
     title: 'Drop Short-Form Content & Stream Live',
     subtitle: 'Zero algorithm interference',
-    description: 'Publish high-retention video drops, uncompressed audio drops, or launch interactive live streams straight to your audience.',
+    description:
+      'Publish high-retention video drops, uncompressed audio drops, or launch interactive live streams straight to your audience.',
     icon: <Video className="w-6 h-6 text-primary" />,
   },
   {
@@ -49,7 +51,8 @@ export function LandingProcess() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            3 simple steps to transition from legacy algorithmic dependency to direct fan monetization.
+            3 simple steps to transition from legacy algorithmic dependency to direct fan
+            monetization.
           </p>
         </div>
 

@@ -24,12 +24,14 @@ const stats: FixStat[] = [
   {
     value: '3.5X',
     label: 'Avg. Engagement Increase',
-    description: 'More direct comments, shares, saves, and fan circle subscriptions — not just empty views.',
+    description:
+      'More direct comments, shares, saves, and fan circle subscriptions — not just empty views.',
   },
   {
     value: '<24hr',
     label: 'Direct Payout Speed',
-    description: '100% of fan payments sent straight to your Stripe balance with zero platform delays.',
+    description:
+      '100% of fan payments sent straight to your Stripe balance with zero platform delays.',
   },
 ]
 
@@ -52,10 +54,10 @@ export function LandingFix() {
             stagger={0.06}
           />
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
-            We don’t just host videos — we engineer each drop for retention, reach, and direct fan monetization. You drop the content, we handle everything else.
+            We don’t just host videos — we engineer each drop for retention, reach, and direct fan
+            monetization. You drop the content, we handle everything else.
           </p>
         </div>
-
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
@@ -69,7 +71,9 @@ export function LandingFix() {
                     {stat.value}
                   </span>
                   <h4 className="text-base font-bold text-white mb-2 font-heading">{stat.label}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{stat.description}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {stat.description}
+                  </p>
                 </div>
               </div>
             </RevealSection>

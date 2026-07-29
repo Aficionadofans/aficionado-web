@@ -2,9 +2,19 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 const PROTECTED_ROUTES = [
-  '/home', '/explore', '/create', '/circles', '/communities',
-  '/progress', '/settings', '/studio', '/creator', '/live',
-  '/content', '/monetization', '/admin',
+  '/home',
+  '/explore',
+  '/create',
+  '/circles',
+  '/communities',
+  '/progress',
+  '/settings',
+  '/studio',
+  '/creator',
+  '/live',
+  '/content',
+  '/monetization',
+  '/admin',
 ]
 
 export async function proxy(request: NextRequest) {
@@ -22,21 +32,23 @@ export async function proxy(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({ request })
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            supabaseResponse.cookies.set(name, value, options),
           )
         },
       },
-    }
+    },
   )
 
   // Refresh session — must run before any auth checks
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
   const { data: aalData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
   const currentLevel = aalData?.currentLevel
   const nextLevel = aalData?.nextLevel
 
   const { pathname } = request.nextUrl
-  const isProtected = PROTECTED_ROUTES.some(r => pathname.startsWith(r))
+  const isProtected = PROTECTED_ROUTES.some((r) => pathname.startsWith(r))
 
   // Unauthenticated on protected route → login
   if (isProtected && !user) {
@@ -83,7 +95,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
 }

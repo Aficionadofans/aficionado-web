@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       type?: string
       creatorId?: string
       priceId?: string
-      amount?: number   // cents, for tips
+      amount?: number // cents, for tips
       message?: string
     }
 
@@ -19,7 +19,9 @@ export async function POST(req: Request) {
     }
 
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -42,14 +44,16 @@ export async function POST(req: Request) {
         payment_method_types: ['card'],
         mode: 'payment',
         customer_email: user.email,
-        line_items: [{
-          price_data: {
-            currency: 'usd',
-            product_data: { name: 'Fan Tip' },
-            unit_amount: amount,
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: { name: 'Fan Tip' },
+              unit_amount: amount,
+            },
+            quantity: 1,
           },
-          quantity: 1,
-        }],
+        ],
         payment_intent_data: {
           metadata: {
             type: 'tip',

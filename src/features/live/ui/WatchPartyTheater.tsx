@@ -4,11 +4,11 @@ import React from 'react'
 import { LiveStreamPlayer } from './LiveStreamPlayer'
 import { LiveChatSidebar } from './LiveChatSidebar'
 
-export function WatchPartyTheater({ 
+export function WatchPartyTheater({
   username,
   playbackId,
-  isOwner
-}: { 
+  isOwner,
+}: {
   username: string
   playbackId?: string
   isOwner?: boolean
@@ -20,15 +20,18 @@ export function WatchPartyTheater({
     >
       {/* Background ambient glows */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[140px] pointer-events-none animate-breathe-calm" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-bio-teal/10 rounded-full blur-[140px] pointer-events-none animate-breathe-calm" style={{ animationDelay: '2s' }} />
+      <div
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-bio-teal/10 rounded-full blur-[140px] pointer-events-none animate-breathe-calm"
+        style={{ animationDelay: '2s' }}
+      />
 
       {/* Main Video Stream Player */}
       <div className="flex-1 glass-panel ring-2 ring-primary/30 shadow-[0_0_24px_rgba(0,212,200,0.2)] relative overflow-hidden">
-        <LiveStreamPlayer 
-          username={username} 
+        <LiveStreamPlayer
+          username={username}
           playbackId={playbackId}
           isOwner={isOwner}
-          viewerCount={1204} 
+          viewerCount={1204}
         />
       </div>
 

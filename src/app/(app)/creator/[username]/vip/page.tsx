@@ -31,7 +31,6 @@ export default async function VIPDropPage({ params }: { params: Promise<{ userna
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10" />
 
       <div className="max-w-md w-full liquid-glass border-white/10 rounded-2xl p-8 text-center space-y-6">
-
         {/* Creator Avatar */}
         <div className="relative w-24 h-24 mx-auto">
           <img
@@ -50,7 +49,8 @@ export default async function VIPDropPage({ params }: { params: Promise<{ userna
             Join @{creator.username}&apos;s VIP Circle
           </h1>
           <p className="text-sm text-muted-foreground">
-            {creator.bio || "I'm launching exclusive, behind-the-scenes content soon. Join the waitlist to get early access and 20% off my first drop."}
+            {creator.bio ||
+              "I'm launching exclusive, behind-the-scenes content soon. Join the waitlist to get early access and 20% off my first drop."}
           </p>
         </div>
 
@@ -65,7 +65,9 @@ export default async function VIPDropPage({ params }: { params: Promise<{ userna
 
         {/* Perks list */}
         <div className="pt-4 border-t border-white/10 text-left space-y-2">
-          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">VIP Perks Include:</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            VIP Perks Include:
+          </p>
           <div className="flex items-center gap-2 text-xs text-off-white/80">
             <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
             <span>20% off the first paid subscription drop</span>
@@ -75,7 +77,6 @@ export default async function VIPDropPage({ params }: { params: Promise<{ userna
             <span>Exclusive &quot;Founding Fan&quot; profile badge</span>
           </div>
         </div>
-
       </div>
     </div>
   )

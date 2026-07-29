@@ -18,9 +18,18 @@ export default async function AdminDashboardPage() {
   ] = await Promise.all([
     supabase.from('profiles').select('*', { count: 'exact', head: true }),
     supabase.from('content').select('*', { count: 'exact', head: true }),
-    supabase.from('content').select('*', { count: 'exact', head: true }).eq('moderation_status', 'pending_review'),
-    supabase.from('subscriptions').select('*', { count: 'exact', head: true }).eq('status', 'active'),
-    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'aficionado'),
+    supabase
+      .from('content')
+      .select('*', { count: 'exact', head: true })
+      .eq('moderation_status', 'pending_review'),
+    supabase
+      .from('subscriptions')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'active'),
+    supabase
+      .from('profiles')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_type', 'aficionado'),
     supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'fan'),
   ])
 
@@ -64,7 +73,10 @@ export default async function AdminDashboardPage() {
         {/* Moderation Queue */}
         <div
           className="rounded-xl p-5"
-          style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.06)',
+          }}
         >
           <SectionHeader
             variant="editorial"
@@ -76,9 +88,15 @@ export default async function AdminDashboardPage() {
           />
           {recentFlagged && recentFlagged.length > 0 ? (
             <div className="space-y-1">
-              {recentFlagged.map(c => (
-                <div key={c.id} className="flex items-center justify-between py-2.5 border-b border-border last:border-0 gap-2">
-                  <Link href={`/content/${c.id}`} className="text-sm text-foreground hover:text-primary truncate max-w-[50%] transition-colors">
+              {recentFlagged.map((c) => (
+                <div
+                  key={c.id}
+                  className="flex items-center justify-between py-2.5 border-b border-border last:border-0 gap-2"
+                >
+                  <Link
+                    href={`/content/${c.id}`}
+                    className="text-sm text-foreground hover:text-primary truncate max-w-[50%] transition-colors"
+                  >
                     {c.title}
                   </Link>
                   <div className="flex items-center gap-2 shrink-0">
@@ -99,14 +117,21 @@ export default async function AdminDashboardPage() {
               ))}
             </div>
           ) : (
-            <EmptyState icon={ShieldCheck} title="Queue Clear" description="No content awaiting review." />
+            <EmptyState
+              icon={ShieldCheck}
+              title="Queue Clear"
+              description="No content awaiting review."
+            />
           )}
         </div>
 
         {/* User Management */}
         <div
           className="rounded-xl p-5"
-          style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.06)',
+          }}
         >
           <SectionHeader
             variant="editorial"
@@ -123,15 +148,22 @@ export default async function AdminDashboardPage() {
           />
           {recentUsers && recentUsers.length > 0 ? (
             <div className="space-y-1">
-              {recentUsers.map(u => (
-                <div key={u.id} className="flex items-center justify-between py-2.5 border-b border-border last:border-0">
+              {recentUsers.map((u) => (
+                <div
+                  key={u.id}
+                  className="flex items-center justify-between py-2.5 border-b border-border last:border-0"
+                >
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-foreground">@{u.username ?? 'unnamed'}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                      u.user_type === 'aficionado'
-                        ? 'bg-[rgba(245,158,11,0.15)] text-[#F59E0B]'
-                        : 'bg-primary/10 text-primary'
-                    }`}>
+                    <span className="text-sm font-medium text-foreground">
+                      @{u.username ?? 'unnamed'}
+                    </span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
+                        u.user_type === 'aficionado'
+                          ? 'bg-[rgba(245,158,11,0.15)] text-[#F59E0B]'
+                          : 'bg-primary/10 text-primary'
+                      }`}
+                    >
                       {u.user_type ?? 'unknown'}
                     </span>
                   </div>
@@ -150,10 +182,20 @@ export default async function AdminDashboardPage() {
       {/* Quick Links */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {[
-          { href: '/admin/email',      label: 'Send Email',    icon: Mail,       desc: 'Broadcast to users' },
-          { href: '/admin/users',      label: 'Manage Users',  icon: Users,      desc: 'View & moderate accounts' },
-          { href: '/admin/moderation', label: 'Moderation',    icon: ShieldCheck, desc: 'Review flagged content' },
-        ].map(item => {
+          { href: '/admin/email', label: 'Send Email', icon: Mail, desc: 'Broadcast to users' },
+          {
+            href: '/admin/users',
+            label: 'Manage Users',
+            icon: Users,
+            desc: 'View & moderate accounts',
+          },
+          {
+            href: '/admin/moderation',
+            label: 'Moderation',
+            icon: ShieldCheck,
+            desc: 'Review flagged content',
+          },
+        ].map((item) => {
           const Icon = item.icon
           return (
             <Link
@@ -164,11 +206,11 @@ export default async function AdminDashboardPage() {
                 background: 'rgba(255,255,255,0.02)',
                 border: '1px solid rgba(255,255,255,0.06)',
               }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,212,200,0.25)'
+              onMouseEnter={(e) => {
+                ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,212,200,0.25)'
               }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'
+              onMouseLeave={(e) => {
+                ;(e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'
               }}
             >
               <Icon className="w-5 h-5 text-primary mb-2.5 transition-transform group-hover:scale-110" />

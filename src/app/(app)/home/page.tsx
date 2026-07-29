@@ -6,7 +6,9 @@ import type { Content } from '@/shared/types/database'
 
 export default async function HomePage() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) {
     redirect('/auth')
@@ -15,7 +17,7 @@ export default async function HomePage() {
   // Fallback to admin client to bypass any restrictive RLS that might hide drops/videos from followers
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  
+
   let dbClient = supabase
   if (serviceRoleKey && supabaseUrl) {
     const { createClient: createAdminClient } = await import('@supabase/supabase-js')
@@ -30,7 +32,7 @@ export default async function HomePage() {
     .eq('status', 'active')
 
   // The feed should include the user's own content + content from creators they follow
-  const creatorIds = (subs || []).map(s => s.creator_id)
+  const creatorIds = (subs || []).map((s) => s.creator_id)
   const feedUserIds = [user.id, ...creatorIds]
 
   // 2. Fetch approved content for these users

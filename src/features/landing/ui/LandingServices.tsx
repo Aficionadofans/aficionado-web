@@ -6,7 +6,10 @@ import { Video, Camera, Radio, CheckCircle2, ArrowRight } from 'lucide-react'
 
 export function LandingServices() {
   return (
-    <section className="py-24 px-4 relative z-10 bg-[#070709] border-t border-white/8" id="services">
+    <section
+      className="py-24 px-4 relative z-10 bg-[#070709] border-t border-white/8"
+      id="services"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <SectionHeader
@@ -25,9 +28,12 @@ export function LandingServices() {
         <RevealSection delay={300}>
           <div className="curved-card p-6 sm:p-8 border border-[#E8501A]/40 bg-gradient-to-r from-[#140E1A] via-[#0E0B14] to-[#0A070F] flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-left max-w-xl">
-              <h4 className="text-lg font-extrabold text-white font-heading mb-1">Hand off the heavy lifting</h4>
+              <h4 className="text-lg font-extrabold text-white font-heading mb-1">
+                Hand off the heavy lifting
+              </h4>
               <p className="text-xs text-muted-foreground">
-                We deliver polished, platform-ready video drops while you focus on building your sovereign creator brand.
+                We deliver polished, platform-ready video drops while you focus on building your
+                sovereign creator brand.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-white">

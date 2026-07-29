@@ -27,7 +27,7 @@ export function useRevealOnScroll(threshold = 0.15, rootMargin = '0px') {
             observer.disconnect() // fire once
           }
         },
-        { threshold, rootMargin }
+        { threshold, rootMargin },
       )
       observer.observe(el)
     } catch {

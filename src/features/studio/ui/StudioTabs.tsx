@@ -16,10 +16,10 @@ export function StudioTabs() {
           <button
             onClick={() => setActiveTab('post')}
             className={cn(
-              "flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300",
-              activeTab === 'post' 
-                ? "bg-primary text-primary-foreground shadow-[0_2px_10px_0_rgba(0,240,181,0.3)]" 
-                : "text-muted-foreground hover:text-off-white hover:bg-white/5"
+              'flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300',
+              activeTab === 'post'
+                ? 'bg-primary text-primary-foreground shadow-[0_2px_10px_0_rgba(0,240,181,0.3)]'
+                : 'text-muted-foreground hover:text-off-white hover:bg-white/5',
             )}
           >
             <PenSquare className="w-4 h-4" />
@@ -28,10 +28,10 @@ export function StudioTabs() {
           <button
             onClick={() => setActiveTab('video')}
             className={cn(
-              "flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300",
-              activeTab === 'video' 
-                ? "bg-primary text-primary-foreground shadow-[0_2px_10px_0_rgba(0,240,181,0.3)]" 
-                : "text-muted-foreground hover:text-off-white hover:bg-white/5"
+              'flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300',
+              activeTab === 'video'
+                ? 'bg-primary text-primary-foreground shadow-[0_2px_10px_0_rgba(0,240,181,0.3)]'
+                : 'text-muted-foreground hover:text-off-white hover:bg-white/5',
             )}
           >
             <Video className="w-4 h-4" />

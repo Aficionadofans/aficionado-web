@@ -57,7 +57,9 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
         {/* Amber glow — monetization context */}
         <div
           className="absolute inset-x-0 top-0 h-px"
-          style={{ background: 'linear-gradient(to right, transparent, rgba(245,158,11,0.5), transparent)' }}
+          style={{
+            background: 'linear-gradient(to right, transparent, rgba(245,158,11,0.5), transparent)',
+          }}
           aria-hidden="true"
         />
 
@@ -83,13 +85,18 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
             <div className="flex flex-col items-center justify-center py-8 animate-fade-in-up gap-3">
               <div
                 className="w-14 h-14 rounded-full flex items-center justify-center"
-                style={{ background: 'rgba(245,158,11,0.15)', border: '1px solid rgba(245,158,11,0.3)' }}
+                style={{
+                  background: 'rgba(245,158,11,0.15)',
+                  border: '1px solid rgba(245,158,11,0.3)',
+                }}
               >
                 <DollarSign className="w-7 h-7 text-[#F59E0B]" />
               </div>
               <div className="text-center">
                 <h3 className="text-lg font-semibold text-foreground">Tip Sent!</h3>
-                <p className="text-sm text-muted-foreground mt-0.5">Thanks for supporting @{creatorId}.</p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Thanks for supporting @{creatorId}.
+                </p>
               </div>
             </div>
           ) : (
@@ -104,14 +111,18 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
                 {/* Big amount display */}
                 <div
                   className="text-5xl font-bold tabular-nums mb-5"
-                  style={{ color: '#F59E0B', fontFamily: 'var(--font-heading)', letterSpacing: '-0.03em' }}
+                  style={{
+                    color: '#F59E0B',
+                    fontFamily: 'var(--font-heading)',
+                    letterSpacing: '-0.03em',
+                  }}
                 >
                   ${amount || 0}
                 </div>
 
                 {/* Preset grid */}
                 <div className="grid grid-cols-4 gap-2 mb-3">
-                  {PRESETS.map(preset => (
+                  {PRESETS.map((preset) => (
                     <button
                       key={preset}
                       type="button"
@@ -125,7 +136,10 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
                       style={
                         amount === preset && !customAmount
                           ? { background: '#F59E0B', boxShadow: '0 0 14px rgba(245,158,11,0.35)' }
-                          : { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }
+                          : {
+                              background: 'rgba(255,255,255,0.06)',
+                              border: '1px solid rgba(255,255,255,0.08)',
+                            }
                       }
                     >
                       ${preset}
@@ -135,7 +149,9 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
 
                 {/* Custom input */}
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium">$</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium">
+                    $
+                  </span>
                   <input
                     type="text"
                     placeholder="Custom"
@@ -144,7 +160,9 @@ export function TipModal({ creatorId, onClose }: { creatorId: string; onClose: (
                     className="w-full rounded-xl py-2.5 pl-7 pr-3.5 text-sm font-medium text-foreground placeholder:text-muted-foreground outline-none transition-colors"
                     style={{
                       background: 'rgba(255,255,255,0.05)',
-                      border: customAmount ? '1px solid rgba(245,158,11,0.4)' : '1px solid rgba(255,255,255,0.1)',
+                      border: customAmount
+                        ? '1px solid rgba(245,158,11,0.4)'
+                        : '1px solid rgba(255,255,255,0.1)',
                     }}
                   />
                 </div>

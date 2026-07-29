@@ -19,30 +19,25 @@ export function LandingPage() {
       {/* Framer-style exact background elements */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-framer-bars" />
       <div className="fixed inset-0 z-0 pointer-events-none bg-framer-dust animate-dust opacity-30" />
-      
+
       <div className="relative z-10 flex flex-col w-full h-full">
         <LandingNav />
         <main className="flex-1 w-full">
-        <LandingHero />
-        <LandingMarquee />
-        <LandingProblem />
-        <LandingFix />
-        <LandingServices />
-        <LandingProcess />
-        <LandingShowcase />
-        <LandingResultsGrid />
-        <LandingTestimonial />
-        <LandingToolsMarquee />
-        <LandingFAQ />
-        <LandingCTA />
-      </main>
-      <LandingFooter />
+          <LandingHero />
+          <LandingMarquee />
+          <LandingProblem />
+          <LandingFix />
+          <LandingServices />
+          <LandingProcess />
+          <LandingShowcase />
+          <LandingResultsGrid />
+          <LandingTestimonial />
+          <LandingToolsMarquee />
+          <LandingFAQ />
+          <LandingCTA />
+        </main>
+        <LandingFooter />
       </div>
     </div>
   )
 }
-
-
-
-
-

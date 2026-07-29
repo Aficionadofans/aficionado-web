@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) redirect('/login?next=/admin')
 
@@ -32,7 +34,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 border: '1px solid rgba(0,212,200,0.35)',
               }}
             >
-              <span className="text-xs font-black text-primary" style={{ textShadow: '0 0 8px rgba(0,212,200,0.7)' }}>
+              <span
+                className="text-xs font-black text-primary"
+                style={{ textShadow: '0 0 8px rgba(0,212,200,0.7)' }}
+              >
                 A
               </span>
             </div>
@@ -72,9 +77,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             style={{ background: 'rgba(0,212,200,0.04)', filter: 'blur(80px)', zIndex: 0 }}
             aria-hidden="true"
           />
-          <div className="relative z-10">
-            {children}
-          </div>
+          <div className="relative z-10">{children}</div>
         </div>
       </main>
     </div>

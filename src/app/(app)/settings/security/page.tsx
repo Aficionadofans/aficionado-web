@@ -7,7 +7,7 @@ import { createClient } from '@/shared/lib/supabase/server'
 export default async function SecurityPage() {
   const supabase = await createClient()
   const { data } = await supabase.auth.mfa.listFactors()
-  
+
   const totpFactor = data?.totp?.[0]
   const initialIsEnrolled = totpFactor?.status === 'verified'
   const initialFactorId = totpFactor?.id || ''
@@ -16,7 +16,9 @@ export default async function SecurityPage() {
     <div className="max-w-3xl px-4 py-8 mx-auto lg:py-12">
       <header className="mb-10">
         <h1 className="text-3xl font-bold tracking-tight text-off-white">Security</h1>
-        <p className="mt-2 text-muted-foreground">Manage your account security and two-factor authentication.</p>
+        <p className="mt-2 text-muted-foreground">
+          Manage your account security and two-factor authentication.
+        </p>
       </header>
 
       <div className="space-y-6">
@@ -25,7 +27,7 @@ export default async function SecurityPage() {
         </Suspense>
 
         <DeviceSessionList />
-        
+
         <DangerZoneCard />
       </div>
     </div>

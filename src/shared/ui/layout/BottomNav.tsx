@@ -12,7 +12,8 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
       <div
         className="grid grid-cols-5 h-16 items-center px-2 rounded-full border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300"
         style={{
-          background: 'linear-gradient(135deg, rgba(20, 20, 24, 0.88) 0%, rgba(10, 10, 12, 0.94) 100%)',
+          background:
+            'linear-gradient(135deg, rgba(20, 20, 24, 0.88) 0%, rgba(10, 10, 12, 0.94) 100%)',
           backdropFilter: 'blur(32px) saturate(1.5)',
           WebkitBackdropFilter: 'blur(32px) saturate(1.5)',
         }}
@@ -20,8 +21,7 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive =
-            pathname === item.href ||
-            (item.href !== '/home' && pathname.startsWith(item.href))
+            pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))
 
           return (
             <Link
@@ -49,7 +49,10 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
                 className="w-5 h-5 relative z-10 transition-transform duration-200"
                 style={
                   isActive
-                    ? { filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))', transform: 'scale(1.1)' }
+                    ? {
+                        filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))',
+                        transform: 'scale(1.1)',
+                      }
                     : undefined
                 }
               />

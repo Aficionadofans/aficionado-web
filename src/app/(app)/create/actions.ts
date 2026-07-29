@@ -6,8 +6,10 @@ import { createClient } from '@/shared/lib/supabase/server'
 
 export async function createPost(formData: FormData) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   if (!user) throw new Error('Not authenticated')
 
   const content = formData.get('content') as string
@@ -20,12 +22,10 @@ export async function createPost(formData: FormData) {
     await supabase.from('profiles').update({ ai_tone: aiTone }).eq('id', user.id)
   }
 
-  const { error } = await supabase
-    .from('posts')
-    .insert({
-      author_id: user.id,
-      content: content.trim(),
-    })
+  const { error } = await supabase.from('posts').insert({
+    author_id: user.id,
+    content: content.trim(),
+  })
 
   if (error) {
     console.error('Error creating post:', error)

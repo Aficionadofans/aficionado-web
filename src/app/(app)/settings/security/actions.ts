@@ -6,27 +6,39 @@ import { revalidatePath } from 'next/cache'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function enrollMfa(prevState: any, formData: FormData) {
   const supabase = await createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) return { error: 'Not authenticated', qrCode: null, secret: null, factorId: null }
 
   try {
     const { data: responseData, error } = await supabase.functions.invoke('mfa', {
-      body: { action: 'enroll' }
+      body: { action: 'enroll' },
     })
 
     if (error) {
-      return { error: error.message || 'Failed to enroll', qrCode: null, secret: null, factorId: null }
+      return {
+        error: error.message || 'Failed to enroll',
+        qrCode: null,
+        secret: null,
+        factorId: null,
+      }
     }
     if (responseData?.error) {
-      return { error: responseData.error || 'Failed to enroll', qrCode: null, secret: null, factorId: null }
+      return {
+        error: responseData.error || 'Failed to enroll',
+        qrCode: null,
+        secret: null,
+        factorId: null,
+      }
     }
 
     return {
       qrCode: responseData.data.totp.qr_code,
       secret: responseData.data.totp.secret,
       factorId: responseData.data.id,
-      error: null
+      error: null,
     }
   } catch (err: unknown) {
     return { error: (err as Error).message, qrCode: null, secret: null, factorId: null }
@@ -43,13 +55,15 @@ export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
   }
 
   const supabase = await createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) return { error: 'Not authenticated', success: false }
 
   try {
     const { data, error } = await supabase.functions.invoke('mfa', {
-      body: { action: 'challengeAndVerify', factorId, code }
+      body: { action: 'challengeAndVerify', factorId, code },
     })
 
     if (error) {
@@ -78,13 +92,15 @@ export async function unenrollMfa(prevState: any, formData: FormData) {
   }
 
   const supabase = await createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) return { error: 'Not authenticated', success: false }
 
   try {
     const { data, error } = await supabase.functions.invoke('mfa', {
-      body: { action: 'unenroll', factorId }
+      body: { action: 'unenroll', factorId },
     })
 
     if (error) {
@@ -100,4 +116,3 @@ export async function unenrollMfa(prevState: any, formData: FormData) {
     return { error: (err as Error).message, success: false }
   }
 }
-

@@ -4,7 +4,9 @@ import { createClient } from '@/shared/lib/supabase/server'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   let userType: 'aficionado' | 'fan' | null = null
   let isAdmin = false
@@ -23,9 +25,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Navigation isAdmin={isAdmin} userType={userType} />
-      <MainLayout>
-        {children}
-      </MainLayout>
+      <MainLayout>{children}</MainLayout>
     </>
   )
 }

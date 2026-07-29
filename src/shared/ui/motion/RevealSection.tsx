@@ -45,11 +45,7 @@ export function RevealSection({
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`${className} ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
-      style={
-        isVisible
-          ? { animationDelay: `${delay}ms`, animationFillMode: 'both' }
-          : undefined
-      }
+      style={isVisible ? { animationDelay: `${delay}ms`, animationFillMode: 'both' } : undefined}
     >
       {children}
     </div>

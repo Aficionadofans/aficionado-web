@@ -4,7 +4,9 @@ import { SettingsView } from '@/features/settings/ui/SettingsView'
 
 export default async function SettingsPage() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) {
     redirect('/login?next=/settings')

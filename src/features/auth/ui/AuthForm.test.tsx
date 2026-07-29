@@ -68,7 +68,7 @@ describe('AuthForm', () => {
     await user.click(submitButton)
 
     expect(
-      await screen.findByText(/you must accept the terms of service and privacy policy/i)
+      await screen.findByText(/you must accept the terms of service and privacy policy/i),
     ).toBeInTheDocument()
     expect(mockAuthAction).not.toHaveBeenCalled()
   })
@@ -92,7 +92,7 @@ describe('AuthForm', () => {
     await user.click(submitButton)
 
     expect(
-      await screen.findByText(/you must accept the creator monetization agreement/i)
+      await screen.findByText(/you must accept the creator monetization agreement/i),
     ).toBeInTheDocument()
     expect(mockAuthAction).not.toHaveBeenCalled()
   })
@@ -134,14 +134,14 @@ describe('AuthForm', () => {
 
     // Error should be shown now (Terms unchecked)
     expect(
-      await screen.findByText(/you must accept the terms of service and privacy policy/i)
+      await screen.findByText(/you must accept the terms of service and privacy policy/i),
     ).toBeInTheDocument()
 
     // Switch to login — error should be cleared
     await user.click(screen.getByRole('button', { name: /login/i }))
 
     expect(
-      screen.queryByText(/you must accept the terms of service and privacy policy/i)
+      screen.queryByText(/you must accept the terms of service and privacy policy/i),
     ).not.toBeInTheDocument()
   })
 
@@ -157,14 +157,14 @@ describe('AuthForm', () => {
     // Submit without Terms checked → checkbox error appears
     await user.click(screen.getByRole('button', { name: /create account/i }))
     expect(
-      await screen.findByText(/you must accept the terms of service and privacy policy/i)
+      await screen.findByText(/you must accept the terms of service and privacy policy/i),
     ).toBeInTheDocument()
 
     // Switch to login mode
     await user.click(screen.getByRole('button', { name: /login/i }))
 
     expect(
-      screen.queryByText(/you must accept the terms of service and privacy policy/i)
+      screen.queryByText(/you must accept the terms of service and privacy policy/i),
     ).not.toBeInTheDocument()
   })
 
@@ -180,7 +180,7 @@ describe('AuthForm', () => {
     // Trigger checkbox error
     await user.click(screen.getByRole('button', { name: /create account/i }))
     expect(
-      await screen.findByText(/you must accept the terms of service and privacy policy/i)
+      await screen.findByText(/you must accept the terms of service and privacy policy/i),
     ).toBeInTheDocument()
 
     // Switch to the magic-link / forgot-password flow via "Forgot your password?" — first go back to login
@@ -188,14 +188,12 @@ describe('AuthForm', () => {
 
     // Error banner gone
     expect(
-      screen.queryByText(/you must accept the terms of service and privacy policy/i)
+      screen.queryByText(/you must accept the terms of service and privacy policy/i),
     ).not.toBeInTheDocument()
 
     // Switch back to signup — form should be clean (no error state)
     await user.click(screen.getByRole('button', { name: /sign up/i }))
-    expect(
-      screen.queryByText(/you must accept/i)
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText(/you must accept/i)).not.toBeInTheDocument()
   })
 
   /**

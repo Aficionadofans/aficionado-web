@@ -59,9 +59,12 @@ function GlassCard({
           'active:scale-[0.99] active:translate-y-0',
         ],
 
-        className
+        className,
       )}
-      style={{ backdropFilter: 'blur(24px) saturate(1.3)', WebkitBackdropFilter: 'blur(24px) saturate(1.3)' }}
+      style={{
+        backdropFilter: 'blur(24px) saturate(1.3)',
+        WebkitBackdropFilter: 'blur(24px) saturate(1.3)',
+      }}
       {...props}
     />
   )

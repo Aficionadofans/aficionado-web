@@ -23,10 +23,7 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
           /* Empty state: 4 skeleton avatar circles */
           <>
             {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center gap-1.5 flex-shrink-0"
-              >
+              <div key={i} className="flex flex-col items-center gap-1.5 flex-shrink-0">
                 <div className="w-16 h-16 rounded-full bg-muted shimmer" />
                 <div className="w-10 h-2 rounded-full bg-muted shimmer" />
               </div>

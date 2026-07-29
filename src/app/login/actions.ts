@@ -15,14 +15,15 @@ export async function authAction(prevState: any, formData: FormData) {
 
   const supabase = await createClient()
   const headersList = await headers()
-  const origin = headersList.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aficionado.fans'
+  const origin =
+    headersList.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aficionado.fans'
 
   let redirectPath = ''
-  
+
   try {
     if (mode === 'signup') {
       if (!email || !password) return { error: 'Email and password are required', success: null }
-      
+
       const { error, data } = await supabase.auth.signUp({
         email,
         password,
@@ -31,46 +32,42 @@ export async function authAction(prevState: any, formData: FormData) {
           data: {
             user_type: userType,
             zip_code: zipCode,
-          }
-        }
+          },
+        },
       })
-      
+
       if (error) return { error: error.message, success: null }
-      
+
       if (!data.session && data.user) {
         return { success: 'Check your email for the confirmation link.', error: null }
       }
-      
     } else if (mode === 'login') {
       if (!email || !password) return { error: 'Email and password are required', success: null }
-      
+
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
       if (error) return { error: error.message, success: null }
-      
     } else if (mode === 'magic_link') {
       if (!email) return { error: 'Email is required', success: null }
-      
+
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
           emailRedirectTo: `${origin}/auth/callback`,
-        }
+        },
       })
       if (error) return { error: error.message, success: null }
       return { success: 'Magic link sent! Check your email.', error: null }
-      
     } else if (mode === 'forgot_password') {
       if (!email) return { error: 'Email is required', success: null }
-      
+
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${origin}/update-password`,
       })
       if (error) return { error: error.message, success: null }
       return { success: 'Password reset instructions sent to your email.', error: null }
-      
     } else {
       return { error: 'Invalid action', success: null }
     }
@@ -83,18 +80,17 @@ export async function authAction(prevState: any, formData: FormData) {
         redirectPath = '/home'
       }
     }
-
   } catch (err: unknown) {
     return { error: (err as Error).message || 'An error occurred', success: null }
   }
-  
+
   if (redirectPath) {
     if (redirectPath === '/home') {
       revalidatePath('/', 'layout')
     }
     redirect(redirectPath)
   }
-  
+
   return { error: null, success: null }
 }
 

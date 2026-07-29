@@ -22,11 +22,13 @@ export function StudioQuickActions({
   const handleInvite = () => {
     const url = `${window.location.origin}/${username}`
     if (navigator.share) {
-      navigator.share({
-        title: `Join my Inner Circle`,
-        text: `Unlock exclusive behind-the-scenes content and direct chat with me!`,
-        url: url
-      }).catch(console.error)
+      navigator
+        .share({
+          title: `Join my Inner Circle`,
+          text: `Unlock exclusive behind-the-scenes content and direct chat with me!`,
+          url: url,
+        })
+        .catch(console.error)
     } else {
       navigator.clipboard.writeText(url)
       alert('Link copied to clipboard!')
@@ -39,7 +41,9 @@ export function StudioQuickActions({
         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,212,200,0.2)]">
           <Upload className="w-7 h-7 text-primary" />
         </div>
-        <span className="text-base font-bold text-primary tracking-tight text-center">Upload Video</span>
+        <span className="text-base font-bold text-primary tracking-tight text-center">
+          Upload Video
+        </span>
       </button>
 
       <Link
@@ -58,11 +62,24 @@ export function StudioQuickActions({
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-bio-teal/30 group relative overflow-hidden shadow-[0_0_20px_rgba(0,240,181,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bio-teal"
       >
         <div className="w-14 h-14 rounded-2xl bg-bio-teal/10 border border-bio-teal/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,240,181,0.25)]">
-          <svg className="w-7 h-7 text-bio-teal" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            className="w-7 h-7 text-bio-teal"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
-        <span className="text-base font-bold text-bio-teal tracking-tight text-center">Create Drop</span>
+        <span className="text-base font-bold text-bio-teal tracking-tight text-center">
+          Create Drop
+        </span>
       </button>
 
       <button
@@ -72,7 +89,9 @@ export function StudioQuickActions({
         <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(99,102,241,0.2)]">
           <Lock className="w-7 h-7 text-indigo-400" />
         </div>
-        <span className="text-base font-bold text-indigo-400 tracking-tight text-center">Time Capsule</span>
+        <span className="text-base font-bold text-indigo-400 tracking-tight text-center">
+          Time Capsule
+        </span>
       </button>
 
       <button
@@ -80,14 +99,24 @@ export function StudioQuickActions({
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-emerald-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
       >
         <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-          <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            className="w-7 h-7 text-emerald-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="12" y1="18" x2="12" y2="12"></line>
             <line x1="9" y1="15" x2="15" y2="15"></line>
           </svg>
         </div>
-        <span className="text-base font-bold text-emerald-500 tracking-tight text-center">Import Fans</span>
+        <span className="text-base font-bold text-emerald-500 tracking-tight text-center">
+          Import Fans
+        </span>
       </button>
 
       <button
@@ -97,7 +126,9 @@ export function StudioQuickActions({
         <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
           <Share2 className="w-7 h-7 text-amber-500" />
         </div>
-        <span className="text-base font-bold text-amber-500 tracking-tight text-center">Invite Fans</span>
+        <span className="text-base font-bold text-amber-500 tracking-tight text-center">
+          Invite Fans
+        </span>
       </button>
     </section>
   )

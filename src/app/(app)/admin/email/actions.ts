@@ -11,7 +11,7 @@ const ADMIN_EMAILS = [
   'devastatingdebater@gmail.com',
   'tamerlanium@gmail.com',
   'support@aficionado.fans',
-  'contact@aficionado.fans'
+  'contact@aficionado.fans',
 ]
 
 // ── Live Preview Server Action ─────────────────────────────────────────────
@@ -33,11 +33,13 @@ export type EmailActionState = {
 
 export async function sendEmailAction(
   prevState: EmailActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<EmailActionState> {
   // 1. Re-verify admin scope server-side — defense in depth
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user || !user.email || !ADMIN_EMAILS.includes(user.email.toLowerCase())) {
     return { success: false, message: 'Unauthorized. Admin access only.' }

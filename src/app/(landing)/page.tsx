@@ -17,7 +17,9 @@ export default async function LandingPageRoute({
 
   // Auth check — authenticated users go straight to the app
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (user) {
     redirect('/home')

@@ -11,7 +11,8 @@ export default async function CreatorProfilePage({
 }) {
   const { username } = await params
   const resolvedSearchParams = await searchParams
-  const source = typeof resolvedSearchParams.source === 'string' ? resolvedSearchParams.source : undefined
+  const source =
+    typeof resolvedSearchParams.source === 'string' ? resolvedSearchParams.source : undefined
   const supabase = await createClient()
 
   // Fetch creator profile

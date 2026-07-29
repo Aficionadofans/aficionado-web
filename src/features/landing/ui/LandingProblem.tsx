@@ -24,10 +24,10 @@ export function LandingProblem() {
             stagger={0.06}
           />
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
-            You’re spending hours creating videos, but the results just don’t match the effort. The problem isn’t consistency — it’s what happens after people hit play.
+            You’re spending hours creating videos, but the results just don’t match the effort. The
+            problem isn’t consistency — it’s what happens after people hit play.
           </p>
         </div>
-
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Views that don't convert */}
@@ -37,9 +37,12 @@ export function LandingProblem() {
                 <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 shadow-[0_0_16px_rgba(239,68,68,0.2)]">
                   <TrendingDown className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-white font-heading">Views that don’t convert</h3>
+                <h3 className="text-xl font-bold text-white font-heading">
+                  Views that don’t convert
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Your videos get views, but no real engagement, subscriber growth, or direct revenue.
+                  Your videos get views, but no real engagement, subscriber growth, or direct
+                  revenue.
                 </p>
               </div>
 
@@ -52,7 +55,9 @@ export function LandingProblem() {
                 <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
                   <div className="h-full w-[32%] bg-gradient-to-r from-red-600 to-red-400 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
                 </div>
-                <span className="text-[10px] font-mono text-red-400/90">50% Viewers dropped past 3s</span>
+                <span className="text-[10px] font-mono text-red-400/90">
+                  50% Viewers dropped past 3s
+                </span>
               </div>
             </div>
           </RevealSection>
@@ -64,9 +69,12 @@ export function LandingProblem() {
                 <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.2)]">
                   <Coins className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-white font-heading">Likes don’t pay the bills</h3>
+                <h3 className="text-xl font-bold text-white font-heading">
+                  Likes don’t pay the bills
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Viral moments feel good, but without a sovereign direct monetization model, they don’t build a business.
+                  Viral moments feel good, but without a sovereign direct monetization model, they
+                  don’t build a business.
                 </p>
               </div>
 
@@ -91,9 +99,12 @@ export function LandingProblem() {
                 <div className="w-12 h-12 rounded-2xl bg-[#E8501A]/10 border border-[#E8501A]/30 flex items-center justify-center text-[#E8501A] shadow-[0_0_16px_rgba(232,80,26,0.25)]">
                   <CalendarX className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-white font-heading">No system, no consistency</h3>
+                <h3 className="text-xl font-bold text-white font-heading">
+                  No system, no consistency
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Posting randomly without a structured drop system leads to viewer fatigue and algorithm traps.
+                  Posting randomly without a structured drop system leads to viewer fatigue and
+                  algorithm traps.
                 </p>
               </div>
 
@@ -108,7 +119,9 @@ export function LandingProblem() {
                     <div
                       key={i}
                       className={`flex-1 h-6 rounded-md flex items-center justify-center text-[9px] font-mono font-bold transition-all ${
-                        i < 3 ? 'bg-[#E8501A] text-black shadow-[0_0_8px_rgba(232,80,26,0.4)]' : 'bg-white/5 text-muted-foreground'
+                        i < 3
+                          ? 'bg-[#E8501A] text-black shadow-[0_0_8px_rgba(232,80,26,0.4)]'
+                          : 'bg-white/5 text-muted-foreground'
                       }`}
                     >
                       {day}
@@ -119,7 +132,6 @@ export function LandingProblem() {
             </div>
           </RevealSection>
         </div>
-
       </div>
     </section>
   )

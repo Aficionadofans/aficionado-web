@@ -20,7 +20,9 @@ export async function verifyMfa(prevState: unknown, formData: FormData) {
   const supabase = await createClient()
 
   // Verify session exists before attempting MFA
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
   if (!session) {
     redirect('/login?message=Session expired. Please sign in again.')
   }

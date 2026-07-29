@@ -32,10 +32,12 @@ export function LegalPage({
     >
       {/* Outer wrapper — positions sidebar + content side by side on lg */}
       <div className="max-w-6xl mx-auto flex gap-10 items-start">
-
         {/* Sticky TOC sidebar — only on lg+ */}
         {headings.length > 0 && (
-          <aside className="hidden lg:block w-64 shrink-0" style={{ position: 'sticky', top: '6rem' }}>
+          <aside
+            className="hidden lg:block w-64 shrink-0"
+            style={{ position: 'sticky', top: '6rem' }}
+          >
             <LegalTOC headings={headings} />
           </aside>
         )}
@@ -75,9 +77,7 @@ export function LegalPage({
           <div className="section-divider mb-10" />
 
           {/* Content area */}
-          <div className="text-white/80 leading-relaxed space-y-8">
-            {children}
-          </div>
+          <div className="text-white/80 leading-relaxed space-y-8">{children}</div>
 
           {/* Footer CTA bar */}
           <div className="mt-14">
@@ -111,13 +111,7 @@ export function LegalPage({
  * Convenience wrappers for legal section headings so page authors
  * can render styled h2 / h3 without repeating class strings.
  */
-export function LegalH2({
-  id,
-  children,
-}: {
-  id?: string
-  children: React.ReactNode
-}) {
+export function LegalH2({ id, children }: { id?: string; children: React.ReactNode }) {
   return (
     <h2
       id={id}

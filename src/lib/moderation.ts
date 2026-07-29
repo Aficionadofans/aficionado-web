@@ -13,9 +13,7 @@ export interface ModerationResult {
 /**
  * Checks an array of thumbnail image URLs for adult/NSFW content.
  */
-export async function checkVideoThumbnails(
-  imageUrls: string[]
-): Promise<ModerationResult> {
+export async function checkVideoThumbnails(imageUrls: string[]): Promise<ModerationResult> {
   const sightengineUser = process.env.SIGHTENGINE_USER
   const sightengineSecret = process.env.SIGHTENGINE_SECRET
   const openAiKey = process.env.OPENAI_API_KEY
@@ -49,7 +47,7 @@ export async function checkVideoThumbnails(
                 confidence: Math.max(
                   nudity.sexual_activity ?? 0,
                   nudity.sexual_display ?? 0,
-                  nudity.erotica ?? 0
+                  nudity.erotica ?? 0,
                 ),
               }
             }

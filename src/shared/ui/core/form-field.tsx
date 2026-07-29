@@ -47,19 +47,20 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
       className,
       inputClassName,
     },
-    ref
+    ref,
   ) => {
     const hasError = Boolean(error)
 
     return (
       <div className={cn('flex flex-col gap-1.5', className)}>
         {label && (
-          <label
-            htmlFor={id}
-            className="text-sm font-medium text-foreground/80 select-none"
-          >
+          <label htmlFor={id} className="text-sm font-medium text-foreground/80 select-none">
             {label}
-            {required && <span className="text-destructive ml-1" aria-hidden="true">*</span>}
+            {required && (
+              <span className="text-destructive ml-1" aria-hidden="true">
+                *
+              </span>
+            )}
           </label>
         )}
 
@@ -80,9 +81,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
             pattern={pattern}
             title={title}
             aria-invalid={hasError}
-            aria-describedby={
-              error ? `${id}-error` : hint ? `${id}-hint` : undefined
-            }
+            aria-describedby={error ? `${id}-error` : hint ? `${id}-hint` : undefined}
             onChange={onChange}
             onBlur={onBlur}
             className={cn(
@@ -93,10 +92,11 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
               // Focus
               'focus:border-primary focus:shadow-[0_0_0_3px_rgba(0,212,200,0.15)]',
               // Error
-              hasError && 'border-destructive focus:border-destructive focus:shadow-[0_0_0_3px_rgba(244,63,94,0.15)]',
+              hasError &&
+                'border-destructive focus:border-destructive focus:shadow-[0_0_0_3px_rgba(244,63,94,0.15)]',
               // Disabled
               disabled && 'opacity-50 cursor-not-allowed',
-              inputClassName
+              inputClassName,
             )}
           />
         )}
@@ -114,7 +114,7 @@ const FormField = React.forwardRef<HTMLInputElement, FormFieldProps>(
         )}
       </div>
     )
-  }
+  },
 )
 FormField.displayName = 'FormField'
 

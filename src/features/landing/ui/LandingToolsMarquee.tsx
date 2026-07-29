@@ -15,9 +15,7 @@ export function LandingToolsMarquee() {
   return (
     <section className="py-16 bg-[#040406] border-y border-white/10 relative z-20">
       <div className="max-w-6xl mx-auto px-4 text-center mb-8">
-        <h4
-          className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground font-mono"
-        >
+        <h4 className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground font-mono">
           WHATEVER TOOL OR FORMAT YOU USE, OUR SOVEREIGN ENGINE SUPPORTS IT
         </h4>
       </div>
@@ -25,7 +23,10 @@ export function LandingToolsMarquee() {
       <div className="w-full overflow-hidden relative">
         <div className="flex w-max animate-marquee gap-8 items-center text-xs font-bold uppercase tracking-widest text-white/80 whitespace-nowrap">
           {[...tools, ...tools, ...tools].map((tool, i) => (
-            <div key={i} className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+            <div
+              key={i}
+              className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10"
+            >
               {tool.icon}
               <span>{tool.name}</span>
             </div>

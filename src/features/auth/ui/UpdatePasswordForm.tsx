@@ -59,7 +59,10 @@ export function UpdatePasswordForm() {
   }
 
   return (
-    <div className="w-full max-w-md space-y-8 liquid-glass p-8 relative overflow-hidden animate-fade-in-up" style={{ animationDuration: '350ms', animationFillMode: 'both' }}>
+    <div
+      className="w-full max-w-md space-y-8 liquid-glass p-8 relative overflow-hidden animate-fade-in-up"
+      style={{ animationDuration: '350ms', animationFillMode: 'both' }}
+    >
       <div className="absolute -top-20 -left-20 w-48 h-48 bg-primary/20 rounded-full blur-[80px] mix-blend-screen pointer-events-none" />
 
       <div className="relative">
@@ -80,7 +83,9 @@ export function UpdatePasswordForm() {
           <div className="space-y-4">
             {/* New password */}
             <div>
-              <label htmlFor="password" className="sr-only">New Password</label>
+              <label htmlFor="password" className="sr-only">
+                New Password
+              </label>
               <input
                 id="password"
                 name="password"
@@ -111,7 +116,9 @@ export function UpdatePasswordForm() {
 
             {/* Confirm password */}
             <div>
-              <label htmlFor="confirm-password" className="sr-only">Confirm Password</label>
+              <label htmlFor="confirm-password" className="sr-only">
+                Confirm Password
+              </label>
               <input
                 id="confirm-password"
                 name="confirm-password"
@@ -126,9 +133,7 @@ export function UpdatePasswordForm() {
                 placeholder="Confirm new password"
                 minLength={8}
               />
-              {mismatch && (
-                <p className="text-xs mt-1 text-destructive">Passwords do not match</p>
-              )}
+              {mismatch && <p className="text-xs mt-1 text-destructive">Passwords do not match</p>}
             </div>
           </div>
 

@@ -46,7 +46,7 @@ export async function GET(req: Request) {
 
     for (const video of pendingVideos) {
       const playbackId = video.mux_playback_id!
-      
+
       // Sample 3 frame thumbnails from Mux at timestamps 1s, 5s, 10s
       const sampleThumbnails = [
         `https://image.mux.com/${playbackId}/thumbnail.jpg?width=600&time=1`,

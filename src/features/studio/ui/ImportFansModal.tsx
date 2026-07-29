@@ -32,16 +32,19 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
       // Simple CSV parser (no dependencies)
       const lines = text.split('\n')
       const emails: { email: string; name: string }[] = []
-      
-      lines.forEach(line => {
+
+      lines.forEach((line) => {
         const parts = line.split(',')
         if (parts.length > 0) {
           // Look for an email-like string in the parts
-          const emailPart = parts.find(p => p.includes('@') && p.includes('.'))?.trim()
+          const emailPart = parts.find((p) => p.includes('@') && p.includes('.'))?.trim()
           if (emailPart) {
             // Assume the first part might be a name if it's not the email
-            const namePart = parts.find(p => p !== emailPart)?.trim() || ''
-            emails.push({ email: emailPart.replace(/["']/g, ''), name: namePart.replace(/["']/g, '') })
+            const namePart = parts.find((p) => p !== emailPart)?.trim() || ''
+            emails.push({
+              email: emailPart.replace(/["']/g, ''),
+              name: namePart.replace(/["']/g, ''),
+            })
           }
         }
       })
@@ -54,7 +57,9 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
   const handleImport = async () => {
     if (parsedEmails.length === 0) return
     if (parsedEmails.length > 500) {
-      alert('Maximum 500 fans can be imported at once to prevent spam. Please split your CSV into smaller files.')
+      alert(
+        'Maximum 500 fans can be imported at once to prevent spam. Please split your CSV into smaller files.',
+      )
       return
     }
     setImportStatus('importing')
@@ -79,14 +84,20 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-      
+
       <div className="relative w-full max-w-lg bg-[#0f1115] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col animate-in fade-in zoom-in-95 duration-200">
-        
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           <div>
-            <h2 className="text-xl font-bold text-white tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>Import Fans</h2>
-            <p className="text-sm text-muted-foreground mt-1">Migrate your audience to Aficionado</p>
+            <h2
+              className="text-xl font-bold text-white tracking-tight"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Import Fans
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Migrate your audience to Aficionado
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -101,7 +112,9 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
           <button
             onClick={() => setActiveTab('csv')}
             className={`pb-3 text-sm font-semibold transition-colors border-b-2 ${
-              activeTab === 'csv' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-white'
+              activeTab === 'csv'
+                ? 'border-primary text-primary'
+                : 'border-transparent text-muted-foreground hover:text-white'
             }`}
           >
             CSV Import
@@ -109,7 +122,9 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
           <button
             onClick={() => setActiveTab('link')}
             className={`pb-3 text-sm font-semibold transition-colors border-b-2 ${
-              activeTab === 'link' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-white'
+              activeTab === 'link'
+                ? 'border-primary text-primary'
+                : 'border-transparent text-muted-foreground hover:text-white'
             }`}
           >
             Custom Link
@@ -126,7 +141,10 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                     <CheckCircle2 className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2">Import Successful!</h3>
-                  <p className="text-muted-foreground mb-6">Successfully imported {parsedEmails.length} fans. They have been added to your invites list.</p>
+                  <p className="text-muted-foreground mb-6">
+                    Successfully imported {parsedEmails.length} fans. They have been added to your
+                    invites list.
+                  </p>
                   <button
                     onClick={onClose}
                     className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-bold transition-all"
@@ -139,13 +157,20 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm font-medium text-white">Preview</span>
-                      <span className="text-xs font-bold text-primary bg-primary/20 px-2 py-0.5 rounded-full">{parsedEmails.length} fans found</span>
+                      <span className="text-xs font-bold text-primary bg-primary/20 px-2 py-0.5 rounded-full">
+                        {parsedEmails.length} fans found
+                      </span>
                     </div>
                     <div className="max-h-40 overflow-y-auto space-y-2 pr-2">
                       {parsedEmails.slice(0, 10).map((u, i) => (
-                        <div key={i} className="flex justify-between items-center text-xs py-1 border-b border-white/5 last:border-0">
+                        <div
+                          key={i}
+                          className="flex justify-between items-center text-xs py-1 border-b border-white/5 last:border-0"
+                        >
                           <span className="text-white truncate">{u.email}</span>
-                          <span className="text-muted-foreground truncate max-w-[100px]">{u.name}</span>
+                          <span className="text-muted-foreground truncate max-w-[100px]">
+                            {u.name}
+                          </span>
                         </div>
                       ))}
                       {parsedEmails.length > 10 && (
@@ -155,7 +180,7 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-3">
                     <button
                       onClick={() => setParsedEmails([])}
@@ -175,14 +200,14 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                   </div>
                 </div>
               ) : (
-                <div 
+                <div
                   className="border-2 border-dashed border-white/10 rounded-3xl p-10 flex flex-col items-center justify-center text-center hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all group"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <input 
-                    type="file" 
-                    accept=".csv" 
-                    className="hidden" 
+                  <input
+                    type="file"
+                    accept=".csv"
+                    className="hidden"
                     ref={fileInputRef}
                     onChange={handleFileUpload}
                   />
@@ -191,7 +216,8 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                   </div>
                   <h3 className="text-lg font-bold text-white mb-1">Upload CSV File</h3>
                   <p className="text-sm text-muted-foreground max-w-[250px]">
-                    Import your Patreon, Substack, or generic email list. Must contain an email column.
+                    Import your Patreon, Substack, or generic email list. Must contain an email
+                    column.
                   </p>
                 </div>
               )}
@@ -199,15 +225,18 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
           ) : (
             <div className="flex flex-col gap-5">
               <p className="text-sm text-muted-foreground">
-                Generate a unique referral link to share with your audience. We&apos;ll show a personalized welcome message based on the source.
+                Generate a unique referral link to share with your audience. We&apos;ll show a
+                personalized welcome message based on the source.
               </p>
-              
+
               <div className="space-y-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Traffic Source</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  Traffic Source
+                </label>
                 <div className="relative">
                   <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={sourceName}
                     onChange={(e) => setSourceName(e.target.value)}
                     placeholder="e.g. patreon, twitter, newsletter"
@@ -217,7 +246,9 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Your Custom Link</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                  Your Custom Link
+                </label>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 bg-black/40 border border-white/10 rounded-xl py-3 px-4 text-sm text-white/70 font-mono truncate select-all">
                     aficionado.fans/{username}?source={encodeURIComponent(sourceName.toLowerCase())}
@@ -227,7 +258,11 @@ export function ImportFansModal({ onClose, username }: ImportFansModalProps) {
                     className="p-3 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-all flex-shrink-0 border border-white/5"
                     title="Copy to clipboard"
                   >
-                    {copied ? <CheckCircle2 className="w-5 h-5 text-primary" /> : <LinkIcon className="w-5 h-5" />}
+                    {copied ? (
+                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                    ) : (
+                      <LinkIcon className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>

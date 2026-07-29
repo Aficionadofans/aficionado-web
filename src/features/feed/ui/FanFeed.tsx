@@ -70,7 +70,10 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
           videos.map((video, index) => {
             const thumbnailUrl = `https://image.mux.com/${video.playbackId}/thumbnail.jpg?width=400`
             const card = (
-              <Link href={`/content/${video.id}`} className="clipcut-card overflow-hidden group cursor-pointer block">
+              <Link
+                href={`/content/${video.id}`}
+                className="clipcut-card overflow-hidden group cursor-pointer block"
+              >
                 {/* Thumbnail */}
                 <div className="relative aspect-video w-full overflow-hidden bg-[#100F17]">
                   <Image

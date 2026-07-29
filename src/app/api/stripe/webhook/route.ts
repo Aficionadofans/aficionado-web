@@ -45,7 +45,7 @@ export async function POST(req: Request) {
       const metadata = (subData.metadata ?? {}) as Record<string, string>
       const fanId = metadata.fan_id
       const creatorId = metadata.creator_id
-      const status = (subData.status as string) as SubscriptionStatus
+      const status = subData.status as string as SubscriptionStatus
 
       if (!fanId || !creatorId) {
         console.error('Missing fan_id or creator_id in subscription metadata', metadata)
@@ -57,15 +57,16 @@ export async function POST(req: Request) {
         ? new Date(rawPeriodEnd * 1000).toISOString()
         : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
 
-      const { error } = await supabaseAdmin
-        .from('subscriptions')
-        .upsert({
+      const { error } = await supabaseAdmin.from('subscriptions').upsert(
+        {
           stripe_subscription_id: subData.id as string,
           fan_id: fanId,
           creator_id: creatorId,
           status,
           current_period_end: periodEnd,
-        }, { onConflict: 'stripe_subscription_id' })
+        },
+        { onConflict: 'stripe_subscription_id' },
+      )
 
       if (error) console.error('Supabase upsert error:', error.message)
       break

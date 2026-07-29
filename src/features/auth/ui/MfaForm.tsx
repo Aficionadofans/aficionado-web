@@ -38,7 +38,9 @@ export function MfaForm({ factorId }: { factorId: string }) {
         <input type="hidden" name="factorId" value={factorId} />
         <div className="rounded-md shadow-sm space-y-4">
           <div>
-            <label htmlFor="code" className="sr-only">Authentication Code</label>
+            <label htmlFor="code" className="sr-only">
+              Authentication Code
+            </label>
             <input
               id="code"
               name="code"

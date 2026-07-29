@@ -14,7 +14,8 @@ export function LandingProblemSolution() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Legacy social networks profit by keeping users addicted to infinite feeds while taking massive platform cuts. Aficionado flips the model completely.
+            Legacy social networks profit by keeping users addicted to infinite feeds while taking
+            massive platform cuts. Aficionado flips the model completely.
           </p>
         </div>
 
@@ -39,15 +40,24 @@ export function LandingProblemSolution() {
               <ul className="flex flex-col gap-4 mt-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>50% Platform Cuts:</strong> Legacy giants take up to half of creator revenue while controlling your audience list.</span>
+                  <span>
+                    <strong>50% Platform Cuts:</strong> Legacy giants take up to half of creator
+                    revenue while controlling your audience list.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>Infinite Scroll Drain:</strong> Algorithms prioritize rage-bait and mindless doomscrolling over quality creator-fan depth.</span>
+                  <span>
+                    <strong>Infinite Scroll Drain:</strong> Algorithms prioritize rage-bait and
+                    mindless doomscrolling over quality creator-fan depth.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>Pay-to-Reach Mechanics:</strong> Only 5-10% of your followers ever see your posts unless you pay for ads.</span>
+                  <span>
+                    <strong>Pay-to-Reach Mechanics:</strong> Only 5-10% of your followers ever see
+                    your posts unless you pay for ads.
+                  </span>
                 </li>
               </ul>
             </div>
@@ -77,15 +87,24 @@ export function LandingProblemSolution() {
               <ul className="flex flex-col gap-4 mt-2 text-sm text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span><strong>100% Direct Payouts:</strong> Direct fan subscriptions and tips straight to your account with zero platform extortion.</span>
+                  <span>
+                    <strong>100% Direct Payouts:</strong> Direct fan subscriptions and tips straight
+                    to your account with zero platform extortion.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span><strong>Finite Digital Well-Being:</strong> Anti-dopamine feed guarantees fans stay engaged without endless doomscrolling.</span>
+                  <span>
+                    <strong>Finite Digital Well-Being:</strong> Anti-dopamine feed guarantees fans
+                    stay engaged without endless doomscrolling.
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span><strong>Gated Fan Inner Circles:</strong> Host live sessions and drop exclusive content for your most loyal supporters.</span>
+                  <span>
+                    <strong>Gated Fan Inner Circles:</strong> Host live sessions and drop exclusive
+                    content for your most loyal supporters.
+                  </span>
                 </li>
               </ul>
             </div>
@@ -100,4 +119,3 @@ export function LandingProblemSolution() {
     </section>
   )
 }
-

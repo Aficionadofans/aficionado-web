@@ -1,7 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
-import { X, Sparkles, PlusCircle, Compass, Music, Video, Cpu, HeartHandshake, Utensils, Smile, Waves, Mic } from 'lucide-react'
+import {
+  X,
+  Sparkles,
+  PlusCircle,
+  Compass,
+  Music,
+  Video,
+  Cpu,
+  HeartHandshake,
+  Utensils,
+  Smile,
+  Waves,
+  Mic,
+} from 'lucide-react'
 import { createClient } from '@/shared/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -12,14 +25,70 @@ interface CreateCircleModalProps {
 }
 
 const CATEGORIES = [
-  { id: 'music', label: 'Music & Audio', icon: Music, color: 'text-purple-400', border: 'border-purple-500/40', bg: 'bg-purple-500/20' },
-  { id: 'film', label: 'Film & Motion', icon: Video, color: 'text-amber-400', border: 'border-amber-500/40', bg: 'bg-amber-500/20' },
-  { id: 'tech', label: 'Tech & AI', icon: Cpu, color: 'text-cyan-400', border: 'border-cyan-500/40', bg: 'bg-cyan-500/20' },
-  { id: 'diving', label: 'Diving & Ocean', icon: Waves, color: 'text-sky-400', border: 'border-sky-500/40', bg: 'bg-sky-500/20' },
-  { id: 'speaking', label: 'Public Speaking', icon: Mic, color: 'text-orange-400', border: 'border-orange-500/40', bg: 'bg-orange-500/20' },
-  { id: 'parenting', label: 'Parenting & Family', icon: HeartHandshake, color: 'text-pink-400', border: 'border-pink-500/40', bg: 'bg-pink-500/20' },
-  { id: 'culinary', label: 'Culinary Arts', icon: Utensils, color: 'text-emerald-400', border: 'border-emerald-500/40', bg: 'bg-emerald-500/20' },
-  { id: 'wellness', label: 'Mindfulness', icon: Smile, color: 'text-indigo-400', border: 'border-indigo-500/40', bg: 'bg-indigo-500/20' },
+  {
+    id: 'music',
+    label: 'Music & Audio',
+    icon: Music,
+    color: 'text-purple-400',
+    border: 'border-purple-500/40',
+    bg: 'bg-purple-500/20',
+  },
+  {
+    id: 'film',
+    label: 'Film & Motion',
+    icon: Video,
+    color: 'text-amber-400',
+    border: 'border-amber-500/40',
+    bg: 'bg-amber-500/20',
+  },
+  {
+    id: 'tech',
+    label: 'Tech & AI',
+    icon: Cpu,
+    color: 'text-cyan-400',
+    border: 'border-cyan-500/40',
+    bg: 'bg-cyan-500/20',
+  },
+  {
+    id: 'diving',
+    label: 'Diving & Ocean',
+    icon: Waves,
+    color: 'text-sky-400',
+    border: 'border-sky-500/40',
+    bg: 'bg-sky-500/20',
+  },
+  {
+    id: 'speaking',
+    label: 'Public Speaking',
+    icon: Mic,
+    color: 'text-orange-400',
+    border: 'border-orange-500/40',
+    bg: 'bg-orange-500/20',
+  },
+  {
+    id: 'parenting',
+    label: 'Parenting & Family',
+    icon: HeartHandshake,
+    color: 'text-pink-400',
+    border: 'border-pink-500/40',
+    bg: 'bg-pink-500/20',
+  },
+  {
+    id: 'culinary',
+    label: 'Culinary Arts',
+    icon: Utensils,
+    color: 'text-emerald-400',
+    border: 'border-emerald-500/40',
+    bg: 'bg-emerald-500/20',
+  },
+  {
+    id: 'wellness',
+    label: 'Mindfulness',
+    icon: Smile,
+    color: 'text-indigo-400',
+    border: 'border-indigo-500/40',
+    bg: 'bg-indigo-500/20',
+  },
 ]
 
 export function CreateCircleModal({ isOpen, onClose, onSuccess }: CreateCircleModalProps) {
@@ -28,7 +97,7 @@ export function CreateCircleModal({ isOpen, onClose, onSuccess }: CreateCircleMo
   const [category, setCategory] = useState('music')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  
+
   const supabase = createClient()
   const router = useRouter()
 
@@ -42,7 +111,9 @@ export function CreateCircleModal({ isOpen, onClose, onSuccess }: CreateCircleMo
     setError(null)
 
     try {
-      const { data: { user } } = await supabase.auth.getUser()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
       if (!user) {
         setError('You must be logged in to create a circle.')
         setIsSubmitting(false)
@@ -105,7 +176,10 @@ export function CreateCircleModal({ isOpen, onClose, onSuccess }: CreateCircleMo
             <PlusCircle className="w-6 h-6" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-foreground" style={{ fontFamily: 'var(--font-heading)' }}>
+            <h2
+              className="text-xl font-bold text-foreground"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
               Create New Circle
             </h2>
             <p className="text-xs text-muted-foreground">

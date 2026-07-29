@@ -1,16 +1,57 @@
 'use client'
 
-import { Film, Target, TrendingUp, Zap, Sparkles, ShieldCheck, Flame, PlayCircle } from 'lucide-react'
+import {
+  Film,
+  Target,
+  TrendingUp,
+  Zap,
+  Sparkles,
+  ShieldCheck,
+  Flame,
+  PlayCircle,
+} from 'lucide-react'
 
 const lanePills = [
-  { text: 'Short Video Editing', icon: <Film className="w-3.5 h-3.5 text-[#E8501A]" />, badge: '9:16 Shorts' },
-  { text: 'Content Strategy', icon: <Target className="w-3.5 h-3.5 text-primary" />, badge: 'Retention' },
-  { text: 'Growth Optimization', icon: <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />, badge: '+3.5X Reach' },
-  { text: 'Fast 24-48h Turnaround', icon: <Zap className="w-3.5 h-3.5 text-amber-400" />, badge: 'Express' },
-  { text: '100% Direct Payouts', icon: <ShieldCheck className="w-3.5 h-3.5 text-[#E8501A]" />, badge: '0% Cuts' },
-  { text: 'Hook-Driven Edits', icon: <Flame className="w-3.5 h-3.5 text-pink-400" />, badge: 'High Watch Time' },
-  { text: 'Live HD Broadcasts', icon: <PlayCircle className="w-3.5 h-3.5 text-primary" />, badge: 'Low Latency' },
-  { text: 'Sovereign Fan Circles', icon: <Sparkles className="w-3.5 h-3.5 text-amber-400" />, badge: 'VIP Vault' },
+  {
+    text: 'Short Video Editing',
+    icon: <Film className="w-3.5 h-3.5 text-[#E8501A]" />,
+    badge: '9:16 Shorts',
+  },
+  {
+    text: 'Content Strategy',
+    icon: <Target className="w-3.5 h-3.5 text-primary" />,
+    badge: 'Retention',
+  },
+  {
+    text: 'Growth Optimization',
+    icon: <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />,
+    badge: '+3.5X Reach',
+  },
+  {
+    text: 'Fast 24-48h Turnaround',
+    icon: <Zap className="w-3.5 h-3.5 text-amber-400" />,
+    badge: 'Express',
+  },
+  {
+    text: '100% Direct Payouts',
+    icon: <ShieldCheck className="w-3.5 h-3.5 text-[#E8501A]" />,
+    badge: '0% Cuts',
+  },
+  {
+    text: 'Hook-Driven Edits',
+    icon: <Flame className="w-3.5 h-3.5 text-pink-400" />,
+    badge: 'High Watch Time',
+  },
+  {
+    text: 'Live HD Broadcasts',
+    icon: <PlayCircle className="w-3.5 h-3.5 text-primary" />,
+    badge: 'Low Latency',
+  },
+  {
+    text: 'Sovereign Fan Circles',
+    icon: <Sparkles className="w-3.5 h-3.5 text-amber-400" />,
+    badge: 'VIP Vault',
+  },
 ]
 
 export function LandingMarquee() {

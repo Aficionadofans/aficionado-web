@@ -8,7 +8,10 @@ export default function UpdatePasswordPage() {
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[150px] animate-breathe-calm mix-blend-screen" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-bio-emerald/8 blur-[120px] animate-float mix-blend-screen" />
-        <div className="absolute top-3/4 left-1/2 w-[300px] h-[300px] rounded-full bg-primary/6 blur-[100px] animate-float mix-blend-screen" style={{ animationDelay: '3s' }} />
+        <div
+          className="absolute top-3/4 left-1/2 w-[300px] h-[300px] rounded-full bg-primary/6 blur-[100px] animate-float mix-blend-screen"
+          style={{ animationDelay: '3s' }}
+        />
       </div>
 
       {/* ── Centered card column ── */}

@@ -15,8 +15,7 @@ const testimonials: Testimonial[] = [
     handle: '@sarahcreates',
     initial: 'S',
     avatarBg: 'rgba(0, 212, 200, 0.15)',
-    quote:
-      'Finally a platform that pays creators fairly. My revenue has tripled in 3 months.',
+    quote: 'Finally a platform that pays creators fairly. My revenue has tripled in 3 months.',
   },
   {
     name: 'Marcus Webb',
@@ -31,32 +30,28 @@ const testimonials: Testimonial[] = [
     handle: '@priyafan',
     initial: 'P',
     avatarBg: 'rgba(0, 212, 200, 0.12)',
-    quote:
-      'I actually discover content I want to watch. No more doom-scrolling.',
+    quote: 'I actually discover content I want to watch. No more doom-scrolling.',
   },
   {
     name: 'James Okafor',
     handle: '@jamesvideo',
     initial: 'J',
     avatarBg: 'rgba(0, 212, 200, 0.18)',
-    quote:
-      'Going live on Aficionado feels intimate. My audience actually shows up and stays.',
+    quote: 'Going live on Aficionado feels intimate. My audience actually shows up and stays.',
   },
   {
     name: 'Luna Park',
     handle: '@lunapark',
     initial: 'L',
     avatarBg: 'rgba(0, 212, 200, 0.08)',
-    quote:
-      'As a fan, I love supporting creators directly without ads getting in the way.',
+    quote: 'As a fan, I love supporting creators directly without ads getting in the way.',
   },
   {
     name: 'David Torres',
     handle: '@dtorres',
     initial: 'D',
     avatarBg: 'rgba(0, 212, 200, 0.13)',
-    quote:
-      'The analytics are incredible. I finally understand what my audience wants.',
+    quote: 'The analytics are incredible. I finally understand what my audience wants.',
   },
 ]
 

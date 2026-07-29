@@ -57,11 +57,11 @@ function Avatar({
   const initials = name
     ? name
         .split(' ')
-        .map(w => w[0])
+        .map((w) => w[0])
         .join('')
         .slice(0, 2)
         .toUpperCase()
-    : alt?.slice(0, 1).toUpperCase() ?? '?'
+    : (alt?.slice(0, 1).toUpperCase() ?? '?')
 
   return (
     <AvatarPrimitive.Root
@@ -71,14 +71,10 @@ function Avatar({
         sizeClasses[size],
 
         // Ring styles
-        ring === 'primary' && [
-          'ring-2 ring-primary ring-offset-2 ring-offset-background',
-        ],
-        ring === 'monetization' && [
-          'ring-2 ring-[#F59E0B] ring-offset-2 ring-offset-background',
-        ],
+        ring === 'primary' && ['ring-2 ring-primary ring-offset-2 ring-offset-background'],
+        ring === 'monetization' && ['ring-2 ring-[#F59E0B] ring-offset-2 ring-offset-background'],
 
-        className
+        className,
       )}
       {...props}
     >
@@ -97,7 +93,7 @@ function Avatar({
             className={cn(
               'flex size-full items-center justify-center rounded-full font-bold',
               'bg-primary/10 text-primary',
-              fallbackTextSize[size]
+              fallbackTextSize[size],
             )}
           >
             {initials}
@@ -113,7 +109,7 @@ function Avatar({
             statusDotSize[size],
             status === 'online' && 'bg-bio-emerald shadow-[0_0_6px_rgba(16,185,129,0.7)]',
             status === 'offline' && 'bg-muted-foreground',
-            status === 'away' && 'bg-yellow-500'
+            status === 'away' && 'bg-yellow-500',
           )}
           aria-label={`Status: ${status}`}
         />
@@ -139,7 +135,7 @@ function AvatarFallback({ className, ...props }: AvatarPrimitive.Fallback.Props)
       data-slot="avatar-fallback"
       className={cn(
         'flex size-full items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold',
-        className
+        className,
       )}
       {...props}
     />
@@ -150,7 +146,10 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="avatar-group"
-      className={cn('group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background', className)}
+      className={cn(
+        'group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background',
+        className,
+      )}
       {...props}
     />
   )

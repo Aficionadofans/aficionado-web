@@ -29,7 +29,8 @@ const items: ShowcaseItem[] = [
     subscribers: '14.8k',
     duration: '12:40',
     thumbnailGradient: 'from-cyan-950/80 via-[#0B1520] to-[#070709]',
-    description: 'Exclusive masterclass on leaving legacy algorithmic platforms to build direct subscriber circles.',
+    description:
+      'Exclusive masterclass on leaving legacy algorithmic platforms to build direct subscriber circles.',
   },
   {
     id: '2',
@@ -41,7 +42,8 @@ const items: ShowcaseItem[] = [
     subscribers: '22.1k',
     duration: 'LIVE',
     thumbnailGradient: 'from-teal-950/80 via-[#0D1C1B] to-[#070709]',
-    description: 'Interactive broadcast exploring finite social design, audience retention, and well-being.',
+    description:
+      'Interactive broadcast exploring finite social design, audience retention, and well-being.',
   },
   {
     id: '4',
@@ -53,19 +55,22 @@ const items: ShowcaseItem[] = [
     subscribers: '31.5k',
     duration: 'Gated',
     thumbnailGradient: 'from-blue-950/80 via-[#0C1628] to-[#070709]',
-    description: 'Subscriber-only access to unreleased project files, sample packs, and private video drops.',
+    description:
+      'Subscriber-only access to unreleased project files, sample packs, and private video drops.',
   },
 ]
 
 export function LandingShowcase() {
   const [activeTab, setActiveTab] = useState<'all' | 'video' | 'live' | 'circle'>('all')
 
-  const filteredItems = activeTab === 'all'
-    ? items
-    : items.filter((item) => item.category === activeTab)
+  const filteredItems =
+    activeTab === 'all' ? items : items.filter((item) => item.category === activeTab)
 
   return (
-    <section id="showcase" className="py-24 px-4 relative z-10 bg-[#060608]/80 border-t border-white/8">
+    <section
+      id="showcase"
+      className="py-24 px-4 relative z-10 bg-[#060608]/80 border-t border-white/8"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <SectionHeader
@@ -76,7 +81,8 @@ export function LandingShowcase() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Explore real video drops, live broadcasts, and gated inner circles powered by Aficionado.
+            Explore real video drops, live broadcasts, and gated inner circles powered by
+            Aficionado.
           </p>
 
           {/* Filter Tabs */}
@@ -130,7 +136,9 @@ export function LandingShowcase() {
             <RevealSection key={item.id} delay={index * 80}>
               <div className="liquid-glass-card glass-shimmer-sweep p-5 flex flex-col justify-between gap-6 group">
                 {/* Media card thumbnail frame */}
-                <div className={`relative aspect-video rounded-xl bg-gradient-to-br ${item.thumbnailGradient} border border-white/10 overflow-hidden flex flex-col justify-between p-4 group-hover:border-primary/40 transition-all duration-300`}>
+                <div
+                  className={`relative aspect-video rounded-xl bg-gradient-to-br ${item.thumbnailGradient} border border-white/10 overflow-hidden flex flex-col justify-between p-4 group-hover:border-primary/40 transition-all duration-300`}
+                >
                   {/* Top tags */}
                   <div className="flex items-center justify-between z-10">
                     <span className="clipcut-pill px-3 py-1 text-[10px]">
@@ -160,11 +168,15 @@ export function LandingShowcase() {
                         {item.avatarText}
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-foreground leading-none">{item.creator}</h4>
+                        <h4 className="text-sm font-bold text-foreground leading-none">
+                          {item.creator}
+                        </h4>
                         <span className="text-[11px] text-muted-foreground">{item.role}</span>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-primary font-bold">{item.subscribers} fans</span>
+                    <span className="text-xs font-mono text-primary font-bold">
+                      {item.subscribers} fans
+                    </span>
                   </div>
 
                   <h3

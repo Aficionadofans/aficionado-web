@@ -59,10 +59,7 @@ const buttonVariants = cva(
           'bg-secondary text-secondary-foreground',
           'hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]',
         ],
-        ghost: [
-          'hover:bg-muted hover:text-foreground',
-          'aria-expanded:bg-muted',
-        ],
+        ghost: ['hover:bg-muted hover:text-foreground', 'aria-expanded:bg-muted'],
         'ghost-primary': [
           'text-primary hover:bg-[rgba(0,212,200,0.08)] hover:border-[rgba(0,212,200,0.25)]',
         ],
@@ -80,13 +77,13 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-9 px-4 text-sm rounded-xl',
-        xs: 'h-6 px-2 text-xs rounded-lg gap-1 [&_svg:not([class*=\'size-\'])]:size-3',
-        sm: 'h-7 px-3 text-xs rounded-lg [&_svg:not([class*=\'size-\'])]:size-3.5',
+        xs: "h-6 px-2 text-xs rounded-lg gap-1 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-7 px-3 text-xs rounded-lg [&_svg:not([class*='size-'])]:size-3.5",
         lg: 'h-11 px-6 text-sm rounded-xl',
         xl: 'h-13 px-8 text-base rounded-2xl',
         icon: 'size-9 rounded-xl',
-        'icon-xs': 'size-6 rounded-md [&_svg:not([class*=\'size-\'])]:size-3',
-        'icon-sm': 'size-7 rounded-lg [&_svg:not([class*=\'size-\'])]:size-3.5',
+        'icon-xs': "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
+        'icon-sm': "size-7 rounded-lg [&_svg:not([class*='size-'])]:size-3.5",
         'icon-lg': 'size-11 rounded-xl',
       },
       rounded: {
@@ -101,7 +98,7 @@ const buttonVariants = cva(
       size: 'default',
       rounded: 'default',
     },
-  }
+  },
 )
 
 interface ButtonProps extends ButtonPrimitive.Props, VariantProps<typeof buttonVariants> {
@@ -134,8 +131,19 @@ function Button({
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            />
           </svg>
           {children}
         </>

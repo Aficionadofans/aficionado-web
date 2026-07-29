@@ -18,7 +18,13 @@ interface Props {
   source?: string
 }
 
-export function CreatorProfileClient({ profile, subscriberCount, contentItems, circleId, source }: Props) {
+export function CreatorProfileClient({
+  profile,
+  subscriberCount,
+  contentItems,
+  circleId,
+  source,
+}: Props) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'feed' | 'circle'>('feed')
   const [scrolled, setScrolled] = useState(false)
@@ -31,29 +37,31 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const formattedCount = subscriberCount >= 1000
-    ? `${(subscriberCount / 1000).toFixed(1)}K`
-    : subscriberCount.toString()
+  const formattedCount =
+    subscriberCount >= 1000 ? `${(subscriberCount / 1000).toFixed(1)}K` : subscriberCount.toString()
 
   return (
     <div className="min-h-[100dvh] bg-background text-foreground flex flex-col relative overflow-hidden pb-16 md:pb-6">
-
       {/* Header — shrinks on scroll */}
       <header
         className={cn(
           'sticky top-0 z-50 liquid-glass rounded-none border-t-0 border-l-0 border-r-0 border-b flex items-center transition-all duration-300 ease-out',
-          scrolled ? 'px-3 py-2 gap-2 border-white/10 shadow-lg bg-background/90' : 'px-4 py-4 gap-4 border-transparent bg-background/60'
+          scrolled
+            ? 'px-3 py-2 gap-2 border-white/10 shadow-lg bg-background/90'
+            : 'px-4 py-4 gap-4 border-transparent bg-background/60',
         )}
       >
         <button
           onClick={() => router.back()}
           className={cn(
             'rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-            scrolled ? 'w-8 h-8' : 'w-10 h-10'
+            scrolled ? 'w-8 h-8' : 'w-10 h-10',
           )}
           aria-label="Go back"
         >
-          <ArrowLeft className={cn('transition-all duration-300', scrolled ? 'w-4 h-4' : 'w-5 h-5')} />
+          <ArrowLeft
+            className={cn('transition-all duration-300', scrolled ? 'w-4 h-4' : 'w-5 h-5')}
+          />
         </button>
         <div className="flex items-center gap-3 flex-1 min-w-0">
           {profile.avatar_url ? (
@@ -65,25 +73,29 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
                 height={scrolled ? 28 : 40}
                 className={cn(
                   'rounded-full object-cover flex-shrink-0 transition-all duration-300 border-2 border-primary/40 shadow-[0_0_15px_rgba(245,158,11,0.3)]',
-                  scrolled ? 'w-7 h-7' : 'w-10 h-10'
+                  scrolled ? 'w-7 h-7' : 'w-10 h-10',
                 )}
               />
             </div>
           ) : null}
           <div className="min-w-0">
-            <h1 className={cn(
-              'font-black truncate transition-all duration-300 text-off-white flex items-center gap-1.5',
-              scrolled ? 'text-sm' : 'text-lg tracking-tight'
-            )}>
+            <h1
+              className={cn(
+                'font-black truncate transition-all duration-300 text-off-white flex items-center gap-1.5',
+                scrolled ? 'text-sm' : 'text-lg tracking-tight',
+              )}
+            >
               <span>@{profile.username}</span>
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-bold text-primary uppercase tracking-widest shadow-[0_0_10px_rgba(245,158,11,0.2)]">
                 Verified
               </span>
             </h1>
-            <p className={cn(
-              'text-muted-foreground transition-all duration-300 font-semibold',
-              scrolled ? 'text-[10px] leading-tight' : 'text-xs'
-            )}>
+            <p
+              className={cn(
+                'text-muted-foreground transition-all duration-300 font-semibold',
+                scrolled ? 'text-[10px] leading-tight' : 'text-xs',
+              )}
+            >
               {formattedCount} Subscriber{subscriberCount !== 1 ? 's' : ''}
             </p>
           </div>
@@ -94,7 +106,8 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
       {source && (
         <div className="bg-primary/10 border-b border-primary/20 py-2.5 px-4 text-center animate-in slide-in-from-top-4 duration-500">
           <p className="text-sm text-primary font-bold tracking-tight">
-            Welcome, {source.charAt(0).toUpperCase() + source.slice(1)} supporters! @{profile.username} has a special Inner Circle space for you here.
+            Welcome, {source.charAt(0).toUpperCase() + source.slice(1)} supporters! @
+            {profile.username} has a special Inner Circle space for you here.
           </p>
         </div>
       )}
@@ -147,8 +160,12 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               color: '#080808',
               boxShadow: '0 0 16px rgba(245,158,11,0.3)',
             }}
-            onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 24px rgba(245,158,11,0.5)')}
-            onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 16px rgba(245,158,11,0.3)')}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = '0 0 24px rgba(245,158,11,0.5)')
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.boxShadow = '0 0 16px rgba(245,158,11,0.3)')
+            }
           >
             Tip ✦
           </button>
@@ -173,12 +190,18 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
 
       {/* Segmented Pill Tabs */}
       <div className="flex justify-center p-4">
-        <div className="liquid-glass rounded-full p-1 flex relative w-full max-w-sm shadow-sm border border-white/10" role="tablist" aria-label="Creator Profile Views">
+        <div
+          className="liquid-glass rounded-full p-1 flex relative w-full max-w-sm shadow-sm border border-white/10"
+          role="tablist"
+          aria-label="Creator Profile Views"
+        >
           {/* Active indicator pill */}
           <div
             className={cn(
-              "absolute inset-y-1 rounded-full bg-primary/20 border border-primary/30 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(245,158,11,0.25)]",
-              activeTab === 'feed' ? "left-1 w-[calc(50%-0.25rem)]" : "left-[50%] w-[calc(50%-0.25rem)]"
+              'absolute inset-y-1 rounded-full bg-primary/20 border border-primary/30 transition-all duration-300 ease-out shadow-[0_0_15px_rgba(245,158,11,0.25)]',
+              activeTab === 'feed'
+                ? 'left-1 w-[calc(50%-0.25rem)]'
+                : 'left-[50%] w-[calc(50%-0.25rem)]',
             )}
             aria-hidden="true"
           />
@@ -188,7 +211,7 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
             onClick={() => setActiveTab('feed')}
             className={cn(
               'relative flex-1 py-2 px-4 text-xs sm:text-sm font-semibold tracking-wide transition-colors z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full',
-              activeTab === 'feed' ? 'text-primary' : 'text-white/60 hover:text-white'
+              activeTab === 'feed' ? 'text-primary' : 'text-white/60 hover:text-white',
             )}
           >
             <div className="flex items-center justify-center gap-2">
@@ -201,7 +224,7 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
             onClick={() => setActiveTab('circle')}
             className={cn(
               'relative flex-1 py-2 px-4 text-xs sm:text-sm font-semibold tracking-wide transition-colors z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-full',
-              activeTab === 'circle' ? 'text-amber-400' : 'text-amber-500/60 hover:text-amber-400'
+              activeTab === 'circle' ? 'text-amber-400' : 'text-amber-500/60 hover:text-amber-400',
             )}
           >
             <div className="flex items-center justify-center gap-2">
@@ -222,7 +245,11 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
               <p className="text-sm">No public content available yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-3 gap-0.5 p-0.5" role="region" aria-label="Public Video Grid">
+            <div
+              className="grid grid-cols-3 gap-0.5 p-0.5"
+              role="region"
+              aria-label="Public Video Grid"
+            >
               {contentItems.map((item, index) => (
                 <Link
                   key={item.id}
@@ -273,4 +300,3 @@ export function CreatorProfileClient({ profile, subscriberCount, contentItems, c
     </div>
   )
 }
-

@@ -27,10 +27,7 @@ export function LandingNav() {
         }`}
       >
         {/* Brand Logo (Ultra Appealing Wordless 3D Crystal Emblem) */}
-        <Link
-          href="/"
-          className="flex items-center focus-visible:outline-none rounded-full group"
-        >
+        <Link href="/" className="flex items-center focus-visible:outline-none rounded-full group">
           <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#090401]/90 border border-white/20 flex items-center justify-center shadow-[0_0_24px_rgba(232,80,26,0.5)] group-hover:scale-110 group-hover:border-[#E8501A] group-hover:shadow-[0_0_30px_rgba(0,212,200,0.6)] transition-all duration-500 ease-out">
             <img
               src="/nav-logo.png"
@@ -39,10 +36,6 @@ export function LandingNav() {
             />
           </div>
         </Link>
-
-
-
-
 
         {/* Desktop Links */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Landing Navigation">
@@ -76,7 +69,6 @@ export function LandingNav() {
             <span className="text-xs font-bold font-mono">↗</span>
           </Link>
         </div>
-
 
         {/* Mobile Toggle */}
         <button
@@ -134,4 +126,3 @@ export function LandingNav() {
     </header>
   )
 }
-

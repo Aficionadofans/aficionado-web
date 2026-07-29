@@ -1,18 +1,12 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
 export interface Database {
   public: {
     Enums: {
-      user_type: "fan" | "creator" | "admin"
-      content_visibility: "public" | "subscriber"
-      moderation_status: "pending" | "approved" | "rejected"
-      subscription_status: "active" | "canceled" | "past_due"
+      user_type: 'fan' | 'creator' | 'admin'
+      content_visibility: 'public' | 'subscriber'
+      moderation_status: 'pending' | 'approved' | 'rejected'
+      subscription_status: 'active' | 'canceled' | 'past_due'
     }
     Tables: {
       profiles: {
@@ -25,7 +19,7 @@ export interface Database {
           goal: string | null
           strictness: string | null
           ai_tone: string | null
-          user_type: "fan" | "creator" | "admin"
+          user_type: 'fan' | 'creator' | 'admin'
           platform_fee_percent: number | null
           waitlist_goal_reached: boolean | null
         }
@@ -76,8 +70,8 @@ export interface Database {
           description: string | null
           mux_playback_id: string | null
           mux_asset_id: string | null
-          visibility: "public" | "subscriber"
-          moderation_status: "pending" | "approved" | "rejected"
+          visibility: 'public' | 'subscriber'
+          moderation_status: 'pending' | 'approved' | 'rejected'
           status: string
         }
       }
@@ -87,7 +81,7 @@ export interface Database {
           created_at: string
           creator_id: string
           subscriber_id: string
-          status: "active" | "canceled" | "past_due"
+          status: 'active' | 'canceled' | 'past_due'
           current_period_end: string | null
           stripe_subscription_id: string | null
         }
@@ -97,7 +91,7 @@ export interface Database {
           id: string
           created_at: string
           user_id: string
-          status: "pending" | "approved" | "rejected"
+          status: 'pending' | 'approved' | 'rejected'
           portfolio_url: string | null
           social_links: Json | null
         }

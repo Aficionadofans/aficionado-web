@@ -41,26 +41,67 @@ function getCircleIcon(name: string) {
   if (n.includes('dive') || n.includes('diver') || n.includes('scuba') || n.includes('ocean')) {
     return { icon: Waves, color: 'text-sky-400', bg: 'bg-sky-500/20', border: 'border-sky-500/40' }
   }
-  if (n.includes('speak') || n.includes('speaker') || n.includes('orator') || n.includes('keynote') || n.includes('stage')) {
-    return { icon: Mic, color: 'text-orange-400', bg: 'bg-orange-500/20', border: 'border-orange-500/40' }
+  if (
+    n.includes('speak') ||
+    n.includes('speaker') ||
+    n.includes('orator') ||
+    n.includes('keynote') ||
+    n.includes('stage')
+  ) {
+    return {
+      icon: Mic,
+      color: 'text-orange-400',
+      bg: 'bg-orange-500/20',
+      border: 'border-orange-500/40',
+    }
   }
   if (n.includes('sound') || n.includes('music') || n.includes('audio')) {
-    return { icon: Music, color: 'text-purple-400', bg: 'bg-purple-500/20', border: 'border-purple-500/40' }
+    return {
+      icon: Music,
+      color: 'text-purple-400',
+      bg: 'bg-purple-500/20',
+      border: 'border-purple-500/40',
+    }
   }
   if (n.includes('film') || n.includes('cinema') || n.includes('video') || n.includes('motion')) {
-    return { icon: Video, color: 'text-amber-400', bg: 'bg-amber-500/20', border: 'border-amber-500/40' }
+    return {
+      icon: Video,
+      color: 'text-amber-400',
+      bg: 'bg-amber-500/20',
+      border: 'border-amber-500/40',
+    }
   }
   if (n.includes('tech') || n.includes('ai') || n.includes('code') || n.includes('zenith')) {
     return { icon: Cpu, color: 'text-cyan-400', bg: 'bg-cyan-500/20', border: 'border-cyan-500/40' }
   }
   if (n.includes('parent') || n.includes('family') || n.includes('nursery') || n.includes('baby')) {
-    return { icon: Baby, color: 'text-pink-400', bg: 'bg-pink-500/20', border: 'border-pink-500/40' }
+    return {
+      icon: Baby,
+      color: 'text-pink-400',
+      bg: 'bg-pink-500/20',
+      border: 'border-pink-500/40',
+    }
   }
   if (n.includes('culinary') || n.includes('chef') || n.includes('food') || n.includes('bake')) {
-    return { icon: Utensils, color: 'text-emerald-400', bg: 'bg-emerald-500/20', border: 'border-emerald-500/40' }
+    return {
+      icon: Utensils,
+      color: 'text-emerald-400',
+      bg: 'bg-emerald-500/20',
+      border: 'border-emerald-500/40',
+    }
   }
-  if (n.includes('wellness') || n.includes('mind') || n.includes('solace') || n.includes('health')) {
-    return { icon: Smile, color: 'text-indigo-400', bg: 'bg-indigo-500/20', border: 'border-indigo-500/40' }
+  if (
+    n.includes('wellness') ||
+    n.includes('mind') ||
+    n.includes('solace') ||
+    n.includes('health')
+  ) {
+    return {
+      icon: Smile,
+      color: 'text-indigo-400',
+      bg: 'bg-indigo-500/20',
+      border: 'border-indigo-500/40',
+    }
   }
   return { icon: Hash, color: 'text-primary', bg: 'bg-primary/20', border: 'border-primary/40' }
 }
@@ -94,7 +135,7 @@ export default function CommunitiesHub() {
               ...circle,
               member_count: count ?? 1,
             }
-          })
+          }),
         )
         setCircles(circlesWithCounts)
       }
@@ -113,7 +154,7 @@ export default function CommunitiesHub() {
   const filteredCircles = circles.filter(
     (c) =>
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase()))
+      (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase())),
   )
 
   return (
@@ -184,7 +225,8 @@ export default function CommunitiesHub() {
                   </span>
                 </div>
                 <p className="text-muted-foreground text-xs sm:text-sm mt-1 max-w-lg leading-relaxed">
-                  Hyper-local living communities for neighbors. Strictly segregated and verified by your Zip Code.
+                  Hyper-local living communities for neighbors. Strictly segregated and verified by
+                  your Zip Code.
                 </p>
               </div>
             </div>
@@ -252,7 +294,8 @@ export default function CommunitiesHub() {
                           {circle.name}
                         </h3>
                         <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 mb-6">
-                          {circle.description || 'A vibrant community circle for like-minded aficionados.'}
+                          {circle.description ||
+                            'A vibrant community circle for like-minded aficionados.'}
                         </p>
                       </div>
 
