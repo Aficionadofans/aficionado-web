@@ -35,11 +35,11 @@ export default async function HomePage() {
   const creatorIds = (subs || []).map((s) => s.creator_id)
   const feedUserIds = [user.id, ...creatorIds]
 
-  // 2. Fetch approved content for these users
+  // 2. Fetch approved content for these users (and the user's own content regardless of status)
   const { data: contentData } = await dbClient
     .from('content')
     .select('id, mux_playback_id, description, moderation_status, profiles!inner(username)')
-    .eq('moderation_status', 'approved')
+    .or(`moderation_status.eq.approved,author_id.eq.${user.id}`)
     .in('author_id', feedUserIds)
     .not('mux_playback_id', 'is', null)
     .order('created_at', { ascending: false })

@@ -88,6 +88,17 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                   {/* Bottom gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
 
+                  {/* Moderation Status Badge - top right */}
+                  {video.moderationStatus && video.moderationStatus !== 'approved' && (
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white backdrop-blur-sm ${
+                        video.moderationStatus === 'pending' ? 'bg-amber-500/80 border border-amber-500/30' : 'bg-red-500/80 border border-red-500/30'
+                      }`}>
+                        {video.moderationStatus === 'pending' ? 'Pending Moderation' : 'Rejected'}
+                      </span>
+                    </div>
+                  )}
+
                   {/* Creator username — bottom-left overlay */}
                   <div className="absolute bottom-3 left-3 z-10">
                     <span
