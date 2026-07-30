@@ -4,6 +4,8 @@ import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
 import { createClient } from '@/shared/lib/supabase/server'
 import type { Content } from '@/shared/types/database'
 
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   const supabase = await createClient()
   const {
@@ -35,13 +37,36 @@ export default async function HomePage() {
   const creatorIds = (subs || []).map((s) => s.creator_id)
   const feedUserIds = [user.id, ...creatorIds]
 
-  // 2. Fetch approved content for these users (and the user's own content regardless of status)
-  const { data: contentData } = await dbClient
+  // 2. Fetch user's own content regardless of status
+  const { data: ownContent, error: ownErr } = await dbClient
     .from('content')
-    .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username)')
-    .or(`author_id.eq.${user.id},and(author_id.in.(${feedUserIds.join(',')}),moderation_status.eq.approved,mux_playback_id.not.is.null)`)
+    .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at')
+    .eq('author_id', user.id)
     .order('created_at', { ascending: false })
     .limit(20)
+
+  if (ownErr) console.error("Error fetching own content:", ownErr)
+
+  // 3. Fetch approved content from followed creators
+  let feedContent: any[] = []
+  if (creatorIds.length > 0) {
+    const { data: othersContent, error: othersErr } = await dbClient
+      .from('content')
+      .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at')
+      .in('author_id', creatorIds)
+      .eq('moderation_status', 'approved')
+      .not('mux_playback_id', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(20)
+      
+    if (othersErr) console.error("Error fetching others content:", othersErr)
+    if (othersContent) feedContent = othersContent
+  }
+
+  // Merge and sort
+  const contentData = [...(ownContent || []), ...feedContent]
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, 20)
 
   const videos: Video[] = (contentData ?? []).map((c) => {
     const profile = Array.isArray(c.profiles) ? c.profiles[0] : c.profiles
