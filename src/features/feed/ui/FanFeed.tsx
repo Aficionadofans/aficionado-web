@@ -69,7 +69,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
           </div>
         ) : (
           videos.map((video, index) => {
-            const thumbnailUrl = video.playbackId ? `https://image.mux.com/${video.playbackId}/thumbnail.jpg?width=400` : null
+            const thumbnailUrl = video.playbackId ? `/api/mux/thumbnail?playbackId=${video.playbackId}&width=400` : null
             const card = (
               <Link
                 href={`/content/${video.id}`}
