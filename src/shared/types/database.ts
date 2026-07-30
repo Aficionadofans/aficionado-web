@@ -10,7 +10,7 @@
 // Discriminated union literals
 // ──────────────────────────────────────────
 
-import { Database } from './supabase'
+import type { Database } from './supabase'
 
 export type UserType = 'fan' | 'creator' | 'admin'
 export type ContentVisibility = 'public' | 'subscriber'

@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { InnerCircleView } from '@/features/circles/ui/InnerCircleView'
 import { ArrowLeft, Grip, Lock, Play } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { InnerCircleView } from '@/features/circles/ui/InnerCircleView'
+import { cn } from '@/lib/utils'
+import type { Content, Profile } from '@/shared/types/database'
 import { StatCounter } from '@/shared/ui/core'
-import type { Profile, Content } from '@/shared/types/database'
 
 interface Props {
   profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'>

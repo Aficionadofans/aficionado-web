@@ -1,9 +1,9 @@
 'use client'
 
+import { Play, Sparkles, X } from 'lucide-react'
 import React, { useState } from 'react'
-import { X, Play, Sparkles } from 'lucide-react'
-import { Avatar } from '@/shared/ui/core'
 import type { Post, Profile } from '@/shared/types/database'
+import { Avatar } from '@/shared/ui/core'
 
 export type Drop = Pick<Post, 'id'> & {
   creator: Profile['username']

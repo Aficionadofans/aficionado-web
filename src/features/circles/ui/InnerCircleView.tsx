@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { Lock, Star, Send, DollarSign, User } from 'lucide-react'
-import { TipModal } from '@/features/monetization/ui/TipModal'
-import { createClient } from '@/shared/lib/supabase/client'
+import { DollarSign, Lock, Send, Star, User } from 'lucide-react'
 import Image from 'next/image'
+import React, { useEffect, useRef, useState } from 'react'
+import { TipModal } from '@/features/monetization/ui/TipModal'
 import { cn } from '@/lib/utils'
-import type { Profile, ChatMessage } from '@/shared/types/database'
+import { createClient } from '@/shared/lib/supabase/client'
+import type { ChatMessage, Profile } from '@/shared/types/database'
 
 export function InnerCircleView({ username, circleId }: { username: string; circleId: string }) {
   const [isSubscribed, setIsSubscribed] = useState(false)
