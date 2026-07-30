@@ -41,9 +41,9 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
               <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
                 <div className="w-full h-full rounded-full overflow-hidden ring-2 ring-primary/40 shadow-[0_0_12px_rgba(0,212,200,0.35)]">
                   <Avatar
-                    src={drop.avatar}
-                    alt={drop.creator}
-                    name={drop.creator}
+                    src={drop.avatar || undefined}
+                    alt={drop.creator || 'Creator'}
+                    name={drop.creator || 'Creator'}
                     size="lg"
                     className="w-full h-full rounded-full"
                   />
@@ -83,9 +83,9 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
           <header className="flex items-center justify-between px-5 py-3">
             <div className="flex items-center gap-3">
               <Avatar
-                src={activeDrop.avatar}
-                alt={activeDrop.creator}
-                name={activeDrop.creator}
+                src={activeDrop.avatar || undefined}
+                alt={activeDrop.creator || 'Creator'}
+                name={activeDrop.creator || 'Creator'}
                 size="md"
                 ring="primary"
               />

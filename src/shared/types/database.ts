@@ -12,10 +12,10 @@
 
 import { Database } from './supabase'
 
-export type UserType = Database['public']['Enums']['user_type']
-export type ContentVisibility = Database['public']['Enums']['content_visibility']
-export type ModerationStatus = Database['public']['Enums']['moderation_status']
-export type SubscriptionStatus = Database['public']['Enums']['subscription_status']
+export type UserType = 'fan' | 'creator' | 'admin'
+export type ContentVisibility = 'public' | 'subscriber'
+export type ModerationStatus = 'pending' | 'approved' | 'rejected'
+export type SubscriptionStatus = 'active' | 'canceled' | 'past_due'
 
 export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Content = Database['public']['Tables']['content']['Row']

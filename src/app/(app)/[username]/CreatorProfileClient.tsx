@@ -67,8 +67,8 @@ export function CreatorProfileClient({
           {profile.avatar_url ? (
             <div className="relative">
               <Image
-                src={profile.avatar_url}
-                alt={profile.username}
+                src={profile.avatar_url || ''}
+                alt={profile.username || 'Creator'}
                 width={scrolled ? 28 : 40}
                 height={scrolled ? 28 : 40}
                 className={cn(
@@ -126,8 +126,8 @@ export function CreatorProfileClient({
         {profile.avatar_url ? (
           <div className="relative">
             <Image
-              src={profile.avatar_url}
-              alt={profile.username}
+              src={profile.avatar_url || ''}
+              alt={profile.username || 'Creator'}
               width={96}
               height={96}
               className="w-24 h-24 rounded-full object-cover ring-2 ring-primary/60 glow-teal"
@@ -287,7 +287,7 @@ export function CreatorProfileClient({
             </div>
           )
         ) : circleId ? (
-          <InnerCircleView username={profile.username} circleId={circleId} />
+          <InnerCircleView username={profile.username || 'Creator'} circleId={circleId} />
         ) : (
           <div className="flex flex-col items-center justify-center h-64 text-muted-foreground animate-fade-in-up">
             <div className="w-16 h-16 rounded-2xl bg-amber-500/5 border border-amber-500/10 flex items-center justify-center mb-4">

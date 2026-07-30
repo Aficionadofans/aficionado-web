@@ -219,8 +219,8 @@ export function InnerCircleView({ username, circleId }: { username: string; circ
                   <div className="flex-shrink-0 mt-1">
                     {author?.avatar_url ? (
                       <Image
-                        src={author.avatar_url}
-                        alt={author.username}
+                        src={author.avatar_url || ''}
+                        alt={author.username || 'User'}
                         width={36}
                         height={36}
                         className="w-8 h-8 rounded-full object-cover border border-white/10 shadow-sm"
