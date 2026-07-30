@@ -38,10 +38,10 @@ export default async function HomePage() {
   // 2. Fetch approved content for these users (and the user's own content regardless of status)
   const { data: contentData } = await dbClient
     .from('content')
-    .select('id, mux_playback_id, description, moderation_status, profiles!inner(username)')
+    .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username)')
     .or(`moderation_status.eq.approved,author_id.eq.${user.id}`)
     .in('author_id', feedUserIds)
-    .not('mux_playback_id', 'is', null)
+    .or(`mux_playback_id.not.is.null,author_id.eq.${user.id}`)
     .order('created_at', { ascending: false })
     .limit(20)
 
@@ -51,11 +51,12 @@ export default async function HomePage() {
       id: c.id as string,
       creator: (profile as { username?: string })?.username ?? 'unknown',
       description: (c.description as string) ?? '',
-      playbackId: (c.mux_playback_id as string) ?? '',
+      playbackId: c.mux_playback_id as string | null,
       likes: '0',
       comments: '0',
       isSubscribed: true, // They are subscribed or it's their own
       moderationStatus: (c.moderation_status as Content['moderation_status']) ?? 'approved',
+      status: c.status as Content['status'],
     }
   })
 

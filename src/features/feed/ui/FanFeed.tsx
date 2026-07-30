@@ -11,12 +11,13 @@ import type { Content, Profile } from '@/shared/types/database'
 
 export type Video = Pick<Content, 'id' | 'description'> & {
   creator: Profile['username']
-  playbackId: string
+  playbackId?: string | null
   likes: string
   comments: string
   isSubscribed: boolean
   unlocksAt?: string
   moderationStatus?: Content['moderation_status']
+  status?: Content['status']
 }
 
 export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
@@ -68,7 +69,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
           </div>
         ) : (
           videos.map((video, index) => {
-            const thumbnailUrl = `https://image.mux.com/${video.playbackId}/thumbnail.jpg?width=400`
+            const thumbnailUrl = video.playbackId ? `https://image.mux.com/${video.playbackId}/thumbnail.jpg?width=400` : null
             const card = (
               <Link
                 href={`/content/${video.id}`}
@@ -76,17 +77,36 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-video w-full overflow-hidden bg-[#100F17]">
-                  <Image
-                    src={thumbnailUrl}
-                    alt={`${video.creator} — ${video.description}`}
-                    fill
-                    sizes="(max-width: 672px) 100vw, 672px"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    unoptimized
-                  />
+                  {thumbnailUrl ? (
+                    <Image
+                      src={thumbnailUrl}
+                      alt={`${video.creator} — ${video.description}`}
+                      fill
+                      sizes="(max-width: 672px) 100vw, 672px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-surface/30">
+                      <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2">
+                        <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                      </div>
+                      <p className="text-xs text-muted-foreground font-medium animate-pulse">Processing media...</p>
+                    </div>
+                  )}
 
                   {/* Bottom gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+
+                  {/* Processing Badge - top left */}
+                  {video.status === 'processing' && (
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white backdrop-blur-sm bg-blue-500/80 border border-blue-500/30 flex items-center gap-1">
+                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                        Processing
+                      </span>
+                    </div>
+                  )}
 
                   {/* Moderation Status Badge - top right */}
                   {video.moderationStatus && video.moderationStatus !== 'approved' && (
