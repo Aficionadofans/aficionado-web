@@ -1,7 +1,7 @@
-import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
-import { type Drop } from '@/features/feed/ui/DropZoneCarousel'
-import { createClient } from '@/shared/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import type { Drop } from '@/features/feed/ui/DropZoneCarousel'
+import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
+import { createClient } from '@/shared/lib/supabase/server'
 import type { Content } from '@/shared/types/database'
 
 export default async function HomePage() {
@@ -62,7 +62,7 @@ export default async function HomePage() {
   // 3. Fetch recent posts (drops) for these users
   const { data: postsData } = await dbClient
     .from('posts')
-    .select('id, content, created_at, profiles!inner(username, avatar_url)')
+    .select('id, content, media_url, created_at, profiles!inner(username, avatar_url)')
     .in('author_id', feedUserIds)
     .order('created_at', { ascending: false })
     .limit(10)
@@ -77,6 +77,7 @@ export default async function HomePage() {
       avatar: avatarUrl,
       hasUnread: false,
       content: (p.content as string) ?? '',
+      mediaUrl: (p.media_url as string) ?? undefined,
     }
   })
 

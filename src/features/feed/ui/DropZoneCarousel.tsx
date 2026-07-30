@@ -1,6 +1,7 @@
 'use client'
 
 import { Play, Sparkles, X } from 'lucide-react'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import type { Post, Profile } from '@/shared/types/database'
 import { Avatar } from '@/shared/ui/core'
@@ -10,6 +11,7 @@ export type Drop = Pick<Post, 'id'> & {
   avatar: NonNullable<Profile['avatar_url']>
   hasUnread: boolean
   content: string
+  mediaUrl?: string
 }
 
 export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
@@ -107,29 +109,59 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
           </header>
 
           <div className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-6">
-            {/* Play button */}
-            <div
-              className="w-20 h-20 rounded-full flex items-center justify-center animate-float"
-              style={{
-                background: 'rgba(0,212,200,0.1)',
-                border: '1px solid rgba(0,212,200,0.35)',
-                boxShadow: '0 0 40px rgba(0,212,200,0.2)',
-              }}
-            >
-              <Play
-                className="w-9 h-9 text-primary ml-1"
-                style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))' }}
-              />
-            </div>
-            <div>
-              <h2
-                className="text-2xl font-bold text-foreground mb-2"
-                style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
-              >
-                {activeDrop.content}
-              </h2>
-              <p className="text-sm text-muted-foreground">Tap to view this exclusive drop</p>
-            </div>
+            {activeDrop.mediaUrl ? (
+              <Link href={activeDrop.mediaUrl} className="flex flex-col items-center gap-6">
+                {/* Play button */}
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center animate-float"
+                  style={{
+                    background: 'rgba(0,212,200,0.1)',
+                    border: '1px solid rgba(0,212,200,0.35)',
+                    boxShadow: '0 0 40px rgba(0,212,200,0.2)',
+                  }}
+                >
+                  <Play
+                    className="w-9 h-9 text-primary ml-1"
+                    style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))' }}
+                  />
+                </div>
+                <div>
+                  <h2
+                    className="text-2xl font-bold text-foreground mb-2"
+                    style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
+                  >
+                    {activeDrop.content}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">Tap to view this exclusive drop</p>
+                </div>
+              </Link>
+            ) : (
+              <div className="flex flex-col items-center gap-6">
+                {/* Play button */}
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center animate-float"
+                  style={{
+                    background: 'rgba(0,212,200,0.1)',
+                    border: '1px solid rgba(0,212,200,0.35)',
+                    boxShadow: '0 0 40px rgba(0,212,200,0.2)',
+                  }}
+                >
+                  <Play
+                    className="w-9 h-9 text-primary ml-1"
+                    style={{ filter: 'drop-shadow(0 0 8px rgba(0,212,200,0.8))' }}
+                  />
+                </div>
+                <div>
+                  <h2
+                    className="text-2xl font-bold text-foreground mb-2"
+                    style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.025em' }}
+                  >
+                    {activeDrop.content}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">Tap to view this exclusive drop</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
