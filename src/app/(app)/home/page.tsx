@@ -39,9 +39,7 @@ export default async function HomePage() {
   const { data: contentData } = await dbClient
     .from('content')
     .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username)')
-    .or(`moderation_status.eq.approved,author_id.eq.${user.id}`)
-    .in('author_id', feedUserIds)
-    .or(`mux_playback_id.not.is.null,author_id.eq.${user.id}`)
+    .or(`author_id.eq.${user.id},and(author_id.in.(${feedUserIds.join(',')}),moderation_status.eq.approved,mux_playback_id.not.is.null)`)
     .order('created_at', { ascending: false })
     .limit(20)
 
