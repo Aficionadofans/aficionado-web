@@ -13,7 +13,10 @@ export async function createPost(formData: FormData) {
   if (!user) throw new Error('Not authenticated')
 
   const content = formData.get('content') as string
-  if (!content || content.trim().length === 0) {
+  const contentId = formData.get('content_id') as string | null
+
+  // At least text or media must be provided
+  if ((!content || content.trim().length === 0) && !contentId) {
     throw new Error('Post content cannot be empty')
   }
 
@@ -22,9 +25,24 @@ export async function createPost(formData: FormData) {
     await supabase.from('profiles').update({ ai_tone: aiTone }).eq('id', user.id)
   }
 
+  // If a content_id was provided, look up the mux_playback_id to use as media_url
+  let mediaUrl: string | null = null
+  if (contentId) {
+    const { data: contentRecord } = await supabase
+      .from('content')
+      .select('mux_playback_id')
+      .eq('id', contentId)
+      .single()
+
+    if (contentRecord?.mux_playback_id) {
+      mediaUrl = `mux:${contentRecord.mux_playback_id}`
+    }
+  }
+
   const { error } = await supabase.from('posts').insert({
     author_id: user.id,
-    content: content.trim(),
+    content: content?.trim() || '',
+    ...(mediaUrl && { media_url: mediaUrl }),
   })
 
   if (error) {
