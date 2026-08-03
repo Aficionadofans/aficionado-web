@@ -11,18 +11,31 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const mux = new Mux({
-      tokenId: process.env.MUX_TOKEN_ID,
-      tokenSecret: process.env.MUX_TOKEN_SECRET,
-      jwtSigningKey: process.env.MUX_SIGNING_KEY,
-      jwtPrivateKey: process.env.MUX_PRIVATE_KEY,
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      throw new Error('Missing Supabase credentials')
+    }
+
+    const res = await fetch(`${supabaseUrl}/functions/v1/api/mux/sign-thumbnail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${supabaseAnonKey}`,
+      },
+      body: JSON.stringify({ playbackId, width }),
     })
 
-    const token = await mux.jwt.signPlaybackId(playbackId, {
-      type: 'thumbnail',
-      expiration: '1h',
-      params: { width },
-    })
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(`Edge function returned ${res.status}: ${text}`)
+    }
+
+    const { token, error } = await res.json()
+    if (error || !token) {
+      throw new Error(error || 'No token returned')
+    }
 
     const thumbnailUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg?token=${token}`
 
