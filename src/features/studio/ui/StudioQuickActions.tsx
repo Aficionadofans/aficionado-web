@@ -1,7 +1,6 @@
 'use client'
 
-import React from 'react'
-import { Upload, Video, Lock, Share2 } from 'lucide-react'
+import { Lock, Share2, Upload, Video } from 'lucide-react'
 import Link from 'next/link'
 
 interface StudioQuickActionsProps {
@@ -37,14 +36,17 @@ export function StudioQuickActions({
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-      <button className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-primary/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+      <Link
+        href="/create?tab=video"
+        className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-primary/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+      >
         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-all shadow-[0_0_20px_rgba(0,212,200,0.2)]">
           <Upload className="w-7 h-7 text-primary" />
         </div>
         <span className="text-base font-bold text-primary tracking-tight text-center">
           Upload Video
         </span>
-      </button>
+      </Link>
 
       <Link
         href={liveUrl}
@@ -58,6 +60,7 @@ export function StudioQuickActions({
       </Link>
 
       <button
+        type="button"
         onClick={onOpenDropModal}
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-bio-teal/30 group relative overflow-hidden shadow-[0_0_20px_rgba(0,240,181,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bio-teal"
       >
@@ -67,7 +70,10 @@ export function StudioQuickActions({
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Create Drop"
           >
+            <title>Create Drop</title>
             <path
               d="M13 2L3 14H12L11 22L21 10H12L13 2Z"
               stroke="currentColor"
@@ -83,6 +89,7 @@ export function StudioQuickActions({
       </button>
 
       <button
+        type="button"
         onClick={onOpenTimeCapsuleModal}
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-indigo-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
       >
@@ -95,6 +102,7 @@ export function StudioQuickActions({
       </button>
 
       <button
+        type="button"
         onClick={onOpenImportFansModal}
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-emerald-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
       >
@@ -107,7 +115,10 @@ export function StudioQuickActions({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            role="img"
+            aria-label="Import Fans"
           >
+            <title>Import Fans</title>
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="12" y1="18" x2="12" y2="12"></line>
@@ -120,6 +131,7 @@ export function StudioQuickActions({
       </button>
 
       <button
+        type="button"
         onClick={handleInvite}
         className="flex flex-col items-center justify-center gap-3 p-6 rounded-3xl liquid-glass-hover border-amber-500/30 group relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
       >

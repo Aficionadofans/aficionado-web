@@ -1,5 +1,6 @@
-import { StudioTabs } from '@/features/studio/ui/StudioTabs'
 import { Shield } from 'lucide-react'
+import { Suspense } from 'react'
+import { StudioTabs } from '@/features/studio/ui/StudioTabs'
 
 export default function CreatePage() {
   return (
@@ -14,7 +15,9 @@ export default function CreatePage() {
         </p>
       </header>
 
-      <StudioTabs />
+      <Suspense fallback={null}>
+        <StudioTabs />
+      </Suspense>
 
       <div
         className="flex items-center justify-center gap-2 mt-8 px-8 animate-fade-in-up"
