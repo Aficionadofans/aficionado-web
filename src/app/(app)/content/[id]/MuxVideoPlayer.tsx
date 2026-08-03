@@ -5,16 +5,20 @@ import MuxPlayer from '@mux/mux-player-react'
 interface MuxVideoPlayerProps {
   playbackId: string
   envKey?: string
-  token?: string
+  tokens?: {
+    playback: string
+    thumbnail: string
+    storyboard: string
+  }
   title?: string
 }
 
-export function MuxVideoPlayer({ playbackId, envKey, token, title }: MuxVideoPlayerProps) {
+export function MuxVideoPlayer({ playbackId, envKey, tokens, title }: MuxVideoPlayerProps) {
   return (
     <MuxPlayer
       playbackId={playbackId}
       envKey={envKey}
-      tokens={token ? { playback: token } : undefined}
+      tokens={tokens}
       metadata={{
         video_title: title ?? '',
       }}

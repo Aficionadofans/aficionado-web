@@ -1,10 +1,10 @@
-import { createClient } from '@/shared/lib/supabase/server'
-import { notFound } from 'next/navigation'
-import { MuxVideoPlayer } from './MuxVideoPlayer'
-import type { ContentWithProfile, ContentVisibility } from '@/shared/types/database'
 import { Lock } from 'lucide-react'
 import Link from 'next/link'
-import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/core/avatar'
+import { notFound } from 'next/navigation'
+import { createClient } from '@/shared/lib/supabase/server'
+import type { ContentVisibility, ContentWithProfile } from '@/shared/types/database'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/core/avatar'
+import { MuxVideoPlayer } from './MuxVideoPlayer'
 
 async function getContent(
   id: string,
@@ -47,14 +47,14 @@ async function signPlayback(
   playbackId: string,
   contentId: string,
   supabase: any,
-): Promise<string | undefined> {
+): Promise<{ playback: string; thumbnail: string; storyboard: string } | undefined> {
   try {
     const { data, error } = await supabase.functions.invoke('api/mux/sign', {
       body: { playbackId, contentId },
     })
 
     if (error) throw error
-    return data?.token
+    return data?.tokens
   } catch (err) {
     console.error('Mux sign error:', err instanceof Error ? err.message : err)
     return undefined
@@ -70,14 +70,14 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
   }
 
   // If authorized and content is subscriber-only, sign the playback JWT directly
-  let muxToken: string | undefined
+  let muxTokens: { playback: string; thumbnail: string; storyboard: string } | undefined
   if (
     authorized &&
     content.visibility === ('subscriber' satisfies ContentVisibility) &&
     content.mux_playback_id
   ) {
     const supabase = await createClient()
-    muxToken = await signPlayback(content.mux_playback_id, content.id, supabase)
+    muxTokens = await signPlayback(content.mux_playback_id, content.id, supabase)
   }
 
   const profile = content.profiles
@@ -136,6 +136,7 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
               </Link>
             ) : (
               <button
+                type="button"
                 disabled
                 className="inline-flex items-center justify-center rounded-full bg-surface px-6 py-3 text-sm font-medium text-muted-foreground cursor-not-allowed"
               >
@@ -147,7 +148,7 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
           <MuxVideoPlayer
             playbackId={content.mux_playback_id}
             envKey={process.env.NEXT_PUBLIC_MUX_ENV_KEY}
-            token={muxToken}
+            tokens={muxTokens}
             title={content.title}
           />
         ) : (
