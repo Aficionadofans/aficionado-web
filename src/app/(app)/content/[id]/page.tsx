@@ -1,6 +1,7 @@
-import { Lock } from 'lucide-react'
+import { ArrowLeft, Lock } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { ProcessingVideoClient } from '@/features/studio/ui/ProcessingVideoClient'
 import { createClient } from '@/shared/lib/supabase/server'
 import type { ContentVisibility, ContentWithProfile } from '@/shared/types/database'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/core/avatar'
@@ -152,10 +153,7 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
             title={content.title}
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground bg-surface/30">
-            <div className="animate-spin h-8 w-8 border-2 border-primary border-t-transparent rounded-full mb-4" />
-            <p className="font-medium tracking-wide animate-pulse">Processing media...</p>
-          </div>
+          <ProcessingVideoClient contentId={content.id} />
         )}
       </div>
     </div>
