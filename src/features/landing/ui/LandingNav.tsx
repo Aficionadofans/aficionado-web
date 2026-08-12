@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import { Menu, X, Sparkles } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false)

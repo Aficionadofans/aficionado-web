@@ -1,6 +1,6 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
-import type { Metadata } from 'next'
 import { AdminSidebar } from './AdminSidebar'
 
 export const metadata: Metadata = {

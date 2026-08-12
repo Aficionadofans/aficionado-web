@@ -1,8 +1,8 @@
-import { createClient } from '@/shared/lib/supabase/server'
-import { notFound } from 'next/navigation'
+import { ArrowLeft, Hash, ShieldCheck, Sparkles, Users } from 'lucide-react'
 import Link from 'next/link'
-import { Users, ArrowLeft, ShieldCheck, Sparkles, Hash } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import { InnerCircleView } from '@/features/circles/ui/InnerCircleView'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export default async function CommunityCircleDetailPage({
   params,

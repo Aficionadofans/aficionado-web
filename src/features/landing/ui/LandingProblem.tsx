@@ -1,9 +1,9 @@
 'use client'
 
-import { WordReveal } from '@/shared/ui/motion/WordReveal'
+import { CalendarX, Coins, TrendingDown } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { TrendingDown, Coins, CalendarX } from 'lucide-react'
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
 
 export function LandingProblem() {
   return (

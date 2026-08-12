@@ -1,10 +1,10 @@
 'use server'
 
-import { createClient } from '@/shared/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { createClient } from '@/shared/lib/supabase/server'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function enrollMfa(prevState: any, formData: FormData) {
+export async function enrollMfa(_prevState: any, _formData: FormData) {
   const supabase = await createClient()
   const {
     data: { session },
@@ -45,8 +45,7 @@ export async function enrollMfa(prevState: any, formData: FormData) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
+export async function verifyAndEnableMfa(_prevState: unknown, formData: FormData) {
   const factorId = formData.get('factorId') as string
   const code = formData.get('code') as string
 
@@ -83,8 +82,7 @@ export async function verifyAndEnableMfa(prevState: any, formData: FormData) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function unenrollMfa(prevState: any, formData: FormData) {
+export async function unenrollMfa(_prevState: unknown, formData: FormData) {
   const factorId = formData.get('factorId') as string
 
   if (!factorId) {

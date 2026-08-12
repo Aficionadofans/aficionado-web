@@ -1,30 +1,27 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
 import {
-  Palette,
   Baby,
-  MapPin,
   Compass,
-  Search,
-  PlusCircle,
-  Users,
-  Music,
-  Video,
   Cpu,
-  HeartHandshake,
-  Utensils,
-  Smile,
   Hash,
-  Sparkles,
-  Waves,
+  MapPin,
   Mic,
+  Music,
+  PlusCircle,
+  Search,
+  Smile,
+  Users,
+  Utensils,
+  Video,
+  Waves,
 } from 'lucide-react'
-import { SectionHeader } from '@/shared/ui/core'
-import { RevealSection } from '@/shared/ui/motion/RevealSection'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { CreateCircleModal } from '@/features/circles/ui/CreateCircleModal'
 import { createClient } from '@/shared/lib/supabase/client'
+import { SectionHeader } from '@/shared/ui/core'
+import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
 interface CircleItem {
   id: string
@@ -117,7 +114,7 @@ export default function CommunitiesHub() {
   const fetchCircles = async () => {
     setIsLoading(true)
     try {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('circles')
         .select('id, name, description, owner_id, created_at')
         .order('created_at', { ascending: false })
@@ -149,12 +146,15 @@ export default function CommunitiesHub() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchCircles()
-  }, [])
+  }, [
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchCircles,
+  ])
 
   const filteredCircles = circles.filter(
     (c) =>
       c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (c.description && c.description.toLowerCase().includes(searchQuery.toLowerCase())),
+      c.description?.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
   return (

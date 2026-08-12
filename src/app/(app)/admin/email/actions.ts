@@ -1,8 +1,8 @@
 'use server'
 
+import { render } from '@react-email/render'
 import { Resend } from 'resend'
 import { createClient } from '@/shared/lib/supabase/server'
-import { render } from '@react-email/render'
 import MarkdownEmail from './MarkdownEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -32,7 +32,7 @@ export type EmailActionState = {
 }
 
 export async function sendEmailAction(
-  prevState: EmailActionState,
+  _prevState: EmailActionState,
   formData: FormData,
 ): Promise<EmailActionState> {
   // 1. Re-verify admin scope server-side — defense in depth
@@ -41,7 +41,7 @@ export async function sendEmailAction(
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user || !user.email || !ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+  if (!user?.email || !ADMIN_EMAILS.includes(user.email.toLowerCase())) {
     return { success: false, message: 'Unauthorized. Admin access only.' }
   }
 

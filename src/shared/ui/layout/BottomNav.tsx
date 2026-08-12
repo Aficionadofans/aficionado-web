@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { NavigationItems } from './Navigation'
+import type { NavigationItems } from './Navigation'
 
 export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; pathname: string }) {
   return (

@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Heart, MessageCircle, DollarSign, Users, Share2, Check } from 'lucide-react'
+import { Check, DollarSign, Heart, MessageCircle, Share2, Users } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface VideoOverlayActionsProps {
   videoId: string
@@ -70,7 +70,7 @@ export function VideoOverlayActions({
           />
         </div>
         <span className="text-[11px] font-medium text-white/80 drop-shadow-sm tabular-nums">
-          {isLiked ? parseInt(likes || '0') + 1 : likes}
+          {isLiked ? parseInt(likes || '0', 10) + 1 : likes}
         </span>
       </button>
 

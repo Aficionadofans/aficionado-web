@@ -1,13 +1,11 @@
 'use client'
 
-import React from 'react'
+import { Compass, Heart, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Heart, MessageCircle, Compass } from 'lucide-react'
-import { DropZoneCarousel, type Drop } from './DropZoneCarousel'
-import { RevealSection } from '@/shared/ui/motion/RevealSection'
-
 import type { Content, Profile } from '@/shared/types/database'
+import { RevealSection } from '@/shared/ui/motion/RevealSection'
+import { type Drop, DropZoneCarousel } from './DropZoneCarousel'
 
 export type Video = Pick<Content, 'id' | 'description'> & {
   creator: Profile['username']
@@ -69,7 +67,9 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
           </div>
         ) : (
           videos.map((video, index) => {
-            const thumbnailUrl = video.playbackId ? `/api/mux/thumbnail?playbackId=${video.playbackId}&width=400` : null
+            const thumbnailUrl = video.playbackId
+              ? `/api/mux/thumbnail?playbackId=${video.playbackId}&width=400`
+              : null
             const card = (
               <Link
                 href={`/content/${video.id}`}
@@ -91,7 +91,9 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                       <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-2">
                         <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                       </div>
-                      <p className="text-xs text-muted-foreground font-medium animate-pulse">Processing media...</p>
+                      <p className="text-xs text-muted-foreground font-medium animate-pulse">
+                        Processing media...
+                      </p>
                     </div>
                   )}
 
@@ -111,9 +113,13 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                   {/* Moderation Status Badge - top right */}
                   {video.moderationStatus && video.moderationStatus !== 'approved' && (
                     <div className="absolute top-3 right-3 z-10">
-                      <span className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white backdrop-blur-sm ${
-                        video.moderationStatus === 'pending' ? 'bg-amber-500/80 border border-amber-500/30' : 'bg-red-500/80 border border-red-500/30'
-                      }`}>
+                      <span
+                        className={`px-2 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white backdrop-blur-sm ${
+                          video.moderationStatus === 'pending'
+                            ? 'bg-amber-500/80 border border-amber-500/30'
+                            : 'bg-red-500/80 border border-red-500/30'
+                        }`}
+                      >
                         {video.moderationStatus === 'pending' ? 'Pending Moderation' : 'Rejected'}
                       </span>
                     </div>

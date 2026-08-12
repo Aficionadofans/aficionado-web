@@ -1,22 +1,22 @@
 'use client'
 
-import React, { useState } from 'react'
 import {
-  X,
-  Sparkles,
-  PlusCircle,
-  Compass,
-  Music,
-  Video,
   Cpu,
   HeartHandshake,
-  Utensils,
-  Smile,
-  Waves,
   Mic,
+  Music,
+  PlusCircle,
+  Smile,
+  Sparkles,
+  Utensils,
+  Video,
+  Waves,
+  X,
 } from 'lucide-react'
-import { createClient } from '@/shared/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import type React from 'react'
+import { useState } from 'react'
+import { createClient } from '@/shared/lib/supabase/client'
 
 interface CreateCircleModalProps {
   isOpen: boolean

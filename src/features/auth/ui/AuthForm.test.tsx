@@ -4,9 +4,10 @@
  * Covers all six regression criteria from Requirement 6 and validates
  * the correctness properties defined in the design document.
  */
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { AuthForm } from './AuthForm'
 
 // Mock Next.js server action — must never make real HTTP calls in tests
@@ -29,6 +30,7 @@ vi.mock('@/shared/lib/supabase/client', () => ({
 }))
 
 import { authAction } from '@/app/login/actions'
+
 const mockAuthAction = authAction as ReturnType<typeof vi.fn>
 
 // Helper: render and switch to signup mode

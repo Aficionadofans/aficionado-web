@@ -1,6 +1,6 @@
-import { createClient } from '@/shared/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { SettingsView } from '@/features/settings/ui/SettingsView'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export default async function SettingsPage() {
   const supabase = await createClient()

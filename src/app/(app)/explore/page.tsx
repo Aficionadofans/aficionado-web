@@ -1,12 +1,12 @@
-import { Hash, Star, Compass } from 'lucide-react'
-import { createClient } from '@/shared/lib/supabase/server'
-import { DiscoverySearch } from '@/features/explore/ui/DiscoverySearch'
-import { CuratorCard } from '@/features/explore/ui/CuratorCard'
+import { Compass, Hash, Star } from 'lucide-react'
+import Link from 'next/link'
 import { CircleHighlight } from '@/features/explore/ui/CircleHighlight'
 import { CreatorSpotlight } from '@/features/explore/ui/CreatorSpotlight'
+import { CuratorCard } from '@/features/explore/ui/CuratorCard'
+import { DiscoverySearch } from '@/features/explore/ui/DiscoverySearch'
+import { createClient } from '@/shared/lib/supabase/server'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import Link from 'next/link'
 
 export default async function ExplorePage() {
   const supabase = await createClient()

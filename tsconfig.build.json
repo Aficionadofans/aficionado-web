@@ -1,0 +1,1 @@
+{ "extends": "./tsconfig.json", "exclude": ["sync-mux.ts", "test-*.ts"] }

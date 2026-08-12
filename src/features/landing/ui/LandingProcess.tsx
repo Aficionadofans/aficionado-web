@@ -1,8 +1,8 @@
 'use client'
 
+import { ArrowRight, DollarSign, UserPlus, Video } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { UserPlus, Video, DollarSign, ArrowRight } from 'lucide-react'
 
 interface Step {
   number: string

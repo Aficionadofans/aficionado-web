@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { createClient } from '@/shared/lib/supabase/client'
 
 function getPasswordStrength(pw: string): { label: string; color: string; width: string } {

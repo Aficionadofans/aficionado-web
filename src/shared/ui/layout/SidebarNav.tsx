@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import { LogOut } from 'lucide-react'
+import Link from 'next/link'
 import { logout } from '@/app/login/actions'
-import { NavigationItems } from './Navigation'
+import type { NavigationItems } from './Navigation'
 
 export function SidebarNav({
   navItems,

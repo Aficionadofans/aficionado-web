@@ -1,9 +1,9 @@
 'use client'
 
+import { ChevronDown, HelpCircle } from 'lucide-react'
 import { useState } from 'react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { ChevronDown, HelpCircle } from 'lucide-react'
 
 interface FAQItem {
   question: string

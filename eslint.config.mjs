@@ -14,6 +14,15 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    'check-*.js',
+    'check-*.ts',
+    'sync-mux.ts',
+    'test-*.js',
+    'test-*.ts',
+    'test/**/*.js',
+    'test/**/*.ts',
+    'utility/**/*.js',
+    'utility/**/*.ts',
   ]),
 ])
 

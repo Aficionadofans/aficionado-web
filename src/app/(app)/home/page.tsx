@@ -40,26 +40,30 @@ export default async function HomePage() {
   // 2. Fetch user's own content regardless of status
   const { data: ownContent, error: ownErr } = await dbClient
     .from('content')
-    .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at')
+    .select(
+      'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at',
+    )
     .eq('author_id', user.id)
     .order('created_at', { ascending: false })
     .limit(20)
 
-  if (ownErr) console.error("Error fetching own content:", ownErr)
+  if (ownErr) console.error('Error fetching own content:', ownErr)
 
   // 3. Fetch approved content from followed creators
-  let feedContent: any[] = []
+  let feedContent: Record<string, unknown>[] = []
   if (creatorIds.length > 0) {
     const { data: othersContent, error: othersErr } = await dbClient
       .from('content')
-      .select('id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at')
+      .select(
+        'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at',
+      )
       .in('author_id', creatorIds)
       .eq('moderation_status', 'approved')
       .not('mux_playback_id', 'is', null)
       .order('created_at', { ascending: false })
       .limit(20)
-      
-    if (othersErr) console.error("Error fetching others content:", othersErr)
+
+    if (othersErr) console.error('Error fetching others content:', othersErr)
     if (othersContent) feedContent = othersContent
   }
 

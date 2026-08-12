@@ -2,7 +2,7 @@
 
 import { Play, Sparkles, X } from 'lucide-react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { Post, Profile } from '@/shared/types/database'
 import { Avatar } from '@/shared/ui/core'
 
@@ -21,46 +21,42 @@ export function DropZoneCarousel({ drops }: { drops: Drop[] }) {
     <>
       {/* Horizontal carousel */}
       <div className="w-full pt-3 pb-2 px-4 overflow-x-auto hide-scrollbar flex gap-3 items-center">
-        {drops.length === 0 ? (
-          /* Empty state: 4 skeleton avatar circles */
-          <>
-            {Array.from({ length: 4 }).map((_, i) => (
+        {drops.length === 0
+          ? /* Empty state: 4 skeleton avatar circles */
+            Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="flex flex-col items-center gap-1.5 flex-shrink-0">
                 <div className="w-16 h-16 rounded-full bg-muted shimmer" />
                 <div className="w-10 h-2 rounded-full bg-muted shimmer" />
               </div>
-            ))}
-          </>
-        ) : (
-          drops.map((drop) => (
-            <button
-              key={drop.id}
-              onClick={() => setActiveDrop(drop)}
-              aria-label={`View drop from ${drop.creator}`}
-              className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
-            >
-              {/* Avatar with teal ring + unread dot */}
-              <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
-                <div className="w-full h-full rounded-full overflow-hidden ring-2 ring-primary/40 shadow-[0_0_12px_rgba(0,212,200,0.35)]">
-                  <Avatar
-                    src={drop.avatar || undefined}
-                    alt={drop.creator || 'Creator'}
-                    name={drop.creator || 'Creator'}
-                    size="lg"
-                    className="w-full h-full rounded-full"
-                  />
+            ))
+          : drops.map((drop) => (
+              <button
+                key={drop.id}
+                onClick={() => setActiveDrop(drop)}
+                aria-label={`View drop from ${drop.creator}`}
+                className="flex flex-col items-center gap-1.5 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full"
+              >
+                {/* Avatar with teal ring + unread dot */}
+                <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-105 group-active:scale-95">
+                  <div className="w-full h-full rounded-full overflow-hidden ring-2 ring-primary/40 shadow-[0_0_12px_rgba(0,212,200,0.35)]">
+                    <Avatar
+                      src={drop.avatar || undefined}
+                      alt={drop.creator || 'Creator'}
+                      name={drop.creator || 'Creator'}
+                      size="lg"
+                      className="w-full h-full rounded-full"
+                    />
+                  </div>
+                  {/* Unread indicator: 8px teal dot at bottom-right */}
+                  {drop.hasUnread && (
+                    <span className="absolute bottom-0 right-0 w-2 h-2 bg-primary rounded-full ring-2 ring-background" />
+                  )}
                 </div>
-                {/* Unread indicator: 8px teal dot at bottom-right */}
-                {drop.hasUnread && (
-                  <span className="absolute bottom-0 right-0 w-2 h-2 bg-primary rounded-full ring-2 ring-background" />
-                )}
-              </div>
-              <span className="text-[10px] text-foreground/80 truncate w-14 text-center font-medium group-hover:text-primary transition-colors">
-                {drop.creator}
-              </span>
-            </button>
-          ))
-        )}
+                <span className="text-[10px] text-foreground/80 truncate w-14 text-center font-medium group-hover:text-primary transition-colors">
+                  {drop.creator}
+                </span>
+              </button>
+            ))}
       </div>
 
       {/* Fullscreen drop viewer */}

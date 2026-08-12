@@ -1,17 +1,17 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import {
-  Home,
   Compass,
-  PlusSquare,
+  Home,
+  type LucideIcon,
   MonitorPlay,
+  PlusSquare,
   Settings,
   ShieldAlert,
-  LucideIcon,
 } from 'lucide-react'
-import { SidebarNav } from './SidebarNav'
+import { usePathname } from 'next/navigation'
 import { BottomNav } from './BottomNav'
+import { SidebarNav } from './SidebarNav'
 
 export type NavigationItem = {
   name: string
@@ -47,7 +47,7 @@ export function Navigation({
     '/privacy',
     '/creator-agreement',
   ]
-  if (hideNavRoutes.some((route) => pathname === route || pathname.startsWith(route + '/')))
+  if (hideNavRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`)))
     return null
 
   let finalNavItems = navItems

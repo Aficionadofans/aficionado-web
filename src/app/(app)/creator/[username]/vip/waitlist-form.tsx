@@ -1,8 +1,8 @@
 'use client'
 
+import { ArrowRight, Check } from 'lucide-react'
 import { useState } from 'react'
 import { createClient } from '@/shared/lib/supabase/client'
-import { ArrowRight, Check } from 'lucide-react'
 
 export default function WaitlistForm({ creatorId }: { creatorId: string }) {
   const [email, setEmail] = useState('')

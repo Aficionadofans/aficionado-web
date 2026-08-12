@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { Sparkles, Video } from 'lucide-react'
 import MuxUploader from '@mux/mux-uploader-react'
+import { Sparkles, Video } from 'lucide-react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 import { createClient } from '@/shared/lib/supabase/client'

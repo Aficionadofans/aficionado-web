@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import { X, DollarSign, Send } from 'lucide-react'
+import { DollarSign, Send, X } from 'lucide-react'
+import type React from 'react'
+import { useState } from 'react'
 import { submitTip } from '@/app/monetization/actions'
 import { cn } from '@/lib/utils'
 import { Button } from '@/shared/ui/core'

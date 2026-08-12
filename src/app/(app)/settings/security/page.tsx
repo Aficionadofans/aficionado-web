@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
-import { MfaToggleCard } from '@/features/settings/ui/MfaToggleCard'
-import { DeviceSessionList } from '@/features/settings/ui/DeviceSessionList'
 import { DangerZoneCard } from '@/features/settings/ui/DangerZoneCard'
+import { DeviceSessionList } from '@/features/settings/ui/DeviceSessionList'
+import { MfaToggleCard } from '@/features/settings/ui/MfaToggleCard'
 import { createClient } from '@/shared/lib/supabase/server'
 
 export default async function SecurityPage() {

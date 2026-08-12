@@ -1,24 +1,23 @@
 'use client'
 
-import React, { useState, useTransition } from 'react'
-import { createPortal } from 'react-dom'
 import {
-  User,
-  Shield,
+  AlertCircle,
+  Check,
   CreditCard,
   DollarSign,
-  Wallet,
-  Plus,
-  Trash2,
-  Check,
-  X,
   Lock,
-  Sparkles,
-  AlertCircle,
+  Plus,
+  Shield,
+  Trash2,
+  User,
+  Wallet,
+  X,
 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import React, { useState, useTransition } from 'react'
+import { createPortal } from 'react-dom'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/shared/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
@@ -38,7 +37,7 @@ export function SettingsView({
   email,
   username,
   bio,
-  avatarUrl,
+  avatarUrl: _avatarUrl,
   zipCode,
 }: SettingsViewProps) {
   const [activeTab, setActiveTab] = useState<Tab>('profile')
@@ -509,7 +508,7 @@ export interface PaymentCard {
 
 function getCardBrand(number: string): 'visa' | 'mastercard' | 'amex' | 'discover' | 'unknown' {
   const clean = number.replace(/\D/g, '')
-  if (/^4/.test(clean)) return 'visa'
+  if (clean.startsWith('4')) return 'visa'
   if (/^(5[1-5]|2[2-7])/.test(clean)) return 'mastercard'
   if (/^3[47]/.test(clean)) return 'amex'
   if (/^(6011|65|64[4-9])/.test(clean)) return 'discover'

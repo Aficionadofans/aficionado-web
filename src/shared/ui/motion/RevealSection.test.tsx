@@ -8,9 +8,9 @@
  * **Validates: Requirements 2.1, 2.2, 2.5, 17.1**
  */
 
-import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import fc from 'fast-check'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { RevealSection } from './RevealSection'
 
 // ---------------------------------------------------------------------------
@@ -218,9 +218,9 @@ describe('RevealSection IntersectionObserver fallback', () => {
     // @ts-expect-error intentionally deleting for test
     delete global.IntersectionObserver
 
-    const { container } = render(
+    render(
       <RevealSection>
-        <span data-testid="fallback-child">content</span>
+        <div data-testid="fallback-child">Content</div>
       </RevealSection>,
     )
 

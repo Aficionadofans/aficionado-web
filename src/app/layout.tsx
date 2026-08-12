@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bricolage_Grotesque, Syne, Inter, Geist_Mono } from 'next/font/google'
+import { Bricolage_Grotesque, Geist_Mono, Inter, Syne } from 'next/font/google'
 import { DustParticles } from '@/shared/ui/motion/DustParticles'
 import './globals.css'
 

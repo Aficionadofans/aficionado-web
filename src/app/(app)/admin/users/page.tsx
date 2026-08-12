@@ -1,6 +1,6 @@
-import { createClient } from '@/shared/lib/supabase/server'
 import { Shield, User } from 'lucide-react'
-import { SectionHeader, EmptyState } from '@/shared/ui/core'
+import { createClient } from '@/shared/lib/supabase/server'
+import { EmptyState, SectionHeader } from '@/shared/ui/core'
 
 export const metadata = { title: 'Users — Admin' }
 

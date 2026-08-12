@@ -1,6 +1,6 @@
 'use client'
 
-import { Video, Sparkles, Layers, Sliders, PlayCircle, ShieldCheck } from 'lucide-react'
+import { Layers, PlayCircle, ShieldCheck, Sliders, Sparkles, Video } from 'lucide-react'
 
 const tools = [
   { name: 'ADOBE PREMIERE PRO', icon: <Video className="w-4 h-4 text-purple-400" /> },

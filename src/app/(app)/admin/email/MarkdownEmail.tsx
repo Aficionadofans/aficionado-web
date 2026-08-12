@@ -1,17 +1,16 @@
 import {
-  Html,
-  Head,
   Body,
   Container,
-  Section,
+  Head,
   Heading,
-  Text,
+  Html,
   Link,
   Preview,
+  Section,
+  Text,
 } from '@react-email/components'
-import { Tailwind } from '@react-email/tailwind'
 import { Markdown } from '@react-email/markdown'
-import * as React from 'react'
+import { Tailwind } from '@react-email/tailwind'
 
 interface MarkdownEmailProps {
   subject: string

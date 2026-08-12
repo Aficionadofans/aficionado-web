@@ -2,7 +2,7 @@
 
 import { DollarSign, Lock, Send, Star, User } from 'lucide-react'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { TipModal } from '@/features/monetization/ui/TipModal'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/shared/lib/supabase/client'
@@ -110,7 +110,7 @@ export function InnerCircleView({ username, circleId }: { username: string; circ
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [isSubscribed, circleId, supabase])
+  }, [isSubscribed, circleId, supabase, scrollToBottom, hydrateProfiles])
 
   const handleSend = async () => {
     if (!input.trim() || isSubmitting) return

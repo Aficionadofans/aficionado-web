@@ -1,7 +1,7 @@
-import { createClient } from '@/shared/lib/supabase/server'
-import { Users, FileVideo, ShieldCheck, Mail } from 'lucide-react'
+import { Mail, ShieldCheck, Users } from 'lucide-react'
 import Link from 'next/link'
-import { SectionHeader, EmptyState, StatCounter } from '@/shared/ui/core'
+import { createClient } from '@/shared/lib/supabase/server'
+import { EmptyState, SectionHeader, StatCounter } from '@/shared/ui/core'
 
 export const metadata = { title: 'Admin Dashboard' }
 

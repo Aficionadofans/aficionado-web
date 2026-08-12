@@ -1,8 +1,8 @@
-import { createClient } from '@/shared/lib/supabase/server'
+import { CheckCircle2, Sparkles } from 'lucide-react'
 import { notFound } from 'next/navigation'
-import WaitlistForm from './waitlist-form'
-import { Sparkles, CheckCircle2 } from 'lucide-react'
+import { createClient } from '@/shared/lib/supabase/server'
 import type { Profile } from '@/shared/types/database'
+import WaitlistForm from './waitlist-form'
 
 type CreatorPreview = Pick<Profile, 'id' | 'username' | 'avatar_url' | 'bio'>
 

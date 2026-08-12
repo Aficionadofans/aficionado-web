@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef } from 'react'
 import { Heart, Sparkles } from 'lucide-react'
+import { useRef, useState } from 'react'
 
 export function HoldToAppreciate() {
   const [isHolding, setIsHolding] = useState(false)

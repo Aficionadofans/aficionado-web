@@ -1,8 +1,8 @@
 'use client'
 
+import { Award, DollarSign, Flame, TrendingUp, Users, Zap } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { TrendingUp, Users, Zap, DollarSign, Award, Flame } from 'lucide-react'
 
 interface ResultCard {
   stat: string

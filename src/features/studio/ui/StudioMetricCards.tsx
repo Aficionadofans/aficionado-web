@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useEffect } from 'react'
-import { ShieldCheck, AlertTriangle } from 'lucide-react'
+import { AlertTriangle, ShieldCheck } from 'lucide-react'
+import type React from 'react'
+import { useEffect } from 'react'
 import { useCountUp } from '@/shared/hooks/useCountUp'
 import { useRevealOnScroll } from '@/shared/hooks/useRevealOnScroll'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'

@@ -1,6 +1,6 @@
+import { redirect } from 'next/navigation'
 import { CreatorStudio } from '@/features/studio/ui/CreatorStudio'
 import { createClient } from '@/shared/lib/supabase/server'
-import { redirect } from 'next/navigation'
 
 export default async function CreatorPage() {
   const supabase = await createClient()
