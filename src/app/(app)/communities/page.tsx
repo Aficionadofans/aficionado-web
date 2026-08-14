@@ -17,7 +17,7 @@ import {
   Waves,
 } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { CreateCircleModal } from '@/features/circles/ui/CreateCircleModal'
 import { createClient } from '@/shared/lib/supabase/client'
 import { SectionHeader } from '@/shared/ui/core'
@@ -38,21 +38,15 @@ function getCircleIcon(name: string) {
   if (n.includes('dive') || n.includes('diver') || n.includes('scuba') || n.includes('ocean')) {
     return { icon: Waves, color: 'text-sky-400', bg: 'bg-sky-500/20', border: 'border-sky-500/40' }
   }
-  if (
-    n.includes('speak') ||
-    n.includes('speaker') ||
-    n.includes('orator') ||
-    n.includes('keynote') ||
-    n.includes('stage')
-  ) {
+  if (n.includes('tech') || n.includes('dev') || n.includes('code') || n.includes('ai')) {
     return {
-      icon: Mic,
-      color: 'text-orange-400',
-      bg: 'bg-orange-500/20',
-      border: 'border-orange-500/40',
+      icon: Cpu,
+      color: 'text-emerald-400',
+      bg: 'bg-emerald-500/20',
+      border: 'border-emerald-500/40',
     }
   }
-  if (n.includes('sound') || n.includes('music') || n.includes('audio')) {
+  if (n.includes('music') || n.includes('audio') || n.includes('sound') || n.includes('beat')) {
     return {
       icon: Music,
       color: 'text-purple-400',
@@ -60,32 +54,32 @@ function getCircleIcon(name: string) {
       border: 'border-purple-500/40',
     }
   }
-  if (n.includes('film') || n.includes('cinema') || n.includes('video') || n.includes('motion')) {
+  if (n.includes('film') || n.includes('video') || n.includes('cinema') || n.includes('photo')) {
     return {
       icon: Video,
+      color: 'text-rose-400',
+      bg: 'bg-rose-500/20',
+      border: 'border-rose-500/40',
+    }
+  }
+  if (n.includes('parent') || n.includes('mom') || n.includes('dad') || n.includes('kid')) {
+    return {
+      icon: Baby,
       color: 'text-amber-400',
       bg: 'bg-amber-500/20',
       border: 'border-amber-500/40',
     }
   }
-  if (n.includes('tech') || n.includes('ai') || n.includes('code') || n.includes('zenith')) {
-    return { icon: Cpu, color: 'text-cyan-400', bg: 'bg-cyan-500/20', border: 'border-cyan-500/40' }
-  }
-  if (n.includes('parent') || n.includes('family') || n.includes('nursery') || n.includes('baby')) {
-    return {
-      icon: Baby,
-      color: 'text-pink-400',
-      bg: 'bg-pink-500/20',
-      border: 'border-pink-500/40',
-    }
-  }
-  if (n.includes('culinary') || n.includes('chef') || n.includes('food') || n.includes('bake')) {
+  if (n.includes('food') || n.includes('cook') || n.includes('chef') || n.includes('bake')) {
     return {
       icon: Utensils,
-      color: 'text-emerald-400',
-      bg: 'bg-emerald-500/20',
-      border: 'border-emerald-500/40',
+      color: 'text-orange-400',
+      bg: 'bg-orange-500/20',
+      border: 'border-orange-500/40',
     }
+  }
+  if (n.includes('voice') || n.includes('talk') || n.includes('pod') || n.includes('cast')) {
+    return { icon: Mic, color: 'text-pink-400', bg: 'bg-pink-500/20', border: 'border-pink-500/40' }
   }
   if (
     n.includes('wellness') ||
@@ -109,10 +103,9 @@ export default function CommunitiesHub() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  const supabase = createClient()
-
-  const fetchCircles = async () => {
+  const fetchCircles = useCallback(async () => {
     setIsLoading(true)
+    const supabase = createClient()
     try {
       const { data } = await supabase
         .from('circles')
@@ -141,15 +134,11 @@ export default function CommunitiesHub() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchCircles()
-  }, [
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchCircles,
-  ])
+  }, [fetchCircles])
 
   const filteredCircles = circles.filter(
     (c) =>
@@ -192,6 +181,7 @@ export default function CommunitiesHub() {
         </div>
 
         <button
+          type="button"
           onClick={() => setIsModalOpen(true)}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(0,212,200,0.4)] hover:bg-primary-hover transition-all shrink-0 hover:scale-105"
         >
@@ -260,6 +250,7 @@ export default function CommunitiesHub() {
                 Be the first creator to launch a new community circle!
               </p>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(true)}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider hover:bg-primary-hover transition-colors shadow-[0_0_20px_rgba(0,212,200,0.4)]"
               >
