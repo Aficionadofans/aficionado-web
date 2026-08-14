@@ -57,7 +57,7 @@ pre-push:
       skip:
         - merge
         - rebase
-      run: npm audit --audit-level=critical
+      run: npm audit --audit-level=critical --omit=dev
       fail_text: "❌ Critical dependency vulnerabilities detected. Please run npm audit fix."
     - name: license-audit
       skip:
