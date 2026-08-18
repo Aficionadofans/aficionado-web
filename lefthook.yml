@@ -65,3 +65,8 @@ pre-push:
         - rebase
       run: npx --yes license-checker-rseidelsohn --summary --failOn 'GPL;AGPL'
       fail_text: "❌ Restrictive GPL/AGPL licenses detected in dependencies. Push rejected."
+
+post-merge:
+  jobs:
+    - name: npm-install
+      run: npm install
