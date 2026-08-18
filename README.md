@@ -33,8 +33,31 @@ NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
 
-## Deployment
-This project is configured for seamless deployment on Vercel. Pushing to the `main` branch on GitHub automatically triggers a production deployment.
+## Testing & Quality Assurance
+- **Unit & Component Tests**: Run tests with Vitest:
+  ```bash
+  bun run test
+  ```
+- **Linting & Formatting**:
+  ```bash
+  bunx biome check .
+  bunx oxlint .
+  ```
+
+## 🔒 Security & Git Hooks (Lefthook)
+Git hooks are managed via [Lefthook](https://github.com/evilmartians/lefthook):
+- **`pre-commit`**: Automatically runs secret exposure scanner (`security-scan.sh`), Gitleaks check (`gitleaks-scan.sh`), branch naming verification (`check-branch.sh`), and Biome/OxLint checks on staged files.
+- **`commit-msg`**: Enforces Conventional Commits standard (`feat:`, `fix:`, `refactor:`, etc.).
+- **`pre-push`**: Runs Vitest test suite, npm audit for critical vulnerabilities, and license compliance audits.
+
+## 🚀 CI/CD Pipeline
+GitHub Actions automatically validates pull requests and main branch pushes via [`.github/workflows/ci.yml`](.github/workflows/ci.yml):
+1. **Security Scan**: Catches exposed secrets/keys.
+2. **Biome & OxLint**: Enforces code style and best practices.
+3. **Vitest**: Runs all unit and component tests.
+4. **Dependency Audit**: Checks for critical vulnerabilities.
+5. **Next.js Build Check**: Verifies type safety and build validity.
 
 ## Next.js 16 Caveats
 - The `middleware.ts` file convention is deprecated in Next.js 16. Use `src/proxy.ts` for all route interception and Supabase auth session management.
+
