@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import { MapPin, ShieldAlert, ArrowLeft, Send } from 'lucide-react'
+import { ArrowLeft, MapPin, Send, ShieldAlert } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: string }) {
   // Simulate checking the requested neighborhood against the user's verified zip code

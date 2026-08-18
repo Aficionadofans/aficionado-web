@@ -1,5 +1,5 @@
+import { CheckCircle2, XCircle } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
-import { XCircle, CheckCircle2 } from 'lucide-react'
 
 export function LandingProblemSolution() {
   return (

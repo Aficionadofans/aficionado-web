@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState, useState } from 'react'
-import { verifyMfa } from '@/app/login/mfa/actions'
 import { useFormStatus } from 'react-dom'
+import { verifyMfa } from '@/app/login/mfa/actions'
 
 function SubmitButton({ disabled }: { disabled: boolean }) {
   const { pending } = useFormStatus()

@@ -1,9 +1,9 @@
 'use client'
 
+import { Play, Radio, Sparkles, Video } from 'lucide-react'
 import { useState } from 'react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { Play, Radio, Video, Sparkles } from 'lucide-react'
 
 interface ShowcaseItem {
   id: string

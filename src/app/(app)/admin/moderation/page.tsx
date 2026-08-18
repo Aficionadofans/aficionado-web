@@ -1,6 +1,6 @@
-import { createClient } from '@/shared/lib/supabase/server'
-import { ShieldAlert, ShieldCheck, ExternalLink } from 'lucide-react'
+import { ExternalLink, ShieldAlert, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export const metadata = { title: 'Moderation — Admin' }
 

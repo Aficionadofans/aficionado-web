@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Users, X, Star, Settings, Copy, CheckCircle2 } from 'lucide-react'
-import Link from 'next/link'
 import MuxPlayer from '@mux/mux-player-react'
+import { CheckCircle2, Copy, Settings, Star, Users, X } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 import { createClient } from '@/shared/lib/supabase/client'
 
 interface LiveStreamPlayerProps {

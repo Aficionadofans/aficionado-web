@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
+import type * as React from 'react'
 import { cn } from '@/lib/utils'
 
 type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
@@ -155,4 +155,4 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
-export { Avatar, AvatarImage, AvatarFallback, AvatarGroup }
+export { Avatar, AvatarFallback, AvatarGroup, AvatarImage }

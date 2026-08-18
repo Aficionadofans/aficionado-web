@@ -1,10 +1,10 @@
 'use client'
 
+import { CheckCircle2, Shield, ShieldAlert } from 'lucide-react'
 import { useActionState, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/core/card'
-import { Shield, ShieldAlert, CheckCircle2 } from 'lucide-react'
-import { enrollMfa, verifyAndEnableMfa, unenrollMfa } from '@/app/(app)/settings/security/actions'
 import { useFormStatus } from 'react-dom'
+import { enrollMfa, unenrollMfa, verifyAndEnableMfa } from '@/app/(app)/settings/security/actions'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/core/card'
 
 function SubmitButton({
   text,

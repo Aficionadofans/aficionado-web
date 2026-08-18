@@ -1,10 +1,67 @@
+# Lefthook Git Hooks Configuration for Aficionado Web
+# Enterprise Production Security & Quality Pipeline
+
+colors: true
+
 pre-commit:
   parallel: true
   jobs:
+    - name: secret-scan
+      run: ./scripts/security-scan.sh
+      fail_text: "❌ Secret Exposure Scan Failed: Remove API keys or forbidden sensitive files before committing."
+    - name: gitleaks-scan
+      run: ./scripts/gitleaks-scan.sh
+      fail_text: "❌ Gitleaks detected secrets. Review before committing."
+    - name: check-branch
+      run: ./scripts/check-branch.sh
+      fail_text: "❌ Branch validation failed."
     - name: biome
       glob: "*.{js,ts,jsx,tsx,json}"
-      run: ~/.bun/bin/bunx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      skip:
+        - merge
+        - rebase
+      run: npx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
       stage_fixed: true
     - name: oxlint
       glob: "*.{js,ts,jsx,tsx}"
-      run: ~/.bun/bin/bunx oxlint {staged_files}
+      skip:
+        - merge
+        - rebase
+      run: npx oxlint {staged_files}
+
+commit-msg:
+  jobs:
+    - name: conventional-commit
+      skip:
+        - merge
+        - rebase
+      run: |
+        MSG=$(cat {1})
+        REGEX="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9_-]+\))?: .+"
+        if ! echo "$MSG" | grep -Eq "$REGEX"; then
+          echo "❌ Invalid commit message format: \"$MSG\""
+          echo "Format must follow Conventional Commits standard (e.g. feat: add feature)"
+          exit 1
+        fi
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: vitest-test-all
+      skip:
+        - merge
+        - rebase
+      run: npm run test
+      fail_text: "❌ Web unit test suite failed. Push rejected."
+    - name: package-audit
+      skip:
+        - merge
+        - rebase
+      run: npm audit --audit-level=critical --omit=dev
+      fail_text: "❌ Critical dependency vulnerabilities detected. Please run npm audit fix."
+    - name: license-audit
+      skip:
+        - merge
+        - rebase
+      run: npx --yes license-checker-rseidelsohn --summary --failOn 'GPL;AGPL'
+      fail_text: "❌ Restrictive GPL/AGPL licenses detected in dependencies. Push rejected."

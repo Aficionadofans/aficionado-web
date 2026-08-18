@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/shared/lib/supabase/server'
 import { LandingPage } from '@/features/landing/ui/LandingPage'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export default async function LandingPageRoute({
   searchParams,

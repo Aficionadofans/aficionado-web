@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, Radio, Users, Shield, BarChart2, Globe, CreditCard, Lock } from 'lucide-react'
+import { BarChart2, CreditCard, Globe, Lock, Radio, Shield, Upload, Users } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 

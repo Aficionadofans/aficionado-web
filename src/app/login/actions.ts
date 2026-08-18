@@ -1,12 +1,12 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/shared/lib/supabase/server'
-import { headers } from 'next/headers'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function authAction(prevState: any, formData: FormData) {
+export async function authAction(_prevState: any, formData: FormData) {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
   const mode = formData.get('mode') as string

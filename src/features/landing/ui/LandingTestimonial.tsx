@@ -1,8 +1,8 @@
 'use client'
 
+import { CheckCircle2, Quote, Star } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { Star, Quote, CheckCircle2 } from 'lucide-react'
 
 export function LandingTestimonial() {
   return (

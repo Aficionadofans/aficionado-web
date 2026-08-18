@@ -1,24 +1,24 @@
 'use client'
 
-import { useActionState, useRef, useEffect, useState, useTransition } from 'react'
-import { useFormStatus } from 'react-dom'
-import { Card } from '@/shared/ui/core/card'
-import { Input } from '@/shared/ui/core/input'
-import { Label } from '@/shared/ui/core/label'
-import { Button } from '@/shared/ui/core/button'
-import { Textarea } from '@/shared/ui/core/textarea'
-import { sendEmailAction, previewEmailAction, type EmailActionState } from './actions'
 import {
-  Loader2,
-  Send,
-  CheckCircle2,
   AlertCircle,
+  CheckCircle2,
   Code,
   Eye,
   EyeOff,
-  Sparkles,
   FileText,
+  Loader2,
+  Send,
+  Sparkles,
 } from 'lucide-react'
+import { useActionState, useEffect, useRef, useState, useTransition } from 'react'
+import { useFormStatus } from 'react-dom'
+import { Button } from '@/shared/ui/core/button'
+import { Card } from '@/shared/ui/core/card'
+import { Input } from '@/shared/ui/core/input'
+import { Label } from '@/shared/ui/core/label'
+import { Textarea } from '@/shared/ui/core/textarea'
+import { type EmailActionState, previewEmailAction, sendEmailAction } from './actions'
 
 // ── Email Templates ─────────────────────────────────────────────
 const EMAIL_TEMPLATES = {
@@ -97,7 +97,7 @@ export default function EmailSenderPage() {
       setShowPreview(false)
       setActiveTemplate('blank')
     }
-  }, [state.timestamp])
+  }, [state.timestamp, state.success])
 
   // Apply template
   function applyTemplate(name: TemplateName) {

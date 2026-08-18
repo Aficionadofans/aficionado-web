@@ -1,6 +1,7 @@
-import { Navigation } from '@/shared/ui/layout/Navigation'
-import { MainLayout } from '@/shared/ui/layout/MainLayout'
 import { createClient } from '@/shared/lib/supabase/server'
+import { ActiveUserTracker } from '@/shared/ui/layout/ActiveUserTracker'
+import { MainLayout } from '@/shared/ui/layout/MainLayout'
+import { Navigation } from '@/shared/ui/layout/Navigation'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -25,7 +26,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Navigation isAdmin={isAdmin} userType={userType} />
-      <MainLayout>{children}</MainLayout>
+      <MainLayout>
+        {user && <ActiveUserTracker userId={user.id} />}
+        {children}
+      </MainLayout>
     </>
   )
 }

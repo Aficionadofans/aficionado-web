@@ -2,13 +2,13 @@
 
 import {
   Film,
+  Flame,
+  PlayCircle,
+  ShieldCheck,
+  Sparkles,
   Target,
   TrendingUp,
   Zap,
-  Sparkles,
-  ShieldCheck,
-  Flame,
-  PlayCircle,
 } from 'lucide-react'
 
 const lanePills = [

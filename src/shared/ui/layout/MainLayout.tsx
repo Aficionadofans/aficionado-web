@@ -14,7 +14,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     '/creator-agreement',
   ]
   const isNavHidden = hideNavRoutes.some(
-    (route) => pathname === route || pathname.startsWith(route + '/'),
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
   )
 
   return (

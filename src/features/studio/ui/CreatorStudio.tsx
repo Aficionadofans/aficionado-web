@@ -1,27 +1,28 @@
 'use client'
 
-import React, { useState } from 'react'
 import {
-  Upload,
-  Video,
-  Users,
-  UserCog,
-  ShieldCheck,
   AlertTriangle,
   FileText,
-  UserPlus,
-  Share2,
   PlusCircle,
+  Share2,
+  ShieldCheck,
+  Upload,
+  UserCog,
+  UserPlus,
+  Users,
+  Video,
 } from 'lucide-react'
 import Link from 'next/link'
+import type React from 'react'
+import { useState } from 'react'
+import { CreateCircleModal } from '@/features/circles/ui/CreateCircleModal'
 import { SectionHeader, StatCounter } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 import { CreateDropModal } from './CreateDropModal'
-import { TimeCapsuleModal } from './TimeCapsuleModal'
 import { ImportFansModal } from './ImportFansModal'
-import { StudioQuickActions } from './StudioQuickActions'
 import { StudioMetricCards } from './StudioMetricCards'
-import { CreateCircleModal } from '@/features/circles/ui/CreateCircleModal'
+import { StudioQuickActions } from './StudioQuickActions'
+import { TimeCapsuleModal } from './TimeCapsuleModal'
 
 interface FlaggedItem {
   id: string
@@ -239,7 +240,7 @@ export function CreatorStudio({
                     {inner}
                   </Link>
                 ) : (
-                  <button className={sharedClass + ' w-full'} onClick={action.onClick}>
+                  <button className={`${sharedClass} w-full`} onClick={action.onClick}>
                     {inner}
                   </button>
                 )}

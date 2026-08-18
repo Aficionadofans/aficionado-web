@@ -1,8 +1,8 @@
 'use client'
 
+import { CheckCircle2 } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { Video, Camera, Radio, CheckCircle2, ArrowRight } from 'lucide-react'
 
 export function LandingServices() {
   return (

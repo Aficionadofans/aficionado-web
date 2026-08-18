@@ -19,7 +19,7 @@ export function useCountUp(target: number, duration = 1200) {
       const elapsed = now - startTime
       const progress = Math.min(elapsed / duration, 1)
       // Ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3)
+      const eased = 1 - (1 - progress) ** 3
       setValue(Math.round(eased * target))
       if (progress < 1) {
         rafRef.current = requestAnimationFrame(tick)

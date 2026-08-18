@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 export function UrgeInterceptor() {
-  const pathname = usePathname()
+  const _pathname = usePathname()
   const [isTriggered, setIsTriggered] = useState(false)
   const navigationTimes = useRef<number[]>([])
 
@@ -31,7 +31,7 @@ export function UrgeInterceptor() {
         setIsTriggered(false)
       }, BREATHE_DURATION_MS)
     }
-  }, [pathname, isTriggered])
+  }, [isTriggered])
 
   if (!isTriggered) return null
 

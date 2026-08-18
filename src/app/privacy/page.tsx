@@ -1,6 +1,5 @@
-import React from 'react'
-import Link from 'next/link'
 import { ArrowLeft, Lock } from 'lucide-react'
+import Link from 'next/link'
 
 export default function PrivacyPolicyPage() {
   return (

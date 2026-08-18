@@ -1,6 +1,6 @@
+import { notFound } from 'next/navigation'
 import { WatchPartyTheater } from '@/features/live/ui/WatchPartyTheater'
 import { createClient } from '@/shared/lib/supabase/server'
-import { notFound } from 'next/navigation'
 
 export default async function LiveWatchPartyPage({
   params,

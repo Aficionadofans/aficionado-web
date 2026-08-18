@@ -1,7 +1,7 @@
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { MfaForm } from '@/features/auth/ui/MfaForm'
 import { createClient } from '@/shared/lib/supabase/server'
-import { redirect } from 'next/navigation'
 
 export default async function MfaPage() {
   const supabase = await createClient()

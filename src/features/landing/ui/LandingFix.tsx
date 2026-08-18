@@ -1,8 +1,8 @@
 'use client'
 
-import { WordReveal } from '@/shared/ui/motion/WordReveal'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
 
 interface FixStat {
   value: string

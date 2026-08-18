@@ -1,8 +1,8 @@
 'use client'
 
+import { LayoutDashboard, Mail, ShieldAlert, Users } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Mail, Users, ShieldAlert } from 'lucide-react'
 
 const adminNavItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },

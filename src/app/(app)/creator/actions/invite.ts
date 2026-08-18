@@ -1,8 +1,8 @@
 'use server'
 
-import { createClient } from '@/shared/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { Resend } from 'resend'
+import { createClient } from '@/shared/lib/supabase/server'
 
 export async function processFanImport(emails: { email: string; name?: string }[], source: string) {
   if (emails.length > 500) {

@@ -1,8 +1,8 @@
 'use client'
 
-import { Play, Video, Pause, Volume2, VolumeX } from 'lucide-react'
+import { Pause, Play, Video, Volume2, VolumeX } from 'lucide-react'
+import { useRef, useState } from 'react'
 import { Card, CardContent } from '@/shared/ui/core/card'
-import { useState, useRef } from 'react'
 
 export interface CreatorSpotlightData {
   id: string

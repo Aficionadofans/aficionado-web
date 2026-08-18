@@ -22,6 +22,12 @@ When working on the Aficionado Web project, all agents MUST follow these core gu
 9. **Planning Mode Initially**: Always start tasks by researching first, creating an `implementation_plan.md` artifact, and obtaining explicit user review and approval before executing changes.
 10. **Supabase Backend Source of Truth**: Always treat the Supabase database schema, RLS policies, and SSR helpers as the single source of truth for application state and data access.
 11. **Supabase Vault & Secrets Protocol**: Always manage secrets (API keys, webhook secrets, environment tokens) idempotently in Supabase Vault using PL/pgSQL upsert logic (`vault.update_secret` if secret exists, `vault.create_secret` if new). Never insert duplicate secret names into `vault.secrets`. Ensure Edge Functions gracefully fall back to `vault.decrypted_secrets` if Deno environment variables are unconfigured.
+12. **Git Hooks & Security Pipeline (Lefthook)**:
+    - **Conventional Commits**: Format commit messages as `type(scope): message` (e.g. `feat(auth): add login modal`, `fix(nav): tab transition`).
+    - **Branch Naming**: Use `feat/*`, `fix/*`, `chore/*`, or `refactor/*`.
+    - **Zero Exposed Secrets**: Pre-commit hooks run `security-scan.sh` and `gitleaks-scan.sh`. Never commit `.env.local` or raw secret keys.
+13. **CI Pipeline Compliance**: All PRs must pass the GitHub Actions CI pipeline ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) which runs `security-scan.sh`, `biome check`, `oxlint`, `vitest`, and `next build`. Always run `bun run test` and `bunx biome check .` locally before pushing.
+
 
 
 

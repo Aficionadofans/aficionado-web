@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
+import { ArrowUpRight, Film, Play, Sparkles, Target, TrendingUp } from 'lucide-react'
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
-import { WordReveal } from '@/shared/ui/motion/WordReveal'
-
 import Link from 'next/link'
-import { Sparkles, ArrowUpRight, Film, Target, TrendingUp, Play } from 'lucide-react'
+import { useEffect } from 'react'
+import { WordReveal } from '@/shared/ui/motion/WordReveal'
 
 const heroCards = [
   {

@@ -1,4 +1,5 @@
-import { ArrowLeft, Lock } from 'lucide-react'
+import type { SupabaseClient } from '@supabase/supabase-js'
+import { Lock } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ProcessingVideoClient } from '@/features/studio/ui/ProcessingVideoClient'
@@ -43,11 +44,10 @@ async function getContent(
   return { content: null, authorized: false }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function signPlayback(
   playbackId: string,
   contentId: string,
-  supabase: any,
+  supabase: SupabaseClient,
 ): Promise<{ playback: string; thumbnail: string; storyboard: string } | undefined> {
   try {
     const { data, error } = await supabase.functions.invoke('api/mux/sign', {

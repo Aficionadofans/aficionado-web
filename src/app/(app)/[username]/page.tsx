@@ -1,5 +1,5 @@
-import { createClient } from '@/shared/lib/supabase/server'
 import { notFound } from 'next/navigation'
+import { createClient } from '@/shared/lib/supabase/server'
 import { CreatorProfileClient } from './CreatorProfileClient'
 
 export default async function CreatorProfilePage({

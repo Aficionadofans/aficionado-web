@@ -1,8 +1,7 @@
 'use client'
 
-import React from 'react'
-import { LiveStreamPlayer } from './LiveStreamPlayer'
 import { LiveChatSidebar } from './LiveChatSidebar'
+import { LiveStreamPlayer } from './LiveStreamPlayer'
 
 export function WatchPartyTheater({
   username,

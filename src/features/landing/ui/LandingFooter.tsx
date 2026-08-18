@@ -1,5 +1,5 @@
+import { Globe, MessageCircle, Share2, Sparkles } from 'lucide-react'
 import NextLink from 'next/link'
-import { Sparkles, Globe, Share2, MessageCircle } from 'lucide-react'
 
 export function LandingFooter() {
   return (

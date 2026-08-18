@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
-import { MessageCircle, Send, DollarSign, Star, User } from 'lucide-react'
-import { createClient } from '@/shared/lib/supabase/client'
+import { DollarSign, MessageCircle, Send, Star, User } from 'lucide-react'
 import Image from 'next/image'
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createClient } from '@/shared/lib/supabase/client'
 import type { LiveMessage, Profile } from '@/shared/types/database'
 
 export function LiveChatSidebar({ username }: { username: string }) {
@@ -75,7 +76,7 @@ export function LiveChatSidebar({ username }: { username: string }) {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [supabase])
+  }, [supabase, scrollToBottom, hydrateProfiles])
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault()

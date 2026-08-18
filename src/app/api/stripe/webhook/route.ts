@@ -1,6 +1,6 @@
+import { createClient } from '@supabase/supabase-js'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { createClient } from '@supabase/supabase-js'
 import type { SubscriptionStatus } from '@/shared/types/database'
 
 export async function POST(req: Request) {

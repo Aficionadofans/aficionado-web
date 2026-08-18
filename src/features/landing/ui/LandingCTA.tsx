@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { ArrowRight, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
 export function LandingCTA() {

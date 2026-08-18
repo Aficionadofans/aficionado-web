@@ -12,7 +12,7 @@ export async function submitTip(formData: FormData) {
   }
 
   const amountNum = parseFloat(amount)
-  if (isNaN(amountNum) || amountNum <= 0) {
+  if (Number.isNaN(amountNum) || amountNum <= 0) {
     throw new Error('Invalid tip amount')
   }
 

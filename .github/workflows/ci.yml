@@ -1,0 +1,54 @@
+name: CI — Lint, Test & Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-web-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint, Test & Security Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Security Scan (Secrets)
+        run: ./scripts/security-scan.sh
+
+      - name: Biome Check
+        run: bunx biome check .
+
+      - name: OxLint
+        run: bunx oxlint .
+
+      - name: Unit Tests (Vitest)
+        run: bun run test
+
+      - name: Dependency Audit
+        run: bun pm audit --level critical || true
+
+      - name: Build Check
+        run: bun run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder' }}
+          NEXT_PUBLIC_SITE_URL: "https://aficionado.fans"
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder' }}
+          NEXT_PUBLIC_MUX_ENV_KEY: ${{ secrets.NEXT_PUBLIC_MUX_ENV_KEY || 'placeholder' }}

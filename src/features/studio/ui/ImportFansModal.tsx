@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
-import { X, UploadCloud, Link as LinkIcon, CheckCircle2, Users, ArrowRight } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Link as LinkIcon, UploadCloud, Users, X } from 'lucide-react'
+import type React from 'react'
+import { useRef, useState } from 'react'
 import { processFanImport } from '@/app/(app)/creator/actions/invite'
 
 interface ImportFansModalProps {

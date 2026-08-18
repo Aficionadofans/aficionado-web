@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
-import { X, UploadCloud, Calendar, Lock } from 'lucide-react'
+import { Calendar, Lock, UploadCloud, X } from 'lucide-react'
+import type React from 'react'
+import { useState } from 'react'
 
 export function TimeCapsuleModal({ onClose }: { onClose: () => void }) {
   const [file, setFile] = useState<File | null>(null)

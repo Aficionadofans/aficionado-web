@@ -1,10 +1,10 @@
 'use server'
 
-import { createClient } from '@/shared/lib/supabase/server'
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/shared/lib/supabase/server'
 
-export async function verifyMfa(prevState: unknown, formData: FormData) {
+export async function verifyMfa(_prevState: unknown, formData: FormData) {
   const factorId = formData.get('factorId') as string
   const code = (formData.get('code') as string)?.trim()
 
