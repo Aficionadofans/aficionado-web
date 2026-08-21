@@ -76,7 +76,7 @@ export function LandingResultsGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {results.map((item, i) => (
             <RevealSection key={item.handle} delay={i * 80}>
-              <div className="curved-card-hover p-6 flex flex-col justify-between h-full border border-white/10 group text-left">
+              <div className="liquid-glass-hover rounded-[2rem] p-6 flex flex-col justify-between h-full border border-white/10 group text-left">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
                     <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Geist_Mono, Inter, Syne } from 'next/font/google'
+import { AmbientOrbs } from '@/shared/ui/motion/AmbientOrbs'
 import { DustParticles } from '@/shared/ui/motion/DustParticles'
 import './globals.css'
 
@@ -60,18 +61,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {/* Floating white dust particle animation */}
         <DustParticles />
 
-        {/* Ambient background orbs — fiery orange + electric teal gradient theme */}
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#090401]">
-          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#E8501A]/10 blur-[150px] mix-blend-screen animate-breathe-calm" />
-          <div
-            className="absolute bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full bg-primary/10 blur-[160px] mix-blend-screen animate-breathe-calm"
-            style={{ animationDelay: '3s' }}
-          />
-          <div
-            className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[40vw] h-[40vw] rounded-full bg-[#FF3B00]/8 blur-[140px] mix-blend-screen animate-breathe-calm"
-            style={{ animationDelay: '1.5s' }}
-          />
-        </div>
+        {/* Ambient background orbs — tokenized via CSS custom properties */}
+        <AmbientOrbs />
 
         {children}
       </body>

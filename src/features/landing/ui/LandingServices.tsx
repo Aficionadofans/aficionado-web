@@ -26,7 +26,7 @@ export function LandingServices() {
 
         {/* Bottom Guarantee Banner from Framer Template */}
         <RevealSection delay={300}>
-          <div className="curved-card p-6 sm:p-8 border border-[#E8501A]/40 bg-gradient-to-r from-[#140E1A] via-[#0E0B14] to-[#0A070F] flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="liquid-glass rounded-[2rem] p-6 sm:p-8 border border-[#E8501A]/40 bg-gradient-to-r from-[#140E1A] via-[#0E0B14] to-[#0A070F] flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-left max-w-xl">
               <h4 className="text-lg font-extrabold text-white font-heading mb-1">
                 Hand off the heavy lifting

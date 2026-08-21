@@ -110,7 +110,7 @@ export function SettingsView({
 
       {/* Content */}
       <RevealSection delay={100} className="flex-1">
-        <main className="flex-1 trend-card rounded-[var(--radius-xl)] p-6 md:p-8 relative overflow-hidden">
+        <main className="flex-1 liquid-glass-panel rounded-[var(--radius-xl)] p-6 md:p-8 relative overflow-hidden">
           {activeTab === 'profile' && (
             <ProfileTab username={username} bio={bio} zipCode={zipCode} />
           )}

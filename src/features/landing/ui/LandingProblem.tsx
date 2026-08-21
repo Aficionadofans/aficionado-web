@@ -32,7 +32,7 @@ export function LandingProblem() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Views that don't convert */}
           <RevealSection delay={0}>
-            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
+            <div className="liquid-glass glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group relative overflow-hidden rounded-[1.75rem]">
               <div className="flex flex-col gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 shadow-[0_0_16px_rgba(239,68,68,0.2)]">
                   <TrendingDown className="w-6 h-6" />
@@ -64,7 +64,7 @@ export function LandingProblem() {
 
           {/* Card 2: Likes don't pay the bills */}
           <RevealSection delay={100}>
-            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
+            <div className="liquid-glass glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group relative overflow-hidden rounded-[1.75rem]">
               <div className="flex flex-col gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.2)]">
                   <Coins className="w-6 h-6" />
@@ -94,7 +94,7 @@ export function LandingProblem() {
 
           {/* Card 3: No system, no consistency */}
           <RevealSection delay={200}>
-            <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group">
+            <div className="liquid-glass glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group relative overflow-hidden rounded-[1.75rem]">
               <div className="flex flex-col gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-[#E8501A]/10 border border-[#E8501A]/30 flex items-center justify-center text-[#E8501A] shadow-[0_0_16px_rgba(232,80,26,0.25)]">
                   <CalendarX className="w-6 h-6" />

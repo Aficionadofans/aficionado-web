@@ -25,7 +25,7 @@ export function LandingTestimonial() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Testimonial 1 */}
           <RevealSection delay={0}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
+            <div className="liquid-glass-hover rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-1 text-amber-400">
                   {[...Array(5)].map((_, i) => (
@@ -62,7 +62,7 @@ export function LandingTestimonial() {
 
           {/* Testimonial 2 */}
           <RevealSection delay={100}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
+            <div className="liquid-glass-hover rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-1 text-amber-400">
                   {[...Array(5)].map((_, i) => (
@@ -98,7 +98,7 @@ export function LandingTestimonial() {
 
           {/* Testimonial 3 */}
           <RevealSection delay={200}>
-            <div className="curved-card-hover p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
+            <div className="liquid-glass-hover rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between h-full border border-white/10 text-left group">
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-1 text-amber-400">
                   {[...Array(5)].map((_, i) => (

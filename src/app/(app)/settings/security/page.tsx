@@ -13,7 +13,7 @@ export default async function SecurityPage() {
   const initialFactorId = totpFactor?.id || ''
 
   return (
-    <div className="max-w-3xl px-4 py-8 mx-auto lg:py-12">
+    <div className="max-w-3xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12 mx-auto">
       <header className="mb-10">
         <h1 className="text-3xl font-bold tracking-tight text-off-white">Security</h1>
         <p className="mt-2 text-muted-foreground">

@@ -11,6 +11,10 @@ export function DustParticles() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
+    // Respect user motion preferences
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const prefersReducedMotion = motionQuery.matches
+
     let animationFrameId: number
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
@@ -23,15 +27,15 @@ export function DustParticles() {
 
     window.addEventListener('resize', handleResize)
 
-    // Generate 75 floating white dust particles
-    const particleCount = 75
+    // Reduce particle count for users who prefer reduced motion
+    const particleCount = prefersReducedMotion ? 20 : 75
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       radius: Math.random() * 1.8 + 0.4,
       opacity: Math.random() * 0.5 + 0.15,
-      speedY: Math.random() * 0.4 + 0.1,
-      speedX: (Math.random() - 0.5) * 0.25,
+      speedY: (Math.random() * 0.4 + 0.1) * (prefersReducedMotion ? 0.3 : 1),
+      speedX: (Math.random() - 0.5) * 0.25 * (prefersReducedMotion ? 0.3 : 1),
       pulseSpeed: Math.random() * 0.02 + 0.005,
       pulseFactor: Math.random() * Math.PI,
     }))
@@ -71,5 +75,11 @@ export function DustParticles() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 z-[1] pointer-events-none opacity-80" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 z-[1] pointer-events-none opacity-80"
+      style={{ willChange: 'transform' }}
+    />
+  )
 }

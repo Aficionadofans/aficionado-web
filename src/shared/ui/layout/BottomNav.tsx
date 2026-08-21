@@ -9,15 +9,7 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
       aria-label="Mobile Bottom Navigation"
       className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-md md:hidden"
     >
-      <div
-        className="grid grid-cols-5 h-16 items-center px-2 rounded-full border border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] transition-all duration-300"
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(20, 20, 24, 0.88) 0%, rgba(10, 10, 12, 0.94) 100%)',
-          backdropFilter: 'blur(32px) saturate(1.5)',
-          WebkitBackdropFilter: 'blur(32px) saturate(1.5)',
-        }}
-      >
+      <div className="grid grid-cols-5 h-16 items-center px-2 rounded-full liquid-glass-raised shadow-[0_16px_40px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)]">
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive =
@@ -38,10 +30,7 @@ export function BottomNav({ navItems, pathname }: { navItems: NavigationItems; p
               {/* Active ambient glow pill */}
               {isActive && (
                 <div
-                  className="absolute inset-1 rounded-full z-0 pointer-events-none transition-all"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(0,212,200,0.18) 0%, transparent 80%)',
-                  }}
+                  className="absolute inset-1 rounded-full z-0 pointer-events-none transition-all glass-pill-active border-0"
                   aria-hidden="true"
                 />
               )}

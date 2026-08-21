@@ -39,7 +39,7 @@ export default async function ExplorePage() {
         ></div>
       </div>
 
-      <div className="relative z-10 max-w-3xl px-4 py-8 mx-auto lg:py-12">
+      <div className="relative z-10 max-w-3xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12 mx-auto">
         <header className="mb-8 animate-fade-in-up">
           <div className="clipcut-pill inline-flex items-center gap-2 px-3 py-1 mb-3">
             <Star className="w-3.5 h-3.5 fill-primary" />
@@ -73,7 +73,7 @@ export default async function ExplorePage() {
                   </RevealSection>
                 ))
               ) : (
-                <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
+                <div className="col-span-2 p-6 rounded-2xl liquid-glass-panel text-center">
                   <p className="text-muted-foreground text-sm font-medium">
                     No creators featured today. Check back tomorrow!
                   </p>
@@ -101,7 +101,7 @@ export default async function ExplorePage() {
                   </RevealSection>
                 ))
               ) : (
-                <div className="col-span-2 p-6 rounded-2xl trend-card text-center">
+                <div className="col-span-2 p-6 rounded-2xl liquid-glass-panel text-center">
                   <p className="text-muted-foreground text-sm font-medium">
                     No active circles found right now.
                   </p>

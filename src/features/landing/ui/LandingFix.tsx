@@ -62,7 +62,7 @@ export function LandingFix() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
             <RevealSection key={stat.label} delay={i * 100}>
-              <div className="liquid-glass-card glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group text-left">
+              <div className="liquid-glass glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group text-left relative overflow-hidden rounded-[1.75rem]">
                 <div>
                   <span
                     className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF5500] via-[#E8501A] to-[#00D4C8] block mb-2 drop-shadow-[0_0_15px_rgba(232,80,26,0.3)]"
