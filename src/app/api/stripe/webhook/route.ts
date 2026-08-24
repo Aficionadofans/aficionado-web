@@ -14,9 +14,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 })
   }
 
-  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' })
-
-  // Use Service Role — webhooks run outside user session context
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: '2026-07-29.dahlia',
+    typescript: true,
+  }) // Use Service Role — webhooks run outside user session context
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey)
 
   const body = await req.text()
