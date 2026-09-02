@@ -18,18 +18,6 @@ export default async function CreatorPage() {
 
   if (profile?.user_type === 'fan') redirect('/home')
 
-  // Active subscriber count
-  const { count: activeSubscribers } = await supabase
-    .from('subscriptions')
-    .select('*', { count: 'exact', head: true })
-    .eq('creator_id', user.id)
-    .eq('status', 'active')
-
-  // Total content count
-  const { count: totalContent } = await supabase
-    .from('content')
-    .select('*', { count: 'exact', head: true })
-    .eq('author_id', user.id)
 
   // Flagged content needing review
   const { data: flaggedContent } = await supabase
@@ -44,8 +32,6 @@ export default async function CreatorPage() {
     <div className="min-h-screen bg-background">
       <CreatorStudio
         username={profile?.username ?? ''}
-        activeSubscribers={activeSubscribers ?? 0}
-        totalContent={totalContent ?? 0}
         flaggedContent={flaggedContent ?? []}
       />
     </div>
