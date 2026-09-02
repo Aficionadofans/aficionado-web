@@ -38,11 +38,11 @@ export function LandingProblem() {
                   <TrendingDown className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">
-                  Content that doesn’t connect
+                  Endless scroll, zero connection
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-                  Your videos are out there, but no real engagement, subscriber growth, or direct
-                  revenue.
+                  Global feeds reduce creators to passive reactions. Without geographic proximity,
+                  views rarely convert into genuine community or real-world collab.
                 </p>
               </div>
             </div>
@@ -59,14 +59,14 @@ export function LandingProblem() {
                   Likes don’t pay the bills
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Viral moments feel good, but without a sovereign direct monetization model, they
-                  don’t build a business.
+                  Viral moments feel good, but without sovereign direct monetization and local
+                  roots, they don’t build a lasting creative career.
                 </p>
               </div>
             </div>
           </RevealSection>
 
-          {/* Card 3: No system, no consistency */}
+          {/* Card 3: Algorithmic distribution traps */}
           <RevealSection delay={200}>
             <div className="liquid-glass glass-shimmer-sweep p-6 sm:p-8 flex flex-col justify-between h-full group relative overflow-hidden rounded-[1.75rem]">
               <div className="flex flex-col gap-4">
@@ -74,11 +74,11 @@ export function LandingProblem() {
                   <CalendarX className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">
-                  No system, no consistency
+                  Algorithmic distribution traps
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Posting randomly without a structured drop system leads to viewer fatigue and
-                  algorithm traps.
+                  Feeding black-box recommendation feeds leads to burnout. Proximity-driven
+                  discovery connects creators with fans right in their own zip code.
                 </p>
               </div>
             </div>

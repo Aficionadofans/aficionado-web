@@ -1,15 +1,50 @@
-import { Compass, Hash, Star } from 'lucide-react'
+import { Compass, Hash, MapPin, Star } from 'lucide-react'
 import Link from 'next/link'
 import { CircleHighlight } from '@/features/explore/ui/CircleHighlight'
 import { CreatorSpotlight } from '@/features/explore/ui/CreatorSpotlight'
 import { CuratorCard } from '@/features/explore/ui/CuratorCard'
 import { DiscoverySearch } from '@/features/explore/ui/DiscoverySearch'
+import { LocalCreatorGrid } from '@/features/explore/ui/LocalCreatorGrid'
 import { createClient } from '@/shared/lib/supabase/server'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
 export default async function ExplorePage() {
   const supabase = await createClient()
+
+  // Fetch current user's zip code for local discovery
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  let userZip = ''
+  if (user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('zip_code')
+      .eq('id', user.id)
+      .single()
+    userZip = profile?.zip_code ?? ''
+  }
+
+  // Fetch local creators in the same zip code
+  let localCreators: {
+    id: string
+    username: string | null
+    avatar_url: string | null
+    bio: string | null
+    zip_code: string | null
+  }[] = []
+  if (userZip) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('id, username, avatar_url, bio, zip_code')
+      .eq('zip_code', userZip)
+      .eq('user_type', 'aficionado')
+      .neq('id', user?.id ?? '')
+      .limit(6)
+    localCreators = data ?? []
+  }
 
   // Fetch only a strictly curated, finite number of items
   const { data: featuredCreators } = await supabase
@@ -56,10 +91,27 @@ export default async function ExplorePage() {
         <DiscoverySearch />
 
         <div>
+          {/* Near You — Local Discovery Engine */}
+          {userZip && (
+            <>
+              <section aria-label="Creators Near You">
+                <SectionHeader
+                  variant="editorial"
+                  number="00"
+                  label="NEAR YOU"
+                  title={`Creators in ${userZip}`}
+                  icon={<MapPin className="w-5 h-5" />}
+                />
+                <LocalCreatorGrid creators={localCreators} userZip={userZip} />
+              </section>
+              <hr className="section-divider my-8" />
+            </>
+          )}
+
           <section aria-label="Today&apos;s Featured Voices">
             <SectionHeader
               variant="editorial"
-              number="01"
+              number={userZip ? '01' : '01'}
               label="FEATURED VOICES"
               title="Today's Voices"
               icon={<Star className="w-5 h-5" />}

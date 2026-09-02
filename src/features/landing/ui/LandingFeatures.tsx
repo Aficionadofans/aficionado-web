@@ -1,6 +1,6 @@
 'use client'
 
-import { BarChart2, CreditCard, Globe, Lock, Radio, Shield, Upload, Users } from 'lucide-react'
+import { CreditCard, Globe, Lock, MapPin, Shield, Upload, Users } from 'lucide-react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
@@ -41,6 +41,12 @@ const features: FeatureCard[] = [
     icon: <CreditCard className="w-5 h-5" />,
     headline: 'Instant Stripe Payouts',
     body: 'Direct Stripe & Supabase SSR infrastructure ensuring payouts reach your bank account within 24 hours.',
+  },
+  {
+    icon: <MapPin className="w-5 h-5" />,
+    headline: 'Zipcode Discovery Engine',
+    body: 'Creators get surfaced to fans in their geographic area. Proximity replaces algorithms — real local community.',
+    badge: 'Local First',
   },
   {
     icon: <Lock className="w-5 h-5" />,

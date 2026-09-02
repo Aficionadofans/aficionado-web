@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, Grip, Lock, Play } from 'lucide-react'
+import { ArrowLeft, Grip, Lock, MapPin, Play } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -10,10 +10,13 @@ import { cn } from '@/lib/utils'
 import type { Content, Profile } from '@/shared/types/database'
 
 interface Props {
-  profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'>
+  profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'> & {
+    zip_code?: string | null
+  }
   contentItems: Pick<Content, 'id' | 'mux_playback_id' | 'title' | 'description' | 'visibility'>[]
   circleId: string
   source?: string
+  isLocalCollab?: boolean
 }
 
 export function CreatorProfileClient({
@@ -21,6 +24,7 @@ export function CreatorProfileClient({
   contentItems,
   circleId,
   source,
+  isLocalCollab = false,
 }: Props) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'feed' | 'circle'>('feed')
@@ -46,6 +50,7 @@ export function CreatorProfileClient({
         )}
       >
         <button
+          type="button"
           onClick={() => router.back()}
           className={cn(
             'rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
@@ -84,7 +89,6 @@ export function CreatorProfileClient({
                 Verified
               </span>
             </h1>
-
           </div>
         </div>
       </header>
@@ -137,10 +141,14 @@ export function CreatorProfileClient({
 
         {/* CTA Buttons */}
         <div className="flex items-center gap-3 mt-1">
-          <button className="clipcut-pill inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60">
+          <button
+            type="button"
+            className="clipcut-pill inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-bold shadow-[0_0_20px_rgba(0,212,200,0.3)] hover:shadow-[0_0_28px_rgba(0,212,200,0.5)] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+          >
             Subscribe
           </button>
           <button
+            type="button"
             className="rounded-full px-6 py-2.5 text-sm font-bold transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/60"
             style={{
               background: 'var(--color-monetization, #F59E0B)',
@@ -156,9 +164,28 @@ export function CreatorProfileClient({
           >
             Tip ✦
           </button>
+          {isLocalCollab && (
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
+              style={{
+                background: 'linear-gradient(135deg, rgba(0,212,200,0.15), rgba(16,185,129,0.15))',
+                border: '1px solid rgba(0,212,200,0.4)',
+                color: '#00D4C8',
+                boxShadow: '0 0 16px rgba(0,212,200,0.2)',
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.boxShadow = '0 0 24px rgba(0,212,200,0.4)')
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.boxShadow = '0 0 16px rgba(0,212,200,0.2)')
+              }
+            >
+              <MapPin className="w-3.5 h-3.5" />
+              Collab?
+            </button>
+          )}
         </div>
-
-
       </div>
 
       {/* Bio */}
@@ -188,6 +215,7 @@ export function CreatorProfileClient({
             aria-hidden="true"
           />
           <button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'feed'}
             onClick={() => setActiveTab('feed')}
@@ -201,6 +229,7 @@ export function CreatorProfileClient({
             </div>
           </button>
           <button
+            type="button"
             role="tab"
             aria-selected={activeTab === 'circle'}
             onClick={() => setActiveTab('circle')}
@@ -227,11 +256,7 @@ export function CreatorProfileClient({
               <p className="text-sm">No public content available yet.</p>
             </div>
           ) : (
-            <div
-              className="grid grid-cols-3 gap-0.5 p-0.5"
-              role="region"
-              aria-label="Public Video Grid"
-            >
+            <section className="grid grid-cols-3 gap-0.5 p-0.5" aria-label="Public Video Grid">
               {contentItems.map((item, index) => (
                 <Link
                   key={item.id}
@@ -244,10 +269,12 @@ export function CreatorProfileClient({
                   }}
                 >
                   {item.mux_playback_id ? (
-                    <img
+                    <Image
                       src={`https://image.mux.com/${item.mux_playback_id}/thumbnail.jpg?width=400`}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      alt={item.title || 'Video thumbnail'}
+                      fill
+                      unoptimized
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   ) : (
                     <div className="w-full h-full bg-white/5 transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
@@ -266,7 +293,7 @@ export function CreatorProfileClient({
                   </div>
                 </Link>
               ))}
-            </div>
+            </section>
           )
         ) : circleId ? (
           <InnerCircleView username={profile.username || 'Creator'} circleId={circleId} />

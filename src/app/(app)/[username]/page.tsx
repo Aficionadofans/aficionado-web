@@ -18,7 +18,7 @@ export default async function CreatorProfilePage({
   // Fetch creator profile
   const { data: profile } = await supabase
     .from('profiles')
-    .select('id, username, bio, avatar_url, user_type')
+    .select('id, username, bio, avatar_url, user_type, zip_code')
     .eq('username', username)
     .single()
 
@@ -41,12 +41,32 @@ export default async function CreatorProfilePage({
     .eq('owner_id', profile.id)
     .single()
 
+  // Determine if local collab is possible
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  let isLocalCollab = false
+  if (user && profile.zip_code) {
+    const { data: viewerProfile } = await supabase
+      .from('profiles')
+      .select('zip_code, user_type')
+      .eq('id', user.id)
+      .single()
+    isLocalCollab =
+      viewerProfile?.user_type === 'aficionado' &&
+      !!viewerProfile?.zip_code &&
+      viewerProfile.zip_code === profile.zip_code &&
+      user.id !== profile.id
+  }
+
   return (
     <CreatorProfileClient
       profile={profile}
       contentItems={contentItems ?? []}
       circleId={circle?.id ?? ''}
       source={source}
+      isLocalCollab={isLocalCollab}
     />
   )
 }

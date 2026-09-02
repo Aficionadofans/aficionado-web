@@ -1,6 +1,6 @@
 'use client'
 
-import { Compass, Heart, MessageCircle } from 'lucide-react'
+import { Compass, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Content, Profile } from '@/shared/types/database'
@@ -16,6 +16,7 @@ export type Video = Pick<Content, 'id' | 'description'> & {
   unlocksAt?: string
   moderationStatus?: Content['moderation_status']
   status?: Content['status']
+  isLocal?: boolean
 }
 
 export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
@@ -126,8 +127,9 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                   )}
 
                   {/* Creator username — bottom-left overlay */}
-                  <div className="absolute bottom-3 left-3 z-10">
-                    <span
+                  <div className="absolute bottom-3 left-3 z-10 flex items-center gap-2">
+                    <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault()
                         window.location.href = `/${video.creator}`
@@ -136,10 +138,14 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                       style={{ fontFamily: 'var(--font-heading)' }}
                     >
                       @{video.creator}
-                    </span>
+                    </button>
+                    {video.isLocal && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/20 border border-primary/30 text-[10px] font-bold text-primary backdrop-blur-sm">
+                        <MapPin className="w-2.5 h-2.5" />
+                        Near You
+                      </span>
+                    )}
                   </div>
-
-
                 </div>
 
                 {/* Description — 2-line truncate */}

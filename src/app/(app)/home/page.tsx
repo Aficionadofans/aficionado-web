@@ -16,6 +16,14 @@ export default async function HomePage() {
     redirect('/auth')
   }
 
+  // Fetch user's zip code for local discovery
+  const { data: myProfile } = await supabase
+    .from('profiles')
+    .select('zip_code')
+    .eq('id', user.id)
+    .single()
+  const myZip = myProfile?.zip_code ?? ''
+
   // Fallback to admin client to bypass any restrictive RLS that might hide drops/videos from followers
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -67,9 +75,64 @@ export default async function HomePage() {
     if (othersContent) feedContent = othersContent
   }
 
-  // Merge and sort
-  const contentData = [...(ownContent || []), ...feedContent]
-    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  // 3b. Fetch local creator content based on zip code
+  let localAuthorIds: string[] = []
+  if (myZip) {
+    const { data: localProfiles } = await dbClient
+      .from('profiles')
+      .select('id')
+      .eq('zip_code', myZip)
+      .eq('user_type', 'aficionado')
+      .neq('id', user.id)
+      .limit(20)
+    localAuthorIds = (localProfiles || []).map((p) => p.id)
+  }
+
+  let localContent: Record<string, unknown>[] = []
+  if (localAuthorIds.length > 0) {
+    const { data: localData } = await dbClient
+      .from('content')
+      .select(
+        'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at, author_id',
+      )
+      .in('author_id', localAuthorIds)
+      .eq('moderation_status', 'approved')
+      .not('mux_playback_id', 'is', null)
+      .order('created_at', { ascending: false })
+      .limit(10)
+    if (localData) localContent = localData
+  }
+
+  // Merge: local first, then own+followed, deduped
+  const seenIds = new Set<string>()
+  const mergedContent: (Record<string, unknown> & { _isLocal?: boolean })[] = []
+
+  // Local content first
+  for (const item of localContent) {
+    const id = item.id as string
+    if (!seenIds.has(id)) {
+      seenIds.add(id)
+      mergedContent.push({ ...item, _isLocal: true })
+    }
+  }
+
+  // Then own + followed content
+  for (const item of [...(ownContent || []), ...feedContent]) {
+    const id = item.id as string
+    if (!seenIds.has(id)) {
+      seenIds.add(id)
+      mergedContent.push(item)
+    }
+  }
+
+  const contentData = mergedContent
+    .sort((a, b) => {
+      // Local content gets a boost (sorts earlier)
+      const aLocal = (a as { _isLocal?: boolean })._isLocal ? 1 : 0
+      const bLocal = (b as { _isLocal?: boolean })._isLocal ? 1 : 0
+      if (aLocal !== bLocal) return bLocal - aLocal
+      return new Date(b.created_at as string).getTime() - new Date(a.created_at as string).getTime()
+    })
     .slice(0, 20)
 
   const videos: Video[] = (contentData ?? []).map((c) => {
@@ -84,6 +147,7 @@ export default async function HomePage() {
       isSubscribed: true, // They are subscribed or it's their own
       moderationStatus: (c.moderation_status as Content['moderation_status']) ?? 'approved',
       status: c.status as Content['status'],
+      isLocal: !!(c as { _isLocal?: boolean })._isLocal,
     }
   })
 
