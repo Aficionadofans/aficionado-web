@@ -11,7 +11,6 @@ const PROTECTED_ROUTES = [
   '/settings',
   '/studio',
   '/creator',
-  '/live',
   '/content',
   '/monetization',
   '/admin',

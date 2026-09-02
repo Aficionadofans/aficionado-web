@@ -18,12 +18,7 @@ const features: FeatureCard[] = [
     body: 'Upload high-resolution video & audio drops, set direct fan prices, and keep 100% of your earnings.',
     badge: 'Core Feature',
   },
-  {
-    icon: <Radio className="w-5 h-5" />,
-    headline: 'Interactive Live Broadcasts',
-    body: 'Host real-time HD streams with low-latency chat, fan tipping, and exclusive Q&As for inner circles.',
-    badge: 'Live Stream',
-  },
+
   {
     icon: <Users className="w-5 h-5" />,
     headline: 'Gated Inner Circles',

@@ -23,10 +23,10 @@ const steps: Step[] = [
   },
   {
     number: '02',
-    title: 'Drop Short-Form Content & Stream Live',
+    title: 'Drop Short-Form Content',
     subtitle: 'Zero algorithm interference',
     description:
-      'Publish high-retention video drops, uncompressed audio drops, or launch interactive live streams straight to your audience.',
+      'Publish high-retention video drops and uncompressed audio drops straight to your audience.',
     icon: <Video className="w-6 h-6 text-primary" />,
   },
   {

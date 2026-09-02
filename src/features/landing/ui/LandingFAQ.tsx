@@ -32,9 +32,8 @@ const faqs: FAQItem[] = [
       'You own 100% of your content, intellectual property, and subscriber contacts. Aficionado never locks your audience behind proprietary wall gardens, and you can export your fan database at any time.',
   },
   {
-    question: 'What video and audio formats are supported for live streaming and drops?',
-    answer:
-      'Aficionado supports 4K HDR video uploads, uncompressed audio drops, Mux live streaming infrastructure, and low-latency interactive chat streams.',
+    question: 'What video and audio formats are supported for drops?',
+    answer: 'Aficionado supports 4K HDR video uploads and uncompressed audio drops.',
   },
 ]
 

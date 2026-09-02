@@ -81,20 +81,12 @@ export function CreatorStudio({
   const [isImportFansModalOpen, setIsImportFansModalOpen] = useState(false)
   const [isCreateCircleModalOpen, setIsCreateCircleModalOpen] = useState(false)
 
-  const liveUrl = username ? `/live/${username}` : '#'
-
   const quickActions: QuickAction[] = [
     {
       icon: <Upload className="w-5 h-5 text-primary" />,
       title: 'Upload Content',
       description: 'Publish a new video drop to your channel',
       href: '/create',
-    },
-    {
-      icon: <Video className="w-5 h-5 text-primary" />,
-      title: 'Go Live',
-      description: 'Start a live stream for your subscribers',
-      href: liveUrl,
     },
     {
       icon: <Users className="w-5 h-5 text-primary" />,
@@ -177,14 +169,6 @@ export function CreatorStudio({
               <Upload className="w-4 h-4" />
               Upload Content
             </button>
-
-            <Link
-              href={liveUrl}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-sm font-bold text-off-white hover:bg-white/10 hover:border-primary/40 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            >
-              <Video className="w-4 h-4" />
-              Go Live
-            </Link>
           </div>
         </div>
       </section>

@@ -102,8 +102,8 @@ export function LandingProblemSolution() {
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Gated Fan Inner Circles:</strong> Host live sessions and drop exclusive
-                    content for your most loyal supporters.
+                    <strong>Gated Fan Inner Circles:</strong> Drop exclusive content for your most
+                    loyal supporters.
                   </span>
                 </li>
               </ul>

@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
     handle: '@jamesvideo',
     initial: 'J',
     avatarBg: 'rgba(0, 212, 200, 0.18)',
-    quote: 'Going live on Aficionado feels intimate. My audience actually shows up and stays.',
+    quote: 'Publishing on Aficionado feels intimate. My audience actually shows up and stays.',
   },
   {
     name: 'Luna Park',

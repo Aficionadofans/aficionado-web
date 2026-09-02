@@ -1,13 +1,13 @@
 'use client'
 
-import { Play, Radio, Sparkles, Video } from 'lucide-react'
+import { Play, Sparkles, Video } from 'lucide-react'
 import { useState } from 'react'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 
 interface ShowcaseItem {
   id: string
-  category: 'video' | 'circle' | 'live'
+  category: 'video' | 'circle'
   title: string
   creator: string
   role: string
@@ -32,19 +32,7 @@ const items: ShowcaseItem[] = [
     description:
       'Exclusive masterclass on leaving legacy algorithmic platforms to build direct subscriber circles.',
   },
-  {
-    id: '2',
-    category: 'live',
-    title: 'Live Q&A: Anti-Dopamine Content Architecture',
-    creator: 'Maya Lin',
-    role: 'Wellness & Design Strategist',
-    avatarText: 'ML',
-    subscribers: '22.1k',
-    duration: 'LIVE',
-    thumbnailGradient: 'from-teal-950/80 via-[#0D1C1B] to-[#070709]',
-    description:
-      'Interactive broadcast exploring finite social design, audience retention, and well-being.',
-  },
+
   {
     id: '4',
     category: 'circle',
@@ -61,7 +49,7 @@ const items: ShowcaseItem[] = [
 ]
 
 export function LandingShowcase() {
-  const [activeTab, setActiveTab] = useState<'all' | 'video' | 'live' | 'circle'>('all')
+  const [activeTab, setActiveTab] = useState<'all' | 'video' | 'circle'>('all')
 
   const filteredItems =
     activeTab === 'all' ? items : items.filter((item) => item.category === activeTab)
@@ -81,8 +69,7 @@ export function LandingShowcase() {
             className="mb-4"
           />
           <p className="text-sm sm:text-base text-muted-foreground">
-            Explore real video drops, live broadcasts, and gated inner circles powered by
-            Aficionado.
+            Explore real video drops and gated inner circles powered by Aficionado.
           </p>
 
           {/* Filter Tabs */}
@@ -107,16 +94,7 @@ export function LandingShowcase() {
             >
               <Video className="w-3.5 h-3.5" /> Video Drops
             </button>
-            <button
-              onClick={() => setActiveTab('live')}
-              className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                activeTab === 'live'
-                  ? 'bg-primary text-primary-foreground shadow-[0_0_16px_rgba(0,212,200,0.4)]'
-                  : 'bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10'
-              }`}
-            >
-              <Radio className="w-3.5 h-3.5" /> Live Streams
-            </button>
+
             <button
               onClick={() => setActiveTab('circle')}
               className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${

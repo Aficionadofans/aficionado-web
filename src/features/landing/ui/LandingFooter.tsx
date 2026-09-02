@@ -101,12 +101,6 @@ export function LandingFooter() {
             >
               Inner Circles
             </NextLink>
-            <NextLink
-              href="/login"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              Live Broadcasts
-            </NextLink>
           </div>
 
           {/* Legal Column */}

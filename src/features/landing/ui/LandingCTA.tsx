@@ -26,8 +26,8 @@ export function LandingCTA() {
           </h2>
 
           <p className="text-base md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Leave legacy infinite scroll traps behind. Own your fan relationships, stream live, and
-            keep 100% of direct fan subscriptions today.
+            Leave legacy infinite scroll traps behind. Own your fan relationships and build a loyal
+            audience.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">

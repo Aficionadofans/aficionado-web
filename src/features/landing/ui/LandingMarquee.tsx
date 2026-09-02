@@ -43,7 +43,7 @@ const lanePills = [
     badge: 'High Watch Time',
   },
   {
-    text: 'Live HD Broadcasts',
+    text: '4K HDR Video',
     icon: <PlayCircle className="w-3.5 h-3.5 text-primary" />,
     badge: 'Low Latency',
   },
