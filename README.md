@@ -14,6 +14,7 @@ Aficionado Web is the Next.js 16 client for the Aficionado Wellness App ecosyste
 2. **Micro-Animations**: All lists and cards use staggered fade-in animations (`animate-fade-in-up`), and hover states provide subtle scaling or translating effects for a highly interactive, tactile feel.
 3. **Finite Navigation**: Core sections (`/home`, `/explore`, `/create`, `/circles`, `/progress`) have fixed endpoints. There is no infinite scrolling, reducing mindless engagement.
 4. **Responsive**: A dedicated bottom bar for mobile and a side rail for desktop screens with animated active states.
+5. **Zipcode-Based Local Discovery & Collab**: Replaces algorithmic distribution with proximity-driven community. Creators are surfaced to fans in their geographic area via the "Near You" Explore grid and local-first home feed. Creators sharing the same zip code are provided with a direct "Local — Collab?" action.
 
 ## Local Development
 

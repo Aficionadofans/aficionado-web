@@ -27,16 +27,17 @@ Aficionado is a premium social media platform designed to connect creators and t
   - **Seamless Swiping:** Physics-based vertical swiping to seamlessly transition between videos.
 
 ### 2. The Creator Studio
-- **Goal:** Empower creators to upload, stream, and manage their business.
+- **Goal:** Empower creators to upload short drops and connect with their local community.
 - **Elements:**
-  - **Quick Upload/Go Live:** Prominent action buttons for content creation.
-  - **Analytics Dashboard:** Visualizing views, engagement, and revenue using elegant charts.
-  - **Moderation Inbox:** A private area where creators are notified if a video is flagged by the anti-porn tech, with clear steps for resolution or appeal.
+  - **Quick Drop Upload:** Direct video drop upload pipeline.
+  - **Local Proximity Discovery:** Surfacing creators to nearby fans and fellow creators in their geographic area.
+  - **Moderation Inbox:** A private area where creators are notified if a video is flagged by the moderation gate, with clear steps for resolution or appeal.
 
 ### 3. Monetization & Support
 - **Goal:** Make supporting creators feel rewarding and frictionless.
 - **Elements:**
   - One-tap micro-transactions (tips/gifts) using the gold/amber accent colors to denote value.
+  - Creator-to-creator collaboration prompts ("Local — Collab?") based on shared zip codes.
   - Exclusive "VIP" badges or glowing UI borders for subscribed fans in the comments section.
 
 ## Visual & Interaction Design 
@@ -44,7 +45,7 @@ Aficionado is a premium social media platform designed to connect creators and t
 
 - **Aesthetic Vibe (Liquid Glass):** Cinematic, immersive, and premium. Dark themes (charcoal/zinc) act as a movie theater environment, reducing eye strain and allowing the vibrant colors of the video content to pop.
 - **Translucency (Glassmorphism):** Essential for the short-video format. UI panels (like comment sections or creator bios) slide up over the video using a heavy `backdrop-blur`. This ensures the UI feels connected to the content rather than completely obscuring it.
-- **Accents (Gold/Amber):** Reserved for high-value interactions. Actions like "Subscribe", "Tip", or "Go Live" use these warm accents to stand out against the dark UI, conveying a sense of premium exclusivity.
+- **Accents (Gold/Amber):** Reserved for high-value interactions. Actions like "Subscribe", "Tip", or "Collab?" use these warm accents to stand out against the dark UI, conveying a sense of premium exclusivity.
 - **Micro-interactions:** Swipes, taps, and page transitions must be butter-smooth (60fps+). Double-tapping to like should trigger satisfying, subtle animations. 
 
 ## Accessibility & Responsiveness
