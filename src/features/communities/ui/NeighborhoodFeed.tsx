@@ -87,8 +87,8 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
                 the router again.
               </p>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                <button className="hover:text-white transition-colors">Like (12)</button>
-                <button className="hover:text-white transition-colors">Comment (4)</button>
+                <button className="hover:text-white transition-colors">Like</button>
+                <button className="hover:text-white transition-colors">Comment</button>
               </div>
             </div>
 
@@ -108,8 +108,8 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
                 donuts provided for anyone who helps out. 🍩☕️
               </p>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                <button className="hover:text-white transition-colors">Like (45)</button>
-                <button className="hover:text-white transition-colors">Comment (18)</button>
+                <button className="hover:text-white transition-colors">Like</button>
+                <button className="hover:text-white transition-colors">Comment</button>
               </div>
             </div>
           </div>

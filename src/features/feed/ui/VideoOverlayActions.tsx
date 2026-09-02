@@ -69,9 +69,6 @@ export function VideoOverlayActions({
             ].join(' ')}
           />
         </div>
-        <span className="text-[11px] font-medium text-white/80 drop-shadow-sm tabular-nums">
-          {isLiked ? parseInt(likes || '0', 10) + 1 : likes}
-        </span>
       </button>
 
       {/* Comments */}
@@ -89,9 +86,6 @@ export function VideoOverlayActions({
         >
           <MessageCircle className="w-5 h-5 text-white group-hover:scale-110 transition-transform" />
         </div>
-        <span className="text-[11px] font-medium text-white/80 drop-shadow-sm tabular-nums">
-          {comments}
-        </span>
       </button>
 
       {/* Tip — amber: monetization only */}

@@ -139,17 +139,7 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
                     </span>
                   </div>
 
-                  {/* Like + comment counts — bottom-right overlay */}
-                  <div className="absolute bottom-3 right-3 z-10 flex items-center gap-3">
-                    <span className="flex items-center gap-1 text-white/90 text-xs font-medium">
-                      <Heart className="w-3.5 h-3.5" />
-                      {video.likes}
-                    </span>
-                    <span className="flex items-center gap-1 text-white/90 text-xs font-medium">
-                      <MessageCircle className="w-3.5 h-3.5" />
-                      {video.comments}
-                    </span>
-                  </div>
+
                 </div>
 
                 {/* Description — 2-line truncate */}

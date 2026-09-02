@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react'
 import { InnerCircleView } from '@/features/circles/ui/InnerCircleView'
 import { cn } from '@/lib/utils'
 import type { Content, Profile } from '@/shared/types/database'
-import { StatCounter } from '@/shared/ui/core'
 
 interface Props {
   profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'>
