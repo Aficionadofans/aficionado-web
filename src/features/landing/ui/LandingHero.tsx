@@ -13,7 +13,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
     title: 'Studio Short Edit',
-    views: '1.2M Views',
     rotate: -10,
     yOffset: -16,
     width: 'w-[150px] sm:w-[210px] md:w-[240px]',
@@ -27,7 +26,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop',
     title: 'Lifestyle Vlog',
-    views: '623K Views',
     rotate: -6,
     yOffset: -4,
     width: 'w-[130px] sm:w-[180px] md:w-[210px]',
@@ -41,7 +39,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop',
     title: 'Product Unboxing',
-    views: '487K Views',
     rotate: -3,
     yOffset: 8,
     width: 'w-[110px] sm:w-[160px] md:w-[185px]',
@@ -55,7 +52,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
     title: 'Master Edit',
-    views: '2.4M Views',
     rotate: 0,
     yOffset: 18,
     width: 'w-[125px] sm:w-[175px] md:w-[205px]',
@@ -69,7 +65,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1483721074892-4a858076436c?q=80&w=600&auto=format&fit=crop',
     title: 'Fitness Reel',
-    views: '920K Views',
     rotate: 3,
     yOffset: 8,
     width: 'w-[110px] sm:w-[160px] md:w-[185px]',
@@ -83,7 +78,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=600&auto=format&fit=crop',
     title: 'Cinematic Ride',
-    views: '540K Views',
     rotate: 6,
     yOffset: -4,
     width: 'w-[130px] sm:w-[180px] md:w-[210px]',
@@ -97,7 +91,6 @@ const heroCards = [
     poster:
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
     title: 'Creator Interview',
-    views: '758K Views',
     rotate: 10,
     yOffset: -16,
     width: 'w-[150px] sm:w-[210px] md:w-[240px]',
@@ -262,9 +255,6 @@ export function LandingHero() {
               <div>
                 <span className="text-xs font-bold text-white font-heading block drop-shadow-md">
                   {card.title}
-                </span>
-                <span className="text-[10px] font-mono text-amber-300 font-semibold">
-                  {card.views}
                 </span>
               </div>
             </div>

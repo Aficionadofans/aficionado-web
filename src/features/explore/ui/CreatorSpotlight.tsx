@@ -107,7 +107,7 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
 
               <CardContent className="absolute inset-0 p-5 flex flex-col justify-between z-10">
                 <div className="flex justify-between items-start">
-                  {isPlaying ? (
+                  {isPlaying && (
                     <button
                       onClick={toggleMute}
                       aria-label={isMuted ? 'Unmute video' : 'Mute video'}
@@ -119,10 +119,6 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
                         <Volume2 className="w-4 h-4 text-white" />
                       )}
                     </button>
-                  ) : (
-                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/25 backdrop-blur-md">
-                      1.2M Views
-                    </span>
                   )}
                   <div
                     className={`w-9 h-9 rounded-full backdrop-blur-md flex items-center justify-center border transition-all ${

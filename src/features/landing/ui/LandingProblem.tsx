@@ -38,10 +38,10 @@ export function LandingProblem() {
                   <TrendingDown className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-white font-heading">
-                  Views that don’t convert
+                  Content that doesn’t connect
                 </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Your videos get views, but no real engagement, subscriber growth, or direct
+                <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                  Your videos are out there, but no real engagement, subscriber growth, or direct
                   revenue.
                 </p>
               </div>

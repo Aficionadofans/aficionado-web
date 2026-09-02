@@ -13,7 +13,7 @@ interface ResultCard {
 
 const results: ResultCard[] = [
   {
-    stat: '1.2M+ views on single reel',
+    stat: 'Viral reach on single reel',
     handle: '@nova.skincare',
     description:
       'We created product-focused short videos with strong hooks and clean visuals, reaching a massive new audience.',
@@ -37,7 +37,7 @@ const results: ResultCard[] = [
     stat: '2.5x leads from content',
     handle: '@Urban_sun',
     description:
-      'Strategy-driven videos with clear messages and CTAs turned views into real business leads.',
+      'Strategy-driven videos with clear messages and CTAs turned engagement into real business leads.',
     icon: <Zap className="w-5 h-5 text-amber-400" />,
   },
   {

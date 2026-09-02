@@ -12,7 +12,6 @@ import { StatCounter } from '@/shared/ui/core'
 
 interface Props {
   profile: Pick<Profile, 'id' | 'username' | 'bio' | 'avatar_url' | 'user_type'>
-  subscriberCount: number
   contentItems: Pick<Content, 'id' | 'mux_playback_id' | 'title' | 'description' | 'visibility'>[]
   circleId: string
   source?: string
@@ -20,7 +19,6 @@ interface Props {
 
 export function CreatorProfileClient({
   profile,
-  subscriberCount,
   contentItems,
   circleId,
   source,
@@ -36,9 +34,6 @@ export function CreatorProfileClient({
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const formattedCount =
-    subscriberCount >= 1000 ? `${(subscriberCount / 1000).toFixed(1)}K` : subscriberCount.toString()
 
   return (
     <div className="min-h-[100dvh] bg-background text-foreground flex flex-col relative overflow-hidden pb-16 md:pb-6">
@@ -90,14 +85,7 @@ export function CreatorProfileClient({
                 Verified
               </span>
             </h1>
-            <p
-              className={cn(
-                'text-muted-foreground transition-all duration-300 font-semibold',
-                scrolled ? 'text-[10px] leading-tight' : 'text-xs',
-              )}
-            >
-              {formattedCount} Subscriber{subscriberCount !== 1 ? 's' : ''}
-            </p>
+
           </div>
         </div>
       </header>
@@ -171,12 +159,7 @@ export function CreatorProfileClient({
           </button>
         </div>
 
-        {/* Stat counters */}
-        <div className="flex items-start justify-center gap-10 pt-2 w-full">
-          <StatCounter label="Subscribers" target={subscriberCount} />
-          <StatCounter label="Content" target={contentItems.length} />
-          <StatCounter label="Inner Circle" target={0} />
-        </div>
+
       </div>
 
       {/* Bio */}

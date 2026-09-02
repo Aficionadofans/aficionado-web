@@ -24,13 +24,6 @@ export default async function CreatorProfilePage({
 
   if (!profile) notFound()
 
-  // Fetch active subscriber count
-  const { count: subscriberCount } = await supabase
-    .from('subscriptions')
-    .select('*', { count: 'exact', head: true })
-    .eq('creator_id', profile.id)
-    .eq('status', 'active')
-
   // Fetch public content
   const { data: contentItems } = await supabase
     .from('content')
@@ -51,7 +44,6 @@ export default async function CreatorProfilePage({
   return (
     <CreatorProfileClient
       profile={profile}
-      subscriberCount={subscriberCount ?? 0}
       contentItems={contentItems ?? []}
       circleId={circle?.id ?? ''}
       source={source}
