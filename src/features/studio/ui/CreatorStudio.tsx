@@ -20,7 +20,6 @@ import { SectionHeader, StatCounter } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
 import { CreateDropModal } from './CreateDropModal'
 import { ImportFansModal } from './ImportFansModal'
-import { StudioMetricCards } from './StudioMetricCards'
 import { StudioQuickActions } from './StudioQuickActions'
 import { TimeCapsuleModal } from './TimeCapsuleModal'
 
@@ -33,8 +32,6 @@ interface FlaggedItem {
 
 interface CreatorStudioProps {
   username: string
-  activeSubscribers?: number
-  totalContent?: number
   flaggedContent?: FlaggedItem[]
 }
 
@@ -72,8 +69,6 @@ interface QuickAction {
 
 export function CreatorStudio({
   username,
-  activeSubscribers = 0,
-  totalContent = 0,
   flaggedContent = [],
 }: CreatorStudioProps) {
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
@@ -173,16 +168,6 @@ export function CreatorStudio({
         </div>
       </section>
 
-      {/* ── Stats Row ────────────────────────────────────────────────────── */}
-      <RevealSection className="mb-4">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16 lg:gap-24 py-8 clipcut-card rounded-3xl">
-          <StatCounter label="Active Subscribers" target={activeSubscribers} />
-          <StatCounter label="Total Content" target={totalContent} />
-          <StatCounter label="Flagged for Review" target={flaggedContent.length} />
-        </div>
-      </RevealSection>
-
-      <div className="section-divider my-8" />
 
       {/* ── 01 / Quick Actions ───────────────────────────────────────────── */}
       <section className="mb-8">
@@ -344,12 +329,6 @@ export function CreatorStudio({
         onOpenDropModal={() => setIsDropModalOpen(true)}
         onOpenTimeCapsuleModal={() => setIsTimeCapsuleModalOpen(true)}
         onOpenImportFansModal={() => setIsImportFansModalOpen(true)}
-      />
-
-      <StudioMetricCards
-        activeSubscribers={activeSubscribers}
-        totalContent={totalContent}
-        flaggedContent={flaggedContent}
       />
 
       {/* Modals */}

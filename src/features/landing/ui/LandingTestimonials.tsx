@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     handle: '@dtorres',
     initial: 'D',
     avatarBg: 'rgba(0, 212, 200, 0.13)',
-    quote: 'The analytics are incredible. I finally understand what my audience wants.',
+    quote: 'The freedom to create what I want, on my terms, without algorithmic pressure.',
   },
 ]
 

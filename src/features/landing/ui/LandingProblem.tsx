@@ -45,20 +45,6 @@ export function LandingProblem() {
                   revenue.
                 </p>
               </div>
-
-              {/* Retention Graph Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2 backdrop-blur-md">
-                <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
-                  <span>Avg. Audience Retention</span>
-                  <span className="text-red-400 font-bold">-68% Drop</span>
-                </div>
-                <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full w-[32%] bg-gradient-to-r from-red-600 to-red-400 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
-                </div>
-                <span className="text-[10px] font-mono text-red-400/90">
-                  50% Viewers dropped past 3s
-                </span>
-              </div>
             </div>
           </RevealSection>
 
@@ -77,18 +63,6 @@ export function LandingProblem() {
                   don’t build a business.
                 </p>
               </div>
-
-              {/* Likes vs Revenue Metric Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex items-center justify-between backdrop-blur-md">
-                <div>
-                  <div className="text-xs font-mono text-white font-bold">120K Likes</div>
-                  <div className="text-[10px] text-muted-foreground">Platform Ad Revenue</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs font-mono text-red-400 font-bold">$0.00 Direct</div>
-                  <div className="text-[10px] text-muted-foreground">0% Ownership</div>
-                </div>
-              </div>
             </div>
           </RevealSection>
 
@@ -106,28 +80,6 @@ export function LandingProblem() {
                   Posting randomly without a structured drop system leads to viewer fatigue and
                   algorithm traps.
                 </p>
-              </div>
-
-              {/* Activity Output Mockup */}
-              <div className="mt-8 p-4 rounded-2xl bg-black/60 border border-white/8 flex flex-col gap-2 backdrop-blur-md">
-                <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
-                  <span>Weekly Output</span>
-                  <span className="text-[#E8501A] font-bold">3 / 10 Posts</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
-                    <div
-                      key={i}
-                      className={`flex-1 h-6 rounded-md flex items-center justify-center text-[9px] font-mono font-bold transition-all ${
-                        i < 3
-                          ? 'bg-[#E8501A] text-black shadow-[0_0_8px_rgba(232,80,26,0.4)]'
-                          : 'bg-white/5 text-muted-foreground'
-                      }`}
-                    >
-                      {day}
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </RevealSection>

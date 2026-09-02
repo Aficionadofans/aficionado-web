@@ -31,11 +31,7 @@ const features: FeatureCard[] = [
     body: 'Curated content feeds designed to protect user well-being and eliminate mindless infinite scrolling.',
     badge: 'Well-Being',
   },
-  {
-    icon: <BarChart2 className="w-5 h-5" />,
-    headline: 'Real-Time Creator Analytics',
-    body: 'Track subscriber growth, revenue breakdown, retention cohorts, and stream engagement instantly.',
-  },
+
   {
     icon: <Globe className="w-5 h-5" />,
     headline: 'Custom Community Hubs',
