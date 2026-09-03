@@ -8,6 +8,7 @@ import { LocalCreatorGrid } from '@/features/explore/ui/LocalCreatorGrid'
 import { createClient } from '@/shared/lib/supabase/server'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
+import { WhatCreatorsSaySection } from '@/features/studio/ui/WhatCreatorsSaySection'
 
 export default async function ExplorePage() {
   const supabase = await createClient()
@@ -165,6 +166,13 @@ export default async function ExplorePage() {
           <hr className="section-divider my-8" />
 
           <CreatorSpotlight spotlights={creatorSpotlights || []} />
+
+          <hr className="section-divider my-8" />
+
+          {/* What creators say after working with us */}
+          <section aria-label="What creators say after working with us">
+            <WhatCreatorsSaySection />
+          </section>
 
           <hr className="section-divider my-8" />
 

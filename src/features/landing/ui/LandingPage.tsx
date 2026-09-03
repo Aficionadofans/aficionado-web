@@ -10,7 +10,6 @@ import { LandingProcess } from './LandingProcess'
 import { LandingResultsGrid } from './LandingResultsGrid'
 import { LandingServices } from './LandingServices'
 import { LandingShowcase } from './LandingShowcase'
-import { LandingTestimonial } from './LandingTestimonial'
 import { LandingToolsMarquee } from './LandingToolsMarquee'
 
 export function LandingPage() {
@@ -31,7 +30,6 @@ export function LandingPage() {
           <LandingProcess />
           <LandingShowcase />
           <LandingResultsGrid />
-          <LandingTestimonial />
           <LandingToolsMarquee />
           <LandingFAQ />
           <LandingCTA />

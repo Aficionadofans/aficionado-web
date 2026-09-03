@@ -21,6 +21,7 @@ import { CreateDropModal } from './CreateDropModal'
 import { ImportFansModal } from './ImportFansModal'
 import { StudioQuickActions } from './StudioQuickActions'
 import { TimeCapsuleModal } from './TimeCapsuleModal'
+import { WhatCreatorsSaySection } from './WhatCreatorsSaySection'
 
 interface FlaggedItem {
   id: string
@@ -325,6 +326,13 @@ export function CreatorStudio({ username, flaggedContent = [] }: CreatorStudioPr
         onOpenTimeCapsuleModal={() => setIsTimeCapsuleModalOpen(true)}
         onOpenImportFansModal={() => setIsImportFansModalOpen(true)}
       />
+
+      <div className="section-divider my-8" />
+
+      {/* ── 04 / What Creators Say ─────────────────────────────────────── */}
+      <section className="mb-10">
+        <WhatCreatorsSaySection />
+      </section>
 
       {/* Modals */}
       {isDropModalOpen && <CreateDropModal onClose={() => setIsDropModalOpen(false)} />}
