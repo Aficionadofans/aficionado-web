@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2026-08-26.dahlia',
+    apiVersion: '2026-08-26.dahlia' as any,
     typescript: true,
   }) // Use Service Role — webhooks run outside user session context
   const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey)
