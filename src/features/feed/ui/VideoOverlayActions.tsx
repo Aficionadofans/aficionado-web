@@ -19,8 +19,8 @@ interface VideoOverlayActionsProps {
 export function VideoOverlayActions({
   videoId,
   creator,
-  likes,
-  comments,
+  likes: _likes,
+  comments: _comments,
   isLiked,
   copiedId,
   onToggleLike,

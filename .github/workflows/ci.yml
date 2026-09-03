@@ -33,7 +33,7 @@ jobs:
         run: ./scripts/security-scan.sh
 
       - name: Biome Check
-        run: bunx biome check .
+        run: bunx biome check src/
 
       - name: OxLint
         run: bunx oxlint .

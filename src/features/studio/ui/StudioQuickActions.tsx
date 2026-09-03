@@ -1,6 +1,6 @@
 'use client'
 
-import { Lock, Share2, Upload, Video } from 'lucide-react'
+import { Lock, Share2, Upload } from 'lucide-react'
 import Link from 'next/link'
 
 interface StudioQuickActionsProps {

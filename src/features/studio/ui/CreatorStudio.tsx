@@ -10,7 +10,6 @@ import {
   UserCog,
   UserPlus,
   Users,
-  Video,
 } from 'lucide-react'
 import Link from 'next/link'
 import type React from 'react'
@@ -67,10 +66,7 @@ interface QuickAction {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function CreatorStudio({
-  username,
-  flaggedContent = [],
-}: CreatorStudioProps) {
+export function CreatorStudio({ username, flaggedContent = [] }: CreatorStudioProps) {
   const [isDropModalOpen, setIsDropModalOpen] = useState(false)
   const [isTimeCapsuleModalOpen, setIsTimeCapsuleModalOpen] = useState(false)
   const [isImportFansModalOpen, setIsImportFansModalOpen] = useState(false)
@@ -167,7 +163,6 @@ export function CreatorStudio({
           </div>
         </div>
       </section>
-
 
       {/* ── 01 / Quick Actions ───────────────────────────────────────────── */}
       <section className="mb-8">

@@ -18,7 +18,6 @@ export default async function CreatorPage() {
 
   if (profile?.user_type === 'fan') redirect('/home')
 
-
   // Flagged content needing review
   const { data: flaggedContent } = await supabase
     .from('content')
@@ -30,10 +29,7 @@ export default async function CreatorPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <CreatorStudio
-        username={profile?.username ?? ''}
-        flaggedContent={flaggedContent ?? []}
-      />
+      <CreatorStudio username={profile?.username ?? ''} flaggedContent={flaggedContent ?? []} />
     </div>
   )
 }
