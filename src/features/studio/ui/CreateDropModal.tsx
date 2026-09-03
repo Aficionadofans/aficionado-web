@@ -148,7 +148,11 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
                           (isUploading || uploadComplete) && 'opacity-50 cursor-not-allowed',
                         )}
                       >
-                        {v === 'subscriber' ? 'Subscribers' : v === 'ppv' ? 'Pay-Per-View ($ PPV)' : 'Public (Free)'}
+                        {v === 'subscriber'
+                          ? 'Subscribers'
+                          : v === 'ppv'
+                            ? 'Pay-Per-View ($ PPV)'
+                            : 'Public (Free)'}
                       </button>
                     ))}
                   </div>
@@ -164,7 +168,9 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
                         className="w-24 px-2 py-1 bg-black/50 border border-white/10 rounded-lg text-white text-xs font-bold focus:outline-none focus:border-amber-500"
                         disabled={isUploading || uploadComplete}
                       />
-                      <span className="text-[11px] text-muted-foreground">Fans pay to unlock & stream drop</span>
+                      <span className="text-[11px] text-muted-foreground">
+                        Fans pay to unlock & stream drop
+                      </span>
                     </div>
                   )}
                 </div>

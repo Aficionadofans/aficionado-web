@@ -5,10 +5,10 @@ import { CreatorSpotlight } from '@/features/explore/ui/CreatorSpotlight'
 import { CuratorCard } from '@/features/explore/ui/CuratorCard'
 import { DiscoverySearch } from '@/features/explore/ui/DiscoverySearch'
 import { LocalCreatorGrid } from '@/features/explore/ui/LocalCreatorGrid'
+import { WhatCreatorsSaySection } from '@/features/studio/ui/WhatCreatorsSaySection'
 import { createClient } from '@/shared/lib/supabase/server'
 import { SectionHeader } from '@/shared/ui/core'
 import { RevealSection } from '@/shared/ui/motion/RevealSection'
-import { WhatCreatorsSaySection } from '@/features/studio/ui/WhatCreatorsSaySection'
 
 export default async function ExplorePage() {
   const supabase = await createClient()
