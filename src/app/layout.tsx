@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Geist_Mono, Inter, Syne } from 'next/font/google'
 import { AmbientOrbs } from '@/shared/ui/motion/AmbientOrbs'
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <AmbientOrbs />
 
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )
