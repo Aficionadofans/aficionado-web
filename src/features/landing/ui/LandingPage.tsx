@@ -7,7 +7,6 @@ import { LandingMarquee } from './LandingMarquee'
 import { LandingNav } from './LandingNav'
 import { LandingProblem } from './LandingProblem'
 import { LandingProcess } from './LandingProcess'
-import { LandingResultsGrid } from './LandingResultsGrid'
 import { LandingServices } from './LandingServices'
 import { LandingShowcase } from './LandingShowcase'
 import { LandingToolsMarquee } from './LandingToolsMarquee'
@@ -29,7 +28,6 @@ export function LandingPage() {
           <LandingServices />
           <LandingProcess />
           <LandingShowcase />
-          <LandingResultsGrid />
           <LandingToolsMarquee />
           <LandingFAQ />
           <LandingCTA />
