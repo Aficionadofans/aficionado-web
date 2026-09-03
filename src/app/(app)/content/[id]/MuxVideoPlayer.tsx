@@ -22,6 +22,9 @@ export function MuxVideoPlayer({ playbackId, envKey, tokens, title }: MuxVideoPl
       metadata={{
         video_title: title ?? '',
       }}
+      accentColor="#E8501A"
+      primaryColor="#FFFFFF"
+      secondaryColor="#0A0A0C"
       style={{ width: '100%', height: '100%' }}
     />
   )

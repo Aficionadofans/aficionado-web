@@ -55,7 +55,9 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
             03 / CREATOR SPOTLIGHT
           </span>
-          <h2 className="text-2xl font-extrabold text-white tracking-tight">ClipCut Spotlight</h2>
+          <h2 className="text-2xl font-extrabold text-white tracking-tight">
+            Aficionado Spotlight
+          </h2>
         </div>
       </div>
 

@@ -14,7 +14,7 @@ export function getStripe(): Stripe {
     }
 
     _stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2026-08-26.dahlia' as any,
+      apiVersion: '2026-08-26.dahlia' as unknown as Stripe.LatestApiVersion,
       appInfo: {
         name: 'Aficionado.fans',
         version: '0.1.0',

@@ -25,7 +25,7 @@ export async function createPost(formData: FormData) {
     await supabase.from('profiles').update({ ai_tone: aiTone }).eq('id', user.id)
   }
 
-  // If a content_id was provided, look up the mux_playback_id to use as media_url
+  // If a content_id was provided, look up the mux_playback_id or fallback to content route
   let mediaUrl: string | null = null
   if (contentId) {
     const { data: contentRecord } = await supabase
@@ -36,6 +36,12 @@ export async function createPost(formData: FormData) {
 
     if (contentRecord?.mux_playback_id) {
       mediaUrl = `mux:${contentRecord.mux_playback_id}`
+    } else {
+      mediaUrl = `/content/${contentId}`
+    }
+
+    if (content?.trim()) {
+      await supabase.from('content').update({ description: content.trim() }).eq('id', contentId)
     }
   }
 
