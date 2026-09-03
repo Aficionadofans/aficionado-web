@@ -37,7 +37,8 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadComplete, setUploadComplete] = useState(false)
   const [contentId, setContentId] = useState<string | null>(null)
-  const [visibility, setVisibility] = useState<'public' | 'subscriber'>('subscriber')
+  const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
+  const [pricePpv, setPricePpv] = useState('4.99')
   const supabase = createClient()
 
   // Mux uploader endpoint — creates a content record and returns the direct upload URL
@@ -49,6 +50,7 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
           title: 'Drop Media',
           description: '',
           visibility,
+          pricePpv: visibility === 'ppv' ? Number(pricePpv) : undefined,
         },
       })
       if (error) throw error
@@ -131,25 +133,40 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
                     <Sparkles className="w-3 h-3 text-amber-500" />
                     Media Visibility
                   </span>
-                  <div className="flex gap-3">
-                    {(['public', 'subscriber'] as const).map((v) => (
+                  <div className="flex gap-2">
+                    {(['public', 'subscriber', 'ppv'] as const).map((v) => (
                       <button
                         key={v}
                         type="button"
                         onClick={() => setVisibility(v)}
                         disabled={isUploading || uploadComplete}
                         className={cn(
-                          'px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border',
+                          'px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border',
                           visibility === v
-                            ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+                            ? 'bg-amber-500/20 text-amber-400 border-amber-500/30 font-bold'
                             : 'bg-white/5 text-muted-foreground border-white/5 hover:bg-white/10 hover:text-white',
                           (isUploading || uploadComplete) && 'opacity-50 cursor-not-allowed',
                         )}
                       >
-                        {v === 'subscriber' ? 'Subscribers Only' : 'Public'}
+                        {v === 'subscriber' ? 'Subscribers' : v === 'ppv' ? 'Pay-Per-View ($ PPV)' : 'Public (Free)'}
                       </button>
                     ))}
                   </div>
+                  {visibility === 'ppv' && (
+                    <div className="mt-3 p-3 bg-white/5 border border-amber-500/30 rounded-xl flex items-center gap-3">
+                      <span className="text-xs text-amber-400 font-semibold">PPV Price ($):</span>
+                      <input
+                        type="number"
+                        step="0.50"
+                        min="0.99"
+                        value={pricePpv}
+                        onChange={(e) => setPricePpv(e.target.value)}
+                        className="w-24 px-2 py-1 bg-black/50 border border-white/10 rounded-lg text-white text-xs font-bold focus:outline-none focus:border-amber-500"
+                        disabled={isUploading || uploadComplete}
+                      />
+                      <span className="text-[11px] text-muted-foreground">Fans pay to unlock & stream drop</span>
+                    </div>
+                  )}
                 </div>
 
                 {uploadComplete ? (
