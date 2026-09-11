@@ -57,8 +57,15 @@ pre-push:
       skip:
         - merge
         - rebase
-      # Use bun audit — accurately reflects installed versions vs stale npm advisory ranges
-      run: bun audit --level critical
+      # Only fail on critical vulnerabilities — bun audit prints all but we grep for "critical:"
+      run: |
+        AUDIT=$(bun audit 2>&1)
+        if echo "$AUDIT" | grep -q "^  critical:"; then
+          echo "$AUDIT"
+          echo "❌ Critical vulnerabilities found. Run: bun audit to review."
+          exit 1
+        fi
+        echo "✅ No critical vulnerabilities detected."
       fail_text: "❌ Critical dependency vulnerabilities detected. Please run bun audit fix."
     - name: license-audit
       skip:
