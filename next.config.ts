@@ -1,13 +1,9 @@
-import path from 'node:path'
 import type { NextConfig } from 'next'
 
-const isStandalone = !process.env.VERCEL
+const nextConfig: NextConfig = {}
 
-const nextConfig: NextConfig = {
-  ...(isStandalone ? { output: 'standalone' } : {}),
-  turbopack: {
-    root: path.resolve(__dirname),
-  },
+if (!process.env.VERCEL) {
+  nextConfig.output = 'standalone'
 }
 
 export default nextConfig
