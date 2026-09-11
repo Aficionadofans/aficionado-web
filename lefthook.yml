@@ -51,14 +51,15 @@ pre-push:
       skip:
         - merge
         - rebase
-      run: npm run test
+      run: bun run test
       fail_text: "❌ Web unit test suite failed. Push rejected."
     - name: package-audit
       skip:
         - merge
         - rebase
-      run: npm audit --audit-level=critical --omit=dev
-      fail_text: "❌ Critical dependency vulnerabilities detected. Please run npm audit fix."
+      # Use bun audit — accurately reflects installed versions vs stale npm advisory ranges
+      run: bun audit --level critical
+      fail_text: "❌ Critical dependency vulnerabilities detected. Please run bun audit fix."
     - name: license-audit
       skip:
         - merge
@@ -68,5 +69,5 @@ pre-push:
 
 post-merge:
   jobs:
-    - name: npm-install
-      run: npm install
+    - name: bun-install
+      run: bun install
