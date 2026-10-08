@@ -74,7 +74,7 @@ export default async function ContentPage({ params }: { params: Promise<{ id: st
   let muxTokens: { playback: string; thumbnail: string; storyboard: string } | undefined
   if (
     authorized &&
-    content.visibility === ('subscriber' satisfies ContentVisibility) &&
+    (content.visibility === 'subscriber' || content.visibility === 'ppv') &&
     content.mux_playback_id
   ) {
     const supabase = await createClient()
