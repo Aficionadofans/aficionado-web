@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
 import { Bricolage_Grotesque, Geist_Mono, Inter, Syne } from 'next/font/google'
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <AmbientOrbs />
 
         {children}
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
