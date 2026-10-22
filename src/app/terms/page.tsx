@@ -102,8 +102,39 @@ export default function TermsOfServicePage() {
             </p>
           </section>
 
+          <section className="p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+            <h2 className="text-2xl font-bold text-amber-400 mb-4">
+              8. Zero-Tolerance Policy for Objectionable Content and Abusive Users
+            </h2>
+            <p className="font-semibold text-white mb-3">
+              Aficionado strictly enforces a zero-tolerance policy for objectionable content and
+              abusive users.
+            </p>
+            <p className="mb-3">
+              Users may not upload, transmit, distribute, or share any content that is defamatory,
+              obscene, pornographic, harassing, threatening, discriminatory, violent, sexually
+              explicit, or otherwise objectionable. There is absolutely no tolerance for abusive
+              behavior, bullying, hate speech, or harassment of any kind.
+            </p>
+            <p className="mb-3">
+              Any user found violating this zero-tolerance policy will have their offending content
+              removed immediately and will face immediate, permanent account termination and ban
+              without prior warning.
+            </p>
+            <p>
+              Aficionado provides built-in mechanisms to report any objectionable content or abusive
+              user with a single tap, as well as an immediate user-blocking feature to scrub abusive
+              users and their content from your experience. All reports are reviewed by our
+              moderation team within 24 hours. You may also contact our safety team directly at{' '}
+              <a href="mailto:safety@aficionado.fans" className="text-primary hover:underline">
+                safety@aficionado.fans
+              </a>
+              .
+            </p>
+          </section>
+
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">8. Creator Content</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">9. Creator Content</h2>
             <p>
               If you use creator tools, monetize content, accept gifts, or participate in sponsored
               or affiliate activity, you must comply with our Creator Agreement and all disclosure
@@ -113,7 +144,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">9. Moderation and Enforcement</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">10. Moderation and Enforcement</h2>
             <p>
               We may remove content, reduce reach, limit features, suspend accounts, or terminate
               access if we believe you violated these Terms, our policies, or applicable law. We may
@@ -122,7 +153,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">10. Intellectual Property</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">11. Intellectual Property</h2>
             <p>
               The Service, including software, branding, design, logos, and trademarks, is owned by
               Aficionado.Fans or its licensors and protected by law. You may not use our branding or
@@ -131,7 +162,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">11. Copyright Complaints</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">12. Copyright Complaints</h2>
             <p>
               If you believe content on the Service infringes your copyright, you may send a notice
               to our designated copyright contact with the information required by law. If content
@@ -142,7 +173,7 @@ export default function TermsOfServicePage() {
 
           <section>
             <h2 className="text-2xl font-bold text-white mb-4">
-              12. Third-Party Links and Services
+              13. Third-Party Links and Services
             </h2>
             <p>
               The Service may link to or integrate third-party products or services. We are not
@@ -152,7 +183,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">13. Disclaimers</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">14. Disclaimers</h2>
             <p>
               The Service is provided on an “as is” and “as available” basis. We do not promise
               uninterrupted, error-free, or fully secure operation, and we disclaim warranties to
@@ -161,7 +192,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">14. Limitation of Liability</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">15. Limitation of Liability</h2>
             <p>
               To the maximum extent permitted by law, Aficionado.Fans will not be liable for
               indirect, incidental, special, consequential, or punitive damages arising from your
@@ -170,7 +201,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">15. Indemnification</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">16. Indemnification</h2>
             <p>
               You agree to defend and indemnify Aficionado.Fans against claims arising from your
               content, your use of the Service, your violation of these Terms, or your violation of
@@ -179,7 +210,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">16. Governing Law and Disputes</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">17. Governing Law and Disputes</h2>
             <p>
               These Terms are governed by the laws of Delaware and /or California States, without
               regard to conflict-of-law rules. Dispute resolution will be handled in the forum or
@@ -188,7 +219,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">17. Changes to Terms</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">18. Changes to Terms</h2>
             <p>
               We may update these Terms from time to time. When we do, we will update the effective
               date, and your continued use of the Service after the updated Terms become effective
@@ -197,7 +228,7 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">18. Contact Information</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">19. Contact Information</h2>
             <p>Questions about these Terms may be sent to: support@aficionado.fans</p>
           </section>
 
@@ -272,10 +303,20 @@ export default function TermsOfServicePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-white mb-4">9. Reporting Violations</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">
+              9. Reporting Violations & User Blocking
+            </h2>
+            <p className="mb-3">
+              Aficionado empowers every user with in-app reporting tools on all user-generated
+              content, including videos, posts, comments, direct messages, and creator profiles.
+              Users can also block any abusive user instantly, which immediately purges all past and
+              future content from that user from their local feed and blocks any direct messaging
+              communication.
+            </p>
             <p>
-              Users may report content or accounts that appear to violate these Guidelines. We may
-              review reports and take action at our discretion.
+              Our moderation team reviews every submitted report within 24 hours. Content found to
+              violate our guidelines is taken down immediately, and offending accounts are subject
+              to immediate expulsion.
             </p>
           </section>
 
