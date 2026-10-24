@@ -81,7 +81,7 @@ export function LandingProblemSolution() {
                 className="text-2xl sm:text-3xl font-extrabold text-foreground"
                 style={{ fontFamily: 'var(--font-heading)' }}
               >
-                Sovereign Monetization & Anti-Addiction Feeds
+                Sovereign Monetization & Clean Feeds
               </h3>
 
               <ul className="flex flex-col gap-4 mt-2 text-sm text-muted-foreground">
@@ -95,8 +95,8 @@ export function LandingProblemSolution() {
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span>
-                    <strong>Finite Digital Well-Being:</strong> Anti-dopamine feed guarantees fans
-                    stay engaged without endless doomscrolling.
+                    <strong>Finite Digital Well-Being:</strong> Curated feed guarantees fans stay
+                    engaged without endless doomscrolling.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">

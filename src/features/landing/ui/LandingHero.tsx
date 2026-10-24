@@ -161,7 +161,7 @@ export function LandingHero() {
         {/* H1 Display Title with Smooth Word-by-Word Reveal */}
         <WordReveal
           as="h1"
-          text="Anti-dopamine social media for Aficionado and Fans"
+          text="Self-brand and creator on new social media platform"
           className="framer-h1 max-w-[856px]"
           delay={0.1}
           stagger={0.06}

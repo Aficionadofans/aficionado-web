@@ -15,7 +15,7 @@ const stats: StatItem[] = [
   {
     value: '0',
     label: 'Infinite Scroll Traps',
-    sublabel: 'Anti-dopamine finite feeds',
+    sublabel: 'Curated finite feeds',
   },
   {
     value: '12.4k+',

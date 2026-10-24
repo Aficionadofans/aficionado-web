@@ -176,7 +176,7 @@ export default async function ExplorePage() {
 
           <hr className="section-divider my-8" />
 
-          {/* Anti-Dopamine Stopper */}
+          {/* Curated Feed Stopper */}
           <div className="pt-12 pb-8 text-center animate-fade-in-up">
             <div className="w-20 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto rounded-full mb-6"></div>
             <div className="liquid-glass p-8 rounded-3xl border border-white/10 max-w-lg mx-auto relative overflow-hidden shadow-2xl">

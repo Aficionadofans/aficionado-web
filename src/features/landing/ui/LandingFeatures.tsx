@@ -27,7 +27,7 @@ const features: FeatureCard[] = [
   },
   {
     icon: <Shield className="w-5 h-5" />,
-    headline: 'Anti-Dopamine Finite Feed',
+    headline: 'Curated Finite Feed',
     body: 'Curated content feeds designed to protect user well-being and eliminate mindless infinite scrolling.',
     badge: 'Well-Being',
   },

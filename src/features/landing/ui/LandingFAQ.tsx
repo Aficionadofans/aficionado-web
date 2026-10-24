@@ -12,7 +12,7 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'How does the Anti-Dopamine Finite Feed work?',
+    question: 'How does the Curated Finite Feed work?',
     answer:
       'Unlike legacy social networks that use infinite scroll algorithms to maximize user screen time and ad impressions, Aficionado delivers finite, highly curated feeds. Users see new drops from their subscribed creators and reach a clear completion boundary, encouraging healthy digital consumption.',
   },
