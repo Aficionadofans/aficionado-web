@@ -270,7 +270,7 @@ export function CreatorProfileClient({
                 >
                   {item.mux_playback_id ? (
                     <Image
-                      src={`https://image.mux.com/${item.mux_playback_id}/thumbnail.jpg?width=400`}
+                      src={`/api/mux/thumbnail?playbackId=${item.mux_playback_id}&width=400`}
                       alt={item.title || 'Video thumbnail'}
                       fill
                       unoptimized
@@ -281,7 +281,7 @@ export function CreatorProfileClient({
                       <Play className="w-6 h-6 text-white/30" />
                     </div>
                   )}
-                  {item.visibility === 'subscriber' && (
+                  {(item.visibility === 'subscriber' || item.visibility === 'ppv') && (
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center">
                       <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shadow-[0_0_10px_rgba(245,158,11,0.3)]">
                         <Lock className="w-4 h-4 text-amber-500" />

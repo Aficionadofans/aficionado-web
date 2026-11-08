@@ -30,7 +30,7 @@ export default async function CreatorProfilePage({
     .select('id, mux_playback_id, title, description, visibility')
     .eq('author_id', profile.id)
     .eq('moderation_status', 'approved')
-    .in('visibility', ['public', 'subscriber'])
+    .in('visibility', ['public', 'subscriber', 'ppv'])
     .order('created_at', { ascending: false })
     .limit(12)
 

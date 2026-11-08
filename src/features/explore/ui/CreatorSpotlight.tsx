@@ -1,7 +1,8 @@
 'use client'
 
+import MuxPlayer from '@mux/mux-player-react'
 import { Pause, Play, Video, Volume2, VolumeX } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Card, CardContent } from '@/shared/ui/core/card'
 
 export interface CreatorSpotlightData {
@@ -17,26 +18,55 @@ interface CreatorSpotlightProps {
   spotlights: CreatorSpotlightData[]
 }
 
+/**
+ * Extracts the Mux playback ID from a Mux stream URL.
+ * e.g. "https://stream.mux.com/VZtzUzOWRow00ggfda02302.m3u8" → "VZtzUzOWRow00ggfda02302"
+ * Returns null if the URL is not a recognizable Mux stream URL.
+ */
+function extractMuxPlaybackId(url: string): string | null {
+  try {
+    const parsed = new URL(url)
+    if (parsed.hostname === 'stream.mux.com') {
+      // pathname is like /VZtzUzOWRow00ggfda02302.m3u8
+      const segments = parsed.pathname.split('/')
+      const last = segments[segments.length - 1]
+      if (last) {
+        return last.replace(/\.m3u8$/, '')
+      }
+    }
+  } catch {
+    // not a valid URL
+  }
+  return null
+}
+
 export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
   const [playingId, setPlayingId] = useState<string | null>(null)
   const [isMuted, setIsMuted] = useState(true)
-  const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({})
+  const muxPlayerRefs = useRef<{ [key: string]: HTMLElement | null }>({})
 
-  const togglePlay = (id: string) => {
-    const video = videoRefs.current[id]
-    if (!video) return
+  const togglePlay = useCallback(
+    (id: string) => {
+      const player = muxPlayerRefs.current[id] as
+        | (HTMLElement & { play?: () => void; pause?: () => void })
+        | null
+      if (!player) return
 
-    if (playingId === id) {
-      video.pause()
-      setPlayingId(null)
-    } else {
-      if (playingId && videoRefs.current[playingId]) {
-        videoRefs.current[playingId]?.pause()
+      if (playingId === id) {
+        player.pause?.()
+        setPlayingId(null)
+      } else {
+        // Pause the previously playing spotlight
+        if (playingId && muxPlayerRefs.current[playingId]) {
+          const prev = muxPlayerRefs.current[playingId] as HTMLElement & { pause?: () => void }
+          prev?.pause?.()
+        }
+        player.play?.()
+        setPlayingId(id)
       }
-      video.play().catch(() => {})
-      setPlayingId(id)
-    }
-  }
+    },
+    [playingId],
+  )
 
   const toggleMute = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -64,6 +94,7 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
       <div className="flex gap-4 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar">
         {spotlights.map((spotlight, index) => {
           const isPlaying = playingId === spotlight.id
+          const muxPlaybackId = extractMuxPlaybackId(spotlight.video_url)
 
           return (
             <Card
@@ -85,16 +116,42 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
               }`}
               style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
             >
-              <video
-                ref={(el) => {
-                  if (el) videoRefs.current[spotlight.id] = el
-                }}
-                src={spotlight.video_url}
-                loop
-                playsInline
-                muted={isMuted}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
-              />
+              {/* Use MuxPlayer for Mux HLS URLs (cross-browser), fall back to <video> for others */}
+              {muxPlaybackId ? (
+                <MuxPlayer
+                  ref={(el: HTMLElement | null) => {
+                    if (el) muxPlayerRefs.current[spotlight.id] = el
+                  }}
+                  playbackId={muxPlaybackId}
+                  loop
+                  muted={isMuted}
+                  autoPlay={false}
+                  style={
+                    {
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      opacity: isPlaying ? 1 : 0,
+                      transition: 'opacity 500ms',
+                      '--controls': 'none',
+                      '--media-object-fit': 'cover',
+                    } as React.CSSProperties & Record<string, string | number>
+                  }
+                />
+              ) : (
+                <video
+                  ref={(el) => {
+                    if (el) muxPlayerRefs.current[spotlight.id] = el
+                  }}
+                  src={spotlight.video_url}
+                  loop
+                  playsInline
+                  muted={isMuted}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                />
+              )}
 
               {!isPlaying && (
                 <div
