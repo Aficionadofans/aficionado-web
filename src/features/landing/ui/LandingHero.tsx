@@ -161,7 +161,7 @@ export function LandingHero() {
         {/* H1 Display Title with Smooth Word-by-Word Reveal */}
         <WordReveal
           as="h1"
-          text="Self-brand and creator on new social media platform"
+          text="Sovereign social media platform for independent Creators and community backed Fans"
           className="framer-h1 max-w-[856px]"
           delay={0.1}
           stagger={0.06}

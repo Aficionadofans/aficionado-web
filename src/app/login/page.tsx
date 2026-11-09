@@ -41,7 +41,7 @@ export default function LoginPage() {
             className="mt-4 text-lg text-muted-foreground"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
-            Self-brand and creator on new social media platform.
+            Sovereign social media platform for independent Creators and community backed Fans.
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function LoginPage() {
             Aficionado
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Self-brand and creator on new social media platform.
+            Sovereign social media platform for independent Creators and community backed Fans.
           </p>
         </div>
 

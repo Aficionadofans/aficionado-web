@@ -35,11 +35,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Aficionado | Self-Brand & Creator Social Media',
+    default: 'Aficionado | Sovereign Social Media for Creators & Fans',
     template: '%s | Aficionado',
   },
   description:
-    'Self-brand and creator on new social media platform for Aficionado and Fans. A finite, healthy feed for sovereign creators.',
+    'Sovereign social media platform for independent Creators and community backed Fans. A finite, healthy feed for sovereign creators.',
   metadataBase: new URL('https://aficionado.fans'),
   icons: {
     icon: '/icon.png',
