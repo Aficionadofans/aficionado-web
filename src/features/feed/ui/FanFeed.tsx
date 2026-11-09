@@ -51,8 +51,11 @@ export function FanFeed({ videos, drops }: { videos: Video[]; drops: Drop[] }) {
               >
                 Nothing here yet
               </h3>
-              <p className="text-sm text-muted-foreground mb-6 text-pretty">
+              <p className="text-sm text-muted-foreground mb-4 text-pretty">
                 Follow some creators to see their latest drops here.
+              </p>
+              <p className="text-xs text-muted-foreground/60 mb-6 max-w-[260px] text-center">
+                Sovereign social media platform for Independent Creators and community backed Fans.
               </p>
               <Link
                 href="/explore"
