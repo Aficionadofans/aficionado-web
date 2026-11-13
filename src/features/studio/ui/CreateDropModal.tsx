@@ -39,6 +39,11 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
   const [contentId, setContentId] = useState<string | null>(null)
   const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
   const [pricePpv, setPricePpv] = useState('4.99')
+  const [distributionMode, setDistributionMode] = useState<
+    'creator_zip' | 'targeted_zips' | 'global'
+  >('creator_zip')
+  const [targetZips, setTargetZips] = useState('')
+  const [targetRadiusMiles, setTargetRadiusMiles] = useState(15)
   const supabase = createClient()
 
   // Mux uploader endpoint — creates a content record and returns the direct upload URL
@@ -51,6 +56,15 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
           description: '',
           visibility,
           pricePpv: visibility === 'ppv' ? Number(pricePpv) : undefined,
+          distributionMode,
+          targetRadiusMiles: Number(targetRadiusMiles),
+          targetZips:
+            distributionMode === 'targeted_zips'
+              ? targetZips
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : undefined,
         },
       })
       if (error) throw error
@@ -173,6 +187,75 @@ export function CreateDropModal({ onClose }: { onClose: () => void }) {
                       </span>
                     </div>
                   )}
+
+                  {/* Geo-Targeting & Local Distribution */}
+                  <div className="mt-4 pt-3 border-t border-white/5">
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider block mb-2">
+                      Local Distribution & Geo-Discovery
+                    </span>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {[
+                        { id: 'creator_zip', label: 'My Zip' },
+                        { id: 'targeted_zips', label: 'Target Zip(s)' },
+                        { id: 'global', label: 'Global' },
+                      ].map((m) => (
+                        <button
+                          key={m.id}
+                          type="button"
+                          onClick={() =>
+                            setDistributionMode(m.id as 'creator_zip' | 'targeted_zips' | 'global')
+                          }
+                          disabled={isUploading || uploadComplete}
+                          className={cn(
+                            'px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 border',
+                            distributionMode === m.id
+                              ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 font-bold'
+                              : 'bg-white/5 text-muted-foreground border-white/5 hover:bg-white/10 hover:text-white',
+                            (isUploading || uploadComplete) && 'opacity-50 cursor-not-allowed',
+                          )}
+                        >
+                          {m.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {distributionMode !== 'global' && (
+                      <div className="space-y-2 pt-1">
+                        <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                          <span>Radius: {targetRadiusMiles} miles</span>
+                          <div className="flex gap-1.5">
+                            {[5, 15, 25, 50].map((r) => (
+                              <button
+                                key={r}
+                                type="button"
+                                onClick={() => setTargetRadiusMiles(r)}
+                                disabled={isUploading || uploadComplete}
+                                className={cn(
+                                  'px-2 py-0.5 rounded text-[10px] font-medium border transition-colors',
+                                  targetRadiusMiles === r
+                                    ? 'bg-primary/20 text-primary border-primary/40'
+                                    : 'bg-white/5 text-muted-foreground border-white/5',
+                                )}
+                              >
+                                {r}m
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {distributionMode === 'targeted_zips' && (
+                          <input
+                            type="text"
+                            placeholder="Target Zips (e.g. 90210, 10001)"
+                            value={targetZips}
+                            onChange={(e) => setTargetZips(e.target.value)}
+                            disabled={isUploading || uploadComplete}
+                            className="w-full bg-black/40 border border-white/10 rounded-lg py-1 px-2.5 text-xs text-white placeholder:text-muted-foreground focus:outline-none focus:border-amber-500/50"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {uploadComplete ? (

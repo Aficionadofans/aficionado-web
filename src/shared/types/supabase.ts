@@ -157,6 +157,8 @@ export type Database = {
           status: string
           title: string
           visibility: string | null
+          distribution_mode?: string | null
+          target_radius_miles?: number | null
         }
         Insert: {
           author_id: string
@@ -174,6 +176,8 @@ export type Database = {
           status?: string
           title: string
           visibility?: string | null
+          distribution_mode?: string | null
+          target_radius_miles?: number | null
         }
         Update: {
           author_id?: string
@@ -191,6 +195,50 @@ export type Database = {
           status?: string
           title?: string
           visibility?: string | null
+          distribution_mode?: string | null
+          target_radius_miles?: number | null
+        }
+        Relationships: []
+      }
+      content_target_zips: {
+        Row: {
+          content_id: string
+          created_at: string
+          zip_code: string
+        }
+        Insert: {
+          content_id: string
+          created_at?: string
+          zip_code: string
+        }
+        Update: {
+          content_id?: string
+          created_at?: string
+          zip_code?: string
+        }
+        Relationships: []
+      }
+      zip_centroids: {
+        Row: {
+          city: string | null
+          lat: number
+          lon: number
+          state: string | null
+          zip: string
+        }
+        Insert: {
+          city?: string | null
+          lat: number
+          lon: number
+          state?: string | null
+          zip: string
+        }
+        Update: {
+          city?: string | null
+          lat?: number
+          lon?: number
+          state?: string | null
+          zip?: string
         }
         Relationships: []
       }
@@ -444,6 +492,50 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_distributed_feed: {
+        Args: {
+          p_limit?: number
+          p_offset?: number
+          p_radius_miles?: number
+          p_viewer_zip?: string | null
+        }
+        Returns: {
+          author_avatar_url: string | null
+          author_id: string
+          author_username: string
+          author_zip_code: string | null
+          created_at: string
+          description: string | null
+          distance_miles: number | null
+          distribution_mode: string
+          id: string
+          is_local: boolean
+          moderation_status: string
+          mux_asset_id: string | null
+          mux_playback_id: string
+          price_ppv: number | null
+          required_tier: number
+          status: string
+          target_radius_miles: number
+          title: string
+          visibility: string
+        }[]
+      }
+      get_local_creators: {
+        Args: {
+          p_limit?: number
+          p_radius_miles?: number
+          p_viewer_zip?: string | null
+        }
+        Returns: {
+          avatar_url: string | null
+          bio: string | null
+          distance_miles: number | null
+          id: string
+          username: string
+          zip_code: string | null
+        }[]
+      }
       get_my_is_admin: { Args: never; Returns: boolean }
       increment_creator_strike: {
         Args: { target_user_id: string }

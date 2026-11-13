@@ -34,3 +34,9 @@ export type ContentWithProfile = Content & {
 export type PostWithProfile = Post & {
   profiles: Pick<Profile, 'avatar_url' | 'ai_tone'> | null
 }
+
+export type DistributedFeedItem =
+  Database['public']['Functions']['get_distributed_feed']['Returns'][number]
+
+export type LocalCreatorItem =
+  Database['public']['Functions']['get_local_creators']['Returns'][number]

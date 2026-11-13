@@ -28,15 +28,25 @@ export default async function ExplorePage() {
     userZip = profile?.zip_code?.trim() ?? ''
   }
 
-  // Fetch local creators in the same zip code
+  // Fetch local creators in the same zip code or discovery radius
   let localCreators: {
     id: string
     username: string | null
     avatar_url: string | null
     bio: string | null
     zip_code: string | null
+    distance_miles?: number | null
   }[] = []
-  if (userZip) {
+
+  const { data: localCreatorsData } = await supabase.rpc('get_local_creators', {
+    p_viewer_zip: userZip || null,
+    p_radius_miles: 25,
+    p_limit: 6,
+  })
+
+  if (localCreatorsData && localCreatorsData.length > 0) {
+    localCreators = localCreatorsData
+  } else if (userZip) {
     const zipPrefix = userZip.slice(0, 5)
     const { data } = await supabase
       .from('profiles')

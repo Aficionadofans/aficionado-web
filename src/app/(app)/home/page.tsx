@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 import type { Drop } from '@/features/feed/ui/DropZoneCarousel'
 import { FanFeed, type Video } from '@/features/feed/ui/FanFeed'
 import { createClient } from '@/shared/lib/supabase/server'
-import type { Content } from '@/shared/types/database'
+import type { Content, DistributedFeedItem } from '@/shared/types/database'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,119 +24,69 @@ export default async function HomePage() {
     .single()
   const myZip = myProfile?.zip_code?.trim() ?? ''
 
-  // Fallback to admin client to bypass any restrictive RLS that might hide drops/videos from followers
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-
-  let dbClient = supabase
-  if (serviceRoleKey && supabaseUrl) {
-    const { createClient: createAdminClient } = await import('@supabase/supabase-js')
-    dbClient = createAdminClient(supabaseUrl, serviceRoleKey)
-  }
-
   // 1. Fetch creators this user is following
-  const { data: subs } = await dbClient
+  const { data: subs } = await supabase
     .from('subscriptions')
     .select('creator_id')
     .eq('fan_id', user.id)
     .eq('status', 'active')
 
-  // The feed should include the user's own content + content from creators they follow
   const creatorIds = (subs || []).map((s) => s.creator_id)
   const feedUserIds = [user.id, ...creatorIds]
 
-  // 2. Fetch user's own content regardless of status
-  const { data: ownContent, error: ownErr } = await dbClient
-    .from('content')
-    .select(
-      'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at',
-    )
-    .eq('author_id', user.id)
-    .order('created_at', { ascending: false })
-    .limit(20)
+  // 2. Fetch unified distributed feed via geo-distribution engine
+  const { data: distributedFeed, error: feedError } = await supabase.rpc('get_distributed_feed', {
+    p_viewer_zip: myZip || null,
+    p_radius_miles: 25,
+    p_limit: 20,
+    p_offset: 0,
+  })
 
-  if (ownErr) console.error('Error fetching own content:', ownErr)
-
-  // 3. Fetch approved content from followed creators
-  let feedContent: Record<string, unknown>[] = []
-  if (creatorIds.length > 0) {
-    const { data: othersContent, error: othersErr } = await dbClient
-      .from('content')
-      .select(
-        'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at',
-      )
-      .in('author_id', creatorIds)
-      .eq('moderation_status', 'approved')
-      .not('mux_playback_id', 'is', null)
-      .order('created_at', { ascending: false })
-      .limit(20)
-
-    if (othersErr) console.error('Error fetching others content:', othersErr)
-    if (othersContent) feedContent = othersContent
+  if (feedError) {
+    console.warn('get_distributed_feed RPC notice:', feedError.message)
   }
 
-  // 3b. Fetch local creator content based on zip code
-  let localAuthorIds: string[] = []
-  if (myZip) {
-    const zipPrefix = myZip.slice(0, 5)
-    const { data: localProfiles } = await dbClient
-      .from('profiles')
-      .select('id')
-      .or(`zip_code.eq.${myZip},zip_code.ilike.${zipPrefix}%`)
-      .eq('user_type', 'aficionado')
-      .neq('id', user.id)
-      .limit(20)
-    localAuthorIds = (localProfiles || []).map((p) => p.id)
-  }
+  let contentData: (Record<string, unknown> & {
+    _isLocal?: boolean
+    _distanceMiles?: number | null
+  })[] = []
 
-  let localContent: Record<string, unknown>[] = []
-  if (localAuthorIds.length > 0) {
-    const { data: localData } = await dbClient
+  if (distributedFeed && distributedFeed.length > 0) {
+    contentData = (distributedFeed as DistributedFeedItem[]).map((item: DistributedFeedItem) => ({
+      id: item.id,
+      mux_playback_id: item.mux_playback_id,
+      description: item.description,
+      moderation_status: item.moderation_status,
+      status: item.status,
+      created_at: item.created_at,
+      profiles: {
+        username: item.author_username,
+        avatar_url: item.author_avatar_url,
+      },
+      _isLocal: item.is_local,
+      _distanceMiles: item.distance_miles,
+    }))
+  } else {
+    // Fallback: direct query for followed & public ready content
+    const { data: fallbackContent } = await supabase
       .from('content')
       .select(
-        'id, mux_playback_id, description, moderation_status, status, profiles!inner(username), created_at, author_id',
+        'id, mux_playback_id, description, moderation_status, status, profiles!inner(username, avatar_url), created_at',
       )
-      .in('author_id', localAuthorIds)
+      .or(`author_id.in.(${feedUserIds.join(',')}),visibility.eq.public`)
       .eq('moderation_status', 'approved')
       .eq('status', 'ready')
-      .eq('visibility', 'public')
       .not('mux_playback_id', 'is', null)
       .order('created_at', { ascending: false })
-      .limit(10)
-    if (localData) localContent = localData
-  }
+      .limit(20)
 
-  // Merge: local first, then own+followed, deduped
-  const seenIds = new Set<string>()
-  const mergedContent: (Record<string, unknown> & { _isLocal?: boolean })[] = []
-
-  // Local content first
-  for (const item of localContent) {
-    const id = item.id as string
-    if (!seenIds.has(id)) {
-      seenIds.add(id)
-      mergedContent.push({ ...item, _isLocal: true })
+    if (fallbackContent) {
+      contentData = fallbackContent.map((c) => ({
+        ...c,
+        _isLocal: false,
+      }))
     }
   }
-
-  // Then own + followed content
-  for (const item of [...(ownContent || []), ...feedContent]) {
-    const id = item.id as string
-    if (!seenIds.has(id)) {
-      seenIds.add(id)
-      mergedContent.push(item)
-    }
-  }
-
-  const contentData = mergedContent
-    .sort((a, b) => {
-      // Local content gets a boost (sorts earlier)
-      const aLocal = (a as { _isLocal?: boolean })._isLocal ? 1 : 0
-      const bLocal = (b as { _isLocal?: boolean })._isLocal ? 1 : 0
-      if (aLocal !== bLocal) return bLocal - aLocal
-      return new Date(b.created_at as string).getTime() - new Date(a.created_at as string).getTime()
-    })
-    .slice(0, 20)
 
   const videos: Video[] = (contentData ?? []).map((c) => {
     const profile = Array.isArray(c.profiles) ? c.profiles[0] : c.profiles
@@ -154,8 +104,8 @@ export default async function HomePage() {
     }
   })
 
-  // 3. Fetch recent posts (drops) for these users
-  const { data: postsData } = await dbClient
+  // 3. Fetch recent posts (drops) for followed creators
+  const { data: postsData } = await supabase
     .from('posts')
     .select('id, content, media_url, created_at, profiles!inner(username, avatar_url)')
     .in('author_id', feedUserIds)

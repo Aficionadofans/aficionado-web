@@ -18,6 +18,11 @@ export function VideoUploadForm({
   const [description, setDescription] = useState('')
   const [visibility, setVisibility] = useState<'public' | 'subscriber' | 'ppv'>('subscriber')
   const [pricePpv, setPricePpv] = useState<string>('')
+  const [distributionMode, setDistributionMode] = useState<
+    'creator_zip' | 'targeted_zips' | 'global'
+  >('creator_zip')
+  const [targetZips, setTargetZips] = useState('')
+  const [targetRadiusMiles, setTargetRadiusMiles] = useState(15)
 
   const supabase = createClient()
 
@@ -30,6 +35,15 @@ export function VideoUploadForm({
           description,
           visibility,
           pricePpv: visibility === 'ppv' ? parseFloat(pricePpv) : null,
+          distributionMode,
+          targetRadiusMiles: Number(targetRadiusMiles),
+          targetZips:
+            distributionMode === 'targeted_zips'
+              ? targetZips
+                  .split(',')
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : undefined,
         },
       })
       if (error) throw error
@@ -135,6 +149,77 @@ export function VideoUploadForm({
               </div>
             </div>
           )}
+
+          <div className="mt-5 pt-4 border-t border-white/5">
+            <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider block mb-2">
+              Geo-Targeting & Local Discovery
+            </label>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {[
+                { id: 'creator_zip', label: 'My Zip Code' },
+                { id: 'targeted_zips', label: 'Target Specific Zip(s)' },
+                { id: 'global', label: 'Global (Anywhere)' },
+              ].map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() =>
+                    setDistributionMode(m.id as 'creator_zip' | 'targeted_zips' | 'global')
+                  }
+                  className={cn(
+                    'px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border',
+                    distributionMode === m.id
+                      ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
+                      : 'bg-white/5 text-muted-foreground border-white/5 hover:bg-white/10 hover:text-off-white',
+                  )}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+
+            {distributionMode !== 'global' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div>
+                  <label className="text-[11px] text-muted-foreground block mb-1">
+                    Discovery Radius: {targetRadiusMiles} miles
+                  </label>
+                  <div className="flex gap-2">
+                    {[5, 15, 25, 50].map((r) => (
+                      <button
+                        key={r}
+                        type="button"
+                        onClick={() => setTargetRadiusMiles(r)}
+                        className={cn(
+                          'flex-1 py-1 rounded-lg text-xs font-medium border transition-colors',
+                          targetRadiusMiles === r
+                            ? 'bg-primary/20 text-primary border-primary/40'
+                            : 'bg-white/5 text-muted-foreground border-white/5 hover:bg-white/10',
+                        )}
+                      >
+                        {r} mi
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {distributionMode === 'targeted_zips' && (
+                  <div>
+                    <label className="text-[11px] text-muted-foreground block mb-1">
+                      Target Zip Code(s) (comma-separated)
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 px-3 text-sm text-off-white placeholder:text-muted-foreground focus:outline-none focus:border-amber-500/50"
+                      placeholder="90210, 10001"
+                      value={targetZips}
+                      onChange={(e) => setTargetZips(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="h-px w-full bg-white/10 my-4"></div>
