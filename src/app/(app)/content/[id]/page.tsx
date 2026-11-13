@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ProcessingVideoClient } from '@/features/studio/ui/ProcessingVideoClient'
 import { createClient } from '@/shared/lib/supabase/server'
-import type { ContentVisibility, ContentWithProfile } from '@/shared/types/database'
+import type { ContentWithProfile } from '@/shared/types/database'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/core/avatar'
 import { MuxVideoPlayer } from './MuxVideoPlayer'
 

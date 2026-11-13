@@ -137,7 +137,7 @@ export function CreatorSpotlight({ spotlights }: CreatorSpotlightProps) {
                       transition: 'opacity 500ms',
                       '--controls': 'none',
                       '--media-object-fit': 'cover',
-                    } as any
+                    } as React.CSSProperties & Record<`--${string}`, string>
                   }
                 />
               ) : (

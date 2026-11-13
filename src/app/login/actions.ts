@@ -11,7 +11,8 @@ export async function authAction(_prevState: any, formData: FormData) {
   const password = formData.get('password') as string
   const mode = formData.get('mode') as string
   const userType = formData.get('userType') as string
-  const zipCode = formData.get('zipCode') as string
+  const rawZip = formData.get('zipCode') as string | null
+  const zipCode = rawZip ? rawZip.trim() : ''
 
   const supabase = await createClient()
   const headersList = await headers()
@@ -23,6 +24,9 @@ export async function authAction(_prevState: any, formData: FormData) {
   try {
     if (mode === 'signup') {
       if (!email || !password) return { error: 'Email and password are required', success: null }
+      if (zipCode && !/^\d{5}(-\d{4})?$/.test(zipCode)) {
+        return { error: 'Invalid zip code format. Use 5 digits (e.g. 90210)', success: null }
+      }
 
       const { error, data } = await supabase.auth.signUp({
         email,
@@ -31,7 +35,7 @@ export async function authAction(_prevState: any, formData: FormData) {
           emailRedirectTo: `${origin}/auth/callback`,
           data: {
             user_type: userType,
-            zip_code: zipCode,
+            ...(zipCode ? { zip_code: zipCode } : {}),
           },
         },
       })

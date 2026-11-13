@@ -22,7 +22,7 @@ export default async function HomePage() {
     .select('zip_code')
     .eq('id', user.id)
     .single()
-  const myZip = myProfile?.zip_code ?? ''
+  const myZip = myProfile?.zip_code?.trim() ?? ''
 
   // Fallback to admin client to bypass any restrictive RLS that might hide drops/videos from followers
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -38,7 +38,7 @@ export default async function HomePage() {
   const { data: subs } = await dbClient
     .from('subscriptions')
     .select('creator_id')
-    .eq('subscriber_id', user.id)
+    .eq('fan_id', user.id)
     .eq('status', 'active')
 
   // The feed should include the user's own content + content from creators they follow
@@ -78,10 +78,11 @@ export default async function HomePage() {
   // 3b. Fetch local creator content based on zip code
   let localAuthorIds: string[] = []
   if (myZip) {
+    const zipPrefix = myZip.slice(0, 5)
     const { data: localProfiles } = await dbClient
       .from('profiles')
       .select('id')
-      .eq('zip_code', myZip)
+      .or(`zip_code.eq.${myZip},zip_code.ilike.${zipPrefix}%`)
       .eq('user_type', 'aficionado')
       .neq('id', user.id)
       .limit(20)
@@ -97,6 +98,8 @@ export default async function HomePage() {
       )
       .in('author_id', localAuthorIds)
       .eq('moderation_status', 'approved')
+      .eq('status', 'ready')
+      .eq('visibility', 'public')
       .not('mux_playback_id', 'is', null)
       .order('created_at', { ascending: false })
       .limit(10)

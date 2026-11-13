@@ -25,7 +25,7 @@ export default async function ExplorePage() {
       .select('zip_code')
       .eq('id', user.id)
       .single()
-    userZip = profile?.zip_code ?? ''
+    userZip = profile?.zip_code?.trim() ?? ''
   }
 
   // Fetch local creators in the same zip code
@@ -37,10 +37,11 @@ export default async function ExplorePage() {
     zip_code: string | null
   }[] = []
   if (userZip) {
+    const zipPrefix = userZip.slice(0, 5)
     const { data } = await supabase
       .from('profiles')
       .select('id, username, avatar_url, bio, zip_code')
-      .eq('zip_code', userZip)
+      .or(`zip_code.eq.${userZip},zip_code.ilike.${zipPrefix}%`)
       .eq('user_type', 'aficionado')
       .neq('id', user?.id ?? '')
       .limit(6)

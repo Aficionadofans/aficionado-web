@@ -150,7 +150,8 @@ function ProfileTab({
       setError('Username: 3–30 chars, letters/numbers/underscores only')
       return
     }
-    if (zipVal && !/^\d{5}(-\d{4})?$/.test(zipVal)) {
+    const trimmedZip = zipVal.trim()
+    if (trimmedZip && !/^\d{5}(-\d{4})?$/.test(trimmedZip)) {
       setError('Invalid zip code format')
       return
     }
@@ -160,7 +161,7 @@ function ProfileTab({
       const { error: err } = await supabase.auth.updateUser({
         data: {
           ...(usernameVal ? { username: usernameVal } : {}),
-          ...(zipVal ? { zip_code: zipVal } : {}),
+          ...(trimmedZip ? { zip_code: trimmedZip } : {}),
         },
       })
       // Also update profiles table directly
@@ -173,7 +174,7 @@ function ProfileTab({
           .update({
             bio: bioVal,
             ...(usernameVal ? { username: usernameVal } : {}),
-            ...(zipVal ? { zip_code: zipVal } : {}),
+            ...(trimmedZip ? { zip_code: trimmedZip } : {}),
           })
           .eq('id', user.id)
       }

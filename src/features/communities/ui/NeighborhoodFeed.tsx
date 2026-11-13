@@ -4,12 +4,17 @@ import { ArrowLeft, MapPin, Send, ShieldAlert } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: string }) {
-  // Simulate checking the requested neighborhood against the user's verified zip code
-  // In a real app, this would be a dynamic route like /communities/neighborhood/[zipcode]
-  const [targetZip, setTargetZip] = useState('90210')
+export function NeighborhoodFeed({ userZipCode = '' }: { userZipCode?: string }) {
+  // Use the verified user's zip code, or fallback to 90210 if none configured
+  const initialZip = userZipCode || '90210'
+  const [targetZip, setTargetZip] = useState(initialZip)
 
-  const isVerified = userZipCode === targetZip
+  const hasZip = Boolean(userZipCode && userZipCode.trim().length > 0)
+  const isVerified =
+    hasZip &&
+    (userZipCode === targetZip ||
+      userZipCode.startsWith(targetZip) ||
+      targetZip.startsWith(userZipCode))
 
   return (
     <div className="h-[100dvh] w-full bg-black flex flex-col max-w-md mx-auto relative border-x border-white/5 shadow-2xl">
@@ -48,13 +53,32 @@ export function NeighborhoodFeed({ userZipCode = '90210' }: { userZipCode?: stri
           </p>
 
           <div className="glass-panel p-4 rounded-2xl w-full">
-            <p className="text-sm text-white/70 mb-3">Try visiting your verified neighborhood:</p>
-            <button
-              onClick={() => setTargetZip(userZipCode)}
-              className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-[#00BCAF] transition-all duration-200 shadow-[0_0_20px_rgba(0,212,200,0.3)] active:scale-[0.98]"
-            >
-              Go to {userZipCode}
-            </button>
+            {hasZip ? (
+              <>
+                <p className="text-sm text-white/70 mb-3">
+                  Try visiting your verified neighborhood:
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setTargetZip(userZipCode)}
+                  className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-[#00BCAF] transition-all duration-200 shadow-[0_0_20px_rgba(0,212,200,0.3)] active:scale-[0.98]"
+                >
+                  Go to {userZipCode}
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-white/70 mb-3">
+                  You haven&apos;t set your Zip Code yet:
+                </p>
+                <Link
+                  href="/settings"
+                  className="block w-full py-3 text-center rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-[#00BCAF] transition-all duration-200 shadow-[0_0_20px_rgba(0,212,200,0.3)] active:scale-[0.98]"
+                >
+                  Configure Zip Code in Settings →
+                </Link>
+              </>
+            )}
           </div>
         </div>
       ) : (
